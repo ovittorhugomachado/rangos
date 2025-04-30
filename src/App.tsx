@@ -1,6 +1,6 @@
 
 import './App.css'
-import { LoginContainer } from './pages/login-page'
+import { LoginContainer } from './components/login'
 import { ThemeButton } from './components/theme-button'
 
 function App() {
