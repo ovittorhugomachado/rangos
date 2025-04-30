@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@tailwind utilities;
+
+.input {
+  @apply border border-gray-500 rounded-xl px-3 py-2 w-full
+         focus:outline-none focus:ring-1 focus:ring-green-400 
+         focus:border-transparent transition-all;
+}
+
+.link {
+  @apply cursor-pointer transition-all hover:scale-101 m-1;
+}
