@@ -2,9 +2,14 @@
 
 @tailwind utilities;
 
+@theme {
+  --color-green-domus: #07fa93;
+
+}
+
 .input {
-  @apply border border-gray-500 rounded-xl px-3 py-2 w-full
-         focus:outline-none focus:ring-1 focus:ring-green-400 
+  @apply border border-zinc-400 rounded-xl px-3 py-2 w-full
+         focus:outline-none focus:ring-1 focus:ring-gray-900 
          focus:border-transparent transition-all;
 }
 
