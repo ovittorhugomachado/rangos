@@ -3,16 +3,21 @@
 @tailwind utilities;
 
 @theme {
-  --color-green-domus: #07fa93;
-
+    --font-roboto: "Roboto", sans-serif;
 }
 
+body {
+    @apply text-sm text-white bg-gray-900;
+  }
+
 .input {
-  @apply border border-zinc-400 rounded-xl px-3 py-2 w-full
-         focus:outline-none focus:ring-1 focus:ring-gray-900 
-         focus:border-transparent transition-all;
+    @apply border border-zinc-400 rounded-xl px-3 py-2 w-full bg-white focus:outline-none focus:ring-1 focus:ring-blue-900 focus:border-transparent transition-all;
 }
 
 .link {
-  @apply cursor-pointer transition-all hover:scale-101 m-1;
+    @apply cursor-pointer transition-all hover:scale-101;
+}
+
+.primary-button {
+    @apply bg-black text-white text-lg font-semibold dark:bg-white dark:text-black  px-15 py-[8px] rounded-3xl cursor-pointer transition-all hover:scale-105
 }

@@ -1,14 +1,11 @@
-
 import './App.css'
-import { LoginContainer } from './components/login'
-import { ThemeButton } from './components/theme-button'
+import { LoginPage } from './pages/login-page'
 
 function App() {
 
   return (
     <>
-      <ThemeButton />
-      <LoginContainer />
+  <LoginPage />
     </>
   )
 }
