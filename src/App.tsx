@@ -1,4 +1,3 @@
-import './App.css'
 import { useState } from 'react';
 import { LoginPage } from './pages/login-page'
 import { BsZoomIn } from "react-icons/bs";
