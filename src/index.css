@@ -8,6 +8,10 @@ body {
     @apply text-sm text-white bg-[url(../bg-theme-light.png)] dark:bg-[url(../bg-theme-dark.jpg)] bg-cover bg-center;
   }
 
+.primary-component {
+    @apply backdrop-blur-sm bg-white/5 dark:bg-white/5 border border-zinc-400 rounded-xl text-black dark:text-white
+}
+
 .input {
     @apply text-black border border-zinc-400 rounded-xl px-3 py-2 w-full bg-white focus:outline-none focus:ring-1 focus:ring-blue-900 focus:border-transparent transition-all;
 }

@@ -2,7 +2,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 const LoginContainer = () => {
   return (
-    <div className="backdrop-blur-md bg-white/5 dark:bg-white/5 border border-zinc-400 rounded-xl w-120 h-110 m-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
+    <div className="primary-component w-120 h-110 m-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
       <img
         className="w-35 ml-8 mb-3 hidden dark:block"
         src="../logo-white.png"
@@ -14,17 +14,17 @@ const LoginContainer = () => {
         alt="domus-logo"
       />
       <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
-        <label htmlFor="email" className="font-semibold text-black dark:text-white">
+        <label htmlFor="email" className="font-semibold ">
           Email
         </label>
         <input id="email" type="email" className="input mb-2" />
 
-        <label htmlFor="password" className="font-semibold text-black dark:text-white">
+        <label htmlFor="password" className="font-semibold">
           Senha
         </label>
         <input id="password" type="password" className="input" />
 
-        <a href="#" className="link text-end text-black dark:text-white">
+        <a href="#" className="link text-end">
           Esqueci minha senha
         </a>
       </div>
@@ -33,7 +33,7 @@ const LoginContainer = () => {
 
       <a
         href="#"
-        className="link text-center text-black dark:text-white m-5"
+        className="link text-center m-5"
       >
         Ainda não tem conta?{" "}
         <strong className="whitespace-nowrap">
