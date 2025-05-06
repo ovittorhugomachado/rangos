@@ -1,11 +1,40 @@
-import { LoginContainer } from "../../components/login"
+import { useState } from "react";
+import { login } from "../../services/auth-service";
+import { LoginContainer } from "../../components/login";
 
 const LoginPage = () => {
-    return (
-        <main className=" w-full h-full flex justify-center items-center">
-            <LoginContainer />
-        </main>
-    )
-}
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-export { LoginPage }
+    const handleLogin = async () => {
+        setLoading(true);
+        try {
+            const result = await login({ email, password });
+            localStorage.setItem('token', result.token);
+            setError('');
+        } catch (error) {
+            const err = error as Error;
+            setError(err.message || 'Erro ao fazer login');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <main className="w-full h-full flex justify-center items-center">
+            <LoginContainer
+                email={email}
+                password={password}
+                error={error}
+                loading={loading}
+                setEmail={setEmail}
+                setPassword={setPassword}
+                onLogin={handleLogin}
+            />
+        </main>
+    );
+};
+
+export { LoginPage };

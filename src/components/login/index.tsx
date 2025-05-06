@@ -1,27 +1,24 @@
-import { useState } from "react";
-import { login } from "../../services/auth-service";
 import { FaArrowRight } from "react-icons/fa";
 
-const LoginContainer = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+interface LoginContainerProps {
+    email: string;
+    password: string;
+    error: string;
+    loading: boolean;
+    setEmail: (email: string) => void;
+    setPassword: (password: string) => void;
+    onLogin: () => void;
+}
 
-    const handleLogin = async () => {
-        try {
-            const result = await login({ email, password });
-            localStorage.setItem('token', result.token);
-            setError('')
-            console.log("Login realizado com sucesso");
-        } catch (error) {
-            const err = error as Error;
-            setError(err.message || 'Erro ao fazer login');
-        } finally {
-            setLoading(false)
-        }
-    }
-
+const LoginContainer = ({
+    email,
+    password,
+    error,
+    loading,
+    setEmail,
+    setPassword,
+    onLogin
+}: LoginContainerProps) => {
     return (
         <div className="primary-component w-120 h-110 m-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
             <img
@@ -65,8 +62,8 @@ const LoginContainer = () => {
             {error && <p className="text-red-500 mb-4 font-semibold">{error}</p>}
 
             <button
-                className="primary-button"
-                onClick={handleLogin}
+                className="primary-button w-[200px]"
+                onClick={onLogin}
                 disabled={loading}
             >
                 {loading ? 'Entrando...' : 'Entrar'}
