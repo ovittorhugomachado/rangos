@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @tailwind utilities;
 
 body {
-    @apply text-sm text-white bg-zinc-300 dark:bg-black;
+    @apply text-sm text-white bg-[url(../bg-theme-light.png)] dark:bg-[url(../bg-theme-dark.jpg)] bg-cover bg-center;
   }
 
 .input {
