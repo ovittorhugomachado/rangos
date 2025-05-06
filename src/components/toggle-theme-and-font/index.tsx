@@ -11,7 +11,7 @@ interface ThemeButtonProps {
 const ToggleThemeAndFont = ({ toggleTheme, fontSize, increaseFontSize, decreaseFontSize }: ThemeButtonProps) => {
 
     return (
-        <div className='absolute flex flex-col items-center justify-center gap-2.5 rounded-l-xl text-xl top-2 right-0 w-10 py-2 bg-gray-100 dark:bg-zinc-900 text-black dark:text-white'>
+        <div className='primary-component absolute flex flex-row items-center justify-center gap-2.5 rounded-l-xl text-lg top-2 right-0 py-1 px-2 mx-3 sm:flex-col sm:text-xl sm:py-2 '>
             <button
                 onClick={toggleTheme}
                 className="hidden dark:inline cursor-pointer">
