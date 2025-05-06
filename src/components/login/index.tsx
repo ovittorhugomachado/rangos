@@ -16,7 +16,7 @@ const LoginContainer = () => {
             console.log("Login realizado com sucesso");
         } catch (error) {
             const err = error as Error;
-            setError('Email ou senha inválidos');
+            setError(err.message || 'Erro ao fazer login');
         } finally {
             setLoading(false)
         }
