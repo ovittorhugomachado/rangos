@@ -1,0 +1,1 @@
+export type FontSize = 'text-sm' | 'text-lg';
