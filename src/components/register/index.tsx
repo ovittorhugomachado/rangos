@@ -1,67 +1,41 @@
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { IMaskInput } from "react-imask";
-import { IoEye, IoEyeOff, IoCheckmarkCircleOutline, IoCheckmarkCircleSharp } from "react-icons/io5";
 import { useState } from "react";
-
-type Inputs = {
-    restaurantName: string;
-    cnpj: string;
-    ownersName: string;
-    cpf: string;
-    number: string;
-    email: string;
-    password: string;
-};
-
-interface RegisterContainerProps {
-    restaurantName: string;
-    CNPJ: string;
-    ownersName: string;
-    CPF: string;
-    phoneNumber: string;
-    email: string;
-    password: string;
-    error: string;
-    loading: boolean;
-    setRestaurantName: (restaurantName: string) => void;
-    setCNPJ: (restaurantName: string) => void;
-    setOwnersName: (ownersName: string) => void;
-    setCPF: (ownersName: string) => void;
-    setPhoneNumber: (phoneNumber: string) => void;
-    setEmail: (email: string) => void;
-    setPassword: (password: string) => void;
-    onLogin: () => void;
-}
+import { IMaskInput } from "react-imask";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { IoEye, IoEyeOff, IoCheckmarkCircleOutline, IoCheckmarkCircleSharp } from "react-icons/io5";
+import { RegisterFormData, RegisterContainerProps } from "../../types/register.d";
 
 const RegisterContainer = ({
-    restaurantName,
-    CNPJ,
-    ownersName,
-    CPF,
-    phoneNumber,
-    email,
-    password,
-    //error,
-    loading,
-    setRestaurantName,
-    //setCNPJ,
-    setOwnersName,
-    //setCPF,
-    //setPhoneNumber,
-    //setEmail,
-    //setPassword,
-    onLogin
+    onSubmit,
+    initialValues = {},
+    isLoading = false,
 }: RegisterContainerProps) => {
+    const [showPassword, setShowPassword] = useState(false);
 
-    const [showPassword, setShowPassword] = useState(false)
+    const {
+        register,
+        handleSubmit,
+        control,
+        clearErrors,
+        formState: { errors },
+    } = useForm<RegisterFormData>({
+        defaultValues: {
+            restaurantName: '',
+            cnpj: '',
+            ownersName: '',
+            cpf: '',
+            number: '',
+            email: '',
+            password: '',
+            ...initialValues,
+        },
+    });
 
-    console.log('nome do restaurante:', restaurantName, 'nome do proprietário:', ownersName, 'cnpj:', CNPJ, 'cpf:', CPF, 'celular:', phoneNumber, 'email:', email, 'senha:', password)
-    const { register, handleSubmit, control, clearErrors, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
-
+    const handleFormSubmit: SubmitHandler<RegisterFormData> = (data) => {
+        onSubmit(data);
+    };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="primary-component w-120 m-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="primary-component w-120 m-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
             <img
                 className="w-35 ml-8 mb-3 hidden dark:block"
                 src="../logo-white.png"
@@ -85,7 +59,7 @@ const RegisterContainer = ({
                 <input
                     id="restaurantName"
                     type="text"
-                    className={`input mb-2 ${errors.restaurantName ? "input-error" : ""} autofill:text-black`}
+                    className={`input mb-2 ${errors.restaurantName ? "input-error" : ""}`}
                     placeholder="Restaurante"
                     {...register("restaurantName", {
                         required: "Campo obrigatório",
@@ -97,7 +71,6 @@ const RegisterContainer = ({
                             if (e.target.value.length > 4) {
                                 clearErrors("restaurantName");
                             }
-                            setRestaurantName(e.target.value);
                         }
                     })}
                 />
@@ -159,7 +132,6 @@ const RegisterContainer = ({
                             if (e.target.value.length > 4) {
                                 clearErrors("ownersName");
                             }
-                            setOwnersName(e.target.value);
                         }
                     })}
                 />
@@ -211,7 +183,7 @@ const RegisterContainer = ({
                     }}
                     render={({ field, fieldState }) => (
                         <>
-                            <label htmlFor="cpf" className="label">
+                            <label htmlFor="number" className="label">
                                 Celular *
                                 {fieldState.error && (
                                     <span className="span-error">
@@ -238,6 +210,7 @@ const RegisterContainer = ({
                             {errors.email.message?.toString()}
                         </span>
                     )}
+
                 </label>
                 <input
                     id="email"
@@ -257,10 +230,10 @@ const RegisterContainer = ({
                     name="password"
                     control={control}
                     rules={{
-                        required: "Senha é obrigatória",
+                        required: "Campo obrigatório",
                         pattern: {
                             value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
-                            message: "Campo obrigatório",
+                            message: "digite uma senha válida",
                         },
                     }}
                     render={({ field, fieldState }) => {
@@ -306,12 +279,12 @@ const RegisterContainer = ({
                                     {requirements.map(req => (
                                         <div
                                             key={req.id}
-                                            className={`flex items-center ${req.regex.test(password) ? 'text-green-700' : ''}`}
+                                            className="flex items-center"
                                         >
                                             {req.regex.test(password) ? (
-                                                <IoCheckmarkCircleOutline className="w-4 h-4 mr-1" />
+                                                <IoCheckmarkCircleOutline className="w-4 h-4 mr-1 text-green-700" />
                                             ) : (
-                                                <IoCheckmarkCircleSharp className="w-4 h-4 mr-1 text-gray-300" />
+                                                <IoCheckmarkCircleSharp className="w-4 h-4 mr-1 text-zinc-600" />
                                             )}
                                             {req.text}
                                         </div>
@@ -324,11 +297,11 @@ const RegisterContainer = ({
             </div>
 
             <button
-                className="primary-button w-[250px] "
-                onClick={handleSubmit(onLogin)}
-                disabled={loading}
+                type="submit"
+                className="primary-button w-[250px]"
+                disabled={isLoading}
             >
-                {loading ? 'Carregando...' : 'Criar conta'}
+                {isLoading ? "Carregando..." : "Criar conta"}
             </button>
         </form>
     );
