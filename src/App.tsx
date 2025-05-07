@@ -1,6 +1,6 @@
 import { ToggleThemeAndFont } from './components/toggle-theme-and-font';
-import { LoginPage } from './pages/login-page';
 import { useAppSettings } from './hooks/use-app-settings';
+import { RegisterPage } from './pages/register';
 
 function App() {
   const {
@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div className={`${fontSize} w-screen h-screen`}>
-      <LoginPage />
+      <RegisterPage />
       <ToggleThemeAndFont
         toggleTheme={toggleTheme}
         fontSize={fontSize}
