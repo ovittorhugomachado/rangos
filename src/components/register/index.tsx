@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { IMaskInput } from "react-imask";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { IoEye, IoEyeOff, IoCheckmarkCircleOutline, IoCheckmarkCircleSharp } from "react-icons/io5";
 import { RegisterFormData, RegisterContainerProps } from "../../types/register.d";
+import { InputCNPJ } from "./inputs/input-cnpj";
+import { InputRestaurantName } from "./inputs/input-restaurent-name";
+import { InputOwnersName } from "./inputs/input-owners-name";
+import { InputCPF } from "./inputs/input-cpf";
+import { InputPhoneNumber } from "./inputs/input-phone-number";
+import { InputEmail } from "./inputs/input-email";
 
 const RegisterContainer = ({
     onSubmit,
@@ -48,182 +53,36 @@ const RegisterContainer = ({
             />
             <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
 
-                <label htmlFor="restaurantName" className="label">
-                    Nome do Restaurante *
-                    {errors.restaurantName && (
-                        <span className="span-error">
-                            {errors.restaurantName.message?.toString()}
-                        </span>
-                    )}
-                </label>
-                <input
-                    id="restaurantName"
-                    type="text"
-                    className={`input mb-2 ${errors.restaurantName ? "input-error" : ""}`}
-                    placeholder="Restaurante"
-                    {...register("restaurantName", {
-                        required: "Campo obrigatório",
-                        minLength: {
-                            value: 2,
-                            message: "Campo obrigatório"
-                        },
-                        onChange: (e) => {
-                            if (e.target.value.length > 4) {
-                                clearErrors("restaurantName");
-                            }
-                        }
-                    })}
+                <InputRestaurantName
+                    register={register}
+                    errors={errors}
+                    clearErrors={clearErrors}
                 />
 
-                <Controller
-                    name="cnpj"
+                <InputCNPJ
                     control={control}
-                    rules={{
-                        validate: (value) => {
-                            const digits = value?.replace(/\D/g, '') || '';
-                            if (digits.length > 0 && digits.length < 14) {
-                                return "Digite os 14 dígitos do CNPJ";
-                            }
-                            return true;
-                        },
-                    }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor="cnpj" className="label">
-                                CNPJ
-                                {fieldState.error && (
-                                    <span className="span-error">
-                                        {fieldState.error.message}
-                                    </span>
-                                )}
-                            </label>
-
-                            <IMaskInput
-                                {...field}
-                                mask="00.000.000/0000-00"
-                                placeholder="00.000.000/0000-00"
-                                className={`input mb-2 ${fieldState.error ? "input-error" : ""}`}
-                                onAccept={(value) => field.onChange(value)}
-                            />
-                        </>
-                    )}
+                    initialValues={initialValues}
                 />
 
-                <label htmlFor="ownersName" className="label">
-                    Nome do Proprietário *
-                    {errors.ownersName && (
-                        <span className="span-error">
-                            {errors.ownersName.message?.toString()}
-                        </span>
-                    )}
-                </label>
-                <input
-                    id="ownersName"
-                    type="text"
-                    className={`input mb-2 ${errors.ownersName ? "input-error" : ""} autofill:text-black`}
-                    placeholder="Proprietário"
-                    {...register("ownersName", {
-                        required: "Campo obrigatório",
-                        minLength: {
-                            value: 2,
-                            message: "Campo obrigatório"
-                        },
-                        onChange: (e) => {
-                            if (e.target.value.length > 4) {
-                                clearErrors("ownersName");
-                            }
-                        }
-                    })}
+                <InputOwnersName
+                    register={register}
+                    errors={errors}
+                    clearErrors={clearErrors}
                 />
 
-                <Controller
-                    name="cpf"
+                <InputCPF
                     control={control}
-                    rules={{
-                        required: "Campo obrigatório",
-                        validate: (value) => {
-                            const digits = value?.replace(/\D/g, '') || '';
-                            if (digits.length > 0 && digits.length < 11) {
-                                return "Digite os 11 dígitos do CPF";
-                            }
-                            return true;
-                        },
-                    }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor="cpf" className="label">
-                                CPF *
-                                {fieldState.error && (
-                                    <span className="span-error">
-                                        {fieldState.error.message}
-                                    </span>
-                                )}
-                            </label>
-
-                            <IMaskInput
-                                {...field}
-                                mask="000.000.000-00"
-                                placeholder="000.000.000-00"
-                                className={`input mb-2 ${fieldState.error ? "input-error" : ""}`}
-                                onAccept={(value) => field.onChange(value)}
-                            />
-                        </>
-                    )}
+                    initialValues={initialValues}
                 />
 
-                <Controller
-                    name="number"
+                <InputPhoneNumber
                     control={control}
-                    rules={{
-                        required: "Campo obrigatório",
-                        pattern: {
-                            value: /^\(\d{2}\) \d{5}-\d{4}$/,
-                            message: "Digite no formato (99) 99999-9999",
-                        },
-                    }}
-                    render={({ field, fieldState }) => (
-                        <>
-                            <label htmlFor="number" className="label">
-                                Celular *
-                                {fieldState.error && (
-                                    <span className="span-error">
-                                        {fieldState.error.message}
-                                    </span>
-                                )}
-                            </label>
-                            <IMaskInput
-                                {...field}
-                                mask="(00) 00000-0000"
-                                placeholder="(99) 99999-9999"
-                                className={`input mb-2 ${errors.number ? 'input-error' : ''}`}
-                                onAccept={(value) => field.onChange(value)}
-                            />
-                        </>
-
-                    )}
+                    initialValues={initialValues}
                 />
 
-                <label htmlFor="email" className="label">
-                    Email *
-                    {errors.email && (
-                        <span className="span-error">
-                            {errors.email.message?.toString()}
-                        </span>
-                    )}
-
-                </label>
-                <input
-                    id="email"
-                    type="email"
-                    className={`input mb-2 ${errors.email ? "input-error" : ""}`}
-                    placeholder="restaurante@email.com"
-                    {...register("email", {
-                        required: "Campo obrigatório",
-                        pattern: {
-                            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                            message: "Digite um e-mail válido",
-                        },
-                    })}
+                <InputEmail
+                    control={control}
+                    initialValues={initialValues}
                 />
 
                 <Controller
