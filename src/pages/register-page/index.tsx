@@ -11,6 +11,7 @@ const RegisterPage = () => {
         setLoading(true);
         try {
             const response = await registerUser(data); 
+            console.log(response.token)
             localStorage.setItem('token', response.token);
             setError('');
         } catch (error) {
@@ -20,6 +21,8 @@ const RegisterPage = () => {
             setLoading(false);
         }
     };
+
+
 
     return (
         <main className="w-full min-h-[700px] min-w-[300px] py-14 flex justify-center items-center">
