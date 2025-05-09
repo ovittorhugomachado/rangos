@@ -11,8 +11,9 @@ const LoginPage = () => {
     const handleLogin = async () => {
         setLoading(true);
         try {
-            const result = await login({ email, password });
-            localStorage.setItem('token', result.token);
+            const response = await login({ email, password });
+            localStorage.setItem('token', response.token);
+            console.log(response)
             setError('');
         } catch (error) {
             const err = error as Error;
