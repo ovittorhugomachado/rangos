@@ -134,7 +134,7 @@ const RegisterContainer = ({
                                     </button>
                                 </div>
 
-                                <div className="mb-4 text-sm text-gray-500">
+                                <div className="mb-4 text-gray-500">
                                     {requirements.map(req => (
                                         <div
                                             key={req.id}
