@@ -1,5 +1,5 @@
 import { Controller } from "react-hook-form";
-import { InputEmailProps } from "../../../../types/inputs.d";
+import { InputEmailProps } from "../../../../types/register-inputs.d";
 
 const InputEmail = ({ control, initialValues = {} }: InputEmailProps) => {
   return (

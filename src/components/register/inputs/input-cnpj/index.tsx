@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask"
-import { InputCNPJProps } from "../../../../types/inputs.d";
+import { InputCNPJProps } from "../../../../types/register-inputs.d";
 
 const InputCNPJ = ({
   control,

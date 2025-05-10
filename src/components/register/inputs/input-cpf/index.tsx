@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask"
-import { InputCPFProps } from "../../../../types/inputs.d";
+import { InputCPFProps } from "../../../../types/register-inputs.d";
 
 const InputCPF = ({
     control,

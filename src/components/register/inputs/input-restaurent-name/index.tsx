@@ -1,4 +1,4 @@
-import { inputNameProps } from "../../../../types/inputs.d";
+import { inputNameProps } from "../../../../types/register-inputs.d";
 
 const InputRestaurantName = ({
     register, 
