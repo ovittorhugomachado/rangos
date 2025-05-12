@@ -1,38 +1,53 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppSettings } from "../../hooks/use-app-settings";
 import { login } from "../../services/auth-service";
+import { LoginFormData } from "../../types/login.d";
 import { LoginContainer } from "../../components/login";
+import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const handleLogin = async () => {
+    const {
+        fontSize,
+        increaseFontSize,
+        decreaseFontSize,
+        toggleTheme,
+    } = useAppSettings();
+
+    const navigate = useNavigate()
+
+    const handleLogin = async (data: LoginFormData) => {
         setLoading(true);
         try {
-            const response = await login({ email, password });
+            const response = await login(data);
             localStorage.setItem('token', response.token);
-            console.log(response)
             setError('');
+            navigate('/home')
         } catch (error) {
             const err = error as Error;
             setError(err.message || 'Erro ao fazer login');
+            console.log(error)
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <main className="w-full h-full flex justify-center items-center">
+        <main className={`${fontSize} min-h-[590px] min-w-[300px] flex justify-center items-center`}>
             <LoginContainer
-                email={email}
-                password={password}
+                onSubmit={handleLogin}
+                isLoading={loading}
                 error={error}
-                loading={loading}
-                setEmail={setEmail}
-                setPassword={setPassword}
-                onLogin={handleLogin}
+            />
+            <ToggleThemeAndFont
+                toggleTheme={toggleTheme}
+                fontSize={fontSize}
+                increaseFontSize={increaseFontSize}
+                decreaseFontSize={decreaseFontSize}
             />
         </main>
     );

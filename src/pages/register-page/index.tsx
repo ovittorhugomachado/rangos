@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { registerUser } from "../../services/register";
-import { RegisterContainer } from "../../components/register";
+import { useAppSettings } from "../../hooks/use-app-settings";
 import { RegisterFormData } from "../../types/register.d";
+import { RegisterContainer } from "../../components/register";
+import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
+
 
 const RegisterPage = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+        const {
+            fontSize,
+            increaseFontSize,
+            decreaseFontSize,
+            toggleTheme,
+        } = useAppSettings();
 
     const handleRegister = async (data: RegisterFormData) => {
         setLoading(true);
@@ -22,14 +32,18 @@ const RegisterPage = () => {
         }
     };
 
-
-
     return (
-        <main className="w-full min-h-[700px] min-w-[300px] py-14 flex justify-center items-center">
+        <main className={`${fontSize} min-h-[700px] min-w-[300px] py-14 flex justify-center items-center`}>
             <RegisterContainer
                 onSubmit={handleRegister}
                 isLoading={loading}
                 error={error}
+            />
+            <ToggleThemeAndFont
+                toggleTheme={toggleTheme}
+                fontSize={fontSize}
+                increaseFontSize={increaseFontSize}
+                decreaseFontSize={decreaseFontSize}
             />
         </main>
     );

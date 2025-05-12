@@ -1,27 +1,36 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { InputEmail } from "./input-email/intex";
+import { LoginContainerProps, LoginFormData } from "../../types/login.d";
 import { FaArrowRight } from "react-icons/fa";
-
-interface LoginContainerProps {
-    email: string;
-    password: string;
-    error: string;
-    loading: boolean;
-    setEmail: (email: string) => void;
-    setPassword: (password: string) => void;
-    onLogin: () => void;
-}
+import { InputPassword } from "./input-password";
 
 const LoginContainer = ({
-    email,
-    password,
-    error,
-    loading,
-    setEmail,
-    setPassword,
-    onLogin
+    onSubmit,
+    initialValues = {},
+    isLoading = false,
 }: LoginContainerProps) => {
+
+    const {
+        register,
+        handleSubmit,
+        clearErrors,
+        formState: { errors },
+    } = useForm<LoginFormData>({
+        defaultValues: {
+            email: '',
+            password: '',
+            ...initialValues,
+        },
+    });
+
+    const handleFormSubmit: SubmitHandler<LoginFormData> = (data) => {
+        onSubmit(data);
+    };
+
     return (
-        <div className="primary-component w-120 h-110 m-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
-            <img
+        <div className="primary-component w-120 h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
+            {/* <img
                 className="w-35 ml-8 mb-3 hidden dark:block"
                 src="../logo-white.png"
                 alt="domus-logo"
@@ -30,54 +39,46 @@ const LoginContainer = ({
                 className="w-35 ml-8 mb-3 block dark:hidden"
                 src="../logo-black.png"
                 alt="domus-logo"
-            />
-            <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
-                <label htmlFor="email" className="font-semibold ">
-                    Email
-                </label>
-                <input
-                    id="email"
-                    type="email"
-                    className="input mb-2"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+            /> */}
+            <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
+                <InputEmail
+                    register={register}
+                    errors={errors}
+                    clearErrors={clearErrors}
+                />
+                <InputPassword
+                    register={register}
+                    errors={errors}
+                    clearErrors={clearErrors}
                 />
 
-                <label htmlFor="password" className="font-semibold">
-                    Senha
-                </label>
-                <input
-                    id="password"
-                    type="password"
-                    className="input"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
+                <button
+                    type="submit"
+                    className="primary-button w-[250px] self-center mt-8"
+                    disabled={isLoading}
+                >
+                    {isLoading ? "Carregando..." : "Entrar"}
+                </button>
+            </form>
 
-                <a href="#" className="link text-end">
-                    Esqueci minha senha
+            <div className="flex flex-col gap-4">
+                <a
+                    href="#"
+                    className="link text-center"
+                >
+                    Ainda não tem conta?{" "}
+                    <strong className="whitespace-nowrap">
+                        Criar conta <FaArrowRight className="inline" />
+                    </strong>
+                </a>
+
+                <a
+                    href="#"
+                    className="link text-center"
+                >
+                    Esqueci minha senha{" "}
                 </a>
             </div>
-
-            {error && <p className="text-red-500 mb-4 font-semibold">{error}</p>}
-
-            <button
-                className="primary-button w-[200px]"
-                onClick={onLogin}
-                disabled={loading}
-            >
-                {loading ? 'Entrando...' : 'Entrar'}
-            </button>
-
-            <a
-                href="#"
-                className="link text-center m-5"
-            >
-                Ainda não tem conta?{" "}
-                <strong className="whitespace-nowrap">
-                    Criar conta <FaArrowRight className="inline" />
-                </strong>
-            </a>
         </div>
     );
 };
