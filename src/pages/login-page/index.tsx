@@ -23,14 +23,13 @@ const LoginPage = () => {
     const handleLogin = async (data: LoginFormData) => {
         setLoading(true);
         try {
-            const response = await login(data);
-            localStorage.setItem('token', response.token);
-            setError('');
+            const { token } = await login(data);
+            localStorage.setItem('token', token);
             navigate('/home')
+
         } catch (error) {
-            const err = error as Error;
-            setError(err.message || 'Erro ao fazer login');
-            console.log(error)
+            setError(error instanceof Error ? error.message : 'Erro inesperado');
+
         } finally {
             setLoading(false);
         }

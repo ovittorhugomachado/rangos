@@ -32,6 +32,10 @@ input {
     @apply text-red-500 text-sm mt-1 font-medium text-right
 }
 
+.text-error {
+    @apply text-red-500 text-sm mt-1 font-medium text-center
+}
+
 .link {
     @apply cursor-pointer transition-all hover:scale-101;
 }

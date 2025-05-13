@@ -13,21 +13,23 @@ export const login = async (credentials: LoginCredentials) => {
             body: JSON.stringify(credentials)
         });
 
-        console.log(response.status)
-        if (response.status == 401) {
-            throw new Error("Usuário não encontrado")
-        }
-
+        const data = await response.json()
+        
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Erro ao fazer login')
+            throw new Error(data.message || 'Erro ao fazer login')
         }
 
-        const data = await response.json();
         return data;
 
-    } catch {
-        throw new Error('Erro ao se conectar com o servidor');
-    }
+    } catch (error) {
 
+        if (error instanceof TypeError && error.message === 'Failed to fetch') {
+            throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
+        }
+
+        if (error instanceof Error) {
+            throw error;
+        }
+        throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
+    }
 }

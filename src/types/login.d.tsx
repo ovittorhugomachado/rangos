@@ -7,6 +7,6 @@ export interface LoginFormData {
 export interface LoginContainerProps {
     onSubmit: (data: LoginFormData) => void;
     isLoading: boolean;
-    error?: string;
+    error: string;
     initialValues?: Partial<LoginFormData>;
 }
