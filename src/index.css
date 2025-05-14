@@ -29,11 +29,11 @@ input {
 }
 
 .span-error {
-    @apply text-red-500 text-sm mt-1 font-medium text-right
+    @apply text-red-500 font-medium text-right
 }
 
 .text-error {
-    @apply text-red-500 text-sm mt-1 font-medium text-center
+    @apply text-red-500 font-medium text-center
 }
 
 .link {

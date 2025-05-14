@@ -1,7 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { InputEmail } from "./input-email/intex";
+import { Link } from "react-router-dom";
 import { LoginContainerProps, LoginFormData } from "../../types/login.d";
 import { FaArrowRight } from "react-icons/fa";
+import { InputEmail } from "./input-email";
 import { InputPassword } from "./input-password";
 
 const LoginContainer = ({
@@ -42,16 +43,16 @@ const LoginContainer = ({
             }
         }
     };
-    
+
     return (
         <div className="primary-component w-120 h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
             <img
-                className="w-35 mb-3 hidden dark:block"
+                className="w-35 hidden dark:block"
                 src="../logo-white.png"
                 alt="domus-logo"
             />
             <img
-                className="w-35 mb-3 block dark:hidden"
+                className="w-35 block dark:hidden"
                 src="../logo-black.png"
                 alt="domus-logo"
             />
@@ -81,23 +82,23 @@ const LoginContainer = ({
                 </button>
             </form>
 
-            <div className="flex flex-col gap-4">
-                <a
-                    href="#"
+            <div className="flex flex-col mb-5 gap-4">
+                <Link
+                    to="/register"
                     className="link text-center"
                 >
                     Ainda não tem conta?{" "}
                     <strong className="whitespace-nowrap">
                         Criar conta <FaArrowRight className="inline" />
                     </strong>
-                </a>
+                </Link>
 
-                <a
-                    href="#"
+                <Link
+                    to="/recover-password"
                     className="link text-center"
                 >
-                    Esqueci minha senha{" "}
-                </a>
+                    Esqueci minha senha
+                </Link>
             </div>
         </div>
     );

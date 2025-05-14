@@ -9,6 +9,7 @@ const InputEmail = ({
 
     return (
         <div className="flex flex-col gap-1">
+            
             <label htmlFor="email" className="label">
                 Email
                 {errors.email && (
@@ -36,6 +37,7 @@ const InputEmail = ({
                     }
                 })}
             />
+
         </div>
     )
 }

@@ -45,57 +45,9 @@ const InputPassword = ({
                         {showPassword ? <IoEyeOff size={18} /> : <IoEye size={18} />}
                     </button>
                 </div>
-
-
+                
             </div>
-
         </>
-
-        // <Controller
-        //     name="password"
-        //     control={control}
-        //     rules={{
-        //         required: "Digite sua senha",
-        //         minLength: {
-        //             value: 2,
-        //             message: "Digite sua senha"
-        //         },
-        //     }}
-        //     render={({ field, fieldState }) => {
-        //         const password = field.value || '';
-
-        //         return (
-        //             <div className="relative">
-        //                 <label htmlFor="password" className="label">
-        //                     Senha *
-        //                     {fieldState.error && (
-        //                         <span className="span-error">
-        //                             {fieldState.error.message}
-        //                         </span>
-        //                     )}
-        //                 </label>
-
-        //                 <div className="relative flex items-center">
-        //                     <input
-        //                         {...field}
-        //                         type={showPassword ? "text" : "password"}
-        //                         placeholder="crie sua senha"
-        //                         className={`input mb-2 mt-1 !pr-10 ${fieldState.error ? "input-error" : ""}`}
-        //                     />
-
-        //                     <button
-        //                         type="button"
-        //                         className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-        //                         onClick={() => setShowPassword(!showPassword)}
-        //                         aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
-        //                     >
-        //                         {showPassword ? <IoEyeOff size={18} /> : <IoEye size={18} />}
-        //                     </button>
-        //                 </div>
-        //             </div>
-        //         );
-        //     }}
-        // />
     )
 }
 
