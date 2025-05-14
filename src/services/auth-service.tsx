@@ -1,9 +1,6 @@
-interface LoginCredentials {
-    email: string;
-    password: string;
-}
+import { LoginFormData } from "../types/login.d";
 
-export const login = async (credentials: LoginCredentials) => {
+export const login = async (credentials: LoginFormData) => {
     try {
         const response = await fetch('http://localhost:3000/auth/login', {
             method: 'POST',
