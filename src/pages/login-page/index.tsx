@@ -40,6 +40,7 @@ const LoginPage = () => {
             <LoginContainer
                 onSubmit={handleLogin}
                 isLoading={loading}
+                message=""
                 error={error}
             />
             <ToggleThemeAndFont
