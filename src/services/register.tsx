@@ -1,7 +1,7 @@
 import { RegisterFormData } from "../types/register.d";
 
   export const registerUser = async (data: RegisterFormData) => {
-    const response = await fetch('http://localhost:3000/auth/signup', {
+    const response = await fetch('http://localhost:3000/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
