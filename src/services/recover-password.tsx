@@ -13,7 +13,7 @@ export const recoverPassword = async (credentials: LoginFormData) => {
         const data = await response.json()
         
         if (!response.ok) {
-            throw new Error(data.message || 'Erro ao fazer login')
+            throw new Error(data.message || 'Erro ao recuperar senha')
         }
 
         return data;
