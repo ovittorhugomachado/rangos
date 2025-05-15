@@ -1,6 +1,6 @@
-import { LoginFormData } from "../types/login.d";
+import { AccountFormData } from "../types/account-types.d";
 
-export const login = async (credentials: LoginFormData) => {
+export const login = async (credentials: AccountFormData) => {
     try {
         const response = await fetch('http://localhost:3000/auth/login', {
             method: 'POST',

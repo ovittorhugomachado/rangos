@@ -1,4 +1,4 @@
-import { inputNameProps } from "../../../../types/register-inputs.d";
+import { inputNameProps } from "../../../types/account-input-types.d";
 
 const InputOwnersName = ({
     register,

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { IoEye, IoEyeOff, IoCheckmarkCircleOutline, IoCheckmarkCircleSharp } from "react-icons/io5";
-import { InputPasswordProps } from "../../../../types/register-inputs.d";
+import { InputPasswordProps } from "../../../types/account-input-types.d";
 
-const InputPassword = ({ register, errors, watch }: InputPasswordProps) => {
+const InputPasswordRegister = ({ register, errors, watch }: InputPasswordProps) => {
   const [showPassword, setShowPassword] = useState(false);
  const password = watch("password") || '';
 
@@ -66,4 +66,4 @@ const InputPassword = ({ register, errors, watch }: InputPasswordProps) => {
   );
 };
 
-export { InputPassword };
+export { InputPasswordRegister };

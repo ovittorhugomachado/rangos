@@ -1,8 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { LoginContainerProps, LoginFormData } from "../../types/login.d";
+import { AccountContainerProps, AccountFormData } from "../../types/account-types.d";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import { InputEmail } from "./input-email/index";
+import { InputEmail } from "../inputs/input-email";
 
 
 const RecoverPasswordContainer = ({
@@ -11,21 +11,21 @@ const RecoverPasswordContainer = ({
     message,
     initialValues = {},
     isLoading = false,
-}: LoginContainerProps) => {
+}: AccountContainerProps) => {
     const {
         register,
         handleSubmit,
         clearErrors,
         setError,
         formState: { errors },
-    } = useForm<LoginFormData>({
+    } = useForm<AccountFormData>({
         defaultValues: {
             email: '',
             ...initialValues,
         },
     });
 
-    const handleLoginSubmit: SubmitHandler<LoginFormData> = (data) => {
+    const handleLoginSubmit: SubmitHandler<AccountFormData> = (data) => {
         try {
             onSubmit(data);
             clearErrors();
@@ -106,10 +106,10 @@ const RecoverPasswordContainer = ({
             )}
             {message !== "" && (
                 <>
-                <h1 className="text-center mt-4 mb-12">{message}</h1>
+                    <h1 className="text-center mt-4 mb-12">{message}</h1>
                 </>
             )}
-            
+
         </div>
     );
 };
