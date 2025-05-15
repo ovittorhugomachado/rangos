@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSettings } from "../../hooks/use-app-settings";
 import { login } from "../../services/auth-service";
-import { LoginFormData } from "../../types/login.d";
-import { LoginContainer } from "../../components/login";
+import { AccountFormData } from "../../types/account-types";
+import { LoginFormContainer } from "../../components/login";
 import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
 
 const LoginPage = () => {
@@ -20,7 +20,7 @@ const LoginPage = () => {
 
     const navigate = useNavigate()
 
-    const handleLogin = async (data: LoginFormData) => {
+    const handleLogin = async (data: AccountFormData) => {
         setLoading(true);
         try {
             const { token } = await login(data);
@@ -37,7 +37,7 @@ const LoginPage = () => {
 
     return (
         <main className={`${fontSize} min-h-[590px] min-w-[300px] flex justify-center items-center`}>
-            <LoginContainer
+            <LoginFormContainer
                 onSubmit={handleLogin}
                 isLoading={loading}
                 message=""

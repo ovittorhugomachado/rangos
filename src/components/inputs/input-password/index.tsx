@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
-import { InputPasswordProps } from "../../../types/login-inputs.d";
+import { InputPasswordProps } from "../../../types/account-input-types.d"
 
 const InputPassword = ({
     register,

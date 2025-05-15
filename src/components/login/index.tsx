@@ -1,23 +1,24 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { LoginContainerProps, LoginFormData } from "../../types/login.d";
 import { FaArrowRight } from "react-icons/fa";
-import { InputEmail } from "./input-email";
-import { InputPassword } from "./input-password";
+import { InputEmail } from "../inputs/input-email";
+import { InputPassword } from "../inputs/input-password";
+import { AccountContainerProps, AccountFormData } from "../../types/account-types";
 
-const LoginContainer = ({
+const LoginFormContainer = ({
     onSubmit,
     error,
     initialValues = {},
     isLoading = false,
-}: LoginContainerProps) => {
+}: AccountContainerProps) => {
     const {
         register,
         handleSubmit,
         clearErrors,
         setError,
+        watch,
         formState: { errors },
-    } = useForm<LoginFormData>({
+    } = useForm<AccountFormData>({
         defaultValues: {
             email: '',
             password: '',
@@ -25,7 +26,7 @@ const LoginContainer = ({
         },
     });
 
-    const handleLoginSubmit: SubmitHandler<LoginFormData> = (data) => {
+    const handleAccountFormData: SubmitHandler<AccountFormData> = (data) => {
         try {
             onSubmit(data);
             clearErrors();
@@ -56,7 +57,7 @@ const LoginContainer = ({
                 src="../logo-black.png"
                 alt="domus-logo"
             />
-            <form onSubmit={handleSubmit(handleLoginSubmit)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
+            <form onSubmit={handleSubmit(handleAccountFormData)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
                 <InputEmail
                     register={register}
                     errors={errors}
@@ -64,6 +65,7 @@ const LoginContainer = ({
                 />
                 <InputPassword
                     register={register}
+                    watch={watch}
                     errors={errors}
                     clearErrors={clearErrors}
                 />
@@ -104,4 +106,4 @@ const LoginContainer = ({
     );
 };
 
-export { LoginContainer };
+export { LoginFormContainer};

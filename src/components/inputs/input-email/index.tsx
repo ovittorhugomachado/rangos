@@ -1,4 +1,4 @@
-import { InputEmailProps } from "../../../types/login-inputs.d";
+import { InputEmailProps } from "../../../types/account-input-types.d";
 
 const InputEmail = ({
     register,
@@ -25,7 +25,7 @@ const InputEmail = ({
                 placeholder="Digite seu email"
                 defaultValue={initialValues.email || ""}
                 {...register("email", {
-                    required: " ",
+                    required: "Campo obrigatório",
                     pattern: {
                         value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
                         message: "Digite um e-mail válido",
