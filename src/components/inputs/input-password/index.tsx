@@ -17,6 +17,11 @@ const InputPassword = ({
 
                 <label htmlFor="password" className="label">
                     Senha
+                    {errors?.password && (
+                        <span className="span-error">
+                            {errors.password.message?.toString()}
+                        </span>
+                    )}
                 </label>
 
                 <div className="relative">
@@ -45,7 +50,7 @@ const InputPassword = ({
                         {showPassword ? <IoEyeOff size={18} /> : <IoEye size={18} />}
                     </button>
                 </div>
-                
+
             </div>
         </>
     )

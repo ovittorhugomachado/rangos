@@ -1,0 +1,125 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+import { AccountFormData, AccountContainerProps } from "../../types/account-types.d";
+import { InputCNPJ } from "../inputs/input-cnpj";
+import { InputRestaurantName } from "../inputs/input-restaurent-name";
+import { InputOwnersName } from "../inputs/input-owners-name";
+import { InputCPF } from "../inputs/input-cpf";
+import { InputPhoneNumber } from "../inputs/input-phone-number";
+import { InputEmail } from "../inputs/input-email";
+import { InputPasswordRegister } from "../inputs/input-password-register";
+
+const RegisterFormContainer = ({
+    onSubmit,
+    initialValues = {},
+    isLoading = false,
+}: AccountContainerProps) => {
+
+    const {
+        register,
+        handleSubmit,
+        control,
+        clearErrors,
+        watch,
+        formState: { errors },
+    } = useForm<AccountFormData>({
+        defaultValues: {
+            restaurantName: '',
+            cnpj: '',
+            ownersName: '',
+            cpf: '',
+            number: '',
+            email: '',
+            password: '',
+            ...initialValues,
+        },
+    });
+
+    const handleFormSubmit: SubmitHandler<AccountFormData> = (data) => {
+        onSubmit(data);
+    };
+
+    return (
+
+        <div className="primary-component w-120 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
+            <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col justify-center items-center mt-5 mb-5 w-full max-w-105 gap-4">
+
+
+                <Link
+                    to="/login"
+                    className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
+                >
+                    <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
+                </Link>
+
+                <img
+                    className="w-35 ml-8 mb-3 hidden dark:block"
+                    src="../logo-white.png"
+                    alt="domus-logo"
+                />
+                <img
+                    className="w-35 ml-8 mb-3 block dark:hidden"
+                    src="../logo-black.png"
+                    alt="domus-logo"
+                />
+                <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
+
+                    <InputRestaurantName
+                        register={register}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                    />
+
+                    <InputCNPJ
+                        control={control}
+                        initialValues={initialValues}
+                    />
+
+                    <InputOwnersName
+                        register={register}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                    />
+
+                    <InputCPF
+                        control={control}
+                        initialValues={initialValues}
+                    />
+
+                    <InputPhoneNumber
+                        control={control}
+                        initialValues={initialValues}
+                    />
+
+                    <InputEmail
+                    register={register}
+                    errors={errors}
+                    clearErrors={clearErrors}
+                    />
+
+                    <InputPasswordRegister
+                        register={register}
+                        watch={watch}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                    />
+
+                </div>
+
+                <button
+                    type="submit"
+                    className="primary-button w-[250px]"
+                    disabled={isLoading}
+                >
+                    {isLoading ? "Carregando..." : "Criar conta"}
+                </button>
+            </form>
+        </div>
+
+
+
+    );
+};
+
+export { RegisterFormContainer };

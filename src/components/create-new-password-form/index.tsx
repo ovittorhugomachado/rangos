@@ -1,20 +1,20 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { RegisterFormData, RegisterContainerProps } from "../../types/register.d";
-import { InputCNPJ } from "./inputs/input-cnpj";
-import { InputRestaurantName } from "./inputs/input-restaurent-name";
-import { InputOwnersName } from "./inputs/input-owners-name";
-import { InputCPF } from "./inputs/input-cpf";
-import { InputPhoneNumber } from "./inputs/input-phone-number";
-import { InputEmail } from "./inputs/input-email";
-import { InputPassword } from "./inputs/input-password";
+import { AccountFormData, AccountContainerProps } from "../../types/account-types.d";
+import { InputCNPJ } from "../inputs/input-cnpj";
+import { InputRestaurantName } from "../inputs/input-restaurent-name";
+import { InputOwnersName } from "../inputs/input-owners-name";
+import { InputCPF } from "../inputs/input-cpf";
+import { InputPhoneNumber } from "../inputs/input-phone-number";
+import { InputEmail } from "../inputs/input-email";
+import { InputPasswordRegister } from "../inputs/input-password-register";
 
-const RegisterContainer = ({
+const CreateNewPasswordFormContainer = ({
     onSubmit,
     initialValues = {},
     isLoading = false,
-}: RegisterContainerProps) => {
+}: AccountContainerProps) => {
 
     const {
         register,
@@ -23,7 +23,7 @@ const RegisterContainer = ({
         clearErrors,
         watch,
         formState: { errors },
-    } = useForm<RegisterFormData>({
+    } = useForm<AccountFormData>({
         defaultValues: {
             restaurantName: '',
             cnpj: '',
@@ -36,7 +36,7 @@ const RegisterContainer = ({
         },
     });
 
-    const handleFormSubmit: SubmitHandler<RegisterFormData> = (data) => {
+    const handleFormSubmit: SubmitHandler<AccountFormData> = (data) => {
         onSubmit(data);
     };
 
@@ -93,11 +93,12 @@ const RegisterContainer = ({
                     />
 
                     <InputEmail
-                        control={control}
-                        initialValues={initialValues}
+                    register={register}
+                    errors={errors}
+                    clearErrors={clearErrors}
                     />
 
-                    <InputPassword
+                    <InputPasswordRegister
                         register={register}
                         watch={watch}
                         errors={errors}
@@ -121,4 +122,4 @@ const RegisterContainer = ({
     );
 };
 
-export { RegisterContainer };
+export { CreateNewPasswordFormContainer };

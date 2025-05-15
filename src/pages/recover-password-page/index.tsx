@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAppSettings } from "../../hooks/use-app-settings";
 import { AccountFormData } from "../../types/account-types.d.tsx";
 import { recoverPassword } from "../../services/recover-password";
-import { RecoverPasswordContainer } from "../../components/recover-password";
+import { RecoverPasswordFormContainer } from "../../components/recover-password-form-container/index.tsx";
 import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
 
 const RecoverPasswordPage = () => {
@@ -35,7 +35,7 @@ const RecoverPasswordPage = () => {
 
     return (
         <main className={`${fontSize} min-h-[550px] min-w-[300px] flex justify-center items-center`}>
-            <RecoverPasswordContainer
+            <RecoverPasswordFormContainer
                 onSubmit={HandleRecoverPassword}
                 isLoading={loading}
                 message={message}
