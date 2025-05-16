@@ -9,6 +9,7 @@ import { InputCPF } from "../inputs/input-cpf";
 import { InputPhoneNumber } from "../inputs/input-phone-number";
 import { InputEmail } from "../inputs/input-email";
 import { InputPasswordRegister } from "../inputs/input-password-register";
+import { Logo } from "../logo";
 
 const RegisterFormContainer = ({
     onSubmit,
@@ -53,16 +54,8 @@ const RegisterFormContainer = ({
                     <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
                 </Link>
 
-                <img
-                    className="w-35 ml-8 mb-3 hidden dark:block"
-                    src="../logo-white.png"
-                    alt="domus-logo"
-                />
-                <img
-                    className="w-35 ml-8 mb-3 block dark:hidden"
-                    src="../logo-black.png"
-                    alt="domus-logo"
-                />
+                <Logo />
+                
                 <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
 
                     <InputRestaurantName
@@ -93,9 +86,9 @@ const RegisterFormContainer = ({
                     />
 
                     <InputEmail
-                    register={register}
-                    errors={errors}
-                    clearErrors={clearErrors}
+                        register={register}
+                        errors={errors}
+                        clearErrors={clearErrors}
                     />
 
                     <InputPasswordRegister

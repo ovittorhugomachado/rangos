@@ -7,6 +7,7 @@ import { createNewPassword, validateToken } from "../../services/create-new-pass
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
+import { Logo } from "../../components/logo";
 
 const CreateNewPasswordPage = () => {
     const [message, setMessage] = useState('')
@@ -42,7 +43,6 @@ const CreateNewPasswordPage = () => {
         validateTokenOnLoad();
     }, [token, navigate]);
 
-    console.log(message)
     const handleNewPassword = async (formData: AccountFormData) => {
         if (!token || !isValidToken) {
             setError('Token inválido ou expirado.');
@@ -69,16 +69,9 @@ const CreateNewPasswordPage = () => {
                 <div className="loading-screen">Validando link...</div>
             ) : message ? (
                 <div className="primary-component w-120 h-80 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
-                    <img
-                        className="w-35 mb-3 hidden dark:block"
-                        src="../logo-white.png"
-                        alt="domus-logo"
-                    />
-                    <img
-                        className="w-35 mb-3 block dark:hidden"
-                        src="../logo-black.png"
-                        alt="domus-logo"
-                    />
+
+                    <Logo />
+
                     <p className="span-success">{message}</p>
                     <Link
                         to="/login"
@@ -104,16 +97,8 @@ const CreateNewPasswordPage = () => {
                         <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
                     </Link>
 
-                    <img
-                        className="w-35 mb-3 hidden dark:block"
-                        src="../logo-white.png"
-                        alt="domus-logo"
-                    />
-                    <img
-                        className="w-35 mb-3 block dark:hidden"
-                        src="../logo-black.png"
-                        alt="domus-logo"
-                    />
+                    <Logo />
+
                     {error || 'Link inválido ou expirado'}
                     <Link
                         to="/recover-password"

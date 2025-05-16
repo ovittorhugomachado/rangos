@@ -4,6 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { InputEmail } from "../inputs/input-email";
 import { InputPassword } from "../inputs/input-password";
 import { AccountContainerProps, AccountFormData } from "../../types/account-types.d";
+import { Logo } from "../logo";
 
 const LoginFormContainer = ({
     onSubmit,
@@ -47,16 +48,7 @@ const LoginFormContainer = ({
 
     return (
         <div className="primary-component w-120 h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
-            <img
-                className="w-35 hidden dark:block"
-                src="../logo-white.png"
-                alt="domus-logo"
-            />
-            <img
-                className="w-35 block dark:hidden"
-                src="../logo-black.png"
-                alt="domus-logo"
-            />
+            <Logo />
             <form onSubmit={handleSubmit(handleAccountFormData)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
                 <InputEmail
                     register={register}
@@ -106,4 +98,4 @@ const LoginFormContainer = ({
     );
 };
 
-export { LoginFormContainer};
+export { LoginFormContainer };

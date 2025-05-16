@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AccountContainerProps, AccountFormData } from "../../types/account-types.d";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { InputEmail } from "../inputs/input-email";
+import { Logo } from "../logo";
 
 
 const RecoverPasswordFormContainer = ({
@@ -54,16 +55,7 @@ const RecoverPasswordFormContainer = ({
                 <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
             </Link>
 
-            <img
-                className="w-35 hidden dark:block"
-                src="../logo-white.png"
-                alt="domus-logo"
-            />
-            <img
-                className="w-35 block dark:hidden"
-                src="../logo-black.png"
-                alt="domus-logo"
-            />
+            <Logo />
 
             {message === "" && (
                 <>

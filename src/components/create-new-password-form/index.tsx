@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { AccountFormData, AccountContainerProps } from "../../types/account-types.d";
 import { InputPasswordRegister } from "../inputs/input-password-register";
+import { Logo } from "../logo";
 
 const CreateNewPasswordFormContainer = ({
     onSubmit,
@@ -40,16 +41,8 @@ const CreateNewPasswordFormContainer = ({
                     <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
                 </Link>
 
-                <img
-                    className="w-35 ml-8 mb-3 hidden dark:block"
-                    src="../logo-white.png"
-                    alt="domus-logo"
-                />
-                <img
-                    className="w-35 ml-8 mb-3 block dark:hidden"
-                    src="../logo-black.png"
-                    alt="domus-logo"
-                />
+                <Logo />
+
                 <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
 
                     <InputPasswordRegister
