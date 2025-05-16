@@ -21,7 +21,6 @@ const RegisterPage = () => {
         setLoading(true);
         try {
             const response = await registerUser(data); 
-            console.log(response.token)
             localStorage.setItem('token', response.token);
             setError('');
         } catch (error) {

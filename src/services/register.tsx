@@ -1,6 +1,6 @@
-import { RegisterFormData } from "../types/account-types.d";
+import { AccountFormData } from "../types/account-types.d";
 
-  export const registerUser = async (data: RegisterFormData) => {
+  export const registerUser = async (data: AccountFormData) => {
     const response = await fetch('http://localhost:3000/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

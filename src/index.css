@@ -32,6 +32,10 @@ input {
     @apply text-red-500 font-medium text-right
 }
 
+.span-success {
+    @apply text-green-500 font-medium text-right
+}
+
 .text-error {
     @apply text-red-500 font-medium text-center
 }

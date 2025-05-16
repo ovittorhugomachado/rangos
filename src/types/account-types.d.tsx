@@ -6,6 +6,7 @@ export interface AccountFormData {
   number: string;
   email: string;
   password: string;
+  token: string;
   message: string;
   error: unknown;
 }
