@@ -1,17 +1,10 @@
 const Logo = () => {
     return (
-        <>
             <img
-                className="w-35 hidden dark:block"
-                src="../logo-white.png"
+                className="w-40"
+                src="../logo.png"
                 alt="domus-logo"
             />
-            <img
-                className="w-35 block dark:hidden"
-                src="../logo-black.png"
-                alt="domus-logo"
-            />
-        </>
     )
 }
 

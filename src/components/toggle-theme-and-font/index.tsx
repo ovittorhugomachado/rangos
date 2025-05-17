@@ -15,22 +15,22 @@ const ToggleThemeAndFont = ({ toggleTheme, fontSize, increaseFontSize, decreaseF
             <button
                 onClick={toggleTheme}
                 className="hidden dark:inline cursor-pointer">
-                <IoIosSunny className="w-6 h-6 m-0.2 z-[3]" />
+                <IoIosSunny className="w-6 h-6 m-0.2 z-[3] text-primary" />
             </button>
             <button
                 onClick={toggleTheme}
                 className="inline dark:hidden cursor-pointer">
-                <IoMdMoon className="w-6 h-6 m-0.2 z-[3]" />
+                <IoMdMoon className="w-6 h-6 m-0.2 z-[3] text-primary" />
             </button>
             <button
                 onClick={increaseFontSize}
                 className={fontSize === "text-lg" ? "opacity-30" : "opacity-100 cursor-pointer"}>
-                <BsZoomIn />
+                <BsZoomIn className="text-primary" />
             </button>
             <button
                 onClick={decreaseFontSize}
                 className={fontSize === "text-sm" ? "opacity-30" : "opacity-100 cursor-pointer"}>
-                <BsZoomOut />
+                <BsZoomOut className="text-primary" />
             </button>
         </div>
     )

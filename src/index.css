@@ -4,8 +4,12 @@
 
 @tailwind utilities;
 
+@theme {
+  --color-primary: #85bc05;
+}
+
 body {
-    @apply text-sm text-white bg-[url(../bg-theme-light.png)] dark:bg-[url(../bg-theme-dark.jpg)] bg-no-repeat bg-cover bg-fixed;
+    @apply text-sm text-white bg-white dark:bg-zinc-950 bg-no-repeat bg-cover bg-fixed;
 }
 
 input {
@@ -45,7 +49,7 @@ input {
 }
 
 .primary-button {
-    @apply px-[60px] py-2 rounded-3xl cursor-pointer text-lg font-semibold transition-all bg-black text-white dark:bg-white dark:text-black hover:scale-105;
+    @apply px-[60px] py-2 rounded-3xl cursor-pointer text-lg font-semibold transition-all bg-primary text-black hover:scale-105;
 }
 
 input:-webkit-autofill {
