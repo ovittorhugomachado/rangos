@@ -1,5 +1,14 @@
+import { Link } from "react-router-dom"
+
 const HomePage = () => {
-    return <h1>Em construção🔧</h1>
+    return (
+        <Link
+            to={"/login"}
+            className="primary-button"
+        >
+            Login
+        </Link>
+    )
 }
 
 export { HomePage }
