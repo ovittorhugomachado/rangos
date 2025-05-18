@@ -11,7 +11,7 @@
 }
 
 body {
-    @apply text-sm text-white bg-no-repeat bg-cover bg-fixed;
+    @apply text-sm text-white bg-no-repeat bg-white dark:bg-black bg-cover bg-fixed;
 }
 
 input {

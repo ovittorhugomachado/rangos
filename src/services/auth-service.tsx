@@ -11,7 +11,6 @@ export const login = async (credentials: AccountFormData) => {
         });
 
         const data = await response.json()
-        console.log(data)
         
         if (!response.ok) {
             throw new Error(data.message || 'Erro ao fazer login')
