@@ -1,0 +1,19 @@
+export const userData = async () => {
+
+    const token = localStorage.getItem('token')
+
+    const response = await fetch('http://localhost:3000/me', {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json',
+            'authorization': `Bearer ${token}`
+         },
+    });
+
+    if(!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Erro ao buscar dados do usuário');
+    };
+
+    return await response.json();
+}
