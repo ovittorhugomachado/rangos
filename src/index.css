@@ -6,10 +6,12 @@
 
 @theme {
   --color-primary: #85bc05;
+  --font-display: "geologica", "sans-serif"; 
+  --breakpoint-xs: 260px;
 }
 
 body {
-    @apply text-sm text-white bg-white dark:bg-zinc-950 bg-no-repeat bg-cover bg-fixed;
+    @apply text-sm text-white bg-no-repeat bg-cover bg-fixed;
 }
 
 input {
