@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/register";
 import { useAppSettings } from "../../hooks/use-app-settings";
 import { AccountFormData } from "../../types/account-types.d";
@@ -7,8 +8,11 @@ import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
 
 
 const RegisterPage = () => {
+
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate()
 
         const {
             fontSize,
@@ -22,6 +26,7 @@ const RegisterPage = () => {
         try {
             const response = await registerUser(data); 
             localStorage.setItem('token', response.token);
+            navigate('/admin/settings-page')
             setError('');
         } catch (error) {
             const err = error as Error;
