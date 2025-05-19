@@ -35,10 +35,10 @@ const CreateNewPasswordFormContainer = ({
             <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col justify-center items-center mt-5 mb-5 w-full max-w-105 gap-4">
 
                 <Link
-                    to="/login"
+                    to="/entrar"
                     className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
                 >
-                    <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
+                    <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
                 </Link>
 
                 <Logo />

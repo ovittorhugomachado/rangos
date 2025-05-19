@@ -48,10 +48,10 @@ const RegisterFormContainer = ({
 
 
                 <Link
-                    to="/login"
+                    to="/entrar"
                     className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
                 >
-                    <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
+                    <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
                 </Link>
 
                 <Logo />

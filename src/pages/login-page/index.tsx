@@ -25,7 +25,7 @@ const LoginPage = () => {
         try {
             const { token } = await login(data);
             localStorage.setItem('token', token);
-            navigate('/admin/dashboard')
+            navigate('/painel')
 
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Erro inesperado');

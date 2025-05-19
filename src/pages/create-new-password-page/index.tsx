@@ -34,7 +34,7 @@ const CreateNewPasswordPage = () => {
             } catch (error) {
                 const err = error as Error;
                 setError(err.message || 'Erro ao validar o link');
-                navigate('/login', { state: { error: err.message } });
+                navigate('/entrar', { state: { error: err.message } });
             } finally {
                 setLoading(false);
             }
@@ -74,10 +74,10 @@ const CreateNewPasswordPage = () => {
 
                     <p className="span-success">{message}</p>
                     <Link
-                        to="/login"
+                        to="/entrar"
                         className="primary-button mt-2.5"
                     >
-                        Fazer login
+                        Entrar na conta
                     </Link>
 
                 </div>
@@ -91,17 +91,17 @@ const CreateNewPasswordPage = () => {
             ) : (
                 <div className="primary-component w-120 h-80 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
                     <Link
-                        to="/login"
+                        to="/entrar"
                         className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
                     >
-                        <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
+                        <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
                     </Link>
 
                     <Logo />
 
                     {error || 'Link inválido ou expirado'}
                     <Link
-                        to="/recover-password"
+                        to="/recuperar-senha"
                         className="primary-button mt-3.5"
                     >
                         Solicitar novo link

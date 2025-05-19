@@ -78,7 +78,7 @@ const LoginFormContainer = ({
 
             <div className="flex flex-col mb-5 gap-4">
                 <Link
-                    to="/register"
+                    to="/criar-conta"
                     className="link text-center"
                 >
                     Ainda não tem conta?{" "}
@@ -88,7 +88,7 @@ const LoginFormContainer = ({
                 </Link>
 
                 <Link
-                    to="/recover-password"
+                    to="/recuperar-senha"
                     className="link text-center"
                 >
                     Esqueci minha senha

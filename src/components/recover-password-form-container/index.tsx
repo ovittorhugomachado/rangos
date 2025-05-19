@@ -49,10 +49,10 @@ const RecoverPasswordFormContainer = ({
         <div className="primary-component w-120 gap-3 mx-3 pt-20 pb-10 p-5 flex flex-col justify-center items-center">
 
             <Link
-                to="/login"
+                to="/entrar"
                 className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
             >
-                <span className="translate-y-[1px]"><FaArrowLeft /></span>Fazer login
+                <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
             </Link>
 
             <Logo />
@@ -85,7 +85,7 @@ const RecoverPasswordFormContainer = ({
 
                     <div className="flex flex-col mb-5 gap-4">
                         <Link
-                            to="/register"
+                            to="/criar-conta"
                             className="link text-center"
                         >
                             Ainda não tem conta?{" "}
