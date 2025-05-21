@@ -11,7 +11,7 @@ import { InputEmail } from "../inputs/input-email";
 import { InputPasswordRegister } from "../inputs/input-password-register";
 import { Logo } from "../logo";
 
-const RegisterFormContainer = ({
+const SignupFormContainer = ({
     onSubmit,
     initialValues = {},
     isLoading = false,
@@ -30,7 +30,7 @@ const RegisterFormContainer = ({
             cnpj: '',
             ownersName: '',
             cpf: '',
-            number: '',
+            phoneNumber: '',
             email: '',
             password: '',
             ...initialValues,
@@ -115,4 +115,4 @@ const RegisterFormContainer = ({
     );
 };
 
-export { RegisterFormContainer };
+export { SignupFormContainer };

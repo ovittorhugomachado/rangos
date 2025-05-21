@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/register";
 import { useAppSettings } from "../../hooks/use-app-settings";
 import { AccountFormData } from "../../types/account-types.d";
-import { RegisterFormContainer } from "../../components/register-form-container";
+import { SignupFormContainer } from "../../components/signup-form-container";
 import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
 
 
@@ -26,7 +26,8 @@ const RegisterPage = () => {
         try {
             const response = await registerUser(data); 
             localStorage.setItem('token', response.token);
-            navigate('/admin/settings-page')
+            console.log(data)
+            navigate('/painel')
             setError('');
         } catch (error) {
             const err = error as Error;
@@ -38,7 +39,7 @@ const RegisterPage = () => {
 
     return (
         <main className={`${fontSize} min-h-[700px] min-w-[300px] py-14 flex justify-center items-center`}>
-            <RegisterFormContainer
+            <SignupFormContainer
                 onSubmit={handleRegister}
                 isLoading={loading}
                 message=""
