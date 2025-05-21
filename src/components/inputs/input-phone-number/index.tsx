@@ -8,9 +8,9 @@ const InputPhoneNumber = ({
 }: InputPhoneNumberProps ) => {
     return (
         <Controller
-        name="number"
+        name="phoneNumber"
         control={control}
-        defaultValue={initialValues.number || ""}
+        defaultValue={initialValues.phoneNumber || ""}
         rules={{
             required: "Campo obrigatório",
             pattern: {
@@ -20,7 +20,7 @@ const InputPhoneNumber = ({
         }}
         render={({ field, fieldState }) => (
             <>
-                <label htmlFor="number" className="label">
+                <label htmlFor="phoneNumber" className="label">
                     Celular *
                     {fieldState.error && (
                         <span className="span-error">

@@ -1,7 +1,7 @@
 import { UseFormRegister, UseFormWatch, UseFormClearErrors, FieldErrors, Control } from "react-hook-form";
 import { AccountFormData } from "./account-types.d";
 
-export interface inputNameProps {
+export interface InputNameProps {
     register: UseFormRegister<AccountFormData>;
     errors: FieldErrors<AccountFormData>;
     clearErrors: UseFormClearErrors<AccountFormData>;

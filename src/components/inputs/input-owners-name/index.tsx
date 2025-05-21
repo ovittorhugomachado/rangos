@@ -1,11 +1,11 @@
-import { inputNameProps } from "../../../types/account-input-types.d";
+import { InputNameProps } from "../../../types/account-input-types.d";
 
 const InputOwnersName = ({
     register,
     errors,
     clearErrors,
     initialValues = {},
-}: inputNameProps) => {
+}: InputNameProps) => {
     return (
         <>
             <label htmlFor="ownersName" className="label">

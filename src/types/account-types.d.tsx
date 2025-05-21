@@ -3,7 +3,7 @@ export interface AccountFormData {
   cnpj: string;
   ownersName: string;
   cpf: string;
-  number: string;
+  phoneNumber: string;
   email: string;
   password: string;
   token: string;
