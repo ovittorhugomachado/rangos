@@ -10,6 +10,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Logo } from "../../components/logo";
 
 const CreateNewPasswordPage = () => {
+
     const [message, setMessage] = useState('')
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -72,7 +73,7 @@ const CreateNewPasswordPage = () => {
 
                     <Logo />
 
-                    <p className="span-success">{message}</p>
+                    <p>{message}</p>
                     <Link
                         to="/entrar"
                         className="primary-button mt-2.5"
