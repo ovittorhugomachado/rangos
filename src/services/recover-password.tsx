@@ -2,7 +2,7 @@ import { AccountFormData } from "../types/account-types.d";
 
 export const recoverPassword = async (credentials: AccountFormData) => {
     try {
-        const response = await fetch('http://localhost:3000/recover-password', {
+        const response = await fetch('http://localhost:3000/reset-password/recover-password', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
