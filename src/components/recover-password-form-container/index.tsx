@@ -26,7 +26,7 @@ const RecoverPasswordFormContainer = ({
         },
     });
 
-    const handleLoginSubmit: SubmitHandler<AccountFormData> = (data) => {
+    const handleRecoverPasswordSubmit: SubmitHandler<AccountFormData> = (data) => {
         try {
             onSubmit(data);
             clearErrors();
@@ -59,7 +59,7 @@ const RecoverPasswordFormContainer = ({
 
             {message === "" && (
                 <>
-                    <form onSubmit={handleSubmit(handleLoginSubmit)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
+                    <form onSubmit={handleSubmit(handleRecoverPasswordSubmit)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
                         <InputEmail
                             register={register}
                             errors={errors}
