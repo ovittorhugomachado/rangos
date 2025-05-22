@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { userData } from "../../services/user-data";
+import { AccountFormData } from "../../types/account-types.d";
 
 const AdminDashboard = () => {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState(null)
-
+    const [data, setData] = useState<AccountFormData | null>(null)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const AdminDashboard = () => {
             } catch (error) {
                 const err = error as Error;
                 setError(err.message || 'Erro ao validar o link');
-                navigate('/login', { state: { error: err.message } });
+                navigate('/entrar', { state: { error: err.message } });
             } finally {
                 setLoading(false)
             }
@@ -29,8 +29,13 @@ const AdminDashboard = () => {
 
         consfirmUserLogged()
 
-    }, [])
-    console.log(data)
+    }, [navigate])
+
+        if (error) {
+        navigate('/entrar', { state: { error } });
+        return;
+    }
+    
     return (
         <main className="flex flex-col items-center gap-6">
             {data && (
@@ -41,7 +46,7 @@ const AdminDashboard = () => {
             )}
             {loading && (<p>carregando</p>)}
             <Link
-                to={"/login"}
+                to={"/entrar"}
                 className="primary-button"
                 onClick={() => localStorage.removeItem('token')}
             >
