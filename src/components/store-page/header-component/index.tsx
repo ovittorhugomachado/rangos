@@ -1,6 +1,8 @@
 import { CiShoppingCart } from "react-icons/ci";
 import { RestaurantData } from "../../../types/restaurante-data-types.d";
 import { getRestaurantStatus } from "../../../utils/restaurant-status";
+import { MdOutlinePhotoCamera } from "react-icons/md";
+import { ImageUploader } from "./image-uploader";
 
 export const Header = ({
     restaurantName = "Nome do Restaurante",
@@ -10,8 +12,10 @@ export const Header = ({
     cartValue,
 }: RestaurantData) => {
 
-    const { isOpen, message } = getRestaurantStatus(openingHours);
+    const token = localStorage.getItem('token')
+    console.log(token)
 
+    const { isOpen, message } = getRestaurantStatus(openingHours);
     return (
         <header
             className={
@@ -20,21 +24,31 @@ export const Header = ({
                 ${backgroundColor === "black" ? "text-white" : "text-black"} 
                 ${backgroundColor === "black" ? "border-zinc-800" : "border-gray-200"}
             `}>
-            <div className="w-16 h-16 rounded-full mb-1.5 sm:w-23 sm:h-23 xs:hidden">
+            <div className="w-16 h-16 rounded-full relative mb-1.5 sm:w-23 sm:h-23 xs:hidden">
                 <img
                     src={restaurantImage}
                     alt={restaurantName}
                     className="w-full h-full object-contain p-1.5"
                 />
+                <span
+                    className="w-6 h-6 rounded-full bg-gray-300 absolute right-[-9px] translate-y-[-32px] cursor-pointer flex items-center justify-center">
+                    <MdOutlinePhotoCamera className="w-8" />
+                </span>
             </div>
             <div className="flex items-center gap-3.5">
-                <div className="w-[92px] h-[92px] rounded-full overflow-hidden hidden xs:flex items-center justify-center bg-gray-100">
-                    <img
-                        src={restaurantImage}
-                        alt={restaurantName}
-                        className="w-full h-full object-contain p-1.5"
-                    />
+                <div className="w-[92px] h-[92px] relative hidden xs:block">
+                    <div className="h-full w-full rounded-full overflow-hidden hidden xs:flex items-center justify-center bg-gray-100">
+                        <img
+                            src={restaurantImage}
+                            alt={restaurantName}
+                            className="w-full h-full object-contain p-1.5"
+                        />
+
+                    </div>
+                    <ImageUploader />
+
                 </div>
+
                 <div className="text-center mx-1.5">
                     <h2 className="text-md font-bold mb-1">{restaurantName}</h2>
                     {isOpen ?
