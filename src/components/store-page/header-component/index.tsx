@@ -30,10 +30,7 @@ export const Header = ({
                     alt={restaurantName}
                     className="w-full h-full object-contain p-1.5"
                 />
-                <span
-                    className="w-6 h-6 rounded-full bg-gray-300 absolute right-[-9px] translate-y-[-32px] cursor-pointer flex items-center justify-center">
-                    <MdOutlinePhotoCamera className="w-8" />
-                </span>
+<ImageUploader />
             </div>
             <div className="flex items-center gap-3.5">
                 <div className="w-[92px] h-[92px] relative hidden xs:block">
