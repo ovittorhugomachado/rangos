@@ -13,6 +13,7 @@ import { Logo } from "../logo";
 
 const SignupFormContainer = ({
     onSubmit,
+    error,
     initialValues = {},
     isLoading = false,
 }: AccountContainerProps) => {
@@ -99,7 +100,11 @@ const SignupFormContainer = ({
                     />
 
                 </div>
-
+                {error && (
+                    <p className="text-error">
+                        {error}
+                    </p>
+                )}
                 <button
                     type="submit"
                     className="primary-button w-[250px]"
