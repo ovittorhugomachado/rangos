@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { AccountContainerProps, AccountFormData } from "../../types/account-types.d";
+import { AccountContainerProps, AccountData } from "../../types/account-types.d";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { InputEmail } from "../inputs/input-email";
 import { Logo } from "../logo";
@@ -19,14 +19,14 @@ const RecoverPasswordFormContainer = ({
         clearErrors,
         setError,
         formState: { errors },
-    } = useForm<AccountFormData>({
+    } = useForm<AccountData>({
         defaultValues: {
             email: '',
             ...initialValues,
         },
     });
 
-    const handleRecoverPasswordSubmit: SubmitHandler<AccountFormData> = (data) => {
+    const handleRecoverPasswordSubmit: SubmitHandler<AccountData> = (data) => {
         try {
             onSubmit(data);
             clearErrors();

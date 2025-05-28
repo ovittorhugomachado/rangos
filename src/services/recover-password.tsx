@@ -1,11 +1,15 @@
-import { AccountFormData } from "../types/account-types.d";
+import { AccountData } from "../types/account-types.d";
 
-export const recoverPassword = async (credentials: AccountFormData) => {
+export const recoverPassword = async (credentials: AccountData) => {
     try {
+
+        const token = localStorage.getItem('token')
+
         const response = await fetch('http://localhost:3000/reset-password/recover-password', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
+                'authorization': `Bearer ${token}`
             },
             body: JSON.stringify(credentials)
         });

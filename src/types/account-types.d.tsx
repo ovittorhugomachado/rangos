@@ -16,7 +16,7 @@ export interface AccountData {
   openingHours: object;
 
   primaryColor: string;
-  backgroungColor: string;
+  backgroundColor: string;
   textColor: string;
   textButtonColor: string;
   logoUrl: string;

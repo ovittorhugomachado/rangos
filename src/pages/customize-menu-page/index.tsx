@@ -1,22 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Header } from "../../components/store-page/header-component";
 import { toMoney } from "../../utils/transform-to-money";
 import { BottomNav } from "../../components/store-page/style-toolbar";
-import { AccountFormData } from "../../types/account-types.d";
+import { useAuth } from "../../hooks/use-auth";
 
 const CustomizeMenuPage = () => {
 
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState<AccountFormData | null>(null)
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        setLoading(true)
-    })
+    const { styleStorePage, loading, error } = useAuth();
     const [theme, setTheme] = useState('dark')
 
-    const preferencesUser = {
+    const defaultPreferences = useMemo(() => ({
         backgroundColor: theme,
         primaryColor: '#ffffff',
         textColor: '#ffffff',
@@ -64,6 +57,29 @@ const CustomizeMenuPage = () => {
                 { id: 9, nome: "Pudim de Leite", preco: 12.00 },
             ],
         }
+    }), [theme]);
+
+    // const preferenceUser = useMemo(() => ({
+    //     ...defaultPreferences,
+    //     ...(styleStorePage || {}),
+    //     logoUrl: styleStorePage?.logoUrl || '../logo.png'
+    // }), [defaultPreferences, styleStorePage]);
+
+    useEffect(() => {
+        const alreadyReloaded = sessionStorage.getItem('styleReloaded');
+
+        if (styleStorePage && !alreadyReloaded) {
+            sessionStorage.setItem('styleReloaded', 'true');
+            window.location.reload();
+        }
+    }, [styleStorePage]);
+
+    if (loading) {
+        return <div>Carregando...</div>;
+    }
+
+    if (error) {
+        return <div>Erro: {error}</div>;
     }
 
     const changeTheme = () => {
@@ -82,14 +98,18 @@ const CustomizeMenuPage = () => {
             <BottomNav
                 theme={theme}
                 onThemeChange={changeTheme}
-                className="shadow-lg" // classe adicional opcional
+                className="shadow-lg"
             />
             <Header
-                restaurantImage={preferencesUser.image}
-                restaurantName={preferencesUser.restaurantName}
-                openingHours={preferencesUser.openingHours}
-                cartValue={preferencesUser.cartValue}
-                backgroundColor={preferencesUser.backgroundColor}
+                restaurantImage={styleStorePage?.logoUrl || '../logo.png'}
+                restaurantName={styleStorePage?.restaurantName || 'Mamma Mia'}
+                openingHours={
+                    Array.isArray(styleStorePage?.openingHours)
+                        ? styleStorePage.openingHours
+                        : defaultPreferences.openingHours
+                }
+                cartValue={defaultPreferences.cartValue}
+                backgroundColor={styleStorePage?.backgroundColor || defaultPreferences.backgroundColor}
             />
 
             <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">

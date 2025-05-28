@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { InputEmail } from "../inputs/input-email";
 import { InputPassword } from "../inputs/input-password";
-import { AccountContainerProps, AccountFormData } from "../../types/account-types.d";
+import { AccountContainerProps, AccountData } from "../../types/account-types.d";
 import { Logo } from "../logo";
 
 const LoginFormContainer = ({
@@ -19,7 +19,7 @@ const LoginFormContainer = ({
         setError,
         watch,
         formState: { errors },
-    } = useForm<AccountFormData>({
+    } = useForm<AccountData>({
         defaultValues: {
             email: '',
             password: '',
@@ -27,7 +27,7 @@ const LoginFormContainer = ({
         },
     });
 
-    const handleAccountFormData: SubmitHandler<AccountFormData> = (data) => {
+    const handleAccountData: SubmitHandler<AccountData> = (data) => {
         try {
             onSubmit(data);
             clearErrors();
@@ -49,7 +49,7 @@ const LoginFormContainer = ({
     return (
         <div className="primary-component w-120 h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
             <Logo />
-            <form onSubmit={handleSubmit(handleAccountFormData)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
+            <form onSubmit={handleSubmit(handleAccountData)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
                 <InputEmail
                     register={register}
                     errors={errors}

@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { AccountFormData, AccountContainerProps } from "../../types/account-types.d";
+import { AccountData, AccountContainerProps } from "../../types/account-types.d";
 import { InputPasswordRegister } from "../inputs/input-password-register";
 import { Logo } from "../logo";
 
@@ -18,14 +18,14 @@ const CreateNewPasswordFormContainer = ({
         clearErrors,
         watch,
         formState: { errors },
-    } = useForm<AccountFormData>({
+    } = useForm<AccountData>({
         defaultValues: {
             password: '',
             ...initialValues,
         },
     });
 
-    const handleFormSubmit: SubmitHandler<AccountFormData> = (data) => {
+    const handleFormSubmit: SubmitHandler<AccountData> = (data) => {
         onSubmit(data);
     };
 

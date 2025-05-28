@@ -6,7 +6,7 @@ export const ImageUploader = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleClick = () => {
-        fileInputRef.current?.click(); // abre o seletor de arquivo
+        fileInputRef.current?.click();
     };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,6 +22,7 @@ export const ImageUploader = () => {
         try {
             await UploadProfileImage(1, file);
             alert('Upload concluído!');
+            window.location.reload();
         } catch (error) {
             console.error(error);
             alert('Erro no upload');
@@ -31,7 +32,7 @@ export const ImageUploader = () => {
     return (
         <>
             <span
-                className="w-6 h-6 xs:w-8 xs:h-8 rounded-full bg-gray-300 absolute right-[-9px] translate-y-[-22px] xs:translate-y-[-32px] cursor-pointer flex items-center justify-center"
+                className="w-6 h-6 xs:w-8 xs:h-8 rounded-full bg-gray-300 absolute right-[-9px] translate-y-[-2px] xs:translate-y-[-32px] cursor-pointer flex items-center justify-center"
                 onClick={handleClick}
             >
                 <MdOutlinePhotoCamera className="w-8" />

@@ -1,7 +1,7 @@
 import { CreateNewPasswordFormContainer } from "../../components/create-new-password-form";
 import { useAppSettings } from "../../hooks/use-app-settings";
 import { useState, useEffect } from "react";
-import { AccountFormData } from "../../types/account-types.d";
+import { AccountData } from "../../types/account-types.d";
 import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
 import { createNewPassword, validateToken } from "../../services/create-new-password"; // Adicionei a nova função
 import { useParams, useNavigate } from "react-router-dom";
@@ -44,7 +44,7 @@ const CreateNewPasswordPage = () => {
         validateTokenOnLoad();
     }, [token, navigate]);
 
-    const handleNewPassword = async (formData: AccountFormData) => {
+    const handleNewPassword = async (formData: AccountData) => {
         if (!token || !isValidToken) {
             setError('Token inválido ou expirado.');
             return;

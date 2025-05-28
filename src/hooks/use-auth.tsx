@@ -1,31 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../services/user-data";
-import { AccountFormData } from "../types/account-types.d";
+import { getPageStyle } from "../services/page-style";
+import { AccountData } from "../types/account-types.d";
 
 export const useAuth = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState<AccountFormData | null>(null);
+    const [user, setUser] = useState<AccountData | null>(null);
+    const [styleStorePage, setStyleStorePage] = useState<AccountData | null>(null);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const confirmUserLogged = async () => {
-            setLoading(true);
-            try {
-                const userDataResponse = await userData();
-                setUser(userDataResponse);
-            } catch (error) {
-                const err = error as Error;
-                setError(err.message || 'Erro ao validar o usuário');
-                navigate('/entrar', { state: { error: err.message } });
-            } finally {
-                setLoading(false);
-            }
-        };
+    const fetchData = useCallback(async () => {
+        setLoading(true);
+        try {
+            const userDataResponse = await userData();
+            setUser(userDataResponse);
 
-        confirmUserLogged();
+            if (userDataResponse?.id) {
+                const styleDataPage = await getPageStyle(Number(userDataResponse.id));
+                setStyleStorePage(styleDataPage);
+            }
+        } catch (error) {
+            const err = error as Error;
+            setError(err.message);
+            navigate('/entrar', { state: { error: err.message } });
+        } finally {
+            setLoading(false);
+        }
     }, [navigate]);
 
-    return { user, loading, error };
+    useEffect(() => {
+        fetchData();
+
+        const intervalId = setInterval(fetchData, 30000);
+
+        return () => clearInterval(intervalId);
+    }, [fetchData]);
+
+    return { user, styleStorePage, loading, error, refreshData: fetchData };
 };

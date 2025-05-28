@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSettings } from "../../hooks/use-app-settings";
-import { AccountFormData } from "../../types/account-types.d.tsx";
+import { AccountData } from "../../types/account-types.d.tsx";
 import { recoverPassword } from "../../services/recover-password";
 import { RecoverPasswordFormContainer } from "../../components/recover-password-form-container/index.tsx";
 import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
@@ -19,7 +19,7 @@ const RecoverPasswordPage = () => {
     } = useAppSettings();
 
 
-    const HandleRecoverPassword = async (data: AccountFormData) => {
+    const HandleRecoverPassword = async (data: AccountData) => {
         setLoading(true);
         try {
             const response= await recoverPassword(data);

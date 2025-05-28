@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/register";
 import { useAppSettings } from "../../hooks/use-app-settings";
-import { AccountFormData } from "../../types/account-types.d";
+import { AccountData } from "../../types/account-types.d";
 import { SignupFormContainer } from "../../components/signup-form-container";
 import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
 
@@ -21,7 +21,7 @@ const RegisterPage = () => {
             toggleTheme,
         } = useAppSettings();
 
-    const handleRegister = async (data: AccountFormData) => {
+    const handleRegister = async (data: AccountData) => {
         setLoading(true);
         try {
             const response = await registerUser(data); 

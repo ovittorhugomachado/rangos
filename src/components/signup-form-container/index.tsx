@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { AccountFormData, AccountContainerProps } from "../../types/account-types.d";
+import { AccountData, AccountContainerProps } from "../../types/account-types.d";
 import { InputCNPJ } from "../inputs/input-cnpj";
 import { InputRestaurantName } from "../inputs/input-restaurent-name";
 import { InputOwnersName } from "../inputs/input-owners-name";
@@ -25,7 +25,7 @@ const SignupFormContainer = ({
         clearErrors,
         watch,
         formState: { errors },
-    } = useForm<AccountFormData>({
+    } = useForm<AccountData>({
         defaultValues: {
             restaurantName: '',
             cnpj: '',
@@ -38,7 +38,7 @@ const SignupFormContainer = ({
         },
     });
 
-    const handleFormSubmit: SubmitHandler<AccountFormData> = (data) => {
+    const handleFormSubmit: SubmitHandler<AccountData> = (data) => {
         onSubmit(data);
     };
 
