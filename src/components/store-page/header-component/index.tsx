@@ -1,7 +1,6 @@
 import { CiShoppingCart } from "react-icons/ci";
 import { RestaurantData } from "../../../types/restaurante-data-types.d";
 import { getRestaurantStatus } from "../../../utils/restaurant-status";
-import { MdOutlinePhotoCamera } from "react-icons/md";
 import { ImageUploader } from "./image-uploader";
 
 export const Header = ({
@@ -11,9 +10,6 @@ export const Header = ({
     openingHours = [],
     cartValue,
 }: RestaurantData) => {
-
-    const token = localStorage.getItem('token')
-    console.log(token)
 
     const { isOpen, message } = getRestaurantStatus(openingHours);
     return (
@@ -30,7 +26,7 @@ export const Header = ({
                     alt={restaurantName}
                     className="w-full h-full object-contain p-1.5"
                 />
-<ImageUploader />
+                <ImageUploader />
             </div>
             <div className="flex items-center gap-3.5">
                 <div className="w-[92px] h-[92px] relative hidden xs:block">
