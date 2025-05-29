@@ -18,13 +18,13 @@ interface DaySchedule {
 export const OpeningHoursForm = () => {
     const [schedule, setSchedule] = useState<Record<DayOfWeek, DaySchedule>>({
 
-        seg: { status: 'open', timeRanges: [{ open: '08:00', close: '18:00' }] },
-        ter: { status: 'open', timeRanges: [{ open: '08:00', close: '18:00' }] },
-        qua: { status: 'open', timeRanges: [{ open: '08:00', close: '18:00' }] },
-        qui: { status: 'open', timeRanges: [{ open: '08:00', close: '18:00' }] },
-        sex: { status: 'open', timeRanges: [{ open: '08:00', close: '18:00' }] },
-        sab: { status: 'open', timeRanges: [{ open: '08:00', close: '18:00' }] },
-        dom: { status: 'open', timeRanges: [{ open: '08:00', close: '18:00' }] },
+        seg: { status: 'closed', timeRanges: [{ open: '08:00', close: '18:00' }] },
+        ter: { status: 'closed', timeRanges: [{ open: '08:00', close: '18:00' }] },
+        qua: { status: 'closed', timeRanges: [{ open: '08:00', close: '18:00' }] },
+        qui: { status: 'closed', timeRanges: [{ open: '08:00', close: '18:00' }] },
+        sex: { status: 'closed', timeRanges: [{ open: '08:00', close: '18:00' }] },
+        sab: { status: 'closed', timeRanges: [{ open: '08:00', close: '18:00' }] },
+        dom: { status: 'closed', timeRanges: [{ open: '08:00', close: '18:00' }] },
     });
 
     const dayNames: Record<DayOfWeek, string> = {
@@ -153,10 +153,10 @@ export const OpeningHoursForm = () => {
 
                                     </div>
                                     {schedule[day].timeRanges.length > 1 && (
-                                        <div className="h-full flex  border-r-[1px] border-black ml-2 absolute right-2 rounded-2xl">
+                                        <div className="h-full flex items-center border-r-[1px] border-black ml-2 absolute right-2 rounded-2xl">
                                             <button
                                                 type="button"
-                                                className="text-red-500 translate-x-4 cursor-pointer"
+                                                className="h-4 text-red-500 translate-x-4 cursor-pointer"
                                                 onClick={() => removeTimeRange(day, index)}
                                             >
                                                 <IoMdCloseCircle className="" />
