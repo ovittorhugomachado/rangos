@@ -2,7 +2,7 @@ import { AccountData } from "../types/account-types.d";
 
 export const login = async (credentials: AccountData) => {
     try {
-        const response = await fetch('http://localhost:3000/auth/login', {
+        const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

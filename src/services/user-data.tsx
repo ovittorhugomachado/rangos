@@ -2,7 +2,7 @@ export const userData = async () => {
 
     const token = localStorage.getItem('token')
 
-    const response = await fetch('http://localhost:3000/data/user', {
+    const response = await fetch('http://localhost:3000/user', {
         method: 'GET',
         headers: { 
             'Content-Type': 'application/json',

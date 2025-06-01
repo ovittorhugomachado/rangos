@@ -1,7 +1,7 @@
 
 export const validateToken = async (token: string): Promise<boolean> => {
     try {
-        const response = await fetch(`http://localhost:3000/reset-password/validate-token/${token}`, {
+        const response = await fetch(`http://localhost:3000/validate-token/${token}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         });

@@ -5,7 +5,7 @@ export const recoverPassword = async (credentials: AccountData) => {
 
         const token = localStorage.getItem('token')
 
-        const response = await fetch('http://localhost:3000/reset-password/recover-password', {
+        const response = await fetch('http://localhost:3000/recover-password', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
