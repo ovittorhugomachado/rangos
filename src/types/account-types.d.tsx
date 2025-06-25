@@ -1,3 +1,15 @@
+type TimeRange = {
+  open: string;
+  close: string;
+};
+
+interface OpeningHour {
+    day: string;
+    status: string;
+    timeRanges: TimeRange[];
+}
+
+
 export interface AccountData {
   pageStyle(pageStyle: unknown): unknown;
   id: number;
@@ -13,7 +25,7 @@ export interface AccountData {
   phoneNumber: string;
   passwordResetToken: object;
   storeCustomization: object;
-  openingHours: object;
+  openingHours: OpeningHour[];
 
   primaryColor: string;
   backgroundColor: string;
