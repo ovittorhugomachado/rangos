@@ -18,7 +18,7 @@ export const BottomNav = ({
       w-[500px] h-[60px] fixed bottom-0 m-3.5 rounded-2xl p-4
       flex flex-col items-center content-between
       border-[1px] border-gray-500
-      ${theme === 'black' ? 'bg-white' : 'bg-zinc-950'}
+      ${theme === 'dark' ? 'bg-white' : 'bg-zinc-950'}
       ${className}
     `}>
       <button

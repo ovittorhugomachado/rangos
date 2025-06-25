@@ -3,19 +3,16 @@ import { Header } from "../../components/store-page/header-component";
 import { toMoney } from "../../utils/transform-to-money";
 import { BottomNav } from "../../components/store-page/style-toolbar";
 import { useAuth } from "../../hooks/use-auth";
+import { LoadingComponent } from "../../components/loading-component";
 
 const CustomizeMenuPage = () => {
 
-    const { styleStorePage, loading, error } = useAuth();
+    const { styleStorePage } = useAuth();
     const [theme, setTheme] = useState('dark')
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState('')
 
     const defaultPreferences = useMemo(() => ({
-        backgroundColor: theme,
-        primaryColor: '#ffffff',
-        textColor: '#ffffff',
-        textButtonColor: '#ffffff',
-        restaurantName: 'Mamma Mia',
-        image: '../logo.png',
         openingHours: [
             {
                 day: 'terça' as const,
@@ -66,16 +63,26 @@ const CustomizeMenuPage = () => {
     // }), [defaultPreferences, styleStorePage]);
 
     useEffect(() => {
-        const alreadyReloaded = sessionStorage.getItem('styleReloaded');
+        setLoading(true)
+        try {
+            const alreadyReloaded = sessionStorage.getItem('styleReloaded');
+            if (styleStorePage && !alreadyReloaded) {
+                sessionStorage.setItem('styleReloaded', 'true');
+                window.location.reload();
+            }
 
-        if (styleStorePage && !alreadyReloaded) {
-            sessionStorage.setItem('styleReloaded', 'true');
-            window.location.reload();
+        } catch (error) {
+            const err = error as Error;
+            setError(err.message);
+
+        } finally {
+            setLoading(false)
         }
+
     }, [styleStorePage]);
 
-    if (loading) {
-        return <div>Carregando...</div>;
+    if (loading || !styleStorePage) {
+        return <LoadingComponent />;
     }
 
     if (error) {
@@ -83,7 +90,7 @@ const CustomizeMenuPage = () => {
     }
 
     const changeTheme = () => {
-        setTheme(prevTheme => prevTheme === 'black' ? 'white' : 'black')
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
     }
 
     return (
@@ -100,17 +107,18 @@ const CustomizeMenuPage = () => {
                 onThemeChange={changeTheme}
                 className="shadow-lg"
             />
-            <Header
-                restaurantImage={styleStorePage?.logoUrl || '../logo.png'}
-                restaurantName={styleStorePage?.restaurantName || 'Mamma Mia'}
-                openingHours={
-                    Array.isArray(styleStorePage?.openingHours)
+            {styleStorePage && (
+                <Header
+                    restaurantImage={`${styleStorePage.logoUrl}?${Date.now()}`}
+                    restaurantName={styleStorePage?.restaurantName || 'Nome do restaurante'}
+                    openingHours={Array.isArray(styleStorePage?.openingHours)
                         ? styleStorePage.openingHours
-                        : defaultPreferences.openingHours
-                }
-                cartValue={defaultPreferences.cartValue}
-                backgroundColor={styleStorePage?.backgroundColor || defaultPreferences.backgroundColor}
-            />
+                        : defaultPreferences.openingHours}
+                    cartValue={defaultPreferences.cartValue}
+                    backgroundColor={theme}
+                    id={1}
+                />
+            )}
 
             <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">
                 <img src="../nemo.webp" alt="imagem-capa" className="w-screen hidden xs:block" />

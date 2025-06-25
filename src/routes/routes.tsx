@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LoginPage } from "../pages/login-page";
 import { RegisterPage } from "../pages/signup-page";
-import { HomePage } from "../pages/home-page";
+//import { HomePage } from "../pages/home-page";
 import { RecoverPasswordPage } from "../pages/recover-password-page";
 import { CreateNewPasswordPage } from "../pages/create-new-password-page";
 import { AdminDashboard } from "../pages/dashboard-page";
@@ -11,7 +11,7 @@ const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<AdminDashboard />} />
                 <Route path="/entrar" element={<LoginPage />} />
                 <Route path="/criar-conta" element={<RegisterPage />} />
                 <Route path="/personalizar-cardapio" element={<CustomizeMenuPage />} />

@@ -27,7 +27,7 @@ const RegisterPage = () => {
             const response = await registerUser(data); 
             localStorage.setItem('token', response.token);
             console.log(data)
-            navigate('/painel')
+            navigate('/entrar')
             setError('');
         } catch (error) {
             const err = error as Error;
