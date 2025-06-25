@@ -19,7 +19,7 @@ export const validateToken = async (token: string): Promise<boolean> => {
 
 export const createNewPassword = async (newPassword: string, token: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/reset-password/create-new-password/${token}`, {
+        const response = await fetch(`http://localhost:3000/create-new-password/${token}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ newPassword }),
