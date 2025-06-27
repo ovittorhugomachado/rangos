@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../../services/register";
-import { useAppSettings } from "../../hooks/use-app-settings";
-import { AccountData } from "../../types/account-types.d";
-import { SignupFormContainer } from "../../components/signup-form-container";
-import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
+import { registerUser } from "../services/register";
+import { useAppSettings } from "../hooks/use-app-settings";
+import { AccountData } from "../types/account-types.d";
+import { SignupFormContainer } from "../components/signup-form-container";
+import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
 
 
 const RegisterPage = () => {

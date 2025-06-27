@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useAppSettings } from "../../hooks/use-app-settings";
-import { AccountData } from "../../types/account-types.d.tsx";
-import { recoverPassword } from "../../services/recover-password";
-import { RecoverPasswordFormContainer } from "../../components/recover-password-form-container/index.tsx";
-import { ToggleThemeAndFont } from "../../components/toggle-theme-and-font";
+import { useAppSettings } from "../hooks/use-app-settings.tsx";
+import { AccountData } from "../types/account-types.d.tsx";
+import { recoverPassword } from "../services/recover-password.tsx";
+import { RecoverPasswordFormContainer } from "../components/recover-password-form-container/index.tsx";
+import { ToggleThemeAndFont } from "../components/toggle-theme-and-font/index.tsx";
 
 const RecoverPasswordPage = () => {
 

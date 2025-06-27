@@ -1,63 +1,64 @@
-import { useEffect, useMemo, useState } from "react";
-import { Header } from "../../components/store-page/header-component";
-import { toMoney } from "../../utils/transform-to-money";
-import { BottomNav } from "../../components/store-page/style-toolbar";
-import { LoadingComponent } from "../../components/loading-component";
+//import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
+//import { Header } from "../../components/store-page/header-component";
+//import { toMoney } from "../../utils/transform-to-money";
+import { BottomNav } from "../components/store-page/style-toolbar";
+//import { LoadingComponent } from "../../components/loading-component";
 
 const CustomizeMenuPage = () => {
 
     const [ theme, setTheme ] = useState('dark')
-    const [ loading, setLoading ] = useState(true)
-    const [ error, setError ] = useState('')
+    //const [ loading, setLoading ] = useState(true)
+    //const [ error, setError ] = useState('')
 
-    const defaultPreferences = useMemo(() => ({
-        openingHours: [
-            {
-                day: 'terça' as const,
-                open: '11:00',
-                close: '14:30'
-            },
-            {
-                day: 'quarta' as const,
-                open: '11:00',
-                close: '17:00'
-            },
-            {
-                day: 'quinta' as const,
-                open: '11:00',
-                close: '17:00'
-            },
-            {
-                day: 'sexta' as const,
-                open: '11:00',
-                close: '17:00'
-            }
-        ],
-        cartItems: [],
-        cartValue: toMoney(123.4),
-        cetegories: {
-            pratos: [
-                { id: 1, nome: "Risoto de Cogumelos", preco: 34.90 },
-                { id: 2, nome: "Frango ao Curry", preco: 29.50 },
-                { id: 3, nome: "Lasanha Vegetariana", preco: 31.00 },
-            ],
-            bebidas: [
-                { id: 4, nome: "Suco de Laranja Natural", preco: 8.00 },
-                { id: 5, nome: "Refrigerante Lata", preco: 6.50 },
-                { id: 6, nome: "Água com Gás", preco: 5.00 },
-            ],
-            sobremesas: [
-                { id: 7, nome: "Brownie com Sorvete", preco: 14.90 },
-                { id: 8, nome: "Cheesecake de Frutas Vermelhas", preco: 16.00 },
-                { id: 9, nome: "Pudim de Leite", preco: 12.00 },
-            ],
-        }
-    }), []);
+    // const defaultPreferences = useMemo(() => ({
+    //     openingHours: [
+    //         {
+    //             day: 'terça' as const,
+    //             open: '11:00',
+    //             close: '14:30'
+    //         },
+    //         {
+    //             day: 'quarta' as const,
+    //             open: '11:00',
+    //             close: '17:00'
+    //         },
+    //         {
+    //             day: 'quinta' as const,
+    //             open: '11:00',
+    //             close: '17:00'
+    //         },
+    //         {
+    //             day: 'sexta' as const,
+    //             open: '11:00',
+    //             close: '17:00'
+    //         }
+    //     ],
+    //     cartItems: [],
+    //     cartValue: toMoney(123.4),
+    //     cetegories: {
+    //         pratos: [
+    //             { id: 1, nome: "Risoto de Cogumelos", preco: 34.90 },
+    //             { id: 2, nome: "Frango ao Curry", preco: 29.50 },
+    //             { id: 3, nome: "Lasanha Vegetariana", preco: 31.00 },
+    //         ],
+    //         bebidas: [
+    //             { id: 4, nome: "Suco de Laranja Natural", preco: 8.00 },
+    //             { id: 5, nome: "Refrigerante Lata", preco: 6.50 },
+    //             { id: 6, nome: "Água com Gás", preco: 5.00 },
+    //         ],
+    //         sobremesas: [
+    //             { id: 7, nome: "Brownie com Sorvete", preco: 14.90 },
+    //             { id: 8, nome: "Cheesecake de Frutas Vermelhas", preco: 16.00 },
+    //             { id: 9, nome: "Pudim de Leite", preco: 12.00 },
+    //         ],
+    //     }
+    // }), []);
 
 
-    if (error) {
-        return <div>Erro: {error}</div>;
-    }
+    // if (error) {
+    //     return <div>Erro: {error}</div>;
+    // }
 
     const changeTheme = () => {
         setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
