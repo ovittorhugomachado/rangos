@@ -2,14 +2,14 @@ import { AccountData } from "../types/account-types.d"
 
 export const getPageStyle = async (): Promise<AccountData> => {
     try {
-        const token = localStorage.getItem('token')
-        const response = await fetch(`http://localhost:3000/store-style`,
+        //const token = localStorage.getItem('token')
+        const response = await fetch(`http://localhost:3000/store/style`,
             {
                 method: 'GET',
                 headers: {
-                    'content-type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json',
                 },
+                credentials: 'include'
             }
         )
 

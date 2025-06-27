@@ -1,16 +1,23 @@
 //import { useEffect, useMemo, useState } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 //import { Header } from "../../components/store-page/header-component";
 //import { toMoney } from "../../utils/transform-to-money";
 import { BottomNav } from "../components/store-page/style-toolbar";
-//import { LoadingComponent } from "../../components/loading-component";
+import { getPageStyle } from "../services/page-style";
+import { LoadingComponent } from "../components/loading-component";
+
+type StyleData = {
+    primaryColor?: string | null;
+    backgroundColor?: string | null;
+    textButtonColor?: string | null;
+};
 
 const CustomizeMenuPage = () => {
 
-    const [ theme, setTheme ] = useState('dark')
-    //const [ loading, setLoading ] = useState(true)
-    //const [ error, setError ] = useState('')
-
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState('')
+    const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
+    const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined);
     // const defaultPreferences = useMemo(() => ({
     //     openingHours: [
     //         {
@@ -60,129 +67,160 @@ const CustomizeMenuPage = () => {
     //     return <div>Erro: {error}</div>;
     // }
 
-    const changeTheme = () => {
-        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
-    }
+    // const changeTheme = () => {
+    //     setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
+    // }
+
+    const fetchStoreData = async () => {
+        setLoading(true);
+        try {
+            const styleData = await getPageStyle();
+            if (!styleData) {
+                throw new Error('Dados do estilo não encontrados');
+            };
+
+            setStoreStyle(styleData);
+
+            if (styleData.backgroundColor) setBackgroundColor(styleData.backgroundColor);
+        } catch (error) {
+            const err = error as Error;
+
+            setError(err.message);
+
+            setStoreStyle(null);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchStoreData();
+    }, []);
 
     return (
-        <div className="w-screen h-full px-[5%] lg:px-[15%] flex flex-col items-center bg-black text-black lg:text-base">
-            {/* <nav className="w-[500px] h-[60px] fixed bottom-0 m-1.5 rounded-2xl p-4 flex flex-col items-center content-between bg-white dark:bg-zinc-950 border-[1px] border-gray-500">
+        <>
+            {loading ? <LoadingComponent /> : null}
+            <div
+                style={{ backgroundColor: backgroundColor }}
+                className="w-screen h-full px-[5%] lg:px-[15%] flex flex-col items-center bg-black text-black lg:text-base">
+                {/* <nav className="w-[500px] h-[60px] fixed bottom-0 m-1.5 rounded-2xl p-4 flex flex-col items-center content-between bg-white dark:bg-zinc-950 border-[1px] border-gray-500">
                 <button
                     onClick={changeTheme}
                 >
-                    trocar tem
+                    trocar tema
                 </button>
-            </nav> */}
-            <BottomNav
-                theme={theme}
-                onThemeChange={changeTheme}
-                className="shadow-lg"
-            />
+                </nav> */}
+                <BottomNav
+                    backgroundColorStore={backgroundColor ?? ''}
+                    setBackgroundColor={setBackgroundColor}
+                    className="shadow-lg"
+                />
 
-            <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">
-                <img src="../nemo.webp" alt="imagem-capa" className="w-screen hidden xs:block" />
-                <div className="w-full flex flex-wrap justify-center gap-4 p-2.5 my-3.5">
-                    <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Promoções</button>
-                    <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Combos</button>
-                    <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Pratos</button>
-                    <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Vegetarianos</button>
-                    <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Bebidas</button>
-                    <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Sobremesas</button>
-                </div>
-                <h1 className="self-start ml-3 text-2xl mt-6.5">Promoções</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
-                    <div className="bg-zinc-950 flex border-[1px] border-zinc-800">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className=" text-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
+                <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">
+                    <img src="../nemo.webp" alt="imagem-capa" className="w-screen hidden xs:block" />
+                    <div className="w-full flex flex-wrap justify-center gap-4 p-2.5 my-3.5">
+                        <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Promoções</button>
+                        <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Combos</button>
+                        <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Pratos</button>
+                        <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Vegetarianos</button>
+                        <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Bebidas</button>
+                        <button className="bg-green-600 flex-grow min-w-28 h-8 lg:h-12 px-3 rounded-3xl">Sobremesas</button>
+                    </div>
+                    <h1 className="self-start ml-3 text-2xl mt-6.5">Promoções</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
+                        <div className="bg-zinc-950 flex border-[1px] border-zinc-800">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className=" text-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex max-w-7xl border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex max-w-7xl border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex max-w-7xl border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
+                    <h1 className="self-start pl-3 pr-16 text-2xl mt-6.5 border-b-2 border-green-600">Combos</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
+                        <div className="flex border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex max-w-7xl border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex max-w-7xl border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex max-w-7xl border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
+                        </div>
+                        <div className="flex border-[1px] border-zinc-300">
+                            <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
+                            <div className="bg-white flex flex-col justify-between py-2 px-4">
+                                <h1 className="font-bold">Milano</h1>
+                                <h3>Espaguete, galeto e polenta</h3>
+                                <h3>R$ 24,90</h3>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                    <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                    <div className="flex border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                </div>
-                <h1 className="self-start pl-3 pr-16 text-2xl mt-6.5 border-b-2 border-green-600">Combos</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
-                    <div className="flex border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                    <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                    <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                    <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                    <div className="flex border-[1px] border-zinc-300">
-                        <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                        <div className="bg-white flex flex-col justify-between py-2 px-4">
-                            <h1 className="font-bold">Milano</h1>
-                            <h3>Espaguete, galeto e polenta</h3>
-                            <h3>R$ 24,90</h3>
-                        </div>
-                    </div>
-                </div>
 
-            </main>
+                </main>
 
-            <footer className="w-screen h-[100px] flex items-center justify-center bg-zinc-950">
-                <h3 className="text-white absolute translate-x-[-75px] translate-y-[-20px]">by</h3>
-                <img src="../logo.png" alt="restaurant-image" className="w-[120px] object-contain" />
-            </footer>
-        </div>
+                <footer className="w-screen h-[100px] flex items-center justify-center bg-zinc-950">
+                    <h3 className="text-white absolute translate-x-[-75px] translate-y-[-20px]">by</h3>
+                    <img src="../logo.png" alt="restaurant-image" className="w-[120px] object-contain" />
+                </footer>
+            </div>
+        </>
     )
 }
 
