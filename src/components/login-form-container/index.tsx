@@ -48,7 +48,7 @@ const LoginFormContainer = ({
 
     return (
         <div className="primary-component w-120 h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
-            <Logo />
+            <Logo/>
             <form onSubmit={handleSubmit(handleAccountData)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
                 <InputEmail
                     register={register}
