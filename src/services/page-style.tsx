@@ -1,9 +1,9 @@
 import { AccountData } from "../types/account-types.d"
 
-export const getPageStyle = async (id: number): Promise<AccountData> => {
+export const getPageStyle = async (): Promise<AccountData> => {
     try {
         const token = localStorage.getItem('token')
-        const response = await fetch(`http://localhost:3000/${id}/store-customization`,
+        const response = await fetch(`http://localhost:3000/store-style`,
             {
                 method: 'GET',
                 headers: {
