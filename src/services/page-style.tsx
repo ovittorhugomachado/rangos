@@ -16,18 +16,15 @@ export const getPageStyle = async (): Promise<AccountData> => {
         const data = await response.json()
 
         if (!response.ok) {
-            throw new Error(data.message || 'Erro buscar dados')
+            throw new Error('Erro buscar dados')
         }
 
         return data
     } catch (error) {
-        if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        if (error instanceof TypeError) {
             throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
         }
 
-        if (error instanceof Error) {
-            throw error;
-        }
         throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
     }
 }
