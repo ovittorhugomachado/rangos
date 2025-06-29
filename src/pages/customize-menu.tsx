@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { BottomNav } from "../components/store-page/style-toolbar";
 import { getPageStyle } from "../services/page-style";
 import { LoadingComponent } from "../components/loading-component";
+import { Logo } from "../components/logo";
 
 type StyleData = {
     primaryColor?: string | null;
@@ -215,9 +216,9 @@ const CustomizeMenuPage = () => {
 
                 </main>
 
-                <footer className="w-screen h-[100px] flex items-center justify-center bg-zinc-950">
-                    <h3 className="text-white absolute translate-x-[-75px] translate-y-[-20px]">by</h3>
-                    <img src="../logo.png" alt="restaurant-image" className="w-[120px] object-contain" />
+                <footer className={`${backgroundColor === 'black' ? 'bg-zinc-950' : 'bg-zinc-200'} w-screen h-[110px] flex items-center justify-center`}>
+                    <h3 className={`${backgroundColor === 'black' ? 'text-white' : 'text-black'} absolute translate-x-[-95px] translate-y-[-20px]`}>by</h3>
+                    <Logo backgroundColorStore={backgroundColor ?? ''} />
                 </footer>
             </div>
         </>

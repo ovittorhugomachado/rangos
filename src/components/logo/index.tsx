@@ -1,11 +1,13 @@
-const Logo = () => {
+interface LogoProps {
+    backgroundColorStore: string;
+}
 
-    const theme = localStorage.getItem('theme')
+const Logo = ({ backgroundColorStore }: LogoProps) => {
 
     return (
             <img
                 className="w-40"
-                src={theme === 'dark' ? "../logo-dark.png" : "../logo.png"}
+                src={backgroundColorStore === 'black' ? "../logo-dark.png" : "../logo.png"}
                 alt="domus-logo"
             />
     )
