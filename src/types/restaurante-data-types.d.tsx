@@ -18,3 +18,8 @@ export interface RestaurantData {
   message?: string;
   error?: unknown;
 }
+
+export interface Category {
+  id: number; 
+  name: string;
+}
