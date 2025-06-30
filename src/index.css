@@ -51,7 +51,15 @@ input {
 }
 
 .primary-button {
-    @apply px-[60px] py-2 rounded-3xl cursor-pointer text-lg font-semibold transition-all bg-primary text-black hover:scale-105;
+    @apply px-[60px] py-2 text-sm md:text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-primary text-black hover:scale-105;
+}
+
+.cancel-button {
+    @apply px-[60px] py-2 text-sm md:text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-red-600 text-white hover:scale-105;
+}
+
+.confirm-button {
+    @apply px-[60px] py-2 text-sm md:text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-green-600 text-white hover:scale-105;
 }
 
 input:-webkit-autofill {

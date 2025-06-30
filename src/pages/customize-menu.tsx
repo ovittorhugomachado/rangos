@@ -9,7 +9,7 @@ import ErrorComponent from "../components/error-component";
 import { Logo } from "../components/logo";
 import { getCategoriesStore } from "../services/menu-store";
 import { Category } from "../types/restaurante-data-types.d";
-import { CategoryButtons } from "../components/store-page/by-store/category-buttons";
+import { CategoryButtons } from "../components/store-page/by-store/category-buttons/categories-butttons";
 
 type StyleData = {
     primaryColor?: string | null;
@@ -24,6 +24,9 @@ const CustomizeMenuPage = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
+    const [initialButtonColor, setInitialButtonColor] = useState('');
+    const [initialBackgroundColor, setInitialBackgroundColor] = useState('');
+    const [initialTextColorButtons, setInitialTextColorButtons] = useState('');
     const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined);
     const [categories, setCategories] = useState<Category[]>([]);
     const [textColorButtons, setTextColorButtons] = useState<string>('');
@@ -82,6 +85,8 @@ const CustomizeMenuPage = () => {
     //     setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark')
     // }
 
+    // The initial color states are set after fetching styleData in fetchStoreData
+
     const fetchStoreData = async () => {
         setLoading(true);
         try {
@@ -89,21 +94,27 @@ const CustomizeMenuPage = () => {
 
             const categoriesStore = await getCategoriesStore()
 
-            if (!styleData || categoriesStore.length === 0) {
+            if (!styleData) {
                 throw new Error('Dados da loja não encontrados');
             };
-        
+
             setStoreStyle(styleData);
             setCategories(categoriesStore);
+            setStoreStyle(styleData);
+            setCategories(categoriesStore);
+
+            setInitialButtonColor(styleData.primaryColor ?? '');
+            setInitialBackgroundColor(styleData.backgroundColor ?? '');
+            setInitialTextColorButtons(styleData.textButtonColor ?? '');
 
             if (styleData.backgroundColor) setBackgroundColor(styleData.backgroundColor);
             if (styleData.primaryColor) setButtonColor(styleData.primaryColor);
             if (styleData.textButtonColor) setTextColorButtons(styleData.textButtonColor);
-            
-        } catch (error) {
-            const err = error as Error;
 
-            setError(err.message);
+        } catch (error) {
+            console.log(error)
+
+            setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
 
             setStoreStyle(null);
         } finally {
@@ -129,19 +140,25 @@ const CustomizeMenuPage = () => {
                     style={{ backgroundColor: backgroundColor }}
                     className="w-screen h-full px-[5%] lg:px-[15%] flex flex-col items-center bg-black text-black lg:text-base">
                     <BottomNav
-                        backgroundColorStore={backgroundColor ?? ''}
+                        backgroundColorStore={backgroundColor === "black" || backgroundColor === "white" ? backgroundColor : "white"}
                         setBackgroundColor={setBackgroundColor}
-                        className="shadow-lg"
+                        initialButtonColor={initialButtonColor}
+                        initialBackgroundColor={initialBackgroundColor === "black" || initialBackgroundColor === "white" ? initialBackgroundColor : "white"}
+                        initialTextColorButtons={initialTextColorButtons === "black" || initialTextColorButtons === "white" ? initialTextColorButtons : "black"}
                         buttonColor={buttonColor ?? ''}
                         setButtonColor={setButtonColor}
-                        textColorButtons={textColorButtons}
+                        textColorButtons={textColorButtons === "black" || textColorButtons === "white" ? textColorButtons : "black"}
                         setTextColorButtons={setTextColorButtons}
                     />
 
                     <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">
                         <StoreBanner banner="../nemo.webp" />
                         <div className="w-full ">
-                            <CategoryButtons categories={categories} textColor={textColorButtons} buttonColor={buttonColor} />
+                            <CategoryButtons
+                                categories={categories}
+                                setCategories={setCategories}
+                                textColor={textColorButtons}
+                                buttonColor={buttonColor} />
 
                         </div>
 

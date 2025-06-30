@@ -1,6 +1,8 @@
-import { Category } from "../../../../types/restaurante-data-types.d";
+import React, { useState } from "react";
+import { createCategoryService, deleteCategoryService } from "../../../../../services/menu-store";
+import { Category } from "../../../../../types/restaurante-data-types.d";
+import { CreateCategoryForm } from "../form-create-category";
 import { IoCloseOutline } from "react-icons/io5";
-import { deleteCategoryService } from "../../../../services/menu-store";
 
 interface CategoryButtonsProps {
     categories: Category[];
@@ -9,11 +11,24 @@ interface CategoryButtonsProps {
     textColor?: string;
 }
 
-const CategoryButtons = ({ categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
+export const CategoryButtons = ({ categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
+    const [showForm, setShowForm] = useState(false);
+
     const handleScroll = (id: string) => {
         const section = document.getElementById(id);
         if (section) {
             section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+    const createCategory = async (name: string) => {
+        try {
+            const createdCategory = await createCategoryService({ name });
+            if (createdCategory !== null && createdCategory !== undefined) {
+                setCategories(prev => [...prev, createdCategory]);
+            }
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -49,11 +64,22 @@ const CategoryButtons = ({ categories, setCategories, buttonColor, textColor }: 
                     </button>
                 </div>
             ))}
-            <button className={`max-w-12 bg-transparent border-2 border-green-600 flex-grow h-8 lg:h-10 rounded-3xl cursor-pointer hover:scale-103 transition-transform duration-200 font-extrabold text-green-600`}>
-                +
-            </button>
+            {showForm ? (
+                <CreateCategoryForm
+                    onClose={() => setShowForm(false)}
+                    onSubmit={async (name) => {
+                        await createCategory(name);
+                        setShowForm(false);
+                    }}
+                />
+            ) : (
+                <button
+                    className="w-[35px] max-w-[35px] bg-transparent border-2 border-green-600 flex-grow h-8 lg:h-10 rounded-3xl cursor-pointer hover:scale-103 transition-transform duration-200 font-extrabold text-green-600"
+                    onClick={() => setShowForm(true)}
+                >
+                    +
+                </button>
+            )}
         </div>
     );
 };
-
-export { CategoryButtons };

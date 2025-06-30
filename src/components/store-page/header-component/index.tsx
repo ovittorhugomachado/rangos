@@ -4,7 +4,7 @@ import { getRestaurantStatus } from "../../../utils/restaurant-status";
 import { ImageUploader } from "./image-uploader";
 import { useAuth } from "../../../hooks/use-auth";
 
-export const Header = ({ //importa os tipos que vem do RestaurantData
+export const Header = ({
     id,
     backgroundColor,
     restaurantImage,
@@ -13,7 +13,7 @@ export const Header = ({ //importa os tipos que vem do RestaurantData
     cartValue,
 }: RestaurantData) => { 
 
-    const { isOpen, message } = getRestaurantStatus(openingHours); //chama a função que verifica se esta aberto e quando abre ou fecha
+    const { isOpen, message } = getRestaurantStatus(openingHours); 
     const { user, styleStorePage } = useAuth();
 
     console.log(backgroundColor)
@@ -76,4 +76,4 @@ export const Header = ({ //importa os tipos que vem do RestaurantData
             </div>
         </header >
     )
-}
+};
