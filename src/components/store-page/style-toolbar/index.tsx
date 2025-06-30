@@ -55,6 +55,9 @@ export const BottomNav = ({
                 backgroundColor: backgroundColorStore,
                 textButtonColor: textColorButtons,
             });
+
+            window.location.reload();
+            
         } catch (error) {
             alert("Erro ao salvar as mudanças!");
             console.log(error)
@@ -167,10 +170,10 @@ export const BottomNav = ({
                 {hasChanges && (
                     <button
                         className="
-            w-full rounded-3xl absolute bottom-[-30px]
-            bg-primary text-black
-            cursor-pointer hover:scale-[104%] transition
-        "
+                            w-full rounded-3xl absolute bottom-[-30px]
+                            bg-primary text-black
+                            cursor-pointer hover:scale-[104%] transition
+                        "
                         onClick={saveChanges}
                     >
                         Salvar mudanças
