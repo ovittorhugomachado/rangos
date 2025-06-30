@@ -32,3 +32,35 @@ export const deleteCategoryService = async (categoryId: number) => {
 
     return await response.json();
 };
+
+export const createCategoryService = async (category: {
+    name: string;
+}): Promise<void> => {
+    try {
+        const response = await fetch(`http://localhost:3000/categories`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify(category)
+            }
+        )
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            throw new Error('Erro ao criar categoria')
+        }
+
+        return data
+    } catch (error) {
+
+        if (error instanceof TypeError) {
+            throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
+        }
+
+        throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
+    }
+};
