@@ -29,7 +29,6 @@ export interface AccountData {
 
   primaryColor: string;
   backgroundColor: string;
-  textColor: string;
   textButtonColor: string;
   logoUrl: string;
   bannerUrl: string;

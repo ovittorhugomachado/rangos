@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
+import { updatePageStyle } from '../../../services/page-style';
 import { toggleHiddenFlex } from '../../../utils/toggleHiddenFlex';
 import { MdOutlineColorLens } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 
 interface BottomNavProps {
-    backgroundColorStore: string;
-    setBackgroundColor: (color: string) => void;
+    initialBackgroundColor: 'white' | 'black';
+    initialButtonColor: string;
+    initialTextColorButtons: 'white' | 'black';
+    backgroundColorStore: 'white' | 'black';
+    setBackgroundColor: (color: 'white' | 'black') => void;
     buttonColor: string;
     setButtonColor: (color: string) => void;
-    textColorButtons: string;
-    setTextColorButtons: (color: string) => void;
-    className?: string;
-    children?: React.ReactNode;
+    textColorButtons: 'white' | 'black';
+    setTextColorButtons: (color: 'white' | 'black') => void;
 }
 
 export const BottomNav = ({
+    initialBackgroundColor,
+    initialButtonColor,
+    initialTextColorButtons,
     backgroundColorStore,
     setBackgroundColor,
     buttonColor,
     setButtonColor,
     textColorButtons,
-    setTextColorButtons,
-    className = '',
-    children
+    setTextColorButtons
 }: BottomNavProps) => {
-    const [toolbarOpen, setToolbarOpen] = useState(true);
+
+    const [toolbarOpen, setToolbarOpen] = useState(false);
 
     const handleToggleToolbar = () => {
         const toolbar = document.getElementById('toolbar');
@@ -41,58 +45,137 @@ export const BottomNav = ({
     };
 
     const handleButtonColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setButtonColor(event.target.value); 
+        setButtonColor(event.target.value);
     };
 
+    const saveChanges = async () => {
+        try {
+            await updatePageStyle({
+                primaryColor: buttonColor,
+                backgroundColor: backgroundColorStore,
+                textButtonColor: textColorButtons,
+            });
+        } catch (error) {
+            alert("Erro ao salvar as mudanças!");
+            console.log(error)
+        }
+    };
+
+    const hasChanges =
+        buttonColor !== initialButtonColor ||
+        backgroundColorStore !== initialBackgroundColor ||
+        textColorButtons !== initialTextColorButtons;
+
     return (
-        <nav className={`${backgroundColorStore === 'white' ? 'bg-black border-white text-white' : 'bg-white'} fixed w-[187px] top-0 right-0 m-3.5 py-2 rounded-2xl flex flex-col items-center content-between border-[0.1px] z-30 ${className}`}>
-            <div
-                className='flex items-center gap-1 cursor-pointer transition-all duration-300 ease-in-out'
+
+        <nav
+            className={`
+                fixed top-0 right-0 m-3.5 w-[187px] py-2 z-30
+                flex flex-col items-center content-between rounded-2xl border-[0.1px]
+                ${backgroundColorStore === 'white'
+                    ? 'bg-black border-white text-white'
+                    : 'bg-white'}
+            
+            `}
+        >
+            <button
+                className="flex items-center gap-1 cursor-pointer transition-all duration-300 ease-in-out"
                 onClick={handleToggleToolbar}
             >
-                <MdOutlineColorLens className='text-3xl' />
+                <MdOutlineColorLens className="text-3xl" />
                 <span>Editar cores</span>
-                <IoIosArrowDown className={toolbarOpen ? 'rotate-180 transition-transform duration-300' : 'transition-transform duration-300'} />
-            </div>
+                <IoIosArrowDown
+                    className={
+                        toolbarOpen
+                            ? 'rotate-180 transition-transform duration-300'
+                            : 'transition-transform duration-300'
+                    }
+                />
+            </button>
             <div
-                className={`flex flex-col mt-2.5 items-center content-between transition-all duration-500 ease-in-out ${toolbarOpen ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0 overflow-hidden'}`}
-                id='toolbar'
+                id="toolbar"
+                className={`
+                    flex flex-col items-center content-between
+                    transition-all duration-500 ease-in-out
+                    ${toolbarOpen ? 'opacity-100 max-h-[500px]' : 'opacity-0 max-h-0 overflow-hidden'}
+                `}
             >
-                <div className='h-full flex flex-col items-center justify-between '>
-                    <span className='mb-2 font-bold'>Cor de fundo</span>
-                    <div className='flex items-center gap-1 mx-2.5 font-extralight text-md'>
+                <div className="flex flex-col items-center justify-between h-full">
+                    <span className="mb-2 font-bold">Cor de fundo</span>
+                    <div className="flex items-center gap-1 mx-2.5 text-md font-extralight">
                         <span>Branco</span>
-                        <button onClick={BackgroundStoreChange} className={`${backgroundColorStore === 'white' ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]' : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'} w-[50px] h-[25px] items-center px-1 py-1 ml-1 flex gap-3 rounded-full cursor-pointer transition-all duration-300`} >
-                            <span className={`${backgroundColorStore === 'white' ? 'bg-white' : 'translate-x-6 bg-black'} w-4.5 h-4.5 rounded-full transition-transform duration-300`}></span>
+                        <button
+                            onClick={BackgroundStoreChange}
+                            className={`
+                                w-[50px] h-[25px] ml-1 px-1 py-1 flex items-center gap-3 rounded-full
+                                cursor-pointer transition-all duration-300
+                                ${backgroundColorStore === 'white'
+                                    ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]'
+                                    : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'}
+                            `}
+                        >
+                            <span
+                                className={`
+                                    w-4.5 h-4.5 rounded-full transition-transform duration-300
+                                    ${backgroundColorStore === 'white'
+                                        ? 'bg-white'
+                                        : 'translate-x-6 bg-black'}
+                                `}
+                            ></span>
                         </button>
                         <span>Preto</span>
                     </div>
                 </div>
-                <div className='w-[130px] flex flex-col items-center border-y-2 border-primary mx-3.5 my-3 py-2.5 text-center'>
-                    <label htmlFor='backgroundColor' className='mb-2 font-bold'>Cor dos botões</label>
+                <div className="w-[130px] flex flex-col items-center border-y-2 border-primary mx-3.5 my-3 py-2.5 text-center">
+                    <label htmlFor="buttonColor" className="mb-2 font-bold">
+                        Cor dos botões
+                    </label>
                     <input
                         type="color"
                         name="buttonColor"
                         id="buttonColor"
-                        className="cursor-pointer appearance-none border-1 [&::-webkit-color-swatch]:border-none [&::-webkit-color-swatch]:rounded-full w-[25px] h-[25px] px-0.5 rounded-full"
+                        className="w-[25px] h-[25px] px-0.5 rounded-full border-1 appearance-none cursor-pointer
+                            [&::-webkit-color-swatch]:border-none
+                            [&::-webkit-color-swatch]:rounded-full"
                         value={buttonColor}
                         onChange={handleButtonColorChange}
                     />
                 </div>
-                <span className='mb-2 font-bold text-center'>Cor do texto dos botões</span>
-                <div className='flex items-center gap-1 mx-2.5 font-extralight text-md'>
+                <span className="mb-2 font-bold text-center">Cor do texto dos botões</span>
+                <div className="flex items-center gap-1 mx-2.5 text-md font-extralight">
                     <span>Branco</span>
-                    <button onClick={toggleTextColorButtons} className={`${backgroundColorStore === 'white' ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]' : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'} w-[50px] h-[25px] items-center px-1 py-1 ml-1 flex gap-3 rounded-full cursor-pointer transition-all duration-300`} >
+                    <button
+                        onClick={toggleTextColorButtons}
+                        className={`
+                            w-[50px] h-[25px] ml-1 px-1 py-1 flex items-center gap-3 rounded-full
+                            cursor-pointer transition-all duration-300
+                            ${backgroundColorStore === 'white'
+                                ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]'
+                                : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'}
+                        `}
+                    >
                         <span
-                            className={`${backgroundColorStore === 'white' ? 'bg-white' : ' bg-black'} 
-                                ${textColorButtons === 'black' ? 'translate-x-6' : ''} 
-                                w-4.5 h-4.5 rounded-full transition-transform duration-300`}
+                            className={`
+                                w-4.5 h-4.5 rounded-full transition-transform duration-300
+                                ${backgroundColorStore === 'white' ? 'bg-white' : 'bg-black'}
+                                ${textColorButtons === 'black' ? 'translate-x-6' : ''}
+                            `}
                         />
                     </button>
                     <span>Preto</span>
                 </div>
-                <button className='w-full bg-primary text-black rounded-3xl absolute bottom-[-30px] cursor-pointer hover:scale-[104%] transition'>Salvar mudanças</button>
-                {children}
+                {hasChanges && (
+                    <button
+                        className="
+            w-full rounded-3xl absolute bottom-[-30px]
+            bg-primary text-black
+            cursor-pointer hover:scale-[104%] transition
+        "
+                        onClick={saveChanges}
+                    >
+                        Salvar mudanças
+                    </button>
+                )}
             </div>
         </nav>
     );

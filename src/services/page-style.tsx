@@ -2,7 +2,6 @@ import { AccountData } from "../types/account-types.d"
 
 export const getPageStyle = async (): Promise<AccountData> => {
     try {
-        //const token = localStorage.getItem('token')
         const response = await fetch(`http://localhost:3000/store/style`,
             {
                 method: 'GET',
@@ -16,7 +15,7 @@ export const getPageStyle = async (): Promise<AccountData> => {
         const data = await response.json()
 
         if (!response.ok) {
-            throw new Error('Erro buscar dados')
+            throw new Error('Erro ao buscar dados')
         }
 
         return data
@@ -27,4 +26,37 @@ export const getPageStyle = async (): Promise<AccountData> => {
 
         throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
     }
-}
+};
+
+export const updatePageStyle = async (style: {
+    primaryColor: string;
+    backgroundColor: string;
+    textButtonColor: string;
+}): Promise<AccountData> => {
+    try {
+        const response = await fetch(`http://localhost:3000/store/style`,
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify(style)
+            }
+        )
+
+        const data = await response.json()
+
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar dados')
+        }
+
+        return data
+    } catch (error) {
+        if (error instanceof TypeError) {
+            throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
+        }
+
+        throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
+    }
+};
