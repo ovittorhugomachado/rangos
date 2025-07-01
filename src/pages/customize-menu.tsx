@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BottomNav } from "../components/store-page/style-toolbar";
 import { getPageStyle } from "../services/page-style";
 import { LoadingComponent } from "../components/loading-component";
-import { StoreBanner } from "../components/store-banner";
+import { StoreBanner } from "../components/store-page/by-store/banner";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { StoreFooterComponent } from "../components/store-page/by-store/footer-component";
 import ErrorComponent from "../components/error-component";
@@ -10,6 +10,28 @@ import { Logo } from "../components/logo";
 import { getCategoriesStore } from "../services/menu-store";
 import { Category } from "../types/restaurante-data-types.d";
 import { CategoryButtons } from "../components/store-page/by-store/category-buttons/categories-butttons";
+import { getStoreData } from "../services/store-data";
+
+type StoreData = {
+    restaurantName: string,
+    phoneNumber: string,
+    address: string | null,
+    logoUrl: string | null,
+    bannerUrl: string | null,
+    delivery: boolean,
+    pickup: boolean,
+    openingHours: [
+        {
+            storeId: number,
+            day: string,
+            isOpen: boolean,
+            timeRanges: Array<{
+                start: string,
+                end: string
+            }>
+        }
+    ]
+};
 
 type StyleData = {
     primaryColor?: string | null;
@@ -23,6 +45,8 @@ const CustomizeMenuPage = () => {
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
+    const [storeData, setStoreData] = useState<StoreData | null>(null);
+    const [bannerUrl, setBannerUrl] = useState<string>('');
     const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
     const [initialButtonColor, setInitialButtonColor] = useState('');
     const [initialBackgroundColor, setInitialBackgroundColor] = useState('');
@@ -90,6 +114,9 @@ const CustomizeMenuPage = () => {
     const fetchStoreData = async () => {
         setLoading(true);
         try {
+
+            const storeData = await getStoreData();
+
             const styleData = await getPageStyle();
 
             const categoriesStore = await getCategoriesStore()
@@ -98,8 +125,8 @@ const CustomizeMenuPage = () => {
                 throw new Error('Dados da loja não encontrados');
             };
 
-            setStoreStyle(styleData);
-            setCategories(categoriesStore);
+            setStoreData(storeData);
+            setBannerUrl(storeData.bannerUrl ?? '');
             setStoreStyle(styleData);
             setCategories(categoriesStore);
 
@@ -125,6 +152,8 @@ const CustomizeMenuPage = () => {
     useEffect(() => {
         fetchStoreData();
     }, []);
+
+    console.log(storeData);
 
     return (
         <>
@@ -152,7 +181,13 @@ const CustomizeMenuPage = () => {
                     />
 
                     <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">
-                        <StoreBanner banner="../nemo.webp" />
+                        <StoreBanner
+                            banner={bannerUrl}
+                            onBannerChange={async () => {
+                                const updatedStoreData = await getStoreData();
+                                setBannerUrl(updatedStoreData.bannerUrl ?? '');
+                            }}
+                        />
                         <div className="w-full ">
                             <CategoryButtons
                                 categories={categories}
