@@ -1,54 +1,29 @@
 import { CiShoppingCart } from "react-icons/ci";
 import { RestaurantData } from "../../../types/restaurante-data-types.d";
 import { getRestaurantStatus } from "../../../utils/restaurant-status";
-import { ImageUploader } from "./image-uploader";
-import { useAuth } from "../../../hooks/use-auth";
+import { Logo } from "./logo";
+
 
 export const Header = ({
-    id,
-    backgroundColor,
+    backgroundColor = '',
     restaurantImage,
     restaurantName,
     openingHours = [],
     cartValue,
-}: RestaurantData) => { 
+}: RestaurantData) => {
 
-    const { isOpen, message } = getRestaurantStatus(openingHours); 
-    const { user, styleStorePage } = useAuth();
-
-    console.log(backgroundColor)
+    const { isOpen, message } = getRestaurantStatus(openingHours);
+    
     return (
         <header
-            className={
-                `w-screen px-[5%] lg:px-[15%] fixed py-4 sm:px-6 flex flex-col xs:flex-row items-center justify-between top-0 border-b-[1px] 
-                ${backgroundColor === "dark" ? "bg-black" : "bg-white"} 
-                ${backgroundColor === "dark" ? "text-white" : "text-black"} 
-                ${backgroundColor === "dark" ? "border-zinc-800" : "border-gray-200"}
-            `}>
-            <div className="w-16 h-16 rounded-full relative mb-1.5 sm:w-23 sm:h-23 xs:hidden">
-                <img
-                    src={restaurantImage}
-                    alt={user?.restaurantName}
-                    className="w-full h-full object-contain p-1.5"
-                />
-                <ImageUploader userId={id} />
-            </div>
+            className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white' } z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col xs:flex-row items-center justify-between top-0 border-b-[1px] `}>
             <div className="flex items-center gap-3.5">
-                <div className="w-[92px] h-[92px] relative hidden xs:block">
-                    <div className="h-full w-full rounded-full overflow-hidden hidden xs:flex items-center justify-center bg-gray-100">
-                        <img
-                            src={restaurantImage}
-                            alt={user?.restaurantName}
-                            className="w-full h-full object-contain p-1.5"
-                        />
-
-                    </div>
-                    <ImageUploader userId={id} />
-
-                </div>
-
+                    <Logo
+                        logo={restaurantImage}
+                        onImageChange={() => {}}
+                    />
                 <div className="text-center mx-1.5">
-                    <h2 className="text-md font-bold mb-1">{user?.restaurantName}</h2>
+                    <h2 className="text-md font-bold mb-1">{restaurantName}</h2>
                     {isOpen ?
                         <p
                             aria-live="polite"
@@ -69,7 +44,7 @@ export const Header = ({
             </div >
             <div
                 aria-label="Carrinho de compras"
-                className="hidden xs:flex flex-col items-center text-center"
+                className="flex xs:flex-col items-center text-center"
             >
                 <CiShoppingCart className="text-2xl sm:text-3xl cursor-pointer hover:scale-105 " />
                 <h3 className="text-xs sm:text-base">{cartValue}</h3>
