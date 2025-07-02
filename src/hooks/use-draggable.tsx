@@ -3,8 +3,8 @@ import { useRef, useState, useCallback, useEffect } from "react";
 export const useDraggable = () => {
     const ref = useRef<HTMLDivElement>(null);
     const [dragging, setDragging] = useState(false);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [offset, setOffset] = useState({ x: 0, y: 0 });
+    const [position, setPosition] = useState({ x: 0.5, y: 0 });
+    const [offset, setOffset] = useState({ x: 0.5, y: 0 });
 
     useEffect(() => {
         if (ref.current) {
@@ -84,6 +84,26 @@ export const useDraggable = () => {
         };
     }, [dragging, handleMouseMove, handleTouchMove, handleMouseUp, handleTouchEnd]);
 
+    const clampPosition = (x: number, y: number) => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const el = ref.current;
+        const elWidth = el?.offsetWidth || 0;
+        const elHeight = el?.offsetHeight || 0;
+        return {
+            x: Math.max(0, Math.min(x, width - elWidth)),
+            y: Math.max(0, Math.min(y, height - elHeight)),
+        };
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            setPosition(pos => clampPosition(pos.x, pos.y));
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return {
         ref,
         position,
@@ -91,4 +111,4 @@ export const useDraggable = () => {
         handleMouseDown,
         handleTouchStart,
     };
-}
+};
