@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 export const getCategoriesStore = async () => {
 
     const response = await fetch('http://localhost:3000/categories', {
@@ -11,23 +12,6 @@ export const getCategoriesStore = async () => {
     if (!response.ok) {
         const error = await response.json();
         throw new Error(error.message || 'Erro ao buscar categorias do menu');
-    };
-
-    return await response.json();
-};
-
-export const deleteCategoryService = async (categoryId: number) => {
-    const response = await fetch(`http://localhost:3000/categories/${categoryId}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        credentials: 'include'
-    });
-
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Erro ao deletar categoria do menu');
     };
 
     return await response.json();
@@ -64,3 +48,46 @@ export const createCategoryService = async (category: {
         throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
     }
 };
+
+export const RenameCategoryService = async (categoryId: number, newName: string) => {
+    try {
+        const response = await fetch(`http://localhost:3000/categories/${categoryId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify({ newName: newName })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Erro ao renomear categoria do menu');
+        };
+
+        return await response.json();
+    } catch (error) {
+        if (error instanceof TypeError) {
+            throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
+        }
+        throw error instanceof Error ? error : new Error('Erro desconhecido');
+    }
+};
+
+export const deleteCategoryService = async (categoryId: number) => {
+    const response = await fetch(`http://localhost:3000/categories/${categoryId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include'
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Erro ao deletar categoria do menu');
+    };
+
+    return await response.json();
+};
+
