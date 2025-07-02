@@ -9,7 +9,6 @@ export interface OpeningHour {
 
 export interface RestaurantData {
   restaurantName: string;
-  id: number;
   restaurantImage: string;
   backgroundColor: string;
   openingHours: OpeningHour[];
