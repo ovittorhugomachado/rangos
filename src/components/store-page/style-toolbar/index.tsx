@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { updatePageStyle } from '../../../services/page-style';
 import { toggleHiddenFlex } from '../../../utils/toggleHiddenFlex';
 import { MdOutlineColorLens } from "react-icons/md";
@@ -30,7 +30,7 @@ export const BottomNav = ({
 }: BottomNavProps) => {
 
     const [toolbarOpen, setToolbarOpen] = useState(false);
-
+    const [hasChanges, setHasChanges] = useState(false);
     const {
         ref: navRef,
         position,
@@ -57,6 +57,15 @@ export const BottomNav = ({
         setButtonColor(event.target.value);
     };
 
+    useEffect(() => {
+        setHasChanges(
+            buttonColor !== initialButtonColor ||
+            backgroundColorStore !== initialBackgroundColor ||
+            textColorButtons !== initialTextColorButtons
+        );
+    }, [buttonColor, initialButtonColor, backgroundColorStore, initialBackgroundColor, textColorButtons, initialTextColorButtons]);
+
+
     const saveChanges = async () => {
         try {
             await updatePageStyle({
@@ -65,7 +74,7 @@ export const BottomNav = ({
                 textButtonColor: textColorButtons,
             });
 
-            window.location.reload();
+            setHasChanges(false);
 
         } catch (error) {
             alert("Erro ao salvar as mudanças!");
@@ -73,13 +82,7 @@ export const BottomNav = ({
         }
     };
 
-    const hasChanges =
-        buttonColor !== initialButtonColor ||
-        backgroundColorStore !== initialBackgroundColor ||
-        textColorButtons !== initialTextColorButtons;
-
     return (
-
         <nav
             ref={navRef}
             onMouseDown={handleMouseDown}
@@ -92,8 +95,9 @@ export const BottomNav = ({
                 cursor: dragging ? 'grabbing' : 'grab',
                 zIndex: 30,
             }}
-            className={`w-[187px] py-2 mx-2.5 my-1.5 ${backgroundColorStore === 'white' ? 'bg-black border-white text-white' : 'bg-white'} fixed z-30 flex flex-col items-center content-between rounded-2xl border-[0.1px] select-none`} >
-            <span className="text-3xl left-[-20px] top-1 my-auto absolute text-zinc-600">⋮⋮</span>
+            className={`w-[187px] py-2 mx-2.5 my-1.5 ${backgroundColorStore === 'white' ? 'bg-black border-white text-white' : 'bg-white'} fixed z-30 flex flex-col items-center content-between rounded-2xl border-[0.1px] select-none`}
+        >
+            <span className="text-3xl text-zinc-600 left-[-20px] top-1 my-auto absolute">⋮⋮</span>
             <button className="gap-1 flex items-center cursor-pointer transition-all duration-300 ease-in-out" onClick={handleToggleToolbar}>
                 <MdOutlineColorLens className="text-3xl" />
                 <span>Editar cores</span>
@@ -138,15 +142,15 @@ export const BottomNav = ({
                     </button>
                     <span>Preto</span>
                 </div>
-                {hasChanges && (
-                    <button
-                        className="w-full rounded-3xl absolute bottom-[-37px] bg-primary text-black cursor-pointer hover:scale-[104%] transition"
-                        onClick={saveChanges}
-                    >
-                        Salvar mudanças
-                    </button>
-                )}
             </div>
+            {hasChanges && (
+                <button
+                    className="w-full absolute bottom-[-30px] opacity-100 bg-primary text-black rounded-3xl mt-3 cursor-pointer hover:scale-[104%] transition"
+                    onClick={saveChanges}
+                >
+                    Salvar mudanças
+                </button>
+            )}
         </nav>
     );
 };
