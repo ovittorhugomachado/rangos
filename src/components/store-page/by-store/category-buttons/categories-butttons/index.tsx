@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { createCategoryService, deleteCategoryService } from "../../../../../services/menu-store";
+import { createCategoryService, deleteCategoryService, RenameCategoryService } from "../../../../../services/menu-store";
 import { Category } from "../../../../../types/restaurante-data-types.d";
-import { CreateCategoryForm } from "../form-create-category";
+import { CreateCategoryForm, UpdateCategoryForm } from "../form-category";
 import { IoCloseOutline } from "react-icons/io5";
+import { MdOutlineEdit } from "react-icons/md";
 
 interface CategoryButtonsProps {
     categories: Category[];
@@ -13,6 +14,8 @@ interface CategoryButtonsProps {
 
 export const CategoryButtons = ({ categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
     const [showForm, setShowForm] = useState(false);
+    const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
+    const [editCategoryName, setEditCategoryName] = useState<string | null>("");
 
     const handleScroll = (id: string) => {
         const section = document.getElementById(id);
@@ -31,6 +34,15 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
             console.error(error);
         }
     };
+
+    const RenameCategory = async (categoryId: number, newName: string) => {
+        try {
+            const updatedCategory = await RenameCategoryService(categoryId, newName);
+            setCategories(prev => prev.map(cat => cat.id === categoryId ? updatedCategory : cat));
+        } catch (error) {
+            console.error(error);
+        }
+    };  
 
     const deleteCategory = async (categoryId: number) => {
         try {
@@ -56,12 +68,23 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
                     >
                         {category.name}
                     </button>
-                    <button
-                        className="w-5 h-5 z-2 flex items-center justify-center bg-red-600 text-white rounded-full absolute top-[-11px] left-[0] border-[1px] border-amber-50 cursor-pointer hover:shadow-[0_0_8px_0px_rgba(255,0,0,0.7)] transition-all duration-200"
-                        onClick={() => deleteCategory(category.id)}
-                    >
-                        <IoCloseOutline className="text-lg" />
-                    </button>
+                    <div className="flex top-[-11px] left-[10px] absolute">
+                        <button
+                            className="w-5 h-5 z-2 flex items-center justify-center bg-red-600 text-white rounded-full border-[1px] border-amber-50 cursor-pointer hover:shadow-[0_0_8px_0px_rgba(255,0,0,0.7)] transition-all duration-200"
+                            onClick={() => deleteCategory(category.id)}
+                        >
+                            <IoCloseOutline className="text-lg" />
+                        </button>
+                        <button
+                            className="ml-2 rounded-full w-5 h-5 z-2 flex items-center justify-center bg-blue-600 text-white border-[1px] border-amber-50 cursor-pointer hover:shadow-[0_0_8px_0px_rgba(0,0,255,0.7)] transition-all duration-200"
+                            onClick={() => {
+                                setEditCategoryId(category.id);
+                                setEditCategoryName(category.name);
+                            }}
+                        >
+                            <MdOutlineEdit className="text-sm" />
+                        </button>
+                    </div>
                 </div>
             ))}
             {showForm ? (
@@ -79,6 +102,27 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
                 >
                     +
                 </button>
+            )}
+            {editCategoryId !== null && editCategoryName !== null && (
+                <UpdateCategoryForm
+                    onClose={() => {
+                        setEditCategoryId(null);
+                        setEditCategoryName(null);
+                    }}
+                    onSubmit={async (newName) => {
+                        await RenameCategory(editCategoryId, newName);
+                        console.log(newName)
+                        console.log(editCategoryId)
+                        setCategories(prev =>
+                            prev.map(cat =>
+                                cat.id === editCategoryId ? { ...cat, name: newName } : cat
+                            )
+                        );
+                        setEditCategoryId(null);
+                        setEditCategoryName(null);
+                    }}
+                    initialName={editCategoryName}
+                />
             )}
         </div>
     );
