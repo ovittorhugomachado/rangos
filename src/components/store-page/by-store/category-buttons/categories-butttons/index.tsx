@@ -97,7 +97,7 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
                 />
             ) : (
                 <button
-                    className="w-[35px] max-w-[35px] bg-transparent border-2 border-green-600 flex-grow h-8 lg:h-10 rounded-3xl cursor-pointer hover:scale-103 transition-transform duration-200 font-extrabold text-green-600"
+                    className="w-[35px] max-w-[35px] bg-primary  flex-grow h-8 lg:h-10 rounded-3xl cursor-pointer hover:scale-103 transition-transform duration-200 font-extrabold text-black"
                     onClick={() => setShowForm(true)}
                 >
                     +

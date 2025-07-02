@@ -87,7 +87,7 @@ export const UpdateCategoryForm = ({
                 >
                     <IoCloseOutline className="text-lg" />
                 </button>
-                <h3 className="text-lg md:text-2xl">Criar nova categoria</h3>
+                <h3 className="text-lg md:text-2xl">Renomear categoria</h3>
                 <div className="flex items-start justify-center flex-col w-full max-w-[300px]">
                     <label htmlFor="category-name" className="text-md">Nome</label>
                     <input
