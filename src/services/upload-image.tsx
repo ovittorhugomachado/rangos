@@ -1,11 +1,11 @@
-export const UploadProfileImage = async (imageFile: File) => {
+export const UploadLogo = async (imageFile: File) => {
     try {
 
         const token = localStorage.getItem('token')
         const formData = new FormData();
         formData.append('logo', imageFile);
 
-        const response = await fetch(`http://localhost:3000/users/profile-picture`, {
+        const response = await fetch(`http://localhost:3000/logo`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -22,8 +22,8 @@ export const UploadProfileImage = async (imageFile: File) => {
         return await response.json();
 
     } catch (error) {
-        if (error instanceof TypeError && error.message === 'Failed to fetch') {
-            throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
+        if (error instanceof TypeError) {
+            throw new Error(error.message);
         }
         throw error instanceof Error ? error : new Error('Erro desconhecido');
     }
