@@ -16,7 +16,10 @@ export interface AccountData {
   email: string;
   password: string;
   restaurantName: string;
+  address: string;
   activeAccount: boolean;
+  delivery: boolean;
+  pickup: boolean;
   plan: string;
   cratedAt: Date;
   cnpj: string;
