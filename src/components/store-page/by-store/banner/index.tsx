@@ -33,6 +33,7 @@ const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBannerChang
             <div className="flex items-center gap-2 absolute bottom-2 left-2">
                 <button
                     type="button"
+                    title="Configurar Banner da loja"
                     className="rounded-full flex items-center justify-center w-[35px] h-[35px] border-2 bg-white bg-opacity-40 border-black cursor-pointer hover:scale-105 transition-all duration-200"
                     onClick={handleButtonClick}
                 >

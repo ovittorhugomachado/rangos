@@ -35,6 +35,7 @@ export const Logo = ({ logo, onImageChange}: { logo: string; onImageChange: () =
             <img src={logo ? `${logo}?v=${logoVersion}` : "/logo-default.png"} alt="logo" />
             <button
                 type="button"
+                title="Alterar logo da loja"
                 className="w-6 h-6 sm:w-8 sm:h-8 bg-white bg-opacity-70 border-2 border-black absolute bottom-0 left-0 rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                 onClick={handleButtonClick}
             >

@@ -5,14 +5,16 @@ import { LoadingComponent } from "../components/loading";
 import { StoreBanner } from "../components/store-page/by-store/banner";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { StoreFooterComponent } from "../components/store-page/by-store/footer";
-import ErrorComponent from "../components/error";
+import { ErrorComponent } from "../components/error";
 import { Logo } from "../components/logo";
 import { getCategoriesStore } from "../services/menu-store";
 import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
 import { CategoryButtons } from "../components/store-page/by-store/categories-butttons";
-import { getStoreData } from "../services/store-data";
+import { getStoreData, updateStoreData } from "../services/store-data";
 import { toMoney } from "../utils/transform-to-money";
 import { Header } from "../components/store-page/by-store/header";
+import { UpdateStoreDataForm } from "../components/forms/update-data-store";
+import { AccountData } from "../types/account-types.d";
 
 type StoreData = {
     restaurantName: string,
@@ -27,6 +29,7 @@ type StoreData = {
             storeId: number,
             day: string,
             isOpen: boolean,
+            status: string,
             timeRanges: Array<{
                 start: string,
                 end: string
@@ -47,6 +50,9 @@ const CustomizeMenuPage = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     const [storeData, setStoreData] = useState<StoreData | null>(null);
+    const [showStoreDataUpdateForm, setStoreDataUpdateForm] = useState(false)
+    const [delivery, setDelivery] = useState<StoreData | null>(null);
+    const [pickup, setPickup] = useState<StoreData | null>(null);
     const [bannerUrl, setBannerUrl] = useState<string>('');
     const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
     const [initialButtonColor, setInitialButtonColor] = useState('');
@@ -117,6 +123,8 @@ const CustomizeMenuPage = () => {
             };
 
             setStoreData(storeData);
+            setDelivery(storeData.delivery)
+            setPickup(storeData.pickup)
             setBannerUrl(storeData.bannerUrl ?? '');
             setStoreStyle(styleData);
             setCategories(categoriesStore);
@@ -139,7 +147,7 @@ const CustomizeMenuPage = () => {
             setLoading(false);
         }
     };
-    console.log(storeData)
+
     useEffect(() => {
         fetchStoreData();
     }, []);
@@ -156,7 +164,8 @@ const CustomizeMenuPage = () => {
             ) : (
                 <div
                     style={{ backgroundColor: backgroundColor }}
-                    className="w-screen h-full px-[5%] lg:px-[15%] flex flex-col items-center bg-black text-black lg:text-base">
+                    className="w-screen h-full px-[5%] lg:px-[15%] flex flex-col items-center bg-black text-black lg:text-base"
+                >
                     <BottomNav
                         backgroundColorStore={backgroundColor === "black" || backgroundColor === "white" ? backgroundColor : "white"}
                         setBackgroundColor={setBackgroundColor}
@@ -173,7 +182,7 @@ const CustomizeMenuPage = () => {
                         restaurantImage={storeData?.logoUrl ?? 'store-logo-default.png'}
                         restaurantName={storeData?.restaurantName ?? ''}
                         openingHours={
-                            storeData?.openingHours
+                            Array.isArray(storeData?.openingHours)
                                 ? storeData.openingHours.map((oh) => ({
                                     day: oh.day as DayOfWeek,
                                     open: oh.timeRanges?.[0]?.start ?? '',
@@ -183,7 +192,13 @@ const CustomizeMenuPage = () => {
                                 : []
                         }
                         cartValue={defaultPreferences.cartValue}
+                        openFormUpdateDataStore={() => setStoreDataUpdateForm(true)}
                     />
+                    {showStoreDataUpdateForm && (
+                        <UpdateStoreDataForm
+                            onClose={() => setStoreDataUpdateForm(false)}
+                        />
+                    )}
                     <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">
                         <StoreBanner
                             banner={bannerUrl}

@@ -42,6 +42,7 @@ export const Header: React.FC<HeaderProps> = ({
                         <h2 className="text-md font-bold mb-1">{restaurantName}</h2>
                         <button
                             onClick={openFormUpdateDataStore}
+                            title="Configurar dados da loja"
                             className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                         >
                             <FaGear />
