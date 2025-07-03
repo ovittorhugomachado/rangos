@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { getStoreData, updateStoreData } from "../../../services/store-data";
+import { ErrorComponent } from "../../error";
+import { LoadingComponent } from "../../loading";
 import { AccountData } from "../../../types/account-types.d";
 import { CheckboxDeliveryTypesInput } from "../../inputs/delivery-types";
-import { getStoreData, updateStoreData } from "../../../services/store-data";
-import ErrorComponent from "../../error";
-import { LoadingComponent } from "../../loading";
 import { InputRestaurantName } from "../../inputs/input-restaurent-name";
 import { InputPhoneNumber } from "../../inputs/input-phone-number";
 import { InputAddress } from "../../inputs/input-address";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface UpdateStoreDataFormProps {
-    onSubmit: (data: AccountData) => void;
     onClose: () => void;
     isLoading?: boolean;
     error?: string;
     initialValues?: Partial<AccountData>;
     message?: string;
-}
+};
 
 export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     onClose,
@@ -33,6 +32,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     } = useForm<AccountData>({
         defaultValues: {
             restaurantName: "",
+            address: "",
             phoneNumber: "",
             delivery: false,
             pickup: false,
@@ -40,38 +40,41 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
         },
     });
 
-    const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
     const [messageSuccess, setMessageSuccess] = useState("")
     const [lastData, setLastData] = useState<Partial<AccountData> | null>(null);
 
-    const fetchStoreData = async () => {
-        setLoading(true)
-        try {
-            const response = await getStoreData();
-
-            setValue("restaurantName", response.restaurantName)
-            setValue("phoneNumber", response.phoneNumber)
-            setValue("delivery", response.delivery)
-            setValue("pickup", response.pickup)
-            setLastData({
-                restaurantName: response.restaurantName,
-                phoneNumber: response.phoneNumber,
-                delivery: response.delivery,
-                pickup: response.pickup,
-            });
-        } catch (error: unknown) {
-            console.log(error)
-            setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
-
-        } finally {
-            setLoading(false)
-        }
-    }
-
     useEffect(() => {
+        const fetchStoreData = async () => {
+            setLoading(true)
+            try {
+                const response = await getStoreData();
+
+                setValue("restaurantName", response.restaurantName)
+                setValue("address", response.address)
+                setValue("phoneNumber", response.phoneNumber)
+                setValue("delivery", response.delivery)
+                setValue("pickup", response.pickup)
+                setLastData({
+                    restaurantName: response.restaurantName,
+                    address: response.address,
+                    phoneNumber: response.phoneNumber,
+                    delivery: response.delivery,
+                    pickup: response.pickup,
+                });
+
+            } catch (error: unknown) {
+                console.log(error)
+                setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
+
+            } finally {
+                setLoading(false)
+            }
+        };
+
         fetchStoreData()
-    }, []);
+    }, [setValue]);
 
     useEffect(() => {
         if (messageSuccess) {
@@ -87,10 +90,12 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
         if (
             lastData &&
             data.restaurantName === lastData.restaurantName &&
+            data.address === lastData.address &&
             data.phoneNumber === lastData.phoneNumber &&
             data.delivery === lastData.delivery &&
             data.pickup === lastData.pickup
         ) {
+            console.log()
             setMessageSuccess("");
             return;
         }
@@ -102,12 +107,13 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
             setLastData({
                 restaurantName: data.restaurantName,
                 phoneNumber: data.phoneNumber,
+                address: data.address,
                 delivery: data.delivery,
                 pickup: data.pickup,
             });
         } catch (error: unknown) {
             setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
-            setMessageSuccess(""); 
+            setMessageSuccess("");
         }
     };
 
@@ -122,8 +128,13 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                     <LoadingComponent />
                 </div>
             ) : (
-                <div className="primary-component w-120 h-110 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
-                    <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col justify-center items-center mt-0 mb-5 w-full max-w-105 gap-4">
+                <div className="fixed inset-0 z-30 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
+                    <form
+                        onSubmit={handleSubmit(handleFormSubmit)}
+                        noValidate
+                        className="primary-component z-50 relative bg-white mx-3 pt-25 pb-20 p-5 w-120 h-110 flex flex-col justify-center items-center mt-0 mb-5 max-w-105 gap-4"
+                    >
                         <button
                             type="button"
                             className="bg-red-600 text-white rounded-full p-2 absolute top-2 right-2 cursor-pointer transition-all duration-200"

@@ -13,6 +13,7 @@ interface CategoryButtonsProps {
 }
 
 export const CategoryButtons = ({ categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
+    
     const [showForm, setShowForm] = useState(false);
     const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
     const [editCategoryName, setEditCategoryName] = useState<string | null>("");
