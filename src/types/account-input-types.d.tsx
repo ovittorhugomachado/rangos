@@ -8,6 +8,13 @@ export interface InputNameProps {
     initialValues?: Partial<AccountData>;
 }
 
+export interface InputAddressProps {
+    register: UseFormRegister<AccountData>;
+    errors: FieldErrors<AccountData>;
+    clearErrors: UseFormClearErrors<AccountData>;
+    initialValues?: Partial<AccountData>;
+}
+
 export interface InputCNPJProps {
     control: Control<AccountData>;
     initialValues?: Partial<AccountData>;
