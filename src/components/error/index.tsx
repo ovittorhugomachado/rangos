@@ -1,7 +1,7 @@
 import { FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const ErrorComponent = ({ message }: { message: string }) => {
+export const ErrorComponent = ({ message }: { message: string }) => {
     return (
         <div className="w-full flex flex-col items-center justify-center py-24 m-2">
             <Link
@@ -17,4 +17,3 @@ const ErrorComponent = ({ message }: { message: string }) => {
     );
 };
 
-export default ErrorComponent;
