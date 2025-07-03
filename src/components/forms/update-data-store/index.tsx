@@ -4,7 +4,7 @@ import { getStoreData, updateStoreData } from "../../../services/store-data";
 import { ErrorComponent } from "../../error";
 import { LoadingComponent } from "../../loading";
 import { AccountData } from "../../../types/account-types.d";
-import { CheckboxDeliveryTypesInput } from "../../inputs/delivery-types";
+import { CheckboxDeliveryTypesInput } from "../../inputs/input-delivery-types";
 import { InputRestaurantName } from "../../inputs/input-restaurent-name";
 import { InputPhoneNumber } from "../../inputs/input-phone-number";
 import { InputAddress } from "../../inputs/input-address";

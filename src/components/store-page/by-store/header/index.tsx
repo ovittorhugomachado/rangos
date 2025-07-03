@@ -1,29 +1,52 @@
-import { CiShoppingCart } from "react-icons/ci";
-import { RestaurantData } from "../../../../types/restaurante-data-types.d";
-import { getRestaurantStatus } from "../../../../utils/restaurant-status";
 import { Logo } from "./logo";
+import { DayOfWeek } from "../../../../types/restaurante-data-types.d";
+import { getRestaurantStatus } from "../../../../utils/restaurant-status";
+import { CiShoppingCart } from "react-icons/ci";
+import { FaGear } from "react-icons/fa6";
 
+interface HeaderProps {
+    backgroundColor?: string;
+    restaurantImage?: string;
+    restaurantName?: string;
+    openingHours?: {
+        day: DayOfWeek
+        open: string;
+        close: string;
+        isClosed?: boolean;
+    }[];
+    cartValue?: string | number;
+    openFormUpdateDataStore: () => void;
+};
 
-export const Header = ({
+export const Header: React.FC<HeaderProps> = ({
     backgroundColor = '',
     restaurantImage,
     restaurantName,
     openingHours = [],
     cartValue,
-}: RestaurantData) => {
+    openFormUpdateDataStore,
+}) => {
 
     const { isOpen, message } = getRestaurantStatus(openingHours);
-    
+
     return (
         <header
-            className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white' } z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col xs:flex-row items-center justify-between top-0 border-b-[1px] `}>
+            className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white'} max-h-[387px] z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col xs:flex-row items-center justify-between top-0 border-b-[1px] `}>
             <div className="flex items-center gap-3.5">
-                    <Logo
-                        logo={restaurantImage}
-                        onImageChange={() => {}}
-                    />
+                <Logo
+                    logo={restaurantImage || ""}
+                    onImageChange={() => { }}
+                />
                 <div className="text-center mx-1.5">
-                    <h2 className="text-md font-bold mb-1">{restaurantName}</h2>
+                    <div className="flex justify-center items-center gap-1 m-1">
+                        <h2 className="text-md font-bold mb-1">{restaurantName}</h2>
+                        <button
+                            onClick={openFormUpdateDataStore}
+                            className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
+                        >
+                            <FaGear />
+                        </button>
+                    </div>
                     {isOpen ?
                         <p
                             aria-live="polite"
@@ -39,7 +62,6 @@ export const Header = ({
                             {message}
                         </p>
                     }
-
                 </div>
             </div >
             <div
