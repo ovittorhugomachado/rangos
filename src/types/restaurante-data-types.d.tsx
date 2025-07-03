@@ -11,6 +11,8 @@ export interface RestaurantData {
   restaurantName: string;
   restaurantImage: string;
   backgroundColor: string;
+  delivery: boolean;
+  pickup: boolean;  
   openingHours: OpeningHour[];
   cartValue: string,
   phoneNumber?: string;

@@ -1,18 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
-import { BottomNav } from "../components/store-page/style-toolbar";
+import { BottomNav } from "../components/store-page/by-store/style-toolbar";
 import { getPageStyle } from "../services/page-style";
-import { LoadingComponent } from "../components/loading-component";
+import { LoadingComponent } from "../components/loading";
 import { StoreBanner } from "../components/store-page/by-store/banner";
 import { useAppSettings } from "../hooks/use-app-settings";
-import { StoreFooterComponent } from "../components/store-page/by-store/footer-component";
-import ErrorComponent from "../components/error-component";
+import { StoreFooterComponent } from "../components/store-page/by-store/footer";
+import ErrorComponent from "../components/error";
 import { Logo } from "../components/logo";
 import { getCategoriesStore } from "../services/menu-store";
 import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
-import { CategoryButtons } from "../components/store-page/by-store/category-buttons/categories-butttons";
+import { CategoryButtons } from "../components/store-page/by-store/categories-butttons";
 import { getStoreData } from "../services/store-data";
 import { toMoney } from "../utils/transform-to-money";
-import { Header } from "../components/store-page/header-component";
+import { Header } from "../components/store-page/by-store/header";
 
 type StoreData = {
     restaurantName: string,
@@ -197,10 +197,8 @@ const CustomizeMenuPage = () => {
                             categories={categories}
                             setCategories={setCategories}
                             textColor={textColorButtons}
-                            buttonColor={buttonColor} />
-
-
-
+                            buttonColor={buttonColor}
+                        />
                         <h1 className="self-start ml-3 text-2xl mt-6.5">Promoções</h1>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
                             <div className="bg-zinc-950 flex border-[1px] border-zinc-800">
@@ -287,9 +285,7 @@ const CustomizeMenuPage = () => {
                                 </div>
                             </div>
                         </div>
-
                     </main>
-
                     <StoreFooterComponent backgroundColor={backgroundColor ?? ''} />
                 </div>
             )}

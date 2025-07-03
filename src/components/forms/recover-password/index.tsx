@@ -1,9 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { AccountContainerProps, AccountData } from "../../types/account-types.d";
+import { AccountContainerProps, AccountData } from "../../../types/account-types.d";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import { InputEmail } from "../inputs/input-email";
-import { Logo } from "../logo";
+import { InputEmail } from "../../inputs/input-email";
+import { Logo } from "../../logo";
 
 
 const RecoverPasswordFormContainer = ({

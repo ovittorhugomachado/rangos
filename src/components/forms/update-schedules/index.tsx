@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useAuth } from "../../hooks/use-auth";
+import { useAuth } from "../../../hooks/use-auth";
 import { useEffect } from "react";
-import { DayOfWeek } from "../../types/restaurante-data-types.d";
+import { DayOfWeek } from "../../../types/restaurante-data-types.d";
 
 export const OpeningHoursForm = () => {
     const { user } = useAuth();

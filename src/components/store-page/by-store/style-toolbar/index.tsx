@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { updatePageStyle } from '../../../services/page-style';
-import { toggleHiddenFlex } from '../../../utils/toggleHiddenFlex';
+import { updatePageStyle } from '../../../../services/page-style';
+import { toggleHiddenFlex } from '../../../../utils/toggleHiddenFlex';
 import { MdOutlineColorLens } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
-import { useDraggable } from '../../../hooks/use-draggable';
+import { useDraggable } from '../../../../hooks/use-draggable';
 
 interface BottomNavProps {
     initialBackgroundColor: 'white' | 'black';

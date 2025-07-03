@@ -1,6 +1,6 @@
 import { CiShoppingCart } from "react-icons/ci";
-import { RestaurantData } from "../../../types/restaurante-data-types.d";
-import { getRestaurantStatus } from "../../../utils/restaurant-status";
+import { RestaurantData } from "../../../../types/restaurante-data-types.d";
+import { getRestaurantStatus } from "../../../../utils/restaurant-status";
 import { Logo } from "./logo";
 
 

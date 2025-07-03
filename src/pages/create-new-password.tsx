@@ -1,4 +1,4 @@
-import { CreateNewPasswordFormContainer } from "../components/create-new-password-form";
+import { CreateNewPasswordFormContainer } from "../components/forms/create-new-password";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useState, useEffect } from "react";
 import { AccountData } from "../types/account-types.d";

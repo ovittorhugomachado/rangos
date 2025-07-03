@@ -1,9 +1,9 @@
-import { OpeningHoursForm } from "../components/opening-hours-form";
+import { OpeningHoursForm } from "../components/forms/update-schedules";
 import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
 import { Link } from "react-router-dom";
-import { LoadingComponent } from "../components/loading-component";
+import { LoadingComponent } from "../components/loading";
 
 const AdminDashboard = () => {
     const {

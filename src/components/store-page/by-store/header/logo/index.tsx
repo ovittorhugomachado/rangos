@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
-import { UploadLogo } from "../../../../services/upload-image";
+import { UploadLogo } from "../../../../../services/upload-image";
 
 export const Logo = ({ logo, onImageChange}: { logo: string; onImageChange: () => void;}) => {
     const [logoVersion, setLogoVersion] = useState(Date.now());

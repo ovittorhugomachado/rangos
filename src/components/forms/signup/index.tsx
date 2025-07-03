@@ -1,15 +1,15 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { AccountData, AccountContainerProps } from "../../types/account-types.d";
-import { InputCNPJ } from "../inputs/input-cnpj";
-import { InputRestaurantName } from "../inputs/input-restaurent-name";
-import { InputOwnersName } from "../inputs/input-owners-name";
-import { InputCPF } from "../inputs/input-cpf";
-import { InputPhoneNumber } from "../inputs/input-phone-number";
-import { InputEmail } from "../inputs/input-email";
-import { InputPasswordRegister } from "../inputs/input-password-register";
-import { Logo } from "../logo";
+import { AccountData, AccountContainerProps } from "../../../types/account-types.d";
+import { InputCNPJ } from "../../inputs/input-cnpj";
+import { InputRestaurantName } from "../../inputs/input-restaurent-name";
+import { InputOwnersName } from "../../inputs/input-owners-name";
+import { InputCPF } from "../../inputs/input-cpf";
+import { InputPhoneNumber } from "../../inputs/input-phone-number";
+import { InputEmail } from "../../inputs/input-email";
+import { InputPasswordRegister } from "../../inputs/input-password-register";
+import { Logo } from "../../logo";
 
 const SignupFormContainer = ({
     onSubmit,
