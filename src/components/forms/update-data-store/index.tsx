@@ -117,8 +117,17 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     return (
         <>
             {error ? (
-                <div className="flex flex-col items-center">
-                    <ErrorComponent message={error} />
+                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
+                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white border border-zinc-400 rounded-xl text-black">
+                        <button
+                            type="button"
+                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
+                            onClick={onClose}
+                        >
+                            <IoCloseOutline className="text-lg" />
+                        </button>
+                        <ErrorComponent message={error} />
+                    </div>
                 </div>
             ) : loading ? (
                 <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
