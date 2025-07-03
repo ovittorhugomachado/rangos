@@ -16,7 +16,7 @@ interface UpdateStoreDataFormProps {
     error?: string;
     initialValues?: Partial<AccountData>;
     message?: string;
-};
+}
 
 export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     onClose,
@@ -40,22 +40,22 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
         },
     });
 
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
-    const [messageSuccess, setMessageSuccess] = useState("")
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [messageSuccess, setMessageSuccess] = useState("");
     const [lastData, setLastData] = useState<Partial<AccountData> | null>(null);
 
     useEffect(() => {
         const fetchStoreData = async () => {
-            setLoading(true)
+            setLoading(true);
             try {
                 const response = await getStoreData();
 
-                setValue("restaurantName", response.restaurantName)
-                setValue("address", response.address)
-                setValue("phoneNumber", response.phoneNumber)
-                setValue("delivery", response.delivery)
-                setValue("pickup", response.pickup)
+                setValue("restaurantName", response.restaurantName);
+                setValue("address", response.address);
+                setValue("phoneNumber", response.phoneNumber);
+                setValue("delivery", response.delivery);
+                setValue("pickup", response.pickup);
                 setLastData({
                     restaurantName: response.restaurantName,
                     address: response.address,
@@ -63,17 +63,15 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                     delivery: response.delivery,
                     pickup: response.pickup,
                 });
-
             } catch (error: unknown) {
-                console.log(error)
-                setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
-
+                console.log(error);
+                setError(error instanceof Error ? error.message : "Erro ao carregar os dados da loja");
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
         };
 
-        fetchStoreData()
+        fetchStoreData();
     }, [setValue]);
 
     useEffect(() => {
@@ -95,7 +93,6 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
             data.delivery === lastData.delivery &&
             data.pickup === lastData.pickup
         ) {
-            console.log()
             setMessageSuccess("");
             return;
         }
@@ -112,7 +109,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                 pickup: data.pickup,
             });
         } catch (error: unknown) {
-            setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
+            setError(error instanceof Error ? error.message : "Erro ao carregar os dados da loja");
             setMessageSuccess("");
         }
     };
@@ -123,9 +120,18 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                 <div className="flex flex-col items-center">
                     <ErrorComponent message={error} />
                 </div>
-            ) : (loading) ? (
-                <div className="primary-component w-120 h-90 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
-                    <LoadingComponent />
+            ) : loading ? (
+                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
+                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white border border-zinc-400 rounded-xl text-black">
+                        <button
+                            type="button"
+                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
+                            onClick={onClose}
+                        >
+                            <IoCloseOutline className="text-lg" />
+                        </button>
+                        <LoadingComponent />
+                    </div>
                 </div>
             ) : (
                 <div className="fixed inset-0 z-30 flex items-center justify-center">
@@ -133,16 +139,16 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                     <form
                         onSubmit={handleSubmit(handleFormSubmit)}
                         noValidate
-                        className="primary-component z-50 relative bg-white mx-3 pt-25 pb-20 p-5 w-120 h-110 flex flex-col justify-center items-center mt-0 mb-5 max-w-105 gap-4"
+                        className="relative z-50 flex flex-col items-center justify-center w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 gap-4 bg-white primary-component"
                     >
                         <button
                             type="button"
-                            className="bg-red-600 text-white rounded-full p-2 absolute top-2 right-2 cursor-pointer transition-all duration-200"
+                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
                             onClick={onClose}
                         >
                             <IoCloseOutline className="text-lg" />
                         </button>
-                        <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
+                        <div className="flex flex-col w-full max-w-105 mt-5 mb-5 gap-1">
                             <InputRestaurantName
                                 register={register}
                                 errors={errors}
@@ -159,32 +165,23 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                                 control={control}
                                 initialValues={initialValues}
                             />
-                            <CheckboxDeliveryTypesInput
-                                register={register}
-                            />
-
+                            <CheckboxDeliveryTypesInput register={register} />
                         </div>
                         {error && (
-                            <p className="text-error">
-                                {error}
-                            </p>
+                            <p className="font-bold text-error">{error}</p>
                         )}
                         {messageSuccess && (
-                            <p className="text-green-600 font-bold">
-                                {messageSuccess}
-                            </p>
+                            <p className="font-bold text-green-600">{messageSuccess}</p>
                         )}
                         <button
                             type="submit"
-                            className="primary-button w-[250px]"
+                            className="w-[250px] primary-button"
                         >
                             Atualizar Dados
                         </button>
                     </form>
                 </div>
-            )
-            }
+            )}
         </>
-
     );
 };
