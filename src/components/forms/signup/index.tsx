@@ -114,9 +114,6 @@ const SignupFormContainer = ({
                 </button>
             </form>
         </div>
-
-
-
     );
 };
 
