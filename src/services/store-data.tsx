@@ -1,3 +1,5 @@
+import { AccountData } from "../types/account-types.d";
+
 export const getStoreData = async () => {
     const response = await fetch('http://localhost:3000/store', {
         method: 'GET',
@@ -13,4 +15,22 @@ export const getStoreData = async () => {
     };
 
     return await response.json();   
-}
+};
+
+export const updateStoreData = async (data: AccountData) => {
+    const response = await fetch('http://localhost:3000/store', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Erro ao atualizar dados do usuário');
+    };
+
+    return await response.json();   
+};
