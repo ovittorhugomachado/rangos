@@ -11,6 +11,7 @@ export interface RestaurantData {
   restaurantName: string;
   restaurantImage: string;
   backgroundColor: string;
+  cnpj: string,
   delivery: boolean;
   pickup: boolean;  
   openingHours: OpeningHour[];
@@ -23,4 +24,11 @@ export interface RestaurantData {
 export interface Category {
   id: number; 
   name: string;
+};
+
+export interface RestaurantContainerProps {
+  onSubmit: (data: RestaurantData) => void;
+  isLoading: boolean;
+  error?: string;
+  initialValues?: Partial<RestaurantData>;
 }
