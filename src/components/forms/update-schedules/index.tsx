@@ -228,7 +228,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                         ))}
                     </form>
 
-                    <div className="absolute left-1/2 -translate-x-1/2 w-full flex justify-center z-50" style={{ bottom: "6vh" }}>
+                    <div className="absolute left-1/2 -translate-x-1/2 w-full flex justify-center z-50" style={{ bottom: "4vh" }}>
                         <button
                             type="submit"
                             form="update-schedules-form"
