@@ -24,12 +24,6 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
     const [openingHours, setOpeningHours] = useState<OpeningHour[]>([]);
     const [successMessage, setSuccessMessage] = useState("");
 
-    const weekOrder = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
-
-    const orderedOpeningHours = [...openingHours].sort(
-        (a, b) => weekOrder.indexOf(a.day.toLowerCase()) - weekOrder.indexOf(b.day.toLowerCase())
-    );
-
     useEffect(() => {
         const fetchStoreSchedules = async () => {
             setLoading(true);
@@ -51,6 +45,21 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
             return () => clearTimeout(timer);
         }
     }, [successMessage]);
+
+    
+    const orderedOpeningHours = openingHours.sort((a, b) => {
+        const dayOrder: { [key: string]: number } = {
+            'segunda': 0,
+            'terca': 1,
+            'quarta': 2,
+            'quinta': 3,
+            'sexta': 4,
+            'sabado': 5,
+            'domingo': 6
+        };
+
+        return dayOrder[a.day] - dayOrder[b.day];
+    });
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -98,6 +107,16 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
         }
     };
 
+    const dayDisplay: { [key: string]: string } = {
+        segunda: "Segunda",
+        terca: "Terça",
+        quarta: "Quarta",
+        quinta: "Quinta",
+        sexta: "Sexta",
+        sabado: "Sábado",
+        domingo: "Domingo"
+    };
+
     return (
         <>
             {error && !fieldErrors ? (
@@ -139,7 +158,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                             <h2 className="text-xl text-center font-bold mx-10">Horários de Funcionamento</h2>
                             <button
                                 type="button"
-                                className="absolute right-0 m-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
+                                className="absolute right-0 m-2 p-2 rounded-full bg-red-600 text-white translate-x-[50%] cursor-pointer transition-all duration-200"
                                 onClick={onClose}
                             >
                                 <IoCloseOutline className="text-lg" />
@@ -153,7 +172,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                             <div key={oh.day} className="flex flex-col justify-center items-center border-t-1 border-zinc-300 p-3 mb-2 w-full gap-4">
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="w-full flex flex-col justify-center items-center">
-                                        <span className="font-bold capitalize">{oh.day}</span>
+                                        <span className="font-bold capitalize">{dayDisplay[oh.day] || oh.day}</span>
                                         <label className="flex items-center gap-1">
                                             <input
                                                 type="checkbox"
@@ -218,6 +237,9 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                                             </button>
                                         </div>
                                     ))}
+                                    {
+
+                                    }
                                     <button
                                         type="button"
                                         onClick={() => {
