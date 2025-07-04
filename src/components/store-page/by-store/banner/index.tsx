@@ -34,7 +34,7 @@ const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBannerChang
                 <button
                     type="button"
                     title="Configurar Banner da loja"
-                    className="rounded-full flex items-center justify-center w-[35px] h-[35px] border-2 bg-white bg-opacity-40 border-black cursor-pointer hover:scale-105 transition-all duration-200"
+                    className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 xl:m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                     onClick={handleButtonClick}
                 >
                     <FaCamera className="text-black" />
