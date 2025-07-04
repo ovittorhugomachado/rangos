@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
                         </button>
                     </div>
                     {isOpen ?
-                        <div className="flex items-center">
+                        <div className="flex items-center flex-shrink-0">
                             <p
                                 aria-live="polite"
                                 className="flex flex-col font-extralight mb-1 text-xs sm:text-base">
@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
                             <button
                                 onClick={openFormUpdateDataStore}
                                 title="Configurar dados da loja"
-                                className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
+                                className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200 flex-shrink-0"
                             >
                                 <RiListSettingsFill />
                             </button>
@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
                             <button
                                 onClick={openFormUpdateSchedules}
                                 title="Configurar dados da loja"
-                                className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
+                                className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200 flex-shrink-0"
                             >
                                 <RiListSettingsFill />
                             </button>
