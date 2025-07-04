@@ -7,7 +7,7 @@
 @theme {
   --color-primary: #85bc05;
   --font-display: "geologica", "sans-serif"; 
-  --breakpoint-xs: 260px;
+  --breakpoint-xs: 310px;
 }
 
 body {
