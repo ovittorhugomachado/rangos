@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { BottomNav } from "../components/store-page/by-store/style-toolbar";
 import { getPageStyle } from "../services/page-style";
 import { LoadingComponent } from "../components/loading";
@@ -10,11 +10,11 @@ import { Logo } from "../components/logo";
 import { getCategoriesStore } from "../services/menu-store";
 import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
 import { CategoryButtons } from "../components/store-page/by-store/categories-butttons";
-import { getStoreData, updateStoreData } from "../services/store-data";
-import { toMoney } from "../utils/transform-to-money";
+import { getStoreData } from "../services/store-data";
 import { Header } from "../components/store-page/by-store/header";
 import { UpdateStoreDataForm } from "../components/forms/update-data-store";
-import { AccountData } from "../types/account-types.d";
+import { UpdateSchedulesForm } from "../components/forms/update-schedules";
+import { toMoney } from "../utils/transform-to-money";
 
 type StoreData = {
     restaurantName: string,
@@ -51,8 +51,7 @@ const CustomizeMenuPage = () => {
     const [error, setError] = useState('')
     const [storeData, setStoreData] = useState<StoreData | null>(null);
     const [showStoreDataUpdateForm, setStoreDataUpdateForm] = useState(false)
-    const [delivery, setDelivery] = useState<StoreData | null>(null);
-    const [pickup, setPickup] = useState<StoreData | null>(null);
+    const [showStoreSchedulesUpdateForm, setShowStoreSchedulesUpdateForm] = useState(false)
     const [bannerUrl, setBannerUrl] = useState<string>('');
     const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
     const [initialButtonColor, setInitialButtonColor] = useState('');
@@ -62,51 +61,6 @@ const CustomizeMenuPage = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [textColorButtons, setTextColorButtons] = useState<string>('');
     const [buttonColor, setButtonColor] = useState<string>('');
-
-    const defaultPreferences = useMemo(() => ({
-        openingHours: [
-            {
-                day: 'terça' as const,
-                open: '11:00',
-                close: '14:30'
-            },
-            {
-                day: 'quarta' as const,
-                open: '11:00',
-                close: '17:00'
-            },
-            {
-                day: 'quinta' as const,
-                open: '11:00',
-                close: '17:00'
-            },
-            {
-                day: 'sexta' as const,
-                open: '11:00',
-                close: '17:00'
-            }
-        ],
-        cartItems: [],
-        cartValue: toMoney(123.4),
-        cetegories: {
-            pratos: [
-                { id: 1, nome: "Risoto de Cogumelos", preco: 34.90 },
-                { id: 2, nome: "Frango ao Curry", preco: 29.50 },
-                { id: 3, nome: "Lasanha Vegetariana", preco: 31.00 },
-            ],
-            bebidas: [
-                { id: 4, nome: "Suco de Laranja Natural", preco: 8.00 },
-                { id: 5, nome: "Refrigerante Lata", preco: 6.50 },
-                { id: 6, nome: "Água com Gás", preco: 5.00 },
-            ],
-            sobremesas: [
-                { id: 7, nome: "Brownie com Sorvete", preco: 14.90 },
-                { id: 8, nome: "Cheesecake de Frutas Vermelhas", preco: 16.00 },
-                { id: 9, nome: "Pudim de Leite", preco: 12.00 },
-            ],
-        }
-    }), []);
-
 
     const fetchStoreData = async () => {
         setLoading(true);
@@ -123,8 +77,6 @@ const CustomizeMenuPage = () => {
             };
 
             setStoreData(storeData);
-            setDelivery(storeData.delivery)
-            setPickup(storeData.pickup)
             setBannerUrl(storeData.bannerUrl ?? '');
             setStoreStyle(styleData);
             setCategories(categoriesStore);
@@ -151,6 +103,18 @@ const CustomizeMenuPage = () => {
     useEffect(() => {
         fetchStoreData();
     }, []);
+
+    const handleStoreDataUpdated = async () => {
+        const updatedStoreData = await getStoreData();
+        setStoreData(updatedStoreData);
+        setStoreDataUpdateForm(false)
+    };
+
+    const handleSchedulesUpdated = async () => {
+        const updatedStoreData = await getStoreData();
+        setStoreData(updatedStoreData);
+        setShowStoreSchedulesUpdateForm(false);
+    };
 
     return (
         <>
@@ -191,12 +155,18 @@ const CustomizeMenuPage = () => {
                                 }))
                                 : []
                         }
-                        cartValue={defaultPreferences.cartValue}
+                        cartValue={toMoney(0, 'BRL')}
                         openFormUpdateDataStore={() => setStoreDataUpdateForm(true)}
+                        openFormUpdateSchedules={() => setShowStoreSchedulesUpdateForm(true)}
                     />
                     {showStoreDataUpdateForm && (
                         <UpdateStoreDataForm
-                            onClose={() => setStoreDataUpdateForm(false)}
+                            onClose={handleStoreDataUpdated}
+                        />
+                    )}
+                    {showStoreSchedulesUpdateForm && (
+                        <UpdateSchedulesForm
+                            onClose={handleSchedulesUpdated}
                         />
                     )}
                     <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">

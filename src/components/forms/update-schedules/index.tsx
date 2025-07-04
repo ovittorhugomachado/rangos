@@ -167,7 +167,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                                     </div>
 
                                 </div>
-                                <div className="flex flex-col gap-2">
+                                <div className="flex flex-col gap-6">
                                     {oh.timeRanges.map((tr, trIdx) => (
                                         <div key={trIdx} className="relative flex flex-col items-center justify-center gap-2">
                                             <div className="w-[138px] relative flex items-center justify-end gap-2">
