@@ -24,6 +24,12 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
     const [openingHours, setOpeningHours] = useState<OpeningHour[]>([]);
     const [successMessage, setSuccessMessage] = useState("");
 
+    const weekOrder = ["segunda", "terca", "quarta", "quinta", "sexta", "sabado", "domingo"];
+
+    const orderedOpeningHours = [...openingHours].sort(
+        (a, b) => weekOrder.indexOf(a.day.toLowerCase()) - weekOrder.indexOf(b.day.toLowerCase())
+    );
+
     useEffect(() => {
         const fetchStoreSchedules = async () => {
             setLoading(true);
@@ -143,7 +149,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                         {successMessage && (
                             <p className="fon t-bold text-green-600">{successMessage}</p>
                         )}
-                        {openingHours.map((oh, idx) => (
+                        {orderedOpeningHours.map((oh, idx) => (
                             <div key={oh.day} className="flex flex-col justify-center items-center border-t-1 border-zinc-300 p-3 mb-2 w-full gap-4">
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="w-full flex flex-col justify-center items-center">
