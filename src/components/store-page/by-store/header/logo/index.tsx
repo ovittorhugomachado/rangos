@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { UploadLogo } from "../../../../../services/upload-image";
 
-export const Logo = ({ logo, onImageChange}: { logo: string; onImageChange: () => void;}) => {
+export const Logo = ({ logo, onImageChange }: { logo: string; onImageChange: () => void; }) => {
     const [logoVersion, setLogoVersion] = useState(Date.now());
     const [error, setError] = useState<string | null>(null);
 
@@ -32,7 +32,11 @@ export const Logo = ({ logo, onImageChange}: { logo: string; onImageChange: () =
 
     return (
         <div className={"w-16 h-16 sm:w-23 sm:h-23 rounded-full relative mb-1.5"}>
-            <img src={logo ? `${logo}?v=${logoVersion}` : "/logo-default.png"} alt="logo" />
+            <img
+                src={logo ? `${logo}?v=${logoVersion}` : "/logo-default.png"}
+                alt="logo"
+                className="w-full h-full object-cover rounded-full"
+            />
             <button
                 type="button"
                 title="Alterar logo da loja"
