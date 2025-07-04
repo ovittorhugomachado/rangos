@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
                         <div className="flex items-center flex-shrink-0">
                             <p
                                 aria-live="polite"
-                                className="flex flex-col font-extralight mb-1 text-xs sm:text-base">
+                                className="min-w-28 flex flex-col font-extralight mb-1 text-xs sm:text-base">
                                 <span className="bg-green-600 p-0.5 rounded-md text-white">aberto</span>
                                 {message}
                             </p>
@@ -72,13 +72,13 @@ export const Header: React.FC<HeaderProps> = ({
                         <div className="flex items-center">
                             <p
                                 aria-live="polite"
-                                className="flex flex-col font-extralight mb-1 text-xs sm:text-base">
+                                className="min-w-28 flex flex-col font-extralight mb-1 text-xs sm:text-base">
                                 <span className="bg-red-600 p-0.5 rounded-md text-white">fechado</span>
                                 {message}
                             </p>
                             <button
                                 onClick={openFormUpdateSchedules}
-                                title="Configurar dados da loja"
+                                title="Configurar horários da loja"
                                 className="w-6 h-6 sm:w-8 sm:h-8 text-black bg-white bg-opacity-70 m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200 flex-shrink-0"
                             >
                                 <RiListSettingsFill />
