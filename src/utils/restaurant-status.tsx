@@ -3,7 +3,7 @@ import { DayOfWeek, RestaurantData } from "../types/restaurante-data-types.d";
 export const getRestaurantStatus = (
   openingHours: RestaurantData['openingHours']
 ) => {
-  const days: DayOfWeek[] = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  const days: DayOfWeek[] = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
   const currentDayIndex = new Date().getDay();
   const currentDay = days[currentDayIndex];
 
@@ -40,7 +40,7 @@ const findNextOpenDay = (
   startIndex: number,
   openingHours: RestaurantData['openingHours']
 ) => {
-  const days: DayOfWeek[] = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+  const days: DayOfWeek[] = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
 
   for (let i = 1; i <= 7; i++) {
     const nextIndex = (startIndex + i) % 7;
@@ -52,7 +52,7 @@ const findNextOpenDay = (
     if (schedule) {
       return {
         isOpen: false,
-        message: `Abre ${capitalize(nextDay)} às ${schedule.open}`,
+        message: `Abre ${dayDisplay[nextDay]} às ${schedule.open}`,
       };
     }
   }
@@ -60,4 +60,12 @@ const findNextOpenDay = (
   return { isOpen: false };
 };
 
-const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+const dayDisplay: { [key: string]: string } = {
+  segunda: "Segunda",
+  terca: "Terça",
+  quarta: "Quarta",
+  quinta: "Quinta",
+  sexta: "Sexta",
+  sabado: "Sábado",
+  domingo: "Domingo"
+};
