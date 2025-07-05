@@ -91,3 +91,50 @@ export const deleteCategoryService = async (categoryId: number) => {
     return await response.json();
 };
 
+export const getMenuItemService = async (categoryId: number) => {
+    const response = await fetch(`http://localhost:3000/menu-items/${categoryId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include'
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Erro ao buscar item do menu');
+    };
+
+    return await response.json();
+};
+
+export const createMenuItemService = async (categoryId: number, item: {
+    name: string;
+    description: string;
+    price: number;
+    imageUrl: string;
+}): Promise<void> => {
+    try {
+        const response = await fetch(`http://localhost:3000/menu-items/${categoryId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(item)
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Erro ao criar item do menu');
+        }
+
+        return await response.json();
+    } catch (error) {
+        if (error instanceof TypeError) {
+            throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
+        }
+
+        throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
+    }
+};
