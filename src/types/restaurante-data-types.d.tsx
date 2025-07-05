@@ -26,6 +26,16 @@ export interface Category {
   name: string;
 };
 
+export interface MenuItem {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  photoUrl: string;
+  categoryId: number;
+  isAvailable: boolean;
+};
+
 export interface RestaurantContainerProps {
   onSubmit: (data: RestaurantData) => void;
   isLoading: boolean;
