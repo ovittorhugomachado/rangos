@@ -3,6 +3,11 @@ import { getMenuItemService } from "../../services/menu-store"
 import { ErrorComponent } from "../error"
 import { LoadingComponent } from "../loading"
 
+interface MenuItemsContainerProps {
+    categories: Category[];
+    backgroundColor: string;
+}
+
 interface Category {
     id: number;
     name: string;
@@ -13,9 +18,13 @@ interface MenuItem {
     name: string;
     description: string;
     price: number;
+    photoUrl?: string | null;
 }
 
-export const MenuItemsContainer = ({ categories }: { categories: Category[] }) => {
+export const MenuItemsContainer = ({ 
+    categories, 
+    backgroundColor,
+}: MenuItemsContainerProps) => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -28,7 +37,7 @@ export const MenuItemsContainer = ({ categories }: { categories: Category[] }) =
                 const itemsObj: { [categoryId: number]: MenuItem[] } = {};
                 for (const category of categories) {
                     const response = await getMenuItemService(category.id);
-                    itemsObj[category.id] = response.data; // supondo que response.data é um array de MenuItem
+                    itemsObj[category.id] = response.data;
                 }
                 setMenuItemsByCategory(itemsObj);
             } catch (error) {
@@ -42,6 +51,8 @@ export const MenuItemsContainer = ({ categories }: { categories: Category[] }) =
         }
     }, [categories]);
 
+    console.log(menuItemsByCategory)
+
     return (
         <>
             {error ? (
@@ -51,15 +62,20 @@ export const MenuItemsContainer = ({ categories }: { categories: Category[] }) =
             ) : loading ? (
                 <LoadingComponent />
             ) : (
-                <div className="menu-items">
+                <section className="w-full">
                     {categories.map(category => (
                         <div key={category.id}>
                             <h1 className="text-2xl font-semibold">{category.name}</h1>
-                            <ul>
+                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
                                 {Array.isArray(menuItemsByCategory[category.id]) && menuItemsByCategory[category.id].length > 0 ? (
                                     menuItemsByCategory[category.id].map(item => (
-                                        <li key={item.id}>
-                                            <strong>{item.name}</strong> - {item.description} - R$ {item.price}
+                                        <li key={item.id} className={`flex border-[1px] border-zinc-${backgroundColor === 'white' ? '400' : '700'}`}>
+                                            <img src={item.photoUrl ?? '../prato.webp'} alt="" className="w-[150px] h-[150px] object-cover" />
+                                            <div className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'}  flex flex-col justify-between py-2 px-4`}>
+                                                <h1 className="font-bold">{item.name}</h1>
+                                                <h3>{item.description}</h3>
+                                                <h3>R$ {item.price}</h3>
+                                            </div>
                                         </li>
                                     ))
                                 ) : (
@@ -68,7 +84,8 @@ export const MenuItemsContainer = ({ categories }: { categories: Category[] }) =
                             </ul>
                         </div>
                     ))}
-                </div>
+        
+                </section>
             )}
         </>
     );
