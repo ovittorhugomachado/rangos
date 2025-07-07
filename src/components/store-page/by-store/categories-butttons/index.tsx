@@ -72,14 +72,14 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
                     <div className="flex top-[-11px] left-[10px] absolute">
                         <button
                             title="Excluir categoria"
-                            className="w-5 h-5 z-2 flex items-center justify-center bg-red-600 text-white rounded-full border-[1px] border-amber-50 cursor-pointer hover:shadow-[0_0_8px_0px_rgba(255,0,0,0.7)] transition-all duration-200"
+                            className="w-5 h-5 z-2 flex items-center justify-center bg-red-600 text-white rounded-full border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
                             onClick={() => deleteCategory(category.id)}
                         >
                             <IoCloseOutline className="text-lg" />
                         </button>
                         <button
                             title="Renomear categoria"
-                            className="ml-2 rounded-full w-5 h-5 z-2 flex items-center justify-center bg-blue-600 text-white border-[1px] border-amber-50 cursor-pointer hover:shadow-[0_0_8px_0px_rgba(0,0,255,0.7)] transition-all duration-200"
+                            className="ml-2 rounded-full w-5 h-5 z-2 flex items-center justify-center bg-blue-800 text-white border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
                             onClick={() => {
                                 setEditCategoryId(category.id);
                                 setEditCategoryName(category.name);
