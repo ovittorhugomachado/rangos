@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
+interface categoryFormProps {
+    onClose: () => void;
+    onSubmit: (name: string) => void;
+}
+
 export const CreateCategoryForm = ({
     onClose,
     onSubmit,
-}: {
-    onClose: () => void;
-    onSubmit: (name: string) => void;
-}) => {
+}: categoryFormProps) => {
     const [name, setName] = useState("");
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -19,10 +21,10 @@ export const CreateCategoryForm = ({
     };
 
     return (
-        <div className="fixed inset-0 z-30 flex items-center justify-center">
+        <div className="dark:text-white fixed inset-0 z-30 flex items-center justify-center">
             <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-sm">
                 <form
-                    className="w-full max-w-[600px] h-[300px] bg-white mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative"
+                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative"
                     onSubmit={handleSubmit}
                 >
                     <button
@@ -41,7 +43,7 @@ export const CreateCategoryForm = ({
                             type="text"
                             id="category-name"
                             placeholder="Nome da categoria"
-                            className="w-full px-3 py-2 border rounded"
+                            className="input w-full px-3 py-2 border rounded"
                             value={name}
                             onChange={e => setName(e.target.value)}
                             autoFocus
@@ -61,15 +63,11 @@ export const CreateCategoryForm = ({
     );
 };
 
-export const UpdateCategoryForm = ({
+export const UpdateCategoryForm = ({ 
     onClose,
     onSubmit,
     initialName = "",
-}: {
-    onClose: () => void;
-    onSubmit: (name: string) => void;
-    initialName?: string;
-}) => {
+}: categoryFormProps & { initialName?: string }) => {
     const [name, setName] = useState("");
 
     useEffect(() => {
@@ -85,10 +83,10 @@ export const UpdateCategoryForm = ({
     };
 
     return (
-        <div className="fixed inset-0 z-30 flex items-center justify-center">
+        <div className="dark:text-white fixed inset-0 z-30 flex items-center justify-center">
             <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-sm">
                 <form
-                    className="w-full max-w-[600px] h-[300px] bg-white mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative"
+                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative"
                     onSubmit={handleSubmit}
                 >
                     <button
@@ -107,7 +105,7 @@ export const UpdateCategoryForm = ({
                             type="text"
                             id="category-name"
                             placeholder="Nome da categoria"
-                            className="w-full px-3 py-2 border rounded"
+                            className="input w-full px-3 py-2 border rounded"
                             value={name}
                             onChange={e => setName(e.target.value)}
                             autoFocus

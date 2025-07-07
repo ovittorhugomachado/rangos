@@ -117,6 +117,8 @@ const CustomizeMenuPage = () => {
 
     console.log(buttonColor)
 
+    console.log(backgroundColor)
+
     return (
         <>
             {error ? (
@@ -179,6 +181,7 @@ const CustomizeMenuPage = () => {
                         />
 
                         <CategoryButtons
+                            backgroundColor={backgroundColor ?? ''}
                             categories={categories}
                             setCategories={setCategories}
                             textColor={textColorButtons}
@@ -189,7 +192,7 @@ const CustomizeMenuPage = () => {
                             backgroundColor={backgroundColor ?? ''}
                             buttonColor={buttonColor ?? ''}
                         />
-        
+
                     </main>
                     <StoreFooterComponent backgroundColor={backgroundColor ?? ''} />
                 </div>

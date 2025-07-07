@@ -6,13 +6,14 @@ import { IoCloseOutline } from "react-icons/io5";
 import { MdOutlineEdit } from "react-icons/md";
 
 interface CategoryButtonsProps {
+    backgroundColor?: string;
     categories: Category[];
     setCategories: React.Dispatch<React.SetStateAction<Category[]>>;
     buttonColor?: string;
     textColor?: string;
 }
 
-export const CategoryButtons = ({ categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
+export const CategoryButtons = ({ backgroundColor, categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
 
     const [showForm, setShowForm] = useState(false);
     const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
@@ -92,6 +93,7 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
             ))}
             {showForm ? (
                 <CreateCategoryForm
+                    backgroundColor={backgroundColor ?? ''}
                     onClose={() => setShowForm(false)}
                     onSubmit={async (name) => {
                         await createCategory(name);
@@ -109,6 +111,7 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
             )}
             {editCategoryId !== null && editCategoryName !== null && (
                 <UpdateCategoryForm
+                    backgroundColor={backgroundColor ?? ''}
                     onClose={() => {
                         setEditCategoryId(null);
                         setEditCategoryName(null);
