@@ -76,3 +76,9 @@ input:-webkit-autofill {
     --text-color: #f9fafb;
     --bg-color: #18181b;
 }
+
+@media (prefers-color-scheme: dark) {
+  input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+  }
+}

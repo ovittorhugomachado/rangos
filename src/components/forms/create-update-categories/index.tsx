@@ -24,7 +24,7 @@ export const CreateCategoryForm = ({
         <div className="dark:text-white fixed inset-0 z-30 flex items-center justify-center">
             <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-sm">
                 <form
-                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative"
+                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative border-1 border-zinc-300"
                     onSubmit={handleSubmit}
                 >
                     <button
@@ -86,7 +86,7 @@ export const UpdateCategoryForm = ({
         <div className="dark:text-white fixed inset-0 z-30 flex items-center justify-center">
             <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-sm">
                 <form
-                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative"
+                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative border-1 border-zinc-300"
                     onSubmit={handleSubmit}
                 >
                     <button

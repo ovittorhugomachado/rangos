@@ -46,7 +46,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
         }
     }, [successMessage]);
 
-    
+
     const orderedOpeningHours = openingHours.sort((a, b) => {
         const dayOrder: { [key: string]: number } = {
             'segunda': 0,
@@ -121,7 +121,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
         <>
             {error && !fieldErrors ? (
                 <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white border border-zinc-400 rounded-xl text-black">
+                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
                         <button
                             type="button"
                             className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
@@ -134,7 +134,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                 </div>
             ) : loading ? (
                 <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white border border-zinc-400 rounded-xl text-black">
+                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
                         <button
                             type="button"
                             className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
@@ -146,15 +146,15 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                     </div>
                 </div>
             ) : (
-                <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto max-h-screen">
+                <div className="dark:text-white fixed inset-0 z-50 flex items-center justify-center overflow-y-auto max-h-screen">
                     <div className="fixed inset-0 bg-white/10 backdrop-blur-sm z-40"></div>
                     <form
                         id="update-schedules-form"
                         onSubmit={handleFormSubmit}
                         noValidate
-                        className="relative z-50 flex flex-col items-center w-120 max-w-115 mx-3 mt-10 mb-10 px-5 pb-4 gap-4 bg-white border border-zinc-400 rounded-xl text-black max-h-[80vh] translate-y-[-3vh] overflow-y-auto"
+                        className="dark:bg-black relative z-50 flex flex-col items-center w-120 max-w-115 mx-3 mt-10 mb-10 px-5 pb-4 gap-4 bg-white border border-zinc-400 rounded-xl max-h-[80vh] translate-y-[-3vh] overflow-y-auto"
                     >
-                        <div className="sticky top-0 left-0 w-full py-4 bg-white z-50 flex items-center justify-center">
+                        <div className="dark:bg-black bg-white sticky top-0 left-0 w-full py-4 z-50 flex items-center justify-center">
                             <h2 className="text-xl text-center font-bold mx-10">Horários de Funcionamento</h2>
                             <button
                                 type="button"
@@ -169,7 +169,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                             <p className="fon t-bold text-green-600">{successMessage}</p>
                         )}
                         {orderedOpeningHours.map((oh, idx) => (
-                            <div key={oh.day} className="flex flex-col justify-center items-center border-t-1 border-zinc-300 p-3 mb-2 w-full gap-4">
+                            <div key={oh.day} className="flex flex-col justify-center items-center border-t-1 border-zinc-300 dark:border-zinc-800 p-3 mb-2 w-full gap-4">
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="w-full flex flex-col justify-center items-center">
                                         <span className="font-bold capitalize">{dayDisplay[oh.day] || oh.day}</span>
@@ -205,7 +205,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                                                         updated[idx].timeRanges[trIdx].start = e.target.value;
                                                         setOpeningHours(updated);
                                                     }}
-                                                    className={`w-[92px] border px-2 py-1 rounded ${fieldErrors[`${idx}-${trIdx}-start`] ? "border-red-500" : ""}`}
+                                                    className={`input w-[92px] border px-2 py-1 rounded ${fieldErrors[`${idx}-${trIdx}-start`] ? "border-red-500" : ""}`}
                                                 />
                                                 {fieldErrors[`${idx}-${trIdx}-start`] && (
                                                     <span className="min-w-[92px] max-w-[200px] absolute top-[-20px] left-1/2 -translate-x-1/2 text-center text-xs text-red-600 whitespace-nowrap">{fieldErrors[`${idx}-${trIdx}-start`]}</span>
@@ -221,7 +221,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                                                         updated[idx].timeRanges[trIdx].end = e.target.value;
                                                         setOpeningHours(updated);
                                                     }}
-                                                    className="w-[92px] border px-2 py-1 rounded"
+                                                    className="input w-[92px] border px-2 py-1 rounded"
                                                 />
                                             </div>
                                             <button

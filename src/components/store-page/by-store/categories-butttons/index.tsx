@@ -13,7 +13,7 @@ interface CategoryButtonsProps {
     textColor?: string;
 }
 
-export const CategoryButtons = ({ backgroundColor, categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
+export const CategoryButtons = ({ categories, setCategories, buttonColor, textColor }: CategoryButtonsProps) => {
 
     const [showForm, setShowForm] = useState(false);
     const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
@@ -93,7 +93,6 @@ export const CategoryButtons = ({ backgroundColor, categories, setCategories, bu
             ))}
             {showForm ? (
                 <CreateCategoryForm
-                    backgroundColor={backgroundColor ?? ''}
                     onClose={() => setShowForm(false)}
                     onSubmit={async (name) => {
                         await createCategory(name);
@@ -111,7 +110,6 @@ export const CategoryButtons = ({ backgroundColor, categories, setCategories, bu
             )}
             {editCategoryId !== null && editCategoryName !== null && (
                 <UpdateCategoryForm
-                    backgroundColor={backgroundColor ?? ''}
                     onClose={() => {
                         setEditCategoryId(null);
                         setEditCategoryName(null);
