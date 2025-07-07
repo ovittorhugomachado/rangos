@@ -112,7 +112,6 @@ export const createMenuItemService = async (categoryId: number, item: {
     name: string;
     description: string;
     price: number;
-    imageUrl: string;
 }): Promise<void> => {
     try {
         const response = await fetch(`http://localhost:3000/menu-items/${categoryId}`, {

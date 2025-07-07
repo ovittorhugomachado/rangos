@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getCategoriesStore, getMenuItemService } from "../services/menu-store";
 import { MenuItemsContainer } from "../components/store-page/by-store/menu-items";
+import { MenuItemCreationForm } from "../components/forms/create-update-menu-item";
 
 interface Category {
     id: number;
@@ -43,15 +44,13 @@ export const PlaygroundPage = () => {
     }, []);
 
 
-    console.log(menuItemsByCategory);
-
     return (
-        <section className="text-black">
+        <section className="">
             <h1>Playground</h1>
             {loading ? (
                 <div>Carregando...</div>
             ) : (
-                <MenuItemsContainer categories={categories} />
+                <MenuItemCreationForm onClose={() => {}} /> 
             )}
         </section>
     );

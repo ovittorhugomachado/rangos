@@ -15,6 +15,7 @@ import { UpdateStoreDataForm } from "../components/forms/update-data-store";
 import { UpdateSchedulesForm } from "../components/forms/update-schedules";
 import { toMoney } from "../utils/transform-to-money";
 import { MenuItemsContainer } from "../components/store-page/by-store/menu-items";
+import { MenuItemCreationForm } from "../components/forms/create-update-menu-item";
 
 type StoreData = {
     restaurantName: string,
@@ -95,7 +96,7 @@ const CustomizeMenuPage = () => {
 
             setStoreStyle(null);
         } finally {
-            setLoading(false);
+            setLoading(true);
         }
     };
 
@@ -126,7 +127,8 @@ const CustomizeMenuPage = () => {
                     <ErrorComponent message={error} />
                 </div>
             ) : (loading || !storeStyle) ? (
-                <LoadingComponent />
+                // <LoadingComponent />
+                <MenuItemCreationForm onClose={() => {}} />
             ) : (
                 <div
                     style={{ backgroundColor: backgroundColor }}
