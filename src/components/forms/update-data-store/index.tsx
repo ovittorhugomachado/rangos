@@ -118,7 +118,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
         <>
             {error ? (
                 <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white border border-zinc-400 rounded-xl text-black">
+                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
                         <button
                             type="button"
                             className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
@@ -131,7 +131,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                 </div>
             ) : loading ? (
                 <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white border border-zinc-400 rounded-xl text-black">
+                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
                         <button
                             type="button"
                             className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
@@ -148,7 +148,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                     <form
                         onSubmit={handleSubmit(handleFormSubmit)}
                         noValidate
-                        className="relative z-50 flex flex-col items-center justify-center w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 gap-4 bg-white primary-component"
+                        className="relative z-50 flex flex-col items-center justify-center w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 gap-4 bg-white dark:bg-black primary-component"
                     >
                         <button
                             type="button"
