@@ -1,4 +1,4 @@
-import { OpeningHoursForm } from "../components/forms/update-schedules";
+//import { UpdateSchedulesForm } from "../components/forms/update-schedules";
 import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
@@ -35,7 +35,7 @@ const AdminDashboard = () => {
                             <p>Email: {user.email}</p>
                         </div>
                     )}
-                    <OpeningHoursForm />
+                    {/* <UpdateSchedulesForm /> */}
                     {loading && <p>carregando</p>}
                     <Link
                         to="/entrar"

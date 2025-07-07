@@ -6,15 +6,15 @@ import { StoreBanner } from "../components/store-page/by-store/banner";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { StoreFooterComponent } from "../components/store-page/by-store/footer";
 import { ErrorComponent } from "../components/error";
-import { Logo } from "../components/logo";
 import { getCategoriesStore } from "../services/menu-store";
-import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
+import { DayOfWeek, Category } from "../types/restaurante-data-types.d";
 import { CategoryButtons } from "../components/store-page/by-store/categories-butttons";
 import { getStoreData } from "../services/store-data";
 import { Header } from "../components/store-page/by-store/header";
 import { UpdateStoreDataForm } from "../components/forms/update-data-store";
 import { UpdateSchedulesForm } from "../components/forms/update-schedules";
 import { toMoney } from "../utils/transform-to-money";
+import { MenuItemsContainer } from "../components/menu-items";
 
 type StoreData = {
     restaurantName: string,
@@ -57,8 +57,8 @@ const CustomizeMenuPage = () => {
     const [initialButtonColor, setInitialButtonColor] = useState('');
     const [initialBackgroundColor, setInitialBackgroundColor] = useState('');
     const [initialTextColorButtons, setInitialTextColorButtons] = useState('');
-    const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined);
     const [categories, setCategories] = useState<Category[]>([]);
+    const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined);
     const [textColorButtons, setTextColorButtons] = useState<string>('');
     const [buttonColor, setButtonColor] = useState<string>('');
 
@@ -80,7 +80,6 @@ const CustomizeMenuPage = () => {
             setBannerUrl(storeData.bannerUrl ?? '');
             setStoreStyle(styleData);
             setCategories(categoriesStore);
-
             setInitialButtonColor(styleData.primaryColor ?? '');
             setInitialBackgroundColor(styleData.backgroundColor ?? '');
             setInitialTextColorButtons(styleData.textButtonColor ?? '');
@@ -116,12 +115,13 @@ const CustomizeMenuPage = () => {
         setShowStoreSchedulesUpdateForm(false);
     };
 
+    console.log(buttonColor)
+
     return (
         <>
             {error ? (
                 <div className="flex flex-col items-center">
                     <ErrorComponent message={error} />
-                    <Logo />
                 </div>
             ) : (loading || !storeStyle) ? (
                 <LoadingComponent />
@@ -169,7 +169,7 @@ const CustomizeMenuPage = () => {
                             onClose={handleSchedulesUpdated}
                         />
                     )}
-                    <main className="w-full flex flex-col items-center justify-center pb-24 mt-[130px]">
+                    <main className="w-full flex flex-col items-center justify-center pb-24 mt-[110px] xs:mt-[89px] sm:mt-[115px]">
                         <StoreBanner
                             banner={bannerUrl}
                             onBannerChange={async () => {
@@ -184,92 +184,12 @@ const CustomizeMenuPage = () => {
                             textColor={textColorButtons}
                             buttonColor={buttonColor}
                         />
-                        <h1 className="self-start ml-3 text-2xl mt-6.5">Promoções</h1>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
-                            <div className="bg-zinc-950 flex border-[1px] border-zinc-800">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className=" text-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <h1 className="self-start pl-3 pr-16 text-2xl mt-6.5 border-b-2 border-green-600">Combos</h1>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
-                            <div className="flex border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex max-w-7xl border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                            <div className="flex border-[1px] border-zinc-300">
-                                <img src="../prato.webp" alt="" className="w-[150px] h-[150px] object-cover" />
-                                <div className="bg-white flex flex-col justify-between py-2 px-4">
-                                    <h1 className="font-bold">Milano</h1>
-                                    <h3>Espaguete, galeto e polenta</h3>
-                                    <h3>R$ 24,90</h3>
-                                </div>
-                            </div>
-                        </div>
+                        <MenuItemsContainer
+                            categories={categories}
+                            backgroundColor={backgroundColor ?? ''}
+                            buttonColor={buttonColor ?? ''}
+                        />
+        
                     </main>
                     <StoreFooterComponent backgroundColor={backgroundColor ?? ''} />
                 </div>
