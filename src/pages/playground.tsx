@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCategoriesStore, getMenuItemService } from "../services/menu-store";
-import { MenuItemsContainer } from "../components/menu-items";
+import { MenuItemsContainer } from "../components/store-page/by-store/menu-items";
 
 interface Category {
     id: number;

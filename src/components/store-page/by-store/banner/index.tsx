@@ -29,7 +29,7 @@ const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBannerChang
 
     return (
         <div className="relative hidden xs:block">
-            <img src={banner ? `${banner}?v=${bannerVersion}` : "/store-banner-default.png"} alt="imagem-capa" className="w-screen h-fu md:h-56  object-cover" />
+            <img src={banner ? `${banner}?v=${bannerVersion}` : "/store-banner-default.png"} alt="imagem-capa" className="w-screen h-full object-cover" />
             <div className="flex items-center gap-2 absolute bottom-2 left-2">
                 <button
                     type="button"

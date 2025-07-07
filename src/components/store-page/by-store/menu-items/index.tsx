@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { getMenuItemService } from "../../services/menu-store"
-import { ErrorComponent } from "../error"
-import { LoadingComponent } from "../loading"
+import { getMenuItemService } from "../../../../services/menu-store"
+import { ErrorComponent } from "../../../error"
+import { LoadingComponent } from "../../../loading"
 
 interface MenuItemsContainerProps {
     categories: Category[];
@@ -64,21 +64,21 @@ export const MenuItemsContainer = ({
             ) : (
                 <section className="w-full">
                     {categories.map(category => (
-                        <div key={category.id} className="mt-8">
+                        <div key={category.id} className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} mt-8`}>
                             <h1
                                 style={{borderColor: buttonColor}}    
-                                className="inline-block pr-6 mb-2 text-2xl font-semibold border-b-4 "
+                                className={`inline-block pr-6 mb-2 text-2xl font-semibold border-b-4`}
                             >
                                 {category.name}
                             </h1>
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
                                 {Array.isArray(menuItemsByCategory[category.id]) && menuItemsByCategory[category.id].length > 0 ? (
                                     menuItemsByCategory[category.id].map(item => (
-                                        <li key={item.id} className={`flex border-[1px] border-zinc-${backgroundColor === 'white' ? '400' : '700'}`}>
+                                        <li key={item.id} className={`flex border-[1px] border-zinc-${backgroundColor === 'white' ? '400' : '900'}`}>
                                             <img src={item.photoUrl ?? '../prato.webp'} alt="" className="w-[150px] h-[150px] object-cover" />
-                                            <div className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'}  flex flex-col justify-between py-2 px-4`}>
+                                            <div className="flex flex-col justify-between py-4 px-4">
                                                 <h1 className="font-bold">{item.name}</h1>
-                                                <h3>{item.description}</h3>
+                                                <p className="font-light">{item.description}</p>
                                                 <h3>R$ {item.price}</h3>
                                             </div>
                                         </li>
