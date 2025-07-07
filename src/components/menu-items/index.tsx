@@ -64,7 +64,7 @@ export const MenuItemsContainer = ({
             ) : (
                 <section className="w-full">
                     {categories.map(category => (
-                        <div key={category.id}>
+                        <div key={category.id} className="mt-8">
                             <h1 className="text-2xl font-semibold">{category.name}</h1>
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
                                 {Array.isArray(menuItemsByCategory[category.id]) && menuItemsByCategory[category.id].length > 0 ? (
