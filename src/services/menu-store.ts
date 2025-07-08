@@ -137,3 +137,20 @@ export const createMenuItemService = async (categoryId: number, item: {
         throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
     }
 };
+
+export const deleteMenuItemService = async (itemId: number) => {
+    const response = await fetch(`http://localhost:3000/menu-items/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include'
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Erro ao deletar item do menu');
+    };
+
+    return await response.json();
+};
