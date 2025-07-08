@@ -151,7 +151,6 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
                                         {errors.description.message?.toString()}
                                     </span>
                                 )}
-
                             </label>
                             <textarea
                                 {...register("description", { required: "Descrição obrigatória" })}
@@ -164,7 +163,6 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
                                 clearErrors={clearErrors}
                                 initialValues={{}}
                             />
-
                         </div>
                         {error && (
                             <p className="font-bold text-error">{error}</p>
