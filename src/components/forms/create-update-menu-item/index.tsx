@@ -3,46 +3,44 @@ import { createMenuItemService } from "../../../services/menu-store";
 import { ErrorComponent } from "../../error";
 import { LoadingComponent } from "../../loading";
 import { IoCloseOutline } from "react-icons/io5";
+import { InputName } from "../../inputs/input-name";
+import { useForm } from "react-hook-form";
+import { InputPrice } from "../../inputs/input-price";
 
 interface CreateMenuItemProps {
     onClose: () => void;
+    onCreated?: () => void;
     isLoading?: boolean;
     error?: string;
     message?: string;
-    categoryId?: number; 
+    categoryId?: number;
+}
+
+interface MenuItemFormData {
+    name: string;
+    description: string;
+    price: string;
+    message: string;
+    error: unknown;
 }
 
 export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
     onClose,
+    onCreated,
     categoryId
 }) => {
 
+    const {
+        register,
+        clearErrors,
+        setError,
+        formState: { errors },
+        handleSubmit
+    } = useForm<MenuItemFormData>();
 
-    const [error, setError] = useState("");
+    const [error, setErrorMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const [messageSuccess, setMessageSuccess] = useState("");
-
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
-
-    useEffect(() => {
-        const fetchStoreData = async () => {
-            setLoading(true);
-            try {
-                console.log("teste")
-
-            } catch (error: unknown) {
-                console.log(error);
-                setError(error instanceof Error ? error.message : "Erro ao carregar os dados da loja");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchStoreData();
-    }, []);
 
     useEffect(() => {
         if (messageSuccess) {
@@ -54,31 +52,45 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
         }
     }, [messageSuccess]);
 
-    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleFormSubmit = async (data: MenuItemFormData) => {
         setLoading(true);
-        setError("");
+        setErrorMessage("");
+
+        const priceRegex = /^\d+,\d{2}$/;
+        if (!priceRegex.test(data.price)) {
+            setError("price", { message: "Valor inválido" });
+            setLoading(false);
+            return;
+        }
+
+        const parsedPrice = Number(data.price.replace(',', '.'));
+        if (isNaN(parsedPrice) || parsedPrice <= 0) {
+            setError("price", { message: "Preço inválido" });
+            setLoading(false);
+            return;
+        }
         try {
             if (categoryId === undefined) {
-                setError("Categoria não selecionada.");
+                setErrorMessage("Categoria não selecionada.");
+                setLoading(false);
                 return;
             }
             await createMenuItemService(categoryId, {
-                name,
-                description,
-                price: Number(price),
+                name: data.name,
+                description: data.description ?? undefined,
+                price: parsedPrice,
             });
+            if (onCreated) onCreated();
+
             setMessageSuccess("Item criado com sucesso!");
+            onClose()
         } catch (error: unknown) {
-            if (error instanceof Error) {
-                setError(error.message);
-            } else {
-                setError("Erro ao criar item");
-            }
+            setErrorMessage(error instanceof Error ? error.message : "Erro ao criar item");
         } finally {
             setLoading(false);
         }
     };
+
     return (
         <>
             {error ? (
@@ -111,7 +123,7 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
                 <div className="fixed inset-0 z-30 flex items-center justify-center">
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
                     <form
-                        onSubmit={handleFormSubmit}
+                        onSubmit={handleSubmit(handleFormSubmit)}
                         noValidate
                         className="relative z-50 flex flex-col items-center justify-center w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 gap-4 bg-white dark:bg-black primary-component"
                     >
@@ -123,38 +135,34 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
                             <IoCloseOutline className="text-lg" />
                         </button>
                         <div className="flex flex-col w-full max-w-105 mt-5 mb-5 gap-1">
-                                                        <label htmlFor="imageUrl">Imagem do item</label>
-                            <input
-                                id="imageUrl"
-                                value={imageUrl}
-                                onChange={e => setImageUrl(e.target.value)}
-                                placeholder="URL da imagem"
-                                className="input"
+                            <h3 className="text-lg md:text-2xl text-center mb-3">Cria novo</h3>
+                            <InputName
+                                register={register}
+                                errors={errors}
+                                clearErrors={clearErrors}
                             />
-                            <label htmlFor="name">Nome</label>
-                            <input
-                                id="name"
-                                value={name}
-                                onChange={e =>
-                                    setName(e.target.value)}
-                                placeholder="Nome" 
-                                className="input"
-                                />
-                            <label htmlFor="description">Descrição</label>
+                            <label
+                                htmlFor="description"
+                                className="flex justify-between"
+                            >
+                                Descrição
+                                {errors.description && (
+                                    <span className="span-error">
+                                        {errors.description.message?.toString()}
+                                    </span>
+                                )}
+
+                            </label>
                             <textarea
-                                id="description"
-                                value={description}
-                                onChange={e => setDescription(e.target.value)}
+                                {...register("description", { required: "Descrição obrigatória" })}
+                                className={`input h-32 mb-2.5 ${errors.description ? "input-error" : ""}`}
                                 placeholder="Descrição"
-                                className="input h-32"
                             />
-                            <label htmlFor="price">Preço</label>
-                            <input
-                                id="price"
-                                value={price}
-                                onChange={e => setPrice(e.target.value)}
-                                placeholder="Preço"
-                                className="input"
+                            <InputPrice
+                                register={register}
+                                errors={errors}
+                                clearErrors={clearErrors}
+                                initialValues={{}}
                             />
 
                         </div>
