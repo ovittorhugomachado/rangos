@@ -23,10 +23,10 @@ const InputName = ({
                 placeholder="Nome"
                 defaultValue={initialValues.name || ""}
                 {...register("name", {
-                    required: "Campo obrigatório",
+                    required: "Nome obrigatório",
                     minLength: {
                         value: 2,
-                        message: "Campo obrigatório"
+                        message: "Nome obrigatório"
                     },
                     onChange: (e) => {
                         if (e.target.value.length > 4) {
