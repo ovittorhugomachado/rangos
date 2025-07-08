@@ -4,9 +4,9 @@ type TimeRange = {
 };
 
 interface OpeningHour {
-    day: string;
-    status: string;
-    timeRanges: TimeRange[];
+  day: string;
+  status: string;
+  timeRanges: TimeRange[];
 }
 
 
@@ -16,6 +16,7 @@ export interface AccountData {
   email: string;
   password: string;
   restaurantName: string;
+  name: string;
   address: string;
   activeAccount: boolean;
   delivery: boolean;
@@ -42,10 +43,27 @@ export interface AccountData {
   error: unknown;
 }
 
+export interface MenuItemData {
+  name: string;
+  description: string;
+  price: string;
+  message: string;
+  error: unknown;
+}
+
 export interface AccountContainerProps {
   onSubmit: (data: AccountData) => void;
   isLoading: boolean;
   message: string;
   error?: string;
   initialValues?: Partial<AccountData>;
+};
+
+export interface MenuItemContainerProps {
+  onSubmit: (data: AccountData) => void;
+  isLoading: boolean;
+  message: string;
+  error?: string;
+  initialValues?: Partial<AccountData>;
 }
+
