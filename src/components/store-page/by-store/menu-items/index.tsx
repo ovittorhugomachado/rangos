@@ -3,7 +3,7 @@ import { getMenuItemService } from "../../../../services/menu-store"
 import { ErrorComponent } from "../../../error"
 import { LoadingComponent } from "../../../loading"
 import { IoMdAddCircle } from "react-icons/io";
-import { MenuItemCreationForm } from "../../../forms/create-update-menu-item";
+import { MenuItemCreationForm, UpdateMenuItemForm } from "../../../forms/create-update-menu-item";
 import { IoCloseOutline } from "react-icons/io5";
 import { MdOutlineEdit } from "react-icons/md";
 import { deleteMenuItemService } from "../../../../services/menu-store";
@@ -38,6 +38,7 @@ export const MenuItemsContainer = ({
     const [error, setError] = useState('');
     const [menuItemsByCategory, setMenuItemsByCategory] = useState<{ [categoryId: number]: MenuItem[] }>({});
     const [showFormCreateMenuItem, setShowFormCreateMenuItem] = useState<number | null>(null);
+    const [showFormUpdateMenuItem, setShowFormUpdateMenuItem] = useState<number | null>(null);
 
     const fetchMenuItems = useCallback(async () => {
         setLoading(true);
@@ -72,8 +73,6 @@ export const MenuItemsContainer = ({
                 <section className="w-full">
                     {categories.map(category => (
                         <div key={category.id} className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} mt-8`}>
-
-                            { }
                             <h1
                                 style={{ borderColor: buttonColor }}
                                 className={`inline-block pr-6 mb-2 text-2xl font-semibold border-b-4`}
@@ -83,17 +82,30 @@ export const MenuItemsContainer = ({
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
                                 {Array.isArray(menuItemsByCategory[category.id]) && menuItemsByCategory[category.id].length > 0 ? (
                                     menuItemsByCategory[category.id].map(item => (
-                                        <li key={item.id} className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px]`}>
+                                        <li
+                                            key={item.id}
+                                            className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px]`}
+                                        >
                                             <img src={item.photoUrl ?? '../prato.png'} alt="" className="w-[150px] h-[150px] object-cover" />
                                             <div className="flex flex-col justify-between py-4 px-4">
                                                 <h1 className="font-bold">{item.name}</h1>
                                                 <p className="font-light">{item.description}</p>
                                                 <h3>R$ {Number(item.price.toString().replace(',', '.')).toFixed(2).replace('.', ',')}</h3>
                                             </div>
+                                            {showFormUpdateMenuItem === item.id && (
+                                                <UpdateMenuItemForm
+                                                    onClose={() => setShowFormUpdateMenuItem(null)}
+                                                    categoryId={category.id}
+                                                    onUpdated={fetchMenuItems}
+                                                    itemId={item.id}
+                                                    initialData={item}
+                                                />
+                                            )}
                                             <div className="flex top-[-11px] right-[10px] absolute">
                                                 <button
                                                     title="Renomear categoria"
                                                     className="rounded-full w-5 h-5 z-2 flex items-center justify-center bg-blue-800 text-white border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
+                                                    onClick={() => setShowFormUpdateMenuItem(item.id)}
                                                 >
                                                     <MdOutlineEdit className="text-sm" />
                                                 </button>
@@ -111,7 +123,7 @@ export const MenuItemsContainer = ({
                                         </li>
                                     ))
                                 ) : (
-                                    <li className="text-gray-400">Nenhum item nesta categoria</li>
+                                    <li className="text-gray-400 flex items-center">Nenhum item nesta categoria</li>
                                 )}
 
                                 <button
