@@ -21,7 +21,7 @@ const InputAddress = ({
                 id="address"
                 type="text"
                 className={`input mb-2 ${errors.address ? "input-error" : ""}`}
-                placeholder="Restaurante"
+                placeholder="Endereço"
                 defaultValue={initialValues.address || ""}
                 {...register("address", {
                     minLength: {
