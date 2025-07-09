@@ -15,7 +15,6 @@ import { UpdateStoreDataForm } from "../components/forms/update-data-store";
 import { UpdateSchedulesForm } from "../components/forms/update-schedules";
 import { toMoney } from "../utils/transform-to-money";
 import { MenuItemsContainer } from "../components/store-page/by-store/menu-items";
-import { MenuItemCreationForm } from "../components/forms/create-update-menu-item";
 
 type StoreData = {
     restaurantName: string,
@@ -90,13 +89,12 @@ const CustomizeMenuPage = () => {
             if (styleData.textButtonColor) setTextColorButtons(styleData.textButtonColor);
 
         } catch (error) {
-            console.log(error)
 
             setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
 
             setStoreStyle(null);
         } finally {
-            setLoading(true);
+            setLoading(false);
         }
     };
 
@@ -116,10 +114,6 @@ const CustomizeMenuPage = () => {
         setShowStoreSchedulesUpdateForm(false);
     };
 
-    console.log(buttonColor)
-
-    console.log(backgroundColor)
-
     return (
         <>
             {error ? (
@@ -127,8 +121,7 @@ const CustomizeMenuPage = () => {
                     <ErrorComponent message={error} />
                 </div>
             ) : (loading || !storeStyle) ? (
-                // <LoadingComponent />
-                <MenuItemCreationForm onClose={() => {}} />
+                <LoadingComponent />
             ) : (
                 <div
                     style={{ backgroundColor: backgroundColor }}
@@ -181,7 +174,6 @@ const CustomizeMenuPage = () => {
                                 setBannerUrl(updatedStoreData.bannerUrl ?? '');
                             }}
                         />
-
                         <CategoryButtons
                             backgroundColor={backgroundColor ?? ''}
                             categories={categories}
@@ -194,7 +186,6 @@ const CustomizeMenuPage = () => {
                             backgroundColor={backgroundColor ?? ''}
                             buttonColor={buttonColor ?? ''}
                         />
-
                     </main>
                     <StoreFooterComponent backgroundColor={backgroundColor ?? ''} />
                 </div>

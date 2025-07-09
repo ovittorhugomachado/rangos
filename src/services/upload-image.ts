@@ -74,7 +74,6 @@ export const uploadMenuItemImage = async (
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
-                // NÃO coloque 'Content-Type', o browser define automaticamente para multipart/form-data
             },
             credentials: 'include',
             body: formData,
