@@ -1,9 +1,10 @@
 import { Logo } from "./logo";
 import { DayOfWeek } from "../../../../types/restaurante-data-types.d";
 import { getRestaurantStatus } from "../../../../utils/restaurant-status";
-import { CiShoppingCart } from "react-icons/ci";
 import { FaGear } from "react-icons/fa6";
 import { RiListSettingsFill } from "react-icons/ri";
+import { GoHomeFill } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
     backgroundColor?: string;
@@ -15,7 +16,6 @@ interface HeaderProps {
         close: string;
         isClosed?: boolean;
     }[];
-    cartValue?: string | number;
     openFormUpdateDataStore: () => void;
     openFormUpdateSchedules: () => void;
 };
@@ -25,7 +25,6 @@ export const Header: React.FC<HeaderProps> = ({
     restaurantImage,
     restaurantName,
     openingHours = [],
-    cartValue,
     openFormUpdateDataStore,
     openFormUpdateSchedules,
 }) => {
@@ -34,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
 
     return (
         <header
-            className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white'} max-h-[387px] z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col xs:flex-row items-center justify-between top-0 border-b-[1px] `}>
+            className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white'} max-h-[387px] z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between top-0 border-b-[1px] `}>
             <div className="flex items-center gap-3.5">
                 <Logo
                     logo={restaurantImage || ""}
@@ -87,13 +86,13 @@ export const Header: React.FC<HeaderProps> = ({
                     }
                 </div>
             </div >
-            <div
-                aria-label="Carrinho de compras"
-                className="flex xs:flex-col items-center text-center"
+            <Link
+                to="/"
+                className="z-50 bg-primary text-black p-2 rounded-full top-4 right-4 flex items-center gap-2 hover:scale-105 transition-all duration-200"
             >
-                <CiShoppingCart className="text-2xl sm:text-3xl cursor-pointer hover:scale-105 " />
-                <h3 className="text-xs sm:text-base">{cartValue}</h3>
-            </div>
+                <GoHomeFill />
+                voltar para o painel
+            </Link>
         </header >
     )
 };

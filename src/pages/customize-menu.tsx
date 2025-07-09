@@ -13,7 +13,6 @@ import { getStoreData } from "../services/store-data";
 import { Header } from "../components/store-page/by-store/header";
 import { UpdateStoreDataForm } from "../components/forms/update-data-store";
 import { UpdateSchedulesForm } from "../components/forms/update-schedules";
-import { toMoney } from "../utils/transform-to-money";
 import { MenuItemsContainer } from "../components/store-page/by-store/menu-items";
 
 type StoreData = {
@@ -152,7 +151,6 @@ const CustomizeMenuPage = () => {
                                 }))
                                 : []
                         }
-                        cartValue={toMoney(0, 'BRL')}
                         openFormUpdateDataStore={() => setStoreDataUpdateForm(true)}
                         openFormUpdateSchedules={() => setShowStoreSchedulesUpdateForm(true)}
                     />
@@ -166,7 +164,7 @@ const CustomizeMenuPage = () => {
                             onClose={handleSchedulesUpdated}
                         />
                     )}
-                    <main className="w-full max-w-[1140px] flex flex-col items-center justify-center pb-24 mt-[110px] xs:mt-[89px] sm:mt-[115px] xl:mt-[132px]">
+                    <main className="w-full max-w-[1140px] flex flex-col items-center justify-center pb-24 mt-[110px] xs:mt-[125px] sm:mt-[115px] xl:mt-[132px]">
                         <StoreBanner
                             banner={bannerUrl}
                             onBannerChange={async () => {
