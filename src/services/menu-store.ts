@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 export const getCategoriesStore = async () => {
 
     const response = await fetch('http://localhost:3000/categories', {
