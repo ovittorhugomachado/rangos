@@ -14,4 +14,4 @@ export const userData = async () => {
     };
 
     return await response.json();
-}
+};

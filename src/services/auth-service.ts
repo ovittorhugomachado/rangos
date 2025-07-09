@@ -30,7 +30,7 @@ export const login = async (credentials: AccountData) => {
         }
         throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
     }
-}
+};
 
 export const logout = async () => {
     try {

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { UpdateMenuItemForm } from "../../../../forms/create-update-menu-item";
 import { deleteMenuItemService } from "../../../../../services/menu-store";
@@ -30,6 +30,13 @@ export const Item = ({
     const [imageVersion, setImageVersion] = useState(Date.now());
     const [showFormUpdateMenuItem, setShowFormUpdateMenuItem] = useState<number | null>(null);
 
+    useEffect(() => {
+        if (error) {
+            const timer = setTimeout(() => setError(null), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [error]);
+
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleButtonClick = () => {
@@ -46,7 +53,7 @@ export const Item = ({
                 if (onUpdated) onUpdated();
             } catch (error) {
                 console.error("Erro ao enviar imagem:", error);
-                setError("Erro ao enviar imagem. Por favor, tente novamente mais tarde.");
+                setError(error instanceof Error ? error.message : 'Erro ao enviar imagem');
             }
         }
     };
@@ -58,7 +65,7 @@ export const Item = ({
                 <button
                     type="button"
                     title="Configurar Banner da loja"
-                    className="w-6 h-6 sm:w-8 sm:h-8 absolute bottom-0 text-black bg-white bg-opacity-70 xl:m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
+                    className="w-6 h-6 sm:w-8 sm:h-8 absolute bottom-0 text-black bg-white bg-opacity-70 m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                     onClick={handleButtonClick}
                 >
                     <FaCamera className="text-black" />

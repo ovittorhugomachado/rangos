@@ -33,4 +33,4 @@ export const recoverPassword = async (credentials: AccountData) => {
         }
         throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde');
     }
-}
+};

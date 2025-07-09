@@ -95,7 +95,7 @@ export const MenuItemsContainer = ({
                                         </li>
                                     ))
                                 ) : (
-                                    <li className="text-gray-400 flex items-center">Nenhum item nesta categoria</li>
+                                    <li className="flex items-center">Nenhum item nesta categoria</li>
                                 )}
 
                                 <button
