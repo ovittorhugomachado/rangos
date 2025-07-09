@@ -138,6 +138,39 @@ export const createMenuItemService = async (categoryId: number, item: {
     }
 };
 
+export const updateMenuItemByCategoryService = async (
+    categoryId: number,
+    itemId: number,
+    item: {
+        name?: string | null;
+        description?: string | null;
+        price?: number | null;
+    }
+) => {
+    try {
+        const response = await fetch(`http://localhost:3000/menu-items/${categoryId}/${itemId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(item),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.message || 'Erro ao atualizar item do menu');
+        }
+
+        return await response.json();
+    } catch (error) {
+        if (error instanceof Error && error.message) {
+            throw error;
+        }
+        throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');
+    }
+};
+
 export const deleteMenuItemService = async (itemId: number) => {
     const response = await fetch(`http://localhost:3000/menu-items/${itemId}`, {
         method: 'DELETE',
@@ -154,3 +187,5 @@ export const deleteMenuItemService = async (itemId: number) => {
 
     return await response.json();
 };
+
+
