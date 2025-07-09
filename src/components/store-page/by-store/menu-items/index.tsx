@@ -3,10 +3,8 @@ import { getMenuItemService } from "../../../../services/menu-store"
 import { ErrorComponent } from "../../../error"
 import { LoadingComponent } from "../../../loading"
 import { IoMdAddCircle } from "react-icons/io";
-import { MenuItemCreationForm, UpdateMenuItemForm } from "../../../forms/create-update-menu-item";
-import { IoCloseOutline } from "react-icons/io5";
-import { MdOutlineEdit } from "react-icons/md";
-import { deleteMenuItemService } from "../../../../services/menu-store";
+import { MenuItemCreationForm } from "../../../forms/create-update-menu-item";
+import { Item } from "./item";
 
 
 interface MenuItemsContainerProps {
@@ -38,7 +36,6 @@ export const MenuItemsContainer = ({
     const [error, setError] = useState('');
     const [menuItemsByCategory, setMenuItemsByCategory] = useState<{ [categoryId: number]: MenuItem[] }>({});
     const [showFormCreateMenuItem, setShowFormCreateMenuItem] = useState<number | null>(null);
-    const [showFormUpdateMenuItem, setShowFormUpdateMenuItem] = useState<number | null>(null);
 
     const fetchMenuItems = useCallback(async () => {
         setLoading(true);
@@ -86,40 +83,15 @@ export const MenuItemsContainer = ({
                                             key={item.id}
                                             className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px]`}
                                         >
-                                            <img src={item.photoUrl ?? '../prato.png'} alt="" className="w-[150px] h-[150px] object-cover" />
-                                            <div className="flex flex-col justify-between py-4 px-4">
-                                                <h1 className="font-bold">{item.name}</h1>
-                                                <p className="font-light">{item.description}</p>
-                                                <h3>R$ {Number(item.price.toString().replace(',', '.')).toFixed(2).replace('.', ',')}</h3>
-                                            </div>
-                                            {showFormUpdateMenuItem === item.id && (
-                                                <UpdateMenuItemForm
-                                                    onClose={() => setShowFormUpdateMenuItem(null)}
-                                                    categoryId={category.id}
-                                                    onUpdated={fetchMenuItems}
-                                                    itemId={item.id}
-                                                    initialData={item}
-                                                />
-                                            )}
-                                            <div className="flex top-[-11px] right-[10px] absolute">
-                                                <button
-                                                    title="Renomear categoria"
-                                                    className="rounded-full w-5 h-5 z-2 flex items-center justify-center bg-blue-800 text-white border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
-                                                    onClick={() => setShowFormUpdateMenuItem(item.id)}
-                                                >
-                                                    <MdOutlineEdit className="text-sm" />
-                                                </button>
-                                                <button
-                                                    title="Excluir categoria"
-                                                    className="w-5 h-5 ml-2 z-2 flex items-center justify-center bg-red-600 text-white rounded-full border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
-                                                    onClick={async () => {
-                                                        await deleteMenuItemService(item.id);
-                                                        fetchMenuItems();
-                                                    }}
-                                                >
-                                                    <IoCloseOutline className="text-lg" />
-                                                </button>
-                                            </div>
+                                            <Item
+                                                image={item.photoUrl ?? '../prato.png'}
+                                                name={item.name}
+                                                description={item.description}
+                                                price={item.price}
+                                                categoryId={category.id}
+                                                id={item.id}
+                                                onUpdated={fetchMenuItems}
+                                            />
                                         </li>
                                     ))
                                 ) : (
