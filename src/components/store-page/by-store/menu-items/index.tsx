@@ -6,6 +6,7 @@ import { IoMdAddCircle } from "react-icons/io";
 import { MenuItemCreationForm } from "../../../forms/create-update-menu-item";
 import { IoCloseOutline } from "react-icons/io5";
 import { MdOutlineEdit } from "react-icons/md";
+import { deleteMenuItemService } from "../../../../services/menu-store";
 
 
 interface MenuItemsContainerProps {
@@ -93,14 +94,16 @@ export const MenuItemsContainer = ({
                                                 <button
                                                     title="Renomear categoria"
                                                     className="rounded-full w-5 h-5 z-2 flex items-center justify-center bg-blue-800 text-white border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
-
                                                 >
                                                     <MdOutlineEdit className="text-sm" />
                                                 </button>
                                                 <button
                                                     title="Excluir categoria"
                                                     className="w-5 h-5 ml-2 z-2 flex items-center justify-center bg-red-600 text-white rounded-full border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
-
+                                                    onClick={async () => {
+                                                        await deleteMenuItemService(item.id);
+                                                        fetchMenuItems();
+                                                    }}
                                                 >
                                                     <IoCloseOutline className="text-lg" />
                                                 </button>
