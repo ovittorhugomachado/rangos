@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { UpdateMenuItemForm } from "../../../../forms/create-update-menu-item";
 import { deleteMenuItemService } from "../../../../../services/menu-store";
 import { MdOutlineEdit } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
+import { uploadMenuItemImage } from "../../../../../services/upload-image";
 
 interface ItemProps {
     image?: string;
@@ -15,7 +16,7 @@ interface ItemProps {
     onUpdated?: () => void;
 }
 
-export const Item = ({ 
+export const Item = ({
     image,
     name,
     description,
@@ -24,18 +25,41 @@ export const Item = ({
     id,
     onUpdated,
 }: ItemProps) => {
-    
+
+    const [error, setError] = useState<string | null>(null);
+    const [imageVersion, setImageVersion] = useState(Date.now());
     const [showFormUpdateMenuItem, setShowFormUpdateMenuItem] = useState<number | null>(null);
+
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const handleButtonClick = () => {
+        inputRef.current?.click();
+    };
+
+    const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            try {
+                await uploadMenuItemImage(categoryId, id, file);
+                setImageVersion(Date.now());
+                setError(null);
+                if (onUpdated) onUpdated();
+            } catch (error) {
+                console.error("Erro ao enviar imagem:", error);
+                setError("Erro ao enviar imagem. Por favor, tente novamente mais tarde.");
+            }
+        }
+    };
 
     return (
         <>
             <div className="w-[150px] h-[150px] relative">
-                <img src={image ?? '../prato.png'} alt="" className="w-[150px] h-[150px] object-cover" />
+                <img src={image ? `${image}?v=${imageVersion}` : "../prato.png"} alt="" className="w-[150px] h-[150px] object-cover" />
                 <button
                     type="button"
                     title="Configurar Banner da loja"
-                    className="w-6 h-6 sm:w-8 sm:h-8 bottom-0 text-black bg-white bg-opacity-70 xl:m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
-
+                    className="w-6 h-6 sm:w-8 sm:h-8 absolute bottom-0 text-black bg-white bg-opacity-70 xl:m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
+                    onClick={handleButtonClick}
                 >
                     <FaCamera className="text-black" />
                 </button>
@@ -73,6 +97,18 @@ export const Item = ({
                     <IoCloseOutline className="text-lg" />
                 </button>
             </div>
+            <input
+                type="file"
+                accept="image/*"
+                ref={inputRef}
+                style={{ display: "none" }}
+                onChange={handleImageUpload}
+            />
+            {error && (
+                <div className="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded shadow text-xs z-10">
+                    {error}
+                </div>
+            )}
         </>
     )
 }
