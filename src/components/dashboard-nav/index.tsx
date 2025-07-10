@@ -6,7 +6,7 @@ import { ImExit } from "react-icons/im"
 const DashboardNav = () => {
     return (
         <>
-            <nav className="w-screen h-54 sm:gap-36 fixed top-0 flex flex-col sm:flex-row sm:h-26 items-center justify-center py-12 px-4">
+            <nav className="w-screen h-54 sm:gap-36 absolute top-0 flex flex-col sm:flex-row sm:h-26 items-center justify-center py-12 px-4">
                 <div className="container-logo sm:absolute sm:left-8 mt-2 mb-4">
                     <Logo />
                 </div>
