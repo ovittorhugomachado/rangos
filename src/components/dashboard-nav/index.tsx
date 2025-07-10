@@ -10,7 +10,7 @@ const DashboardNav = () => {
                 <div className="container-logo sm:absolute sm:left-8 mt-2 mb-4">
                     <Logo />
                 </div>
-                <ul className="w-full sm:w-[330px] lg:w-[400px] flex flex-col sm:flex-row sm:translate-x-20 lg:translate-x-0 items-center justify-center gap-2 sm:gap-8 sm:mt-0 sm:justify-around text-black dark:text-primary">
+                <ul className="w-full sm:w-[330px] lg:w-[400px] flex flex-col sm:flex-row sm:translate-x-20 lg:translate-x-0 items-center justify-center gap-2 sm:gap-8 sm:mt-0 sm:justify-around text-black dark:text-white">
                     <li className="flex justify-center sm:border-b-2 sm:border-primary sm:px-4">
                         <Link
                             to="/personalizar-cardapio"
