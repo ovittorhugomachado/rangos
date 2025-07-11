@@ -101,12 +101,13 @@ export const AdminDashboard = () => {
                         decreaseFontSize={decreaseFontSize}
                     />
                     <DashboardNav />
-                    <main className={`${fontSize} w-screen h-screen pt-52 sm:pt-26 flex flex-col text-black dark:text-white items-center gap-6`}>
+                    <main className={`${fontSize} w-screen h-screen pt-52 sm:pt-36 flex flex-col text-black dark:text-white items-center gap-6`}>
                         <h1 className="text-4xl text-center border-b-2 border-primary mx-4">Painel de pedidos</h1>
                         {ordersLoading ? (
                             <LoadingComponent />
                         ) : (
                             <DashboardCards
+                                fontSize={fontSize}
                                 orders={orders}
                                 activePanel={activePanel}
                                 setActivePanel={setActivePanel}
