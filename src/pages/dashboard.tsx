@@ -1,12 +1,18 @@
-import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Order } from "../types/orders-types.d";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
-import { Link } from "react-router-dom";
 import { LoadingComponent } from "../components/loading";
+import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
 import { DashboardNav } from "../components/dashboard-nav";
-import { useEffect, useState } from "react";
 import { DashboardCards } from "../components/dashboard-cards";
-import { Order } from "../types/orders-types.d";
+import {
+    cancelOrderService,
+    acceptOrderService, readyOrderService,
+    deliveredOrderService,
+    getOrdersService
+} from "../services/manage-orders";
 
 export const AdminDashboard = () => {
     const {
@@ -17,21 +23,15 @@ export const AdminDashboard = () => {
     } = useAppSettings();
 
     const { user, loading, error } = useAuth();
+    const [activePanel, setActivePanel] = useState<number[]>([]);
     const [ordersLoading, setOrdersLoading] = useState(true);
     const [orders, setOrders] = useState<Order[]>([]);
 
     const fetchOrders = async () => {
         setOrdersLoading(true);
         try {
-            const response = await fetch(`http://localhost:3000/order/list?limit=50&offset=0`, {
-                credentials: 'include',
-
-            })
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            const data = await response.json();
-            return setOrders(data.data);
+            const orders = await getOrdersService();
+            setOrders(orders);
         } catch (error) {
             console.error("Erro ao buscar pedidos:", error);
         } finally {
@@ -39,11 +39,46 @@ export const AdminDashboard = () => {
         }
     }
 
-    useEffect(() => {
+    const updateOrders = async () => {
+        try {
+            const orders = await getOrdersService();
+            setOrders(orders);
+        } catch (error) {
+            console.error("Erro ao buscar pedidos:", error);
+        }
+    }
 
+    useEffect(() => {
         fetchOrders();
     }, []);
 
+    useEffect(() => {
+        updateOrders();
+        const interval = setInterval(() => updateOrders(), 5000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const handleCancelOrder = async (orderId: number) => {
+        await cancelOrderService(orderId);
+        fetchOrders();
+    };
+
+    const handleAcceptOrder = async (orderId: number) => {
+        await acceptOrderService(orderId);
+        setActivePanel((prev) => [...prev, 1]);
+        fetchOrders();
+    };
+
+    const handleReadyOrder = async (orderId: number) => {
+        await readyOrderService(orderId);
+        setActivePanel((prev) => [...prev, 2]);
+        fetchOrders();
+    };
+
+    const handleDeliveredOrder = async (orderId: number) => {
+        await deliveredOrderService(orderId);
+        fetchOrders();
+    };
 
     return (
         <>
@@ -66,23 +101,25 @@ export const AdminDashboard = () => {
                         decreaseFontSize={decreaseFontSize}
                     />
                     <DashboardNav />
-                    <main className={`${fontSize} h-screen flex flex-col text-black dark:text-white items-center gap-6 w-screen`}>
-
+                    <main className={`${fontSize} w-screen h-screen pt-52 sm:pt-26 flex flex-col text-black dark:text-white items-center gap-6`}>
+                        <h1 className="text-4xl text-center border-b-2 border-primary mx-4">Painel de pedidos</h1>
                         {ordersLoading ? (
                             <LoadingComponent />
                         ) : (
                             <DashboardCards
                                 orders={orders}
-                                onCancelOrder={(orderId) => console.log("Cancel Order:", orderId)}
-                                onAcceptOrder={(orderId) => console.log("Accept Order:", orderId)}
-                                onOrderReady={(orderId) => console.log("Ready Order:", orderId)}
-                                onOrderDelivered={(orderId) => console.log("Delivered Order:", orderId)}
+                                activePanel={activePanel}
+                                setActivePanel={setActivePanel}
+                                onCancelOrder={handleCancelOrder}
+                                onAcceptOrder={handleAcceptOrder}
+                                onOrderReady={handleReadyOrder}
+                                onOrderDelivered={handleDeliveredOrder}
                             />
                         )}
-
                     </main>
                 </>
             )}
         </>
     );
 };
+
