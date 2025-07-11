@@ -120,7 +120,7 @@ export const MenuItemsContainer = ({
                 </section>
             )}
         </>
-    );
-}
+    )
+};
 
 

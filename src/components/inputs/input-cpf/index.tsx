@@ -2,7 +2,7 @@ import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask"
 import { InputCPFProps } from "../../../types/account-input-types.d";
 
-const InputCPF = ({
+export const InputCPF = ({
     control,
     initialValues = {},
 }: InputCPFProps) => {
@@ -44,6 +44,4 @@ const InputCPF = ({
             )}
         />
     )
-}
-
-export { InputCPF }
+};

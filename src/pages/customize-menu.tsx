@@ -43,7 +43,7 @@ type StyleData = {
     textColorButtons?: string | null;
 };
 
-const CustomizeMenuPage = () => {
+export const CustomizeMenuPage = () => {
     useAppSettings();
 
     const [loading, setLoading] = useState(true)
@@ -190,6 +190,4 @@ const CustomizeMenuPage = () => {
             )}
         </>
     )
-}
-
-export { CustomizeMenuPage }
+};

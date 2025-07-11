@@ -1,6 +1,6 @@
 import { InputEmailProps } from "../../../types/account-input-types.d";
 
-const InputEmail = ({
+export const InputEmail = ({
     register,
     errors,
     clearErrors,
@@ -40,6 +40,4 @@ const InputEmail = ({
 
         </div>
     )
-}
-
-export { InputEmail }
+};

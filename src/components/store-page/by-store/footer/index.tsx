@@ -1,4 +1,4 @@
-const StoreFooterComponent = ({ backgroundColor }: { backgroundColor: string }) => {
+export const StoreFooterComponent = ({ backgroundColor }: { backgroundColor: string }) => {
     return (
         <footer
             style={{ backgroundColor: backgroundColor }}
@@ -8,6 +8,4 @@ const StoreFooterComponent = ({ backgroundColor }: { backgroundColor: string }) 
             <img className="w-40" src={backgroundColor === 'black' ? "../logo-dark.png" : "../logo.png"} alt="domus-logo" />
         </footer>
     );
-};
-
-export { StoreFooterComponent };    
+};    

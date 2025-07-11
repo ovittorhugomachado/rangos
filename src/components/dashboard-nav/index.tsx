@@ -3,7 +3,7 @@ import { CgMenuGridR } from "react-icons/cg"
 import { Link } from "react-router-dom"
 import { ImExit } from "react-icons/im"
 
-const DashboardNav = () => {
+export const DashboardNav = () => {
     return (
         <>
             <nav className="w-screen h-54 sm:gap-36 absolute top-0 flex flex-col sm:flex-row sm:h-26 items-center justify-center py-12 px-4">
@@ -36,6 +36,4 @@ const DashboardNav = () => {
             </nav>
         </>
     )
-}
-
-export { DashboardNav }
+};

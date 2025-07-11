@@ -5,7 +5,7 @@ import { recoverPassword } from "../services/recover-password.ts";
 import { RecoverPasswordFormContainer } from "../components/forms/recover-password/index.tsx";
 import { ToggleThemeAndFont } from "../components/toggle-theme-and-font/index.tsx";
 
-const RecoverPasswordPage = () => {
+export const RecoverPasswordPage = () => {
 
     const [error, setError] = useState('');
     const [message, setMessage] = useState('')
@@ -50,6 +50,4 @@ const RecoverPasswordPage = () => {
         </main>
     )
 
-}
-
-export { RecoverPasswordPage }
+};

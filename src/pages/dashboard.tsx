@@ -36,7 +36,7 @@ type Order = {
     orderItems: OrderItem[];
 };
 
-const AdminDashboard = () => {
+export const AdminDashboard = () => {
     const {
         fontSize,
         increaseFontSize,
@@ -194,5 +194,3 @@ const AdminDashboard = () => {
         </>
     );
 };
-
-export { AdminDashboard };

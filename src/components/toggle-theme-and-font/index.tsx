@@ -8,7 +8,7 @@ interface ThemeButtonProps {
     fontSize: 'text-sm' | 'text-lg';
 }
 
-const ToggleThemeAndFont = ({ toggleTheme, fontSize, increaseFontSize, decreaseFontSize }: ThemeButtonProps) => {
+export const ToggleThemeAndFont = ({ toggleTheme, fontSize, increaseFontSize, decreaseFontSize }: ThemeButtonProps) => {
 
     return (
         <div className='absolute top-[10px] right-0 rounded-l-xl flex flex-row items-center justify-center gap-2.5 backdrop-blur-sm bg-white dark:bg-zinc-950 border border-zinc-400 border-r-0 text-black dark:text-white text-lg py-1 px-2 sm:flex-col sm:text-xl sm:py-2 z-60'>
@@ -34,6 +34,4 @@ const ToggleThemeAndFont = ({ toggleTheme, fontSize, increaseFontSize, decreaseF
             </button>
         </div>
     )
-}
-
-export { ToggleThemeAndFont }
+};

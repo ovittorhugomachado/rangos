@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { UploadBannerImage } from "../../../../services/upload-image";
 
-const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBannerChange: () => void }) => {
+export const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBannerChange: () => void }) => {
     const [bannerVersion, setBannerVersion] = useState(Date.now());
     const [error, setError] = useState<string | null>(null);
 
@@ -59,5 +59,3 @@ const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBannerChang
         </div>
     );
 };
-
-export { StoreBanner };

@@ -1,6 +1,6 @@
 import { InputMenuItemPriceProps } from "../../../types/account-input-types.d";
 
-const InputPrice = ({
+export const InputPrice = ({
     register,
     errors,
     clearErrors,
@@ -43,5 +43,3 @@ const InputPrice = ({
         </>
     );
 };
-
-export { InputPrice };

@@ -7,7 +7,7 @@ import { SignupFormContainer } from "../components/forms/signup";
 import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
 
 
-const RegisterPage = () => {
+export const RegisterPage = () => {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -54,5 +54,3 @@ const RegisterPage = () => {
         </main>
     );
 };
-
-export { RegisterPage }; 

@@ -1,4 +1,3 @@
-import React from "react";
 import { UseFormRegister } from "react-hook-form";
 import { AccountData } from "../../../types/account-types.d";
 

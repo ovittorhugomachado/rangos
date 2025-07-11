@@ -2,7 +2,7 @@ import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask"
 import { InputPhoneNumberProps } from "../../../types/account-input-types.d"
 
-const InputPhoneNumber = ({
+export const InputPhoneNumber = ({
     control,
     initialValues = {},
 }: InputPhoneNumberProps ) => {
@@ -40,6 +40,4 @@ const InputPhoneNumber = ({
         )}
     />
     )
-}
-
-export { InputPhoneNumber }
+};

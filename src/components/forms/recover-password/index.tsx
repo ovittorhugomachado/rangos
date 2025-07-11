@@ -5,8 +5,7 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { InputEmail } from "../../inputs/input-email";
 import { Logo } from "../../logo";
 
-
-const RecoverPasswordFormContainer = ({
+export const RecoverPasswordFormContainer = ({
     onSubmit,
     error,
     message,
@@ -105,5 +104,3 @@ const RecoverPasswordFormContainer = ({
         </div>
     );
 };
-
-export { RecoverPasswordFormContainer };

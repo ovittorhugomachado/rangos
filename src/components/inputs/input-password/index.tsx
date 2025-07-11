@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { InputPasswordProps } from "../../../types/account-input-types.d"
 
-const InputPassword = ({
+export const InputPassword = ({
     register,
     errors,
     clearErrors,
@@ -54,6 +54,4 @@ const InputPassword = ({
             </div>
         </>
     )
-}
-
-export { InputPassword }
+};

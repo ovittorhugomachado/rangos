@@ -11,7 +11,7 @@ import { InputEmail } from "../../inputs/input-email";
 import { InputPasswordRegister } from "../../inputs/input-password-register";
 import { Logo } from "../../logo";
 
-const SignupFormContainer = ({
+export const SignupFormContainer = ({
     onSubmit,
     error,
     initialValues = {},
@@ -116,5 +116,3 @@ const SignupFormContainer = ({
         </div>
     );
 };
-
-export { SignupFormContainer };

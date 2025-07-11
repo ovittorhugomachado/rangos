@@ -6,7 +6,7 @@ import { AccountData } from "../types/account-types.d";
 import { LoginFormContainer } from "../components/forms/login";
 import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
 
-const LoginPage = () => {
+export const LoginPage = () => {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -52,5 +52,3 @@ const LoginPage = () => {
         </main>
     );
 };
-
-export { LoginPage };

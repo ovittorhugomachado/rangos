@@ -6,7 +6,7 @@ import { InputPassword } from "../../inputs/input-password";
 import { AccountContainerProps, AccountData } from "../../../types/account-types.d";
 import { Logo } from "../../logo";
 
-const LoginFormContainer = ({
+export const LoginFormContainer = ({
     onSubmit,
     error,
     initialValues = {},
@@ -98,4 +98,3 @@ const LoginFormContainer = ({
     );
 };
 
-export { LoginFormContainer };

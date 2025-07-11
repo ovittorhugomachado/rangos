@@ -8,7 +8,7 @@ import { AdminDashboard } from "../pages/dashboard";
 import { CustomizeMenuPage } from "../pages/customize-menu";
 import { PlaygroundPage } from "../pages/playground";
 
-const AppRoutes = () => {
+export const AppRoutes = () => {
     return (
         <BrowserRouter>
             <Routes>
@@ -23,6 +23,4 @@ const AppRoutes = () => {
             </Routes>
         </BrowserRouter>
     )
-}
-
-export { AppRoutes }
+};

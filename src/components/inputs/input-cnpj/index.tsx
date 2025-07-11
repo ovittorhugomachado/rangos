@@ -2,7 +2,7 @@ import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask"
 import { InputCNPJProps } from "../../../types/account-input-types.d";
 
-const InputCNPJ = ({
+export const InputCNPJ = ({
   control,
   initialValues = {},
 }: InputCNPJProps) => {
@@ -44,5 +44,3 @@ const InputCNPJ = ({
     />
   );
 };
-
-export { InputCNPJ }

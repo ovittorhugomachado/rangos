@@ -1,6 +1,6 @@
 import { InputNameProps } from "../../../types/account-input-types.d";
 
-const InputOwnersName = ({
+export const InputOwnersName = ({
     register,
     errors,
     clearErrors,
@@ -37,6 +37,4 @@ const InputOwnersName = ({
             />
         </>
     )
-}
-
-export { InputOwnersName }
+};

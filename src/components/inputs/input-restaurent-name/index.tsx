@@ -1,6 +1,6 @@
 import { InputNameProps } from "../../../types/account-input-types.d";
 
-const InputRestaurantName = ({
+export const InputRestaurantName = ({
     register, 
     errors,
     clearErrors,
@@ -38,6 +38,4 @@ const InputRestaurantName = ({
             />
         </>
     )
-}
-
-export { InputRestaurantName }
+};

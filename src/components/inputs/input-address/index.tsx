@@ -1,6 +1,6 @@
 import { InputAddressProps } from "../../../types/account-input-types.d";
 
-const InputAddress = ({
+export const InputAddress = ({
     register, 
     errors,
     clearErrors,
@@ -37,6 +37,4 @@ const InputAddress = ({
             />
         </>
     )
-}
-
-export { InputAddress }
+};

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { Logo } from "../components/logo";
 
-const CreateNewPasswordPage = () => {
+export const CreateNewPasswordPage = () => {
 
     const [message, setMessage] = useState('')
     const [error, setError] = useState('');
@@ -113,5 +113,3 @@ const CreateNewPasswordPage = () => {
         </>
     );
 };
-
-export { CreateNewPasswordPage };

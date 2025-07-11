@@ -5,7 +5,7 @@ import { AccountData, AccountContainerProps } from "../../../types/account-types
 import { InputPasswordRegister } from "../../inputs/input-password-register";
 import { Logo } from "../../logo";
 
-const CreateNewPasswordFormContainer = ({
+export const CreateNewPasswordFormContainer = ({
     onSubmit,
     message,
     initialValues = {},
@@ -71,4 +71,4 @@ const CreateNewPasswordFormContainer = ({
     );
 };
 
-export { CreateNewPasswordFormContainer };
+

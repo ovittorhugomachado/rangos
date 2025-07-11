@@ -11,4 +11,4 @@ export const LoadingComponent = () => {
         </div>
 
     )
-}
+};
