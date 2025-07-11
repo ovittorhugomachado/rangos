@@ -32,7 +32,7 @@ export const CountdownTimer = ({ createdAt, durationSeconds }: CountdownTimerPro
     const strokeDashoffset = circumference * (1 - percent);
 
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="absolute right-0 top-0 -translate-y-2 translate-x-5 flex flex-col items-center justify-center">
             <svg width={80} height={80}>
                 <circle
                     cx={40}
@@ -52,6 +52,7 @@ export const CountdownTimer = ({ createdAt, durationSeconds }: CountdownTimerPro
                     strokeDasharray={circumference}
                     strokeDashoffset={strokeDashoffset}
                     style={{ transition: "stroke-dashoffset 1s linear" }}
+                    transform="rotate(-90 40 40)"
                 />
                 <text
                     x="50%"
@@ -59,7 +60,7 @@ export const CountdownTimer = ({ createdAt, durationSeconds }: CountdownTimerPro
                     textAnchor="middle"
                     dy=".3em"
                     fontSize="0.95em"
-                    fill="#ef4444"
+                    fill="#E7000B"
                     fontWeight="bold"
                 >
                     {min}:{sec.toString().padStart(2, "0")}
