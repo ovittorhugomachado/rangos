@@ -6,7 +6,7 @@ interface CountdownTimerProps {
 }
 
 export const CountdownTimer = ({ createdAt, durationSeconds }: CountdownTimerProps) => {
-    const [secondsLeft, setSecondsLeft] = useState(0);
+    const [secondsLeft, setSecondsLeft] = useState(durationSeconds);
 
     useEffect(() => {
         const created = new Date(createdAt).getTime();
@@ -26,12 +26,45 @@ export const CountdownTimer = ({ createdAt, durationSeconds }: CountdownTimerPro
     const min = Math.floor(secondsLeft / 60);
     const sec = secondsLeft % 60;
 
-    return (
-        <>
-            <h1 className="w-full text-center font-bold text-red-600">
-                🕑{min}:{sec.toString().padStart(2, "0")}
-            </h1>
-        </>
+    const radius = 18;
+    const circumference = 2 * Math.PI * radius;
+    const percent = secondsLeft / durationSeconds;
+    const strokeDashoffset = circumference * (1 - percent);
 
+    return (
+        <div className="flex flex-col items-center justify-center">
+            <svg width={80} height={80}>
+                <circle
+                    cx={40}
+                    cy={40}
+                    r={radius}
+                    stroke="#e5e7eb"
+                    strokeWidth={4}
+                    fill="none"
+                />
+                <circle
+                    cx={40}
+                    cy={40}
+                    r={radius}
+                    stroke="#E7000B"
+                    strokeWidth={4}
+                    fill="none"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={strokeDashoffset}
+                    style={{ transition: "stroke-dashoffset 1s linear" }}
+                />
+                <text
+                    x="50%"
+                    y="50%"
+                    textAnchor="middle"
+                    dy=".3em"
+                    fontSize="0.95em"
+                    fill="#ef4444"
+                    fontWeight="bold"
+                >
+                    {min}:{sec.toString().padStart(2, "0")}
+                </text>
+            </svg>
+        </div>
     );
 };
