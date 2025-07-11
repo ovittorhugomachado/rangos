@@ -2,40 +2,18 @@ import { IoIosArrowDown } from "react-icons/io"
 import { CountdownTimer } from "../countdown-timer"
 import { useState } from "react";
 import { useAppSettings } from "../../hooks/use-app-settings";
-
-type OrderItem = {
-    id: number;
-    orderId: number;
-    menuItemId: number;
-    quantity: number;
-    note?: string;
-    menuItem: {
-        name: string;
-        price: string;
-    };
-};
-
-type Order = {
-    id: number;
-    storeId: number;
-    customerName: string;
-    customerPhone: string;
-    address: string;
-    deliveryType: string;
-    paymentMethod: string;
-    totalAmount: string;
-    status: string;
-    createdAt: string;
-    cancellationScheduledAt: string | null;
-    expectedStatus: string | null;
-    orderItems: OrderItem[];
-};
+import { toMoney } from "../../utils/transform-to-money";
+import { Order } from "../../types/orders-types.d";
 
 type DashboardCardProps = {
     orders: Order[];
+    onAcceptOrder: (orderId: number) => void;
+    onCancelOrder: (orderId: number) => void;
+    onOrderReady: (orderId: number) => void;
+    onOrderDelivered: (orderId: number) => void;
 };
 
-export const DashboardCards = ({ orders }: DashboardCardProps) => {
+export const DashboardCards = ({ orders, onAcceptOrder, onCancelOrder, onOrderReady, onOrderDelivered }: DashboardCardProps) => {
 
     const {
         fontSize,
@@ -51,8 +29,7 @@ export const DashboardCards = ({ orders }: DashboardCardProps) => {
             status: "aguardando_aprovacao",
             color: "bg-yellow-500",
             titleColor: "text-black",
-            textColor: "text-black",
-            confirmationButton: "Aceitar",
+            textColor: "text-black"
         },
         {
             id: 1,
@@ -60,35 +37,31 @@ export const DashboardCards = ({ orders }: DashboardCardProps) => {
             status: "em_preparo",
             color: "bg-blue-500",
             titleColor: "text-black",
-            textColor: "text-black",
-            confirmationButton: "Pedido pronto",
+            textColor: "text-black"
         },
         {
             id: 2,
-            name: "Pronto",
+            name: "Prontos",
             status: ["pronto_para_retirada", "a_caminho"],
             color: "bg-green-500",
             titleColor: "text-black",
-            textColor: "text-black",
-            confirmationButton: "Pedido entregue",
+            textColor: "text-black"
         },
         {
             id: 3,
-            name: "Entregue",
+            name: "Entregues",
             status: "entregue",
             color: "bg-green-800",
             titleColor: "text-white",
-            textColor: "text-black",
-            confirmationButton: null,
+            textColor: "text-black"
         },
         {
             id: 4,
-            name: "Cancelado",
+            name: "Cancelados",
             status: ["cancelado", "cancelado_automaticamente"],
             color: "bg-red-600",
             titleColor: "text-white",
-            textColor: "text-black",
-            confirmationButton: null,
+            textColor: "text-black"
         },
     ];
 
@@ -100,11 +73,9 @@ export const DashboardCards = ({ orders }: DashboardCardProps) => {
         );
     };
 
-    console.log(orders)
-
     return (
         <>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto mt-46 sm:mt-26 w-full p-3.5">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto mt-46 sm:mt-26 w-full p-3.5 items-start">
                 {cards.map((card, index) => {
                     const cardOrders = Array.isArray(card.status)
                         ? orders.filter(order => card.status.includes(order.status))
@@ -122,7 +93,7 @@ export const DashboardCards = ({ orders }: DashboardCardProps) => {
                             {cardOrders.length === 0 ? (
                                 <div className={`${activePanel.includes(card.id) ? 'block' : 'hidden'} text-center py-4`}>Nenhum pedido</div>
                             ) : (
-                                <div className={`${activePanel.includes(card.id) ? 'block' : 'hidden'} ${card.textColor} flex flex-col items-center px-4 transition-all duration-6500`}>
+                                <div className={`${activePanel.includes(card.id) ? 'block' : 'hidden'} ${card.textColor} flex flex-col items-center px-4`}>
                                     {cardOrders.map((order, orderIndex) => (
                                         <div key={orderIndex} className={`${fontSize} w-full flex flex-col items-start gap-2 px-2.5 py-2 border-y-[1px] border-white`}>
                                             <h1 className="text-center mx-auto px-2 text-lg font-bold border-b-2 border-black">{order.customerName}</h1>
@@ -137,31 +108,40 @@ export const DashboardCards = ({ orders }: DashboardCardProps) => {
                                                         className={`w-full rounded-sm px-2.5 flex justify-between items-center ${index % 2 === 0 ? 'bg-white/30' : ''}`}
                                                     >
                                                         <p>- {item.menuItem.name}</p>
-                                                        <p className="text-sm">R$ {item.menuItem.price}</p>
+                                                        <p className="text-sm">{toMoney(Number(item.menuItem.price))}</p>
                                                     </li>
                                                 ))}
-                                                <li className="flex justify-end px-2.5"><span className="font-bold pr-2">Total:</span> R$ {order.totalAmount}</li>
+                                                <li className="flex justify-end"><span className="font-bold pr-2">Total: {toMoney(Number(order.totalAmount))}</span></li>
                                             </ul>
                                             <p className="border-l-2 px-2 border-black"><span className="font-bold">pagamento: </span>{order.paymentMethod}</p>
                                             <p className="border-l-2 px-2 border-black"><span className="font-bold">tipo: </span>{order.deliveryType}</p>
                                             <p className="border-l-2 px-2 border-black"><span className="font-bold">endereço: </span>{order.address}</p>
-                                            {card.confirmationButton !== null && (
+                                            {card.status === "aguardando_aprovacao" && (
                                                 <div className="w-full flex justify-center gap-3 mt-2 mb-1">
-                                                    <button className={`${fontSize} bg-green-600 border-2 border-green-900 text-white px-2 py-1 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`}>{card.confirmationButton}</button>
-                                                    <button className={`${fontSize} bg-red-600 text-white px-2 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`}>Recusar</button>
+                                                    <button className={`${fontSize} bg-green-600 border-2 border-green-900 text-white px-2 py-1 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`} onClick={() => onAcceptOrder(order.id)}>Aceitar</button>
+                                                    <button className={`${fontSize} bg-red-600 text-white px-2 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`} onClick={() => onCancelOrder(order.id)}>Recusar</button>
                                                 </div>
                                             )}
-
+                                            {card.status === "em_preparo" && (
+                                                <div className="w-full flex justify-center gap-3 mt-2 mb-1">
+                                                    <button className={`${fontSize} bg-green-600 border-2 border-green-900 text-white px-2 py-1 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`} onClick={() => onOrderReady(order.id)}>Pedido pronto</button>
+                                                    <button className={`${fontSize} bg-red-600 text-white px-2 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`} onClick={() => onCancelOrder(order.id)}>Cancelar pedido</button>
+                                                </div>
+                                            )}
+                                            {Array.isArray(card.status) && card.status.includes(order.status) && card.name !== "Cancelado" && (
+                                                <div className="w-full flex justify-center gap-3 mt-2 mb-1">
+                                                    <button className={`${fontSize} bg-green-600 border-2 border-green-900 text-white px-2 py-1 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`} onClick={() => onOrderDelivered(order.id)}>Pedido entregue</button>
+                                                    <button className={`${fontSize} bg-red-600 text-white px-2 rounded-full cursor-pointer hover:scale-105 transition-all duration-300`} onClick={() => onCancelOrder(order.id)}>Cancelar pedido</button>
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
                             )}
-
                         </li>
                     )
                 })}
             </ul>
         </>
     )
-
-}
+};
