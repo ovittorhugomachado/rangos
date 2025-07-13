@@ -84,7 +84,7 @@ export const MenuItemsContainer = ({
                                             className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px]`}
                                         >
                                             <Item
-                                                image={item.photoUrl ?? '../prato.png'}
+                                                image={item.photoUrl ?? '../prato-default.png'}
                                                 name={item.name}
                                                 description={item.description}
                                                 price={item.price}

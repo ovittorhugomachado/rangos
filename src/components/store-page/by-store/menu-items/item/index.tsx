@@ -61,7 +61,7 @@ export const Item = ({
     return (
         <>
             <div className="w-[150px] h-[150px] relative">
-                <img src={image ? `${image}?v=${imageVersion}` : "../prato.png"} alt="" className="w-[150px] h-[150px] object-cover" />
+                <img src={image ? `${image}?v=${imageVersion}` : "../prato-default.png"} alt="" className="w-[150px] h-[150px] object-cover" />
                 <button
                     type="button"
                     title="Configurar Banner da loja"
