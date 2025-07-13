@@ -5,9 +5,12 @@ import { Header } from "../components/store-page/by-customer/header"
 import { getStoreData } from "../services/store-data";
 import { getPageStyle } from "../services/page-style";
 import { getCategoriesStore } from "../services/menu-store";
-import { DayOfWeek } from "../types/restaurante-data-types.d";
+import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
 import { toMoney } from "../utils/transform-to-money";
 import { StoreBanner } from "../components/store-page/by-customer/banner";
+import { CategoryButtons } from "../components/store-page/by-customer/categories-butttons";
+import { MenuItemsContainer } from "../components/store-page/by-customer/menu-items";
+import { StoreFooterComponent } from "../components/store-page/by-customer/footer";
 
 type StoreData = {
     restaurantName: string,
@@ -44,6 +47,7 @@ export const Store = () => {
     const [error, setError] = useState('');
     const [storeData, setStoreData] = useState<StoreData | null>(null);
     const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const fetchStoreData = async () => {
         setLoading(true);
@@ -53,16 +57,15 @@ export const Store = () => {
 
             const styleData = await getPageStyle();
 
-            //const categoriesStore = await getCategoriesStore()
+            const categoriesStore = await getCategoriesStore()
 
             if (!styleData) {
                 throw new Error('Dados da loja não encontrados');
             };
 
             setStoreData(storeData);
-            //setBannerUrl(storeData.bannerUrl ?? '');
             setStoreStyle(styleData);
-            //setCategories(categoriesStore);
+            setCategories(categoriesStore);
 
             //if (styleData.backgroundColor) setBackgroundColor(styleData.backgroundColor);
             //if (styleData.primaryColor) setButtonColor(styleData.primaryColor);
@@ -84,6 +87,7 @@ export const Store = () => {
 
     console.log("Store Data:", storeData);
     console.log("Store Style:", storeStyle);
+    console.log("Categories:", categories);
 
     return (
         <>
@@ -96,7 +100,7 @@ export const Store = () => {
             ) : (
                 <div
                     style={{ backgroundColor: storeStyle?.backgroundColor ?? undefined }}
-                    className="w-screen h-screen px-[5%] lg:px-[15%] flex flex-col items-center"
+                    className="w-screen h-full min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center"
                 >
                     <Header
                         backgroundColor={storeStyle?.backgroundColor || ''}
@@ -118,9 +122,18 @@ export const Store = () => {
                         {storeData?.bannerUrl && (
                             <StoreBanner banner={storeData?.bannerUrl || 'store-banner-default.png'} />
                         )}
-                        
-                        <h1>Bem-vindo à loja</h1>
+                        <CategoryButtons
+                            categories={categories}
+                            buttonColor={storeStyle?.primaryColor ?? ''}
+                            textColor={storeStyle?.textColorButtons ?? 'black'}
+                        />
+                        <MenuItemsContainer
+                            categories={categories}
+                            backgroundColor={storeStyle?.backgroundColor ?? ''}
+                            buttonColor={storeStyle?.primaryColor ?? ''}
+                        />
                     </main>
+                    <StoreFooterComponent backgroundColor={storeStyle?.backgroundColor ?? ''} />
                 </div>
             )}
         </>
