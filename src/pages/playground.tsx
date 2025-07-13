@@ -1,57 +1,67 @@
 import { useEffect, useState } from "react";
-import { getCategoriesStore, getMenuItemService } from "../services/menu-store";
-import { MenuItemsContainer } from "../components/store-page/by-store/menu-items";
-import { MenuItemCreationForm } from "../components/forms/create-update-menu-item";
+import { DashboardCards } from "../components/dashboard-cards";
 
-interface Category {
+type OrderItem = {
     id: number;
-    name: string;
-}
+    orderId: number;
+    menuItemId: number;
+    quantity: number;
+    note?: string;
+    menuItem: {
+        name: string;
+        price: string;
+    };
+};
 
-interface MenuItem {
+type Order = {
     id: number;
-    name: string;
-    description: string;
-    price: number;
-}
+    storeId: number;
+    customerName: string;
+    customerPhone: string;
+    address: string;
+    deliveryType: string;
+    paymentMethod: string;
+    totalAmount: string;
+    status: string;
+    createdAt: string;
+    cancellationScheduledAt: string | null;
+    expectedStatus: string | null;
+    orderItems: OrderItem[];
+};
 
 export const PlaygroundPage = () => {
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [menuItemsByCategory, setMenuItemsByCategory] = useState<{ [categoryId: number]: MenuItem[] }>({});
-    const [loading, setLoading] = useState(true);
+
+    const [arrayOrders, setArrayOrders] = useState<Order[]>([]);
+
+    const fetchOrder = async () => {
+        try {
+
+            const order = await fetch(`http://localhost:3000/order/list?limit=50&offset=0`, {
+                credentials: 'include',
+            })
+
+            const data = await order.json();
+            setArrayOrders(data.data);
+            return data;
+
+        } catch (error) {
+            console.error("Error fetching orders:", error);
+        }
+    };
 
     useEffect(() => {
-        const fetchAll = async () => {
-            setLoading(true);
-            try {
-                const categoriesResponse = await getCategoriesStore();
-                setCategories(categoriesResponse);
-
-                // Busca os itens de cada categoria
-                const itemsObj: { [categoryId: number]: MenuItem[] } = {};
-                for (const category of categoriesResponse) {
-                    const response = await getMenuItemService(category.id);
-                    itemsObj[category.id] = response.data;
-                }
-                setMenuItemsByCategory(itemsObj);
-            } catch (error) {
-                console.error("Erro ao buscar dados:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchAll();
-    }, []);
-
+        fetchOrder();
+    }, [arrayOrders]);
 
     return (
-        <section className="">
-            <h1>Playground</h1>
-            {loading ? (
-                <div>Carregando...</div>
-            ) : (
-                <MenuItemCreationForm onClose={() => {}} /> 
-            )}
-        </section>
+        <>
+            <DashboardCards
+                orders={arrayOrders}
+                onCancelOrder={(orderId) => console.log("Cancel Order:", orderId)}
+                onAcceptOrder={(orderId) => console.log("Accept Order:", orderId)}
+                onOrderReady={(orderId) => console.log("Ready Order:", orderId)}
+                onOrderDelivered={(orderId) => console.log("Delivered Order:", orderId)}
+            />
+        </>
     );
 };
