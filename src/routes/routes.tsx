@@ -7,6 +7,7 @@ import { CreateNewPasswordPage } from "../pages/create-new-password";
 import { AdminDashboard } from "../pages/dashboard";
 import { CustomizeMenuPage } from "../pages/customize-menu";
 import { PlaygroundPage } from "../pages/playground";
+import { Store } from "../pages/store";
 
 export const AppRoutes = () => {
     return (
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
                 <Route path="/recuperar-senha" element={<RecoverPasswordPage />} />
                 <Route path="/create-new-password/:token" element={<CreateNewPasswordPage />} />
                 <Route path="/painel" element={<AdminDashboard />} />
+                <Route path="/store" element={<Store />} />
                 <Route path="/playground" element={<PlaygroundPage />} />
             </Routes>
         </BrowserRouter>
