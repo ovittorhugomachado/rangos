@@ -7,6 +7,7 @@ import { getPageStyle } from "../services/page-style";
 import { getCategoriesStore } from "../services/menu-store";
 import { DayOfWeek } from "../types/restaurante-data-types.d";
 import { toMoney } from "../utils/transform-to-money";
+import { StoreBanner } from "../components/store-page/by-customer/banner";
 
 type StoreData = {
     restaurantName: string,
@@ -94,8 +95,8 @@ export const Store = () => {
                 <LoadingComponent />
             ) : (
                 <div
-                    style={{ backgroundColor: storeStyle?.backgroundColor || 'black', color: storeStyle?.textColorButtons || 'white' }}
-                    className="w-screen h-full px-[5%] lg:px-[15%] flex flex-col items-center bg-black text-black lg:text-base"
+                    style={{ backgroundColor: storeStyle?.backgroundColor ?? undefined }}
+                    className="w-screen h-screen px-[5%] lg:px-[15%] flex flex-col items-center"
                 >
                     <Header
                         backgroundColor={storeStyle?.backgroundColor || ''}
@@ -113,7 +114,11 @@ export const Store = () => {
                                 : []
                         }
                     />
-                    <main className="pt-[387px]">
+                    <main className="w-full max-w-[1140px] flex flex-col items-center justify-center pb-24 mt-[110px] xs:mt-[87px] sm:mt-[115px] xl:mt-[132px]">
+                        {storeData?.bannerUrl && (
+                            <StoreBanner banner={storeData?.bannerUrl || 'store-banner-default.png'} />
+                        )}
+                        
                         <h1>Bem-vindo à loja</h1>
                     </main>
                 </div>

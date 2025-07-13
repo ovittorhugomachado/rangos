@@ -10,12 +10,21 @@
   --breakpoint-xs: 310px;
 }
 
+
 body {
     @apply box-border text-sm text-white bg-no-repeat bg-white dark:bg-black bg-cover bg-fixed;
 }
 
 input {
     @apply text-left flex items-center
+}
+
+img, button, span {
+     user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;   
+    -ms-user-select: none;   
+    -webkit-tap-highlight-color: transparent; 
 }
 
 .primary-component {

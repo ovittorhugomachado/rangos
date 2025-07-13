@@ -30,11 +30,11 @@ export const Header: React.FC<HeaderProps> = ({
         <header
             className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white'} max-h-[387px] z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between top-0 border-b-[1px] `}>
             <div className="w-full flex flex-col xs:flex-row justify-between items-center">
-                <div className="w-full flex items-center gap-3.5">
+                <div className="w-full flex items-center justify-center xs:justify-start gap-3.5">
                     <LogoStore image={restaurantImage} />
                     <div className="text-center mx-1.5">
                         <div className="flex items-center gap-1 m-1">
-                            <h2 className="text-md font-bold mb-1">{restaurantName}</h2>
+                            <h2 className="text-md xl:text-base font-bold mb-1">{restaurantName}</h2>
                         </div>
                         {isOpen ?
                             <div className="flex items-center flex-shrink-0">
