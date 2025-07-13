@@ -13,6 +13,7 @@ import {
     deliveredOrderService,
     getOrdersService
 } from "../services/manage-orders";
+import { CgMenuGridR } from "react-icons/cg";
 
 export const AdminDashboard = () => {
     const {
@@ -31,7 +32,12 @@ export const AdminDashboard = () => {
         setOrdersLoading(true);
         try {
             const orders = await getOrdersService();
-            setOrders(orders);
+            const now = Date.now();
+            const filtered = orders.filter(order => {
+                const created = new Date(order.createdAt).getTime();
+                return (now - created) <= 24 * 60 * 60 * 1000;
+            });
+            setOrders(filtered);
         } catch (error) {
             console.error("Erro ao buscar pedidos:", error);
         } finally {
@@ -42,7 +48,12 @@ export const AdminDashboard = () => {
     const updateOrders = async () => {
         try {
             const orders = await getOrdersService();
-            setOrders(orders);
+            const now = Date.now();
+            const filtered = orders.filter(order => {
+                const created = new Date(order.createdAt).getTime();
+                return (now - created) <= 24 * 60 * 60 * 1000;
+            });
+            setOrders(filtered);
         } catch (error) {
             console.error("Erro ao buscar pedidos:", error);
         }
@@ -102,7 +113,10 @@ export const AdminDashboard = () => {
                     />
                     <DashboardNav />
                     <main className={`${fontSize} w-screen h-screen pt-52 sm:pt-36 flex flex-col text-black dark:text-white items-center gap-6`}>
-                        <h1 className="text-4xl text-center border-b-2 border-primary mx-4">Painel de pedidos</h1>
+                        <div className="flex items-center justify-center">
+                        <CgMenuGridR className="text-4xl" />
+                        <h1 className="text-4xl text-center border-b-2 border-primary mx-3">Painel de pedidos</h1>
+                        </div>
                         {ordersLoading ? (
                             <LoadingComponent />
                         ) : (
