@@ -152,7 +152,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                         id="update-schedules-form"
                         onSubmit={handleFormSubmit}
                         noValidate
-                        className="dark:bg-black relative z-50 flex flex-col items-center w-120 max-w-115 mx-3 mt-10 mb-10 px-5 pb-4 gap-4 bg-white border border-zinc-400 rounded-xl max-h-[80vh] translate-y-[-3vh] overflow-y-auto"
+                        className="dark:bg-black relative z-50 flex flex-col items-center w-120 max-w-115 mx-3 mt-10 mb-10 px-5 pb-4 bg-white border border-zinc-400 rounded-xl max-h-[80vh] translate-y-[-3vh] overflow-y-auto"
                     >
                         <div className="dark:bg-black bg-white sticky top-0 left-0 w-full py-4 z-50 flex items-center justify-center">
                             <h2 className="text-xl text-center font-bold mx-10">Horários de Funcionamento</h2>
@@ -169,26 +169,41 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                             <p className="fon t-bold text-green-600">{successMessage}</p>
                         )}
                         {orderedOpeningHours.map((oh, idx) => (
-                            <div key={oh.day} className="flex flex-col justify-center items-center border-t-1 border-zinc-300 dark:border-zinc-800 p-3 mb-2 w-full gap-4">
+                            <div key={oh.day} className="flex flex-col justify-center items-center border-t-1 border-zinc-300 dark:border-zinc-800 p-3 mb-2 w-full">
                                 <div className="flex items-center gap-2 mb-2">
                                     <div className="w-full flex flex-col justify-center items-center">
                                         <span className="font-bold capitalize">{dayDisplay[oh.day] || oh.day}</span>
-                                        <label className="flex items-center gap-1">
-                                            <input
-                                                type="checkbox"
-                                                checked={oh.timeRanges.length > 0}
-                                                onChange={e => {
-                                                    const updated = [...openingHours];
-                                                    if (e.target.checked) {
-                                                        updated[idx].timeRanges.push({ start: '', end: '' });
-                                                    } else {
-                                                        updated[idx].timeRanges = [];
-                                                    }
-                                                    setOpeningHours(updated);
-                                                }}
-                                            />
-                                            Aberto
-                                        </label>
+                                        <div className="flex gap-4">
+                                            <label className="flex items-center gap-1 cursor-pointer">
+                                                <input
+                                                    type="radio"
+                                                    name={`opening-status-${idx}`}
+                                                    checked={oh.timeRanges.length > 0}
+                                                    onChange={() => {
+                                                        setOpeningHours(prev => prev.map((item, i) =>
+                                                            i === idx ? { ...item, timeRanges: [{ start: '09:00', end: '18:00' }] } : item
+                                                        ));
+                                                    }}
+                                                    className="accent-blue-600"
+                                                />
+                                                <span className="font-extralight">Aberto</span>
+                                            </label>
+
+                                            <label className="flex items-center gap-1 cursor-pointer">
+                                                <input
+                                                    type="radio"
+                                                    name={`opening-status-${idx}`}
+                                                    checked={oh.timeRanges.length === 0}
+                                                    onChange={() => {
+                                                        setOpeningHours(prev => prev.map((item, i) =>
+                                                            i === idx ? { ...item, timeRanges: [] } : item
+                                                        ));
+                                                    }}
+                                                    className="accent-blue-600"
+                                                />
+                                                <span className="font-extralight">Fechado</span>
+                                            </label>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -237,20 +252,19 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
                                             </button>
                                         </div>
                                     ))}
-                                    {
-
-                                    }
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            const updated = [...openingHours];
-                                            updated[idx].timeRanges.push({ start: "", end: "" });
-                                            setOpeningHours(updated);
-                                        }}
-                                        className="text-blue-600 text-sm"
-                                    >
-                                        + Adicionar horário
-                                    </button>
+                                    {oh.timeRanges.length > 0 && (
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const updated = [...openingHours];
+                                                updated[idx].timeRanges.push({ start: "", end: "" });
+                                                setOpeningHours(updated);
+                                            }}
+                                            className="bg-blue-600 text-sm px-2 py-1 rounded-full text-white hover:scale-103 transition-all duration-200 cursor-pointer"
+                                        >
+                                            + Adicionar horário
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         ))}
