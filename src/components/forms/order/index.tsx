@@ -6,6 +6,7 @@ import { InputCustomerAddress } from "../../inputs/input-customer-address";
 import { CheckboxOrderDeliveryTypesInput } from "../../inputs/input-customer-delivery-type";
 import { IoCloseOutline } from "react-icons/io5";
 import { toMoney } from "../../../utils/transform-to-money";
+import { useCart } from "../../../context/cart-context/hook";
 
 interface OrderDataFormProps {
     onClose: () => void;
@@ -30,7 +31,7 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
         control,
         // setError,
         formState: { errors },
-        //handleSubmit
+        handleSubmit
     } = useForm<OrderFormData>({
         defaultValues: {
             customerName: "",
@@ -39,16 +40,20 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
             ...order,
         },
     });
-    console.log(order)
 
-    const total = order?.items
-        ? order.items.reduce((acc, item) => acc + Number(item.price), 0)
-        : 0;
+    const { cart, clearCart } = useCart();
+
+    const onSubmit = (data: OrderFormData) => {
+        console.log("Form submitted with data:", data);
+    };
 
     return (
         <div className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} fixed inset-0 z-50 flex items-center justify-center overflow-y-auto max-h-screen`}>
             <div className="fixed inset-0 bg-white/10 backdrop-blur-sm z-40"></div>
-            <form className={`${backgroundColor === 'white' ? 'bg-white' : 'bg-black'} relative z-50 flex flex-col items-center w-120 max-w-115 mx-3 mt-10 mb-10 px-5 py-8 border border-zinc-400 rounded-xl max-h-[80vh] translate-y-[-3vh] overflow-y-auto`}>
+            <form
+                id="confirm-order-form"
+                onSubmit={handleSubmit(onSubmit)}
+                className={`${backgroundColor === 'white' ? 'bg-white' : 'bg-black'} relative z-50 flex flex-col items-center w-120 max-w-115 mx-3 mt-10 mb-10 px-5 py-8 border border-zinc-400 rounded-xl max-h-[75vh] translate-y-[-9vh] overflow-y-auto`}>
                 <button
                     type="button"
                     className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
@@ -76,11 +81,13 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
                     />
                     <CheckboxOrderDeliveryTypesInput
                         register={register}
+                        errors={errors}
+                        clearErrors={clearErrors}
                     />
                 </div>
                 <h1 className="text-base">Resumo do Pedido</h1>
                 <ul className="w-full px-2.5 pt-2.5 border-t-2">
-                    {order?.items.map((item, index) => (
+                    {cart.items.map((item, index) => (
                         <li key={index} className="w-full flex justify-between">
                             <span>{item.name}</span>
                             <span>{toMoney(Number(item.price))}</span>
@@ -89,12 +96,27 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
                     <li className="w-full flex items-center justify-between font-extrabold">
                         <span>Total</span>
                         <div className={`${backgroundColor === 'white' ? 'bg-black' : 'bg-white'} flex-1 mx-2 h-px translate-y-1.5`} />
-                        <span>{toMoney(total)}</span>
+                        <span>{toMoney(cart.total)}</span>
                     </li>
                 </ul>
             </form >
-            <div className="absolute left-1/2 -translate-x-1/2 w-full flex justify-center z-50" style={{ bottom: "4vh" }}>
-                <button type="submit" className="w-[320px] max-w-[90vw] primary-button">Confirmar pedido</button>
+            <div className="max-w-76 absolute left-1/2 -translate-x-1/2 w-full flex flex-col justify-center gap-2 z-50 px-2" style={{ bottom: "4vh" }}>
+                <button
+                    type="submit"
+                    form="confirm-order-form"
+                    className="primary-button border-2 border-black"
+                >
+                    Confirmar pedido
+                </button>
+                <button
+                    onClick={() => {
+                        clearCart();
+                        onClose();
+                    }}
+                    className="cancel-button"
+                >
+                    Limpar carrinho
+                </button>
             </div>
         </div >
     );
