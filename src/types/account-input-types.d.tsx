@@ -1,11 +1,19 @@
 import { UseFormRegister, UseFormWatch, UseFormClearErrors, FieldErrors, Control } from "react-hook-form";
 import { AccountData, MenuItemData } from "./account-types.d";
+import { OrderFormData } from "./orders-types.d";
 
 export interface InputNameProps {
     register: UseFormRegister<AccountData>;
     errors: FieldErrors<AccountData>;
     clearErrors: UseFormClearErrors<AccountData>;
     initialValues?: Partial<AccountData>;
+};
+
+export interface InputCustomerNameProps {
+    register: UseFormRegister<OrderFormData>;
+    errors: FieldErrors<OrderFormData>;
+    clearErrors: UseFormClearErrors<OrderFormData>;
+    initialValues?: Partial<OrderFormData>;
 };
 
 export interface InputMenuItemNameProps {
