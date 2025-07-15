@@ -19,13 +19,6 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
     const [editCategoryId, setEditCategoryId] = useState<number | null>(null);
     const [editCategoryName, setEditCategoryName] = useState<string | null>("");
 
-    const handleScroll = (id: string) => {
-        const section = document.getElementById(id);
-        if (section) {
-            section.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
     const createCategory = async (name: string) => {
         try {
             const createdCategory = await createCategoryService({ name });
@@ -66,7 +59,6 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
                     <button
                         type="button"
                         className="flex items-center justify-center w-full h-full"
-                        onClick={() => handleScroll(`category-${category.id}`)}
                     >
                         {category.name}
                     </button>
