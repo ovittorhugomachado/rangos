@@ -30,7 +30,7 @@ export type OrderFormData = {
     customerName: string;
     customerPhone: string;
     deliveryType: string;
-    address: string;
+    customerAddress: string;
     paymentMethod: string;
     items: Array<{
         id: number;

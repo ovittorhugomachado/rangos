@@ -37,6 +37,13 @@ export interface InputAddressProps {
     initialValues?: Partial<AccountData>;
 }
 
+export interface InputCustomerAddressProps {
+    register: UseFormRegister<OrderFormData>;
+    errors: FieldErrors<OrderFormData>;
+    clearErrors: UseFormClearErrors<OrderFormData>;
+    initialValues?: Partial<OrderFormData>;
+}
+
 export interface InputCNPJProps {
     control: Control<AccountData>;
     initialValues?: Partial<AccountData>;
@@ -50,6 +57,11 @@ export interface InputCPFProps {
 export interface InputPhoneNumberProps {
     control: Control<AccountData>;
     initialValues: Partial<AccountData>;
+}
+
+export interface InputCustomerPhoneNumberProps {
+    control: Control<OrderFormData>;
+    initialValues: Partial<OrderFormData>;
 }
 
 export interface InputEmailProps {
