@@ -3,10 +3,12 @@ import { OrderFormData } from "../../../types/orders-types.d";
 import { InputCustomerName } from "../../inputs/input-customer-name";
 import { InputCustomerPhoneNumber } from "../../inputs/input-customer-phone";
 import { InputCustomerAddress } from "../../inputs/input-customer-address";
-import { CheckboxOrderDeliveryTypesInput } from "../../inputs/input-customer-delivery-type";
+import { RadioOrderDeliveryTypesInput } from "../../inputs/input-customer-delivery-type";
 import { IoCloseOutline } from "react-icons/io5";
 import { toMoney } from "../../../utils/transform-to-money";
 import { useCart } from "../../../context/cart-context/hook";
+import { createOrder } from "../../../services/order";
+import { RadioOrderPaymentMethodInput } from "../../inputs/input-payment";
 
 interface OrderDataFormProps {
     onClose: () => void;
@@ -43,8 +45,23 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
 
     const { cart, clearCart } = useCart();
 
-    const onSubmit = (data: OrderFormData) => {
-        console.log("Form submitted with data:", data);
+    const onSubmit = async (data: OrderFormData) => {
+        try {
+            await createOrder({
+                customerName: data.customerName,
+                customerPhone: data.customerPhone,
+                typeOfDelivery: data.deliveryType,
+                address: data.customerAddress,    
+                paymentMethod: data.paymentMethod,
+                items: cart.items.map(item => ({
+                    menuItemId: item.id,
+                    note: "",
+                    optionIds: [],
+                })),
+            });
+        } catch (error) {
+            console.error("Error creating order:", error);
+        }
     };
 
     return (
@@ -79,7 +96,12 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
                         clearErrors={clearErrors}
                         initialValues={initialValues}
                     />
-                    <CheckboxOrderDeliveryTypesInput
+                    <RadioOrderPaymentMethodInput
+                        register={register}
+                        errors={errors}
+                        clearErrors={clearErrors}
+                    />
+                    <RadioOrderDeliveryTypesInput
                         register={register}
                         errors={errors}
                         clearErrors={clearErrors}
