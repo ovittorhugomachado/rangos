@@ -3,7 +3,7 @@ import { createMenuItemService, updateMenuItemByCategoryService } from "../../..
 import { ErrorComponent } from "../../error";
 import { LoadingComponent } from "../../loading";
 import { IoCloseOutline } from "react-icons/io5";
-import { InputName } from "../../inputs/input-name";
+import { InputName } from "../../inputs/input-menu-item-name";
 import { useForm } from "react-hook-form";
 import { InputPrice } from "../../inputs/input-price";
 
