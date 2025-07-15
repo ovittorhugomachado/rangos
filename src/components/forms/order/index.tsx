@@ -31,7 +31,6 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
         register,
         clearErrors,
         control,
-        // setError,
         formState: { errors },
         handleSubmit
     } = useForm<OrderFormData>({
@@ -39,6 +38,8 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
             customerName: "",
             customerAddress: "",
             customerPhone: "",
+            paymentMethod: "",
+            deliveryType: "delivery",
             ...order,
         },
     });
@@ -46,19 +47,23 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
     const { cart, clearCart } = useCart();
 
     const onSubmit = async (data: OrderFormData) => {
+        console.log(data)
         try {
             await createOrder({
                 customerName: data.customerName,
                 customerPhone: data.customerPhone,
                 typeOfDelivery: data.deliveryType,
                 address: data.customerAddress,    
-                paymentMethod: data.paymentMethod,
+                paymentMethod: data.paymentMethod as "pix" | "cartao" | "dinheiro",
                 items: cart.items.map(item => ({
                     menuItemId: item.id,
                     note: "",
                     optionIds: [],
                 })),
             });
+
+            clearCart();
+            onClose();
         } catch (error) {
             console.error("Error creating order:", error);
         }
