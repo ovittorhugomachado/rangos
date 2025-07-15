@@ -40,3 +40,16 @@ export type OrderFormData = {
     message: string;
     error: unknown;
 };
+
+export interface OrderRequest {
+    customerName: string;
+    customerPhone: string;
+    typeOfDelivery: "delivery" | "pickup";
+    address: string;
+    paymentMethod: "pix" | "cartao" | "dinheiro";
+    items: Array<{
+        menuItemId: number;
+        note?: string;
+        optionIds: number[];
+    }>;
+}

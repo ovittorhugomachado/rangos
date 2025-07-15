@@ -6,7 +6,6 @@ import { getStoreData } from "../services/store-data";
 import { getPageStyle } from "../services/page-style";
 import { getCategoriesStore } from "../services/menu-store";
 import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
-import { toMoney } from "../utils/transform-to-money";
 import { StoreBanner } from "../components/store-page/by-customer/banner";
 import { CategoryButtons } from "../components/store-page/by-customer/categories-butttons";
 import { MenuItemsContainer } from "../components/store-page/by-customer/menu-items";
@@ -67,10 +66,6 @@ export const Store = () => {
             setStoreStyle(styleData);
             setCategories(categoriesStore);
 
-            //if (styleData.backgroundColor) setBackgroundColor(styleData.backgroundColor);
-            //if (styleData.primaryColor) setButtonColor(styleData.primaryColor);
-            //if (styleData.textButtonColor) setTextColorButtons(styleData.textButtonColor);
-
         } catch (error) {
 
             setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
@@ -84,10 +79,6 @@ export const Store = () => {
     useEffect(() => {
         fetchStoreData();
     }, []);
-
-    console.log("Store Data:", storeData);
-    console.log("Store Style:", storeStyle);
-    console.log("Categories:", categories);
 
     return (
         <>
@@ -103,10 +94,13 @@ export const Store = () => {
                     className="w-screen h-full min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center"
                 >
                     <Header
-                        backgroundColor={storeStyle?.backgroundColor || ''}
+                        backgroundColor={
+                            storeStyle?.backgroundColor === "black"
+                                ? "black"
+                                : "white"
+                        }
                         restaurantImage={storeData?.logoUrl || 'store-logo-default.png'}
                         restaurantName={storeData?.restaurantName || 'Loja'}
-                        cartValue={toMoney(0, 'BRL')}
                         openingHours={
                             Array.isArray(storeData?.openingHours)
                                 ? storeData.openingHours.map((oh) => ({

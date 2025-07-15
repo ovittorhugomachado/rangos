@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppSettings } from "../hooks/use-app-settings.tsx";
+import { useAppSettings } from "../hooks/use-app-settings.ts";
 import { AccountData } from "../types/account-types.d.tsx";
 import { recoverPassword } from "../services/recover-password.ts";
 import { RecoverPasswordFormContainer } from "../components/forms/recover-password/index.tsx";

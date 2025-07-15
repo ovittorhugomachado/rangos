@@ -79,3 +79,15 @@ export interface InputPasswordProps {
     initialValues?: Partial<AccountData>;
 }
 
+export interface InputDeliveryTypeProps {
+    register: UseFormRegister<OrderFormData>;
+    errors: FieldErrors<OrderFormData>;
+    clearErrors: UseFormClearErrors<OrderFormData>;
+    initialValues?: Partial<OrderFormData>;
+}
+export interface InputPaymentMethodProps {
+    register: UseFormRegister<OrderFormData>;
+    errors: FieldErrors<OrderFormData>;
+    clearErrors: UseFormClearErrors<OrderFormData>;
+    initialValues?: Partial<OrderFormData>;
+}
