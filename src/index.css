@@ -5,9 +5,9 @@
 @tailwind utilities;
 
 @theme {
-  --color-primary: #85bc05;
-  --font-display: "geologica", "sans-serif"; 
-  --breakpoint-xs: 310px;
+    --color-primary: #85bc05;
+    --font-display: "geologica", "sans-serif";
+    --breakpoint-xs: 310px;
 }
 
 
@@ -20,11 +20,11 @@ input {
 }
 
 img, button, span {
-     user-select: none;
+    user-select: none;
     -webkit-user-select: none;
-    -moz-user-select: none;   
-    -ms-user-select: none;   
-    -webkit-tap-highlight-color: transparent; 
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .primary-component {
@@ -71,6 +71,44 @@ img, button, span {
     @apply px-[60px] py-2 text-sm md:text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-green-600 text-white hover:scale-105;
 }
 
+.order-alert {
+    border: 3px solid #ff0000;
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+    0% {
+        border-color: #ff0000;
+    }
+
+    50% {
+        border-color: transparent;
+    }
+
+    100% {
+        border-color: #ff0000;
+    }
+}
+
+.text-alert {
+    animation: piscarTexto 1s infinite;
+}
+
+@keyframes piscarTexto {
+    0% {
+        color: #ff0000;
+    }
+
+    50% {
+        color: #ff0000;
+        opacity: 0.2;
+    }
+
+    100% {
+        color: #ff0000;
+    }
+}
+
 input:-webkit-autofill {
     -webkit-text-fill-color: var(--text-color) !important;
     -webkit-box-shadow: 0 0 0 1000px var(--bg-color) inset !important;
@@ -87,7 +125,7 @@ input:-webkit-autofill {
 }
 
 @media (prefers-color-scheme: dark) {
-  input[type="time"]::-webkit-calendar-picker-indicator {
-      filter: invert(1);
-  }
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
 }

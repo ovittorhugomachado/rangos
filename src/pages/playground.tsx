@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { DashboardCards } from "../components/dashboard-cards";
 
 type OrderItem = {
     id: number;
@@ -55,13 +54,7 @@ export const PlaygroundPage = () => {
 
     return (
         <>
-            <DashboardCards
-                orders={arrayOrders}
-                onCancelOrder={(orderId) => console.log("Cancel Order:", orderId)}
-                onAcceptOrder={(orderId) => console.log("Accept Order:", orderId)}
-                onOrderReady={(orderId) => console.log("Ready Order:", orderId)}
-                onOrderDelivered={(orderId) => console.log("Delivered Order:", orderId)}
-            />
+
         </>
     );
 };

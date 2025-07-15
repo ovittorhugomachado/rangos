@@ -2,6 +2,7 @@ import { IoIosArrowDown } from "react-icons/io"
 import { CountdownTimer } from "../countdown-timer"
 import { toMoney } from "../../utils/transform-to-money";
 import { Order } from "../../types/orders-types.d";
+import { useEffect, useRef, useMemo } from "react";
 
 type DashboardCardProps = {
     fontSize: string;
@@ -25,7 +26,7 @@ export const DashboardCards = ({
     onOrderDelivered
 }: DashboardCardProps) => {
 
-    const cards = [
+    const cards = useMemo(() => [
         {
             id: 0,
             name: "Aguardando aprovação",
@@ -66,7 +67,7 @@ export const DashboardCards = ({
             titleColor: "text-white",
             textColor: "text-zinc-300"
         },
-    ];
+    ], []);
 
     const togglePanel = (panelIndex: number) => {
         setActivePanel((prev) =>
@@ -76,15 +77,45 @@ export const DashboardCards = ({
         );
     };
 
+    const alertAudioRef = useRef<HTMLAudioElement | null>(null);
+
+    useEffect(() => {
+        const aguardandoCard = cards.find(card => card.id === 0);
+        const aguardandoOrders = Array.isArray(aguardandoCard?.status)
+            ? orders.filter(order => aguardandoCard.status.includes(order.status))
+            : orders.filter(order => order.status === aguardandoCard?.status);
+
+        if (aguardandoOrders.length > 0) {
+            if (alertAudioRef.current) {
+                alertAudioRef.current.currentTime = 0;
+                alertAudioRef.current.play();
+            }
+        } else {
+            if (alertAudioRef.current) {
+                alertAudioRef.current.pause();
+                alertAudioRef.current.currentTime = 0;
+            }
+        }
+    }, [orders, cards]);
+
     return (
-        <>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto w-full p-3.5 items-start">
+        <div className="w-full h-full flex flex-col items-center">
+            <audio ref={alertAudioRef} src="./alert.mp3" preload="auto" />
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto w-full p-3.5 pb-20 items-start">
                 {cards.map((card, index) => {
                     const cardOrders = Array.isArray(card.status)
                         ? orders.filter(order => card.status.includes(order.status))
                         : orders.filter(order => order.status === card.status);
                     return (
-                        <li key={index} className={`${activePanel.includes(card.id) ? '' : 'max-h-[50px]'} ${card.color} w-full ${card.titleColor} rounded-xl `}>
+                        <li
+                            key={index}
+                            className={
+                                `${activePanel.includes(card.id) ? '' : 'max-h-[50px]'} ${card.id === 0 && cardOrders.length > 0 ? 'order-alert' : ''} ${card.color} relative w-full ${card.titleColor} rounded-xl`
+                            }
+                        >
+                            {card.id === 0 && cardOrders.length > 0 && (
+                                <span className="text-base absolute top-[-27px] text-red-500 text-alert">Novo pedido</span>
+                            )}
                             <div className="flex items-center justify-between gap-2 p-2">
                                 <IoIosArrowDown
                                     className={`${activePanel.includes(card.id) ? 'rotate-180' : ''} text-2xl cursor-pointer transition-all duration-300`}
@@ -145,6 +176,6 @@ export const DashboardCards = ({
                     )
                 })}
             </ul>
-        </>
+        </div>
     )
 };
