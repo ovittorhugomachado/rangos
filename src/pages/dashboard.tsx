@@ -5,7 +5,7 @@ import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
 import { LoadingComponent } from "../components/loading";
 import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
-import { DashboardNav } from "../components/dashboard-nav";
+import { DashboardNav } from "../components/nav";
 import { DashboardCards } from "../components/dashboard-cards";
 import {
     cancelOrderService,

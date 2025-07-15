@@ -30,7 +30,7 @@ export const DashboardNav = () => {
                             title="Editar cardápio"
                         >
                             <LiaPaintBrushSolid />
-                            Editar cardápio
+                            Editar loja
                         </Link>
                     </li>
                     <li className="flex justify-center sm:border-b-2 border-primary sm:px-4">
