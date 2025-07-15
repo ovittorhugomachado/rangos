@@ -66,7 +66,11 @@ export const MenuItemsContainer = ({
             ) : (
                 <section className="w-full xs:text-base">
                     {categories.map(category => (
-                        <div key={category.id} className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} mt-8`}>
+                        <div
+                            key={category.id}
+                            className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} mt-8`}
+                            id={`category-${category.id}`}
+                        >
                             <h1
                                 style={{ borderColor: buttonColor }}
                                 className={`inline-block pr-6 mb-2 text-2xl font-semibold border-b-4`}
