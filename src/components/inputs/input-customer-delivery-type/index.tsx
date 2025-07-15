@@ -1,7 +1,7 @@
 import { InputDeliveryTypeProps } from "../../../types/account-input-types.d";
 
 
-export const CheckboxOrderDeliveryTypesInput = ({
+export const RadioOrderDeliveryTypesInput = ({
     register,
     errors,
     clearErrors,
