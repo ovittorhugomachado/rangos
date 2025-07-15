@@ -29,7 +29,7 @@ export type Order = {
 export type OrderFormData = {
     customerName: string;
     customerPhone: string;
-    deliveryType: string;
+    deliveryType: "delivery" | "pickup";
     customerAddress: string;
     paymentMethod: string;
     items: Array<{
