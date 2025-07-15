@@ -2,6 +2,7 @@ import { LogoStore } from "./logo";
 import { DayOfWeek } from "../../../../types/restaurante-data-types.d";
 import { getRestaurantStatus } from "../../../../utils/restaurant-status";
 import { CiShoppingCart } from "react-icons/ci";
+import { toMoney } from "../../../../utils/transform-to-money";
 
 interface HeaderProps {
     backgroundColor?: string;
@@ -57,13 +58,15 @@ export const Header: React.FC<HeaderProps> = ({
                         }
                     </div>
                 </div>
-                <div
-                    aria-label="Carrinho de compras"
-                    className="flex xs:flex-col items-center text-center"
-                >
-                    <CiShoppingCart className="text-2xl sm:text-3xl cursor-pointer hover:scale-105 " />
-                    <h3 className="text-xs sm:text-base">{cartValue}</h3>
-                </div>
+                {cartValue !== undefined && Number(cartValue) > 0 && (
+                    <button
+                        aria-label="Carrinho de compras"
+                        className="flex xs:flex-col items-center text-center cursor-pointer hover:scale-105 transition-all duration-200"
+                    >
+                        <CiShoppingCart className="text-2xl sm:text-3xl" />
+                        <h3 className="text-xs sm:text-base">{toMoney(Number(cartValue), 'BRL')}</h3>
+                    </button>
+                )}
             </div >
         </header >
     )
