@@ -1,22 +1,32 @@
-import { UseFormRegister } from "react-hook-form";
-import { OrderFormData } from "../../../types/orders-types.d";
+import { InputDeliveryTypeProps } from "../../../types/account-input-types.d";
 
-interface UpdateDeliveryTypesInputProps {
-    register: UseFormRegister<OrderFormData>;
-}
 
 export const CheckboxOrderDeliveryTypesInput = ({
     register,
-}: UpdateDeliveryTypesInputProps) => (
-    <div className="w-full flex items-start mx-auto gap-4 mt-2">
-        <span className="font-bold">Tipo de entrega:</span>
+    errors,
+    clearErrors,
+}: InputDeliveryTypeProps) => (
+    <div className="w-full flex items-start mx-auto gap-4 mt-2 translate-y-1.5">
+        {errors.deliveryType && (
+            <span className="span-error absolute -translate-y-4.5">
+                {errors.deliveryType.message?.toString()}
+            </span>
+        )}
+        <label className="font-bold">
+            Tipo de entrega:
+        </label>
         <div className="flex flex-col gap-2 font-extralight">
             <div className="flex gap-1.5">
                 <input
                     type="radio"
                     id="delivery"
                     value={"delivery"}
-                    {...register("deliveryType")}
+                    {...register("deliveryType", {
+                        required: "Obrigatório"
+                    })}
+                    onChange={() => {
+                        clearErrors("deliveryType");
+                    }}
                 />
                 <label htmlFor="delivery">Delivery</label>
             </div>
@@ -25,7 +35,12 @@ export const CheckboxOrderDeliveryTypesInput = ({
                     type="radio"
                     id="pickup"
                     value={"pickup"}
-                    {...register("deliveryType")}
+                    {...register("deliveryType", {
+                        required: "Obrigatório"
+                    })}
+                    onChange={() => {
+                        clearErrors("deliveryType");
+                    }}
                 />
                 <label htmlFor="pickup">Retirada</label>
             </div>

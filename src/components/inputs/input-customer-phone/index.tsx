@@ -32,7 +32,7 @@ export const InputCustomerPhoneNumber = ({
                         {...field}
                         mask="(00) 00000-0000"
                         placeholder="(99) 99999-9999"
-                        className={`input-store mb-2 ${fieldState.error ? 'input-error' : ''}`}
+                        className={`input-store mb-2 ${fieldState.error ? 'input-error-store' : ''}`}
                         onAccept={(value) => field.onChange(value)}
                     />
                 </>

@@ -19,7 +19,7 @@ export const InputCustomerName = ({
             <input
                 id="name"
                 type="text"
-                className={`input-store mb-2 ${errors.customerName ? "input-error" : ""} autofill:text-black`}
+                className={`input-store mb-2 ${errors.customerName ? "input-error-store" : ""} autofill:text-black`}
                 placeholder="Nome"
                 defaultValue={initialValues.customerName || ""}
                 {...register("customerName", {

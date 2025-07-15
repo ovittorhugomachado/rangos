@@ -3,12 +3,14 @@ import { DayOfWeek } from "../../../../types/restaurante-data-types.d";
 import { getRestaurantStatus } from "../../../../utils/restaurant-status";
 import { CiShoppingCart } from "react-icons/ci";
 import { toMoney } from "../../../../utils/transform-to-money";
+import { useState } from "react";
+import { OrderForm } from "../../../forms/order";
+import { useCart } from "../../../../context/cart-context/hook";
 
 interface HeaderProps {
-    backgroundColor?: string;
+    backgroundColor: 'white' | 'black';
     restaurantImage?: string;
     restaurantName?: string;
-    cartValue?: string | number;
     openingHours?: {
         day: DayOfWeek
         open: string;
@@ -18,14 +20,20 @@ interface HeaderProps {
 };
 
 export const Header: React.FC<HeaderProps> = ({
-    backgroundColor = '',
+    backgroundColor = 'white',
     restaurantImage,
     restaurantName,
-    cartValue,
     openingHours = [],
 }) => {
 
+    const { cart } = useCart();
+
     const { isOpen, message } = getRestaurantStatus(openingHours);
+    const [showOrderForm, setShowOrderForm] = useState(false);
+
+    const handleCartClick = () => {
+        setShowOrderForm(true);
+    };
 
     return (
         <header
@@ -58,14 +66,22 @@ export const Header: React.FC<HeaderProps> = ({
                         }
                     </div>
                 </div>
-                {cartValue !== undefined && Number(cartValue) > 0 && (
+                {cart.total !== undefined && cart.total > 0 && (
                     <button
                         aria-label="Carrinho de compras"
                         className="flex xs:flex-col items-center text-center cursor-pointer hover:scale-105 transition-all duration-200"
+                        onClick={handleCartClick}
                     >
                         <CiShoppingCart className="text-2xl sm:text-3xl" />
-                        <h3 className="text-xs sm:text-base">{toMoney(Number(cartValue), 'BRL')}</h3>
+                        <h3 className="text-xs sm:text-base">{toMoney(Number(cart.total), 'BRL')}</h3>
                     </button>
+                )}
+                {showOrderForm && (
+                    <OrderForm
+                        onClose={() => setShowOrderForm(false)}
+                        initialValues={{}}
+                        backgroundColor={backgroundColor}
+                    />
                 )}
             </div >
         </header >

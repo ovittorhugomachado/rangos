@@ -20,12 +20,13 @@ export const InputCustomerAddress = ({
             <input
                 id="address"
                 type="text"
-                className={`input-store mb-2 ${errors.customerAddress ? "input-error" : ""}`}
+                className={`input-store mb-2 ${errors.customerAddress ? "input-error-store" : ""}`}
                 placeholder="Endereço"
                 defaultValue={initialValues.customerAddress || ""}
                 {...register("customerAddress", {
+                    required: "Endereço obrigatório",
                     minLength: {
-                        value: 2,
+                        value: 10,
                         message: "Campo obrigatório"
                     },
                     onChange: (e) => {
