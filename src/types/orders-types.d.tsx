@@ -34,7 +34,8 @@ export type OrderFormData = {
     paymentMethod: string;
     items: Array<{
         id: number;
-        quantity: number;
+        name: string;
+        price: number;
     }>;
     message: string;
     error: unknown;

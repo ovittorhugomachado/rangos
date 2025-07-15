@@ -35,6 +35,10 @@ img, button, span {
     @apply border border-zinc-400 rounded-xl px-3 py-2 w-full focus:outline-none focus:ring-1 bg-white text-black focus:ring-zinc-900 dark:bg-zinc-900 dark:text-white dark:focus:ring-white;
 }
 
+.input-store {
+    @apply border border-zinc-400 rounded-xl px-3 py-2 w-full focus:outline-none focus:ring-1;
+}
+
 .input-error {
     @apply border border-red-500 rounded-xl px-3 py-2 w-full focus:outline-none focus:ring-0 bg-white text-black dark:bg-zinc-900 dark:text-white dark:focus:ring-white;
 }

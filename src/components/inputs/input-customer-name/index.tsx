@@ -1,6 +1,6 @@
 import { InputCustomerNameProps } from "../../../types/account-input-types.d";
 
-export const InputName = ({
+export const InputCustomerName = ({
     register,
     errors,
     clearErrors,
@@ -19,7 +19,7 @@ export const InputName = ({
             <input
                 id="name"
                 type="text"
-                className={`input mb-2 ${errors.customerName ? "input-error" : ""} autofill:text-black`}
+                className={`input-store mb-2 ${errors.customerName ? "input-error" : ""} autofill:text-black`}
                 placeholder="Nome"
                 defaultValue={initialValues.customerName || ""}
                 {...register("customerName", {

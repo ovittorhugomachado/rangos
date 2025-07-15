@@ -20,7 +20,7 @@ export const InputCustomerAddress = ({
             <input
                 id="address"
                 type="text"
-                className={`input mb-2 ${errors.customerAddress ? "input-error" : ""}`}
+                className={`input-store mb-2 ${errors.customerAddress ? "input-error" : ""}`}
                 placeholder="Endereço"
                 defaultValue={initialValues.customerAddress || ""}
                 {...register("customerAddress", {

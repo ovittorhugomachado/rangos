@@ -46,8 +46,6 @@ export const SignupFormContainer = ({
 
         <div className="primary-component w-120 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
             <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col justify-center items-center mt-5 mb-5 w-full max-w-105 gap-4">
-
-
                 <Link
                     to="/entrar"
                     className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
