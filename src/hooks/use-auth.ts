@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { userData } from "../services/user-data";
+import { userData } from "../services/service-user-data";
 import { AccountData } from "../types/account-types.d";
 
 export const useAuth = () => { //função que verifica se o usuário tem o token e retorna dados do usuário

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
-import { UploadBannerImage } from "../../../services/upload-image";
+import { UploadBannerImage } from "../../../services/service-upload-image";
 
 export const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBannerChange: () => void }) => {
     const [bannerVersion, setBannerVersion] = useState(Date.now());

@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { UpdateMenuItemForm } from "../forms/create-update-menu-item-form";
-import { deleteMenuItemService } from "../../../services/menu-store";
+import { deleteMenuItemService } from "../../../services/service-manage-menu-store";
 import { MdOutlineEdit } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
-import { uploadMenuItemImage } from "../../../services/upload-image";
+import { uploadMenuItemImage } from "../../../services/service-upload-image";
 
 interface ItemProps {
     image?: string;

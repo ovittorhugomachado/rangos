@@ -12,7 +12,7 @@ import {
     acceptOrderService, readyOrderService,
     deliveredOrderService,
     getOrdersService
-} from "../services/manage-orders";
+} from "../services/service-manage-orders";
 import { CgMenuGridR } from "react-icons/cg";
 
 export const AdminDashboard = () => {

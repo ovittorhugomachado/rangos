@@ -1,4 +1,3 @@
-
 export const validateToken = async (token: string): Promise<boolean> => {
     try {
         const response = await fetch(`http://localhost:3000/validate-token/${token}`, {
@@ -7,7 +6,8 @@ export const validateToken = async (token: string): Promise<boolean> => {
         });
 
         if (!response.ok) {
-            throw new Error('Token inválido');
+            const error = await response.json();
+            throw new Error(error.message ||'Token inválido');
         }
 
         return true;
@@ -27,7 +27,7 @@ export const createNewPassword = async (newPassword: string, token: string) => {
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || error.erro || 'Erro ao criar nova senha');
+            throw new Error(error.message || 'Erro ao criar nova senha');
         }
 
         return await response.json();

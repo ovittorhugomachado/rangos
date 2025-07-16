@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { BottomNav } from "../components/store-side/store-page-components/style-toolbar-store";
-import { getPageStyle } from "../services/page-style";
+import { getPageStyle } from "../services/service-page-style";
 import { LoadingComponent } from "../components/loading-component";
 import { StoreBanner } from "../components/store-side/store-page-components/banner-store";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { StoreFooterComponent } from "../components/store-side/store-page-components/footer-store";
 import { ErrorComponent } from "../components/error-component";
-import { getCategoriesStore } from "../services/menu-store";
+import { getCategoriesStore } from "../services/service-manage-menu-store";
 import { DayOfWeek, Category } from "../types/restaurante-data-types.d";
 import { CategoryButtons } from "../components/store-side/store-page-components/categories-buttons-store";
-import { getStoreData } from "../services/store-data";
+import { getStoreData } from "../services/service-store-data";
 import { Header } from "../components/store-side/store-page-components/header-store";
 import { UpdateStoreDataForm } from "../components/store-side/forms/update-data-store-form";
 import { UpdateSchedulesForm } from "../components/store-side/forms/update-schedules-form";

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getStoreData } from "../../../services/store-data";
-import { updateSchedules } from "../../../services/update-schedules";
+import { getStoreData } from "../../../services/service-store-data";
+import { updateSchedules } from "../../../services/service-update-schedules";
 import { OpeningHour } from "../../../types/schedules-types.d";
 import { IoCloseOutline } from "react-icons/io5";
 import { LoadingComponent } from "../../loading-component";

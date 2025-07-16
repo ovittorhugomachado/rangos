@@ -36,7 +36,7 @@ export const logout = async () => {
     try {
         const response = await fetch('http://localhost:3000/logout', {
             method: 'POST',
-            credentials: 'include',  // importante para enviar cookies
+            credentials: 'include',  
         });
 
         const data = await response.json();

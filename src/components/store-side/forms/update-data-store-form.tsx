@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { getStoreData, updateStoreData } from "../../../services/store-data";
+import { getStoreData, updateStoreData } from "../../../services/service-store-data";
 import { ErrorComponent } from "../../error-component";
 import { LoadingComponent } from "../../loading-component";
 import { AccountData } from "../../../types/account-types.d";

@@ -3,7 +3,7 @@ import { useAppSettings } from "../hooks/use-app-settings";
 import { useState, useEffect } from "react";
 import { AccountData } from "../types/account-types.d";
 import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
-import { createNewPassword, validateToken } from "../services/create-new-password"; // Adicionei a nova função
+import { createNewPassword, validateToken } from "../services/service-create-new-password"; // Adicionei a nova função
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";

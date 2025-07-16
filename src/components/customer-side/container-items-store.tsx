@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import { getMenuItemService } from "../../services/menu-store"
+import { getMenuItemService } from "../../services/service-manage-menu-store"
 import { ErrorComponent } from "../error-component"
 import { LoadingComponent } from "../loading-component"
 import { Item } from "./item-store";

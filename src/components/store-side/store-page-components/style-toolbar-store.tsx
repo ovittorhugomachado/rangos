@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { updatePageStyle } from '../../../services/page-style';
+import { updatePageStyle } from '../../../services/service-page-style';
 import { toggleHiddenFlex } from '../../../utils/toggleHiddenFlex';
 import { MdOutlineColorLens } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";

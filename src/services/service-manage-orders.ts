@@ -1,4 +1,4 @@
-import { Order } from "../types/orders-types.d";
+import { Order, OrderRequest } from "../types/orders-types.d";
 
 export const getOrdersService = async (limit: number = 1000, offset: number = 0): Promise<Order[]> => {
     try {
@@ -16,28 +16,22 @@ export const getOrdersService = async (limit: number = 1000, offset: number = 0)
     }
 };
 
-export const createOrderService = async (orderData: Order) => {
-    try {
-        const response = await fetch('http://localhost:3000/order/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-            body: JSON.stringify(orderData),
-        });
+export const createOrder = async (order: OrderRequest) => {
+    const response = await fetch("http://localhost:3000/order", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        credentials: 'include',
+        body: JSON.stringify(order),
+    });
 
-        if (!response.ok) {
-            throw new Error('Erro ao criar pedido');
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Erro ao criar pedido:', error);
-        throw error;
+    if (!response.ok) {
+        throw new Error("Erro ao criar pedido");
     }
-}; //FALTA TESTAR
+
+    return await response.json();
+};
 
 export const cancelOrderService = async (orderId: number) => {
     try {

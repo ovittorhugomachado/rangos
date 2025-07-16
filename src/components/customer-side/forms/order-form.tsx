@@ -7,7 +7,7 @@ import { RadioOrderDeliveryTypesInput } from "../inputs/customer-delivery-type-i
 import { IoCloseOutline } from "react-icons/io5";
 import { toMoney } from "../../../utils/transform-to-money";
 import { useCart } from "../../../context/cart-context/cart-context";
-import { createOrder } from "../../../services/order";
+import { createOrder } from "../../../services/service-manage-orders";
 import { RadioOrderPaymentMethodInput } from "../inputs/customer-payment-method-input";
 
 interface OrderDataFormProps {

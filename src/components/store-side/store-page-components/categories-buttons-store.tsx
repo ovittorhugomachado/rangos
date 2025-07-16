@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createCategoryService, deleteCategoryService, RenameCategoryService } from "../../../services/menu-store";
+import { createCategoryService, deleteCategoryService, RenameCategoryService } from "../../../services/service-manage-menu-store";
 import { Category } from "../../../types/restaurante-data-types.d";
 import { CreateCategoryForm, UpdateCategoryForm } from "../forms/create-update-categories-form";
 import { IoCloseOutline } from "react-icons/io5";

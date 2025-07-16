@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createMenuItemService, updateMenuItemByCategoryService } from "../../../services/menu-store";
+import { createMenuItemService, updateMenuItemByCategoryService } from "../../../services/service-manage-menu-store";
 import { ErrorComponent } from "../../error-component";
 import { LoadingComponent } from "../../loading-component";
 import { IoCloseOutline } from "react-icons/io5";
