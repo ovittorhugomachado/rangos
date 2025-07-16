@@ -1,4 +1,4 @@
-export function validateOpeningHours(hours: { day: string; timeRanges: { start: string; end: string }[] }[]) {
+export const validateOpeningHours = (hours: { day: string; timeRanges: { start: string; end: string }[] }[]) => {
     const isValidHour = (time: string): boolean =>
         /^(0\d|1\d|2[0-3]):[0-5]\d$/.test(time);
 

@@ -1,4 +1,4 @@
-export async function UploadProfileImage(userId: number, file: File) {
+export const UploadProfileImage = async (userId: number, file: File) => {
   const formData = new FormData();
   formData.append('logo', file);
 

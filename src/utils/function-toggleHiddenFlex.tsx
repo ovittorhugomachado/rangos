@@ -1,4 +1,4 @@
-export function toggleHiddenFlex(element: HTMLElement) {
+export const toggleHiddenFlex = (element: HTMLElement) => {
     if (element.classList.contains('hidden')) {
         element.classList.replace('hidden', 'flex');
     } else if (element.classList.contains('flex')) {
