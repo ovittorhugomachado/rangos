@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { LoginPage } from "../pages/login";
-import { RegisterPage } from "../pages/signup";
+import { LoginPage } from "../pages/page-login";
+import { RegisterPage } from "../pages/page-signup";
 //import { HomePage } from "../pages/home-page";
-import { RecoverPasswordPage } from "../pages/recover-password";
-import { CreateNewPasswordPage } from "../pages/create-new-password";
-import { AdminDashboard } from "../pages/dashboard";
-import { CustomizeMenuPage } from "../pages/customize-menu";
-import { PlaygroundPage } from "../pages/playground";
-import { Store } from "../pages/store";
+import { RecoverPasswordPage } from "../pages/page-recover-password";
+import { CreateNewPasswordPage } from "../pages/page-create-new-password";
+import { AdminDashboard } from "../pages/page-dashboard";
+import { CustomizeMenuPage } from "../pages/page-customize-menu";
+import { PlaygroundPage } from "../pages/page-playground";
+import { Store } from "../pages/page-store";
 
 export const AppRoutes = () => {
     return (
