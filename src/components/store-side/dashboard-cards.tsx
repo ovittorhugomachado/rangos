@@ -1,19 +1,8 @@
-import { IoIosArrowDown } from "react-icons/io"
-import { CountdownTimer } from "./countdown-timer"
-import { toMoney } from "../../utils/function-transform-to-money";
-import { Order } from "../../types/types-orders.d";
 import { useEffect, useRef, useMemo } from "react";
-
-type DashboardCardProps = {
-    fontSize: string;
-    orders: Order[];
-    activePanel: number[];
-    setActivePanel: React.Dispatch<React.SetStateAction<number[]>>;
-    onAcceptOrder: (orderId: number) => void;
-    onCancelOrder: (orderId: number) => void;
-    onOrderReady: (orderId: number) => void;
-    onOrderDelivered: (orderId: number) => void;
-};
+import { toMoney } from "../../utils/function-transform-to-money";
+import { CountdownTimer } from "./countdown-timer"
+import { DashboardCardOrdersProps } from "../../types/types-orders.d";
+import { IoIosArrowDown } from "react-icons/io"
 
 export const DashboardCards = ({
     fontSize,
@@ -24,7 +13,7 @@ export const DashboardCards = ({
     onCancelOrder,
     onOrderReady,
     onOrderDelivered
-}: DashboardCardProps) => {
+}: DashboardCardOrdersProps) => {
 
     const cards = useMemo(() => [
         {

@@ -1,13 +1,8 @@
-import { UseFormRegister } from "react-hook-form";
-import { AccountData } from "../../../types/types-account.d";
-
-interface UpdateDeliveryTypesInputProps {
-    register: UseFormRegister<AccountData>;
-}
+import { InputDeliveryTypeProps } from "../../../types/types-input.d";
 
 export const CheckboxDeliveryTypesInput = ({
     register,
-}: UpdateDeliveryTypesInputProps) => (
+}: InputDeliveryTypeProps) => (
     <div className="flex items-center mx-auto gap-4 mt-2">
         <span className="font-bold">Tipos de entrega:</span>
         <label htmlFor="delivery">Delivery</label>

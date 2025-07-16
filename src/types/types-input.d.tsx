@@ -1,12 +1,28 @@
 import { UseFormRegister, UseFormWatch, UseFormClearErrors, FieldErrors, Control } from "react-hook-form";
-import { AccountData, MenuItemData } from "./types-account.d";
-import { OrderFormData } from "./types-orders.d";
+import { AccountData } from "./types-account.d";
+import { RestaurantData } from "./types-restaurante-data.d";
+import { MenuItem } from "./types-menu.d";
+import { OrderFormData } from "./types-data-forms.d";
 
 export type InputNameProps = {
     register: UseFormRegister<AccountData>;
     errors: FieldErrors<AccountData>;
     clearErrors: UseFormClearErrors<AccountData>;
     initialValues?: Partial<AccountData>;
+};
+
+export type InputOwnersNameProps = {
+    register: UseFormRegister<RestaurantData>;
+    errors: FieldErrors<RestaurantData>;
+    clearErrors: UseFormClearErrors<RestaurantData>;
+    initialValues?: Partial<RestaurantData>;
+};
+
+export type InputRestaurantNameProps = {
+    register: UseFormRegister<RestaurantData>;
+    errors: FieldErrors<RestaurantData>;
+    clearErrors: UseFormClearErrors<RestaurantData>;
+    initialValues?: Partial<RestaurantData>;
 };
 
 export type InputCustomerNameProps = {
@@ -17,24 +33,24 @@ export type InputCustomerNameProps = {
 };
 
 export type InputMenuItemNameProps = {
-    register: UseFormRegister<MenuItemData>;
-    errors: FieldErrors<MenuItemData>;
-    clearErrors: UseFormClearErrors<MenuItemData>;
-    initialValues?: Partial<MenuItemData>;
+    register: UseFormRegister<MenuItem>;
+    errors: FieldErrors<MenuItem>;
+    clearErrors: UseFormClearErrors<MenuItem>;
+    initialValues?: Partial<MenuItem>;
 };
 
 export type InputMenuItemPriceProps = {
-    register: UseFormRegister<MenuItemData>;
-    errors: FieldErrors<MenuItemData>;
-    clearErrors: UseFormClearErrors<MenuItemData>;
-    initialValues: Partial<MenuItemData>;
+    register: UseFormRegister<MenuItem>;
+    errors: FieldErrors<MenuItem>;
+    clearErrors: UseFormClearErrors<MenuItem>;
+    initialValues: Partial<MenuItem>;
 };
 
 export type InputAddressProps = {
-    register: UseFormRegister<AccountData>;
-    errors: FieldErrors<AccountData>;
-    clearErrors: UseFormClearErrors<AccountData>;
-    initialValues?: Partial<AccountData>;
+    register: UseFormRegister<RestaurantData>;
+    errors: FieldErrors<RestaurantData>;
+    clearErrors: UseFormClearErrors<RestaurantData>;
+    initialValues?: Partial<RestaurantData>;
 }
 
 export type InputCustomerAddressProps = {
@@ -45,18 +61,18 @@ export type InputCustomerAddressProps = {
 }
 
 export type InputCNPJProps = {
-    control: Control<AccountData>;
-    initialValues?: Partial<AccountData>;
+    control: Control<RestaurantData>;
+    initialValues?: Partial<RestaurantData>;
 }
 
 export type InputCPFProps = {
-    control: Control<AccountData>;
-    initialValues: Partial<AccountData>;
+    control: Control<RestaurantData>;
+    initialValues: Partial<RestaurantData>;
 }
 
 export type InputPhoneNumberProps = {
-    control: Control<AccountData>;
-    initialValues: Partial<AccountData>;
+    control: Control<RestaurantData>;
+    initialValues: Partial<RestaurantData>;
 }
 
 export type InputCustomerPhoneNumberProps = {
@@ -65,21 +81,26 @@ export type InputCustomerPhoneNumberProps = {
 }
 
 export type InputEmailProps = {
-    register: UseFormRegister<AccountData>;
-    errors: FieldErrors<AccountData>;
-    clearErrors: UseFormClearErrors<AccountData>;
-    initialValues?: Partial<AccountData>;
+    register: UseFormRegister<RestaurantData>;
+    errors: FieldErrors<RestaurantData>;
+    clearErrors: UseFormClearErrors<RestaurantData>;
+    initialValues?: Partial<RestaurantData>;
 }
 
 export type InputPasswordProps = {
-    register: UseFormRegister<AccountData>;
-    errors: FieldErrors<AccountData>;
-    clearErrors: UseFormClearErrors<AccountData>;
-    watch: UseFormWatch<AccountData>;
-    initialValues?: Partial<AccountData>;
+    register: UseFormRegister<RestaurantData>;
+    errors: FieldErrors<RestaurantData>;
+    clearErrors: UseFormClearErrors<RestaurantData>;
+    watch: UseFormWatch<RestaurantData>;
+    initialValues?: Partial<RestaurantData>;
 }
 
 export type InputDeliveryTypeProps = {
+    register: UseFormRegister<RestaurantData>;
+    initialValues?: Partial<RestaurantData>;
+}
+
+export type InputDeliveryTypeOfOrderProps = {
     register: UseFormRegister<OrderFormData>;
     errors: FieldErrors<OrderFormData>;
     clearErrors: UseFormClearErrors<OrderFormData>;

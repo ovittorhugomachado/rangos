@@ -1,11 +1,11 @@
-import { InputDeliveryTypeProps } from "../../../types/types-input.d";
+import { InputDeliveryTypeOfOrderProps } from "../../../types/types-input.d";
 
 
 export const RadioOrderDeliveryTypesInput = ({
     register,
     errors,
     clearErrors,
-}: InputDeliveryTypeProps) => (
+}: InputDeliveryTypeOfOrderProps) => (
     <div className="w-full flex items-start mx-auto gap-4 mt-2 translate-y-1.5">
         {errors.deliveryType && (
             <span className="span-error absolute -translate-y-4.5">

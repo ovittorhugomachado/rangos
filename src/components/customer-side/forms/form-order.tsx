@@ -9,16 +9,7 @@ import { toMoney } from "../../../utils/function-transform-to-money";
 import { useCart } from "../../../context/cart-context/cart-context";
 import { createOrder } from "../../../services/service-manage-orders";
 import { RadioOrderPaymentMethodInput } from "../inputs/input-customer-payment-method";
-
-interface OrderDataFormProps {
-    onClose: () => void;
-    isLoading?: boolean;
-    error?: string;
-    initialValues?: Partial<OrderFormData>;
-    order?: OrderFormData;
-    backgroundColor?: string;
-    message?: string;
-}
+import { OrderDataFormProps } from "../../../types/types-data-forms.d";
 
 export const OrderForm: React.FC<OrderDataFormProps> = ({
     backgroundColor,

@@ -1,43 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { createMenuItemService, updateMenuItemByCategoryService } from "../../../services/service-manage-menu-store";
+import { CreateMenuItemFormProps, MenuItemFormData, UpdateMenuItemFormProps } from "../../../types/types-data-forms.d";
 import { ErrorComponent } from "../../component-error";
 import { LoadingComponent } from "../../component-loading";
-import { IoCloseOutline } from "react-icons/io5";
 import { InputName } from "../inputs/input-store-menu-item-name";
-import { useForm } from "react-hook-form";
 import { InputPrice } from "../inputs/input-store-menu-item-price";
+import { IoCloseOutline } from "react-icons/io5";
 
-interface CreateMenuItemProps {
-    onClose: () => void;
-    onCreated?: () => void;
-    isLoading?: boolean;
-    error?: string;
-    message?: string;
-    categoryId?: number;
-}
-
-interface UpdateMenuItemProps {
-    onClose: () => void;
-    onUpdated?: () => void;
-    categoryId: number;
-    itemId: number;
-    initialData: {
-        name: string;
-        description: string;
-        price: number | string;
-    };
-}
-
-interface MenuItemFormData {
-    name: string;
-    description: string;
-    price: string;
-    itemId?: number;
-    message: string;
-    error: unknown;
-}
-
-export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
+export const MenuItemCreationForm: React.FC<CreateMenuItemFormProps> = ({
     onClose,
     onCreated,
     categoryId
@@ -196,7 +167,7 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemProps> = ({
     );
 };
 
-export const UpdateMenuItemForm: React.FC<UpdateMenuItemProps> = ({
+export const UpdateMenuItemForm: React.FC<UpdateMenuItemFormProps> = ({
     onClose,
     onUpdated,
     categoryId,

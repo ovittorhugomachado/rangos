@@ -1,58 +1,32 @@
 import { useEffect, useState } from "react";
-import { BottomNav } from "../components/store-side/store-page-components/store-style-toolbar";
 import { getPageStyle } from "../services/service-page-style";
+import { getCategoriesStore } from "../services/service-manage-menu-store";
+import { getStoreData } from "../services/service-store-data";
+import { useAppSettings } from "../hooks/use-app-settings";
+import { RestaurantData } from "../types/types-restaurante-data.d";
+import { StyleStorePage } from "../types/types-style-store-page.d";
+import { Category } from "../types/types-menu.d";
+import { BottomNav } from "../components/store-side/store-page-components/store-style-toolbar";
 import { LoadingComponent } from "../components/component-loading";
 import { StoreBanner } from "../components/store-side/store-page-components/store-banner";
-import { useAppSettings } from "../hooks/use-app-settings";
 import { StoreFooterComponent } from "../components/store-side/store-page-components/store-footer";
 import { ErrorComponent } from "../components/component-error";
-import { getCategoriesStore } from "../services/service-manage-menu-store";
-import { Category } from "../types/types-menu.d";
 import { CategoryButtons } from "../components/store-side/store-page-components/store-categories-buttons";
-import { getStoreData } from "../services/service-store-data";
 import { Header } from "../components/store-side/store-page-components/store-header";
 import { UpdateStoreDataForm } from "../components/store-side/forms/form-update-data-store";
 import { UpdateSchedulesForm } from "../components/store-side/forms/form-update-schedules";
-import { MenuItemsContainer } from "../components/store-side/store-page-components/store-container-items";
-
-type StoreData = {
-    restaurantName: string,
-    phoneNumber: string,
-    address: string | null,
-    logoUrl: string | null,
-    bannerUrl: string | null,
-    delivery: boolean,
-    pickup: boolean,
-    openingHours: [
-        {
-            storeId: number,
-            day: string,
-            isOpen: boolean,
-            status: string,
-            timeRanges: Array<{
-                start: string,
-                end: string
-            }>
-        }
-    ]
-};
-
-type StyleData = {
-    primaryColor?: string | null;
-    backgroundColor?: string | null;
-    textColorButtons?: string | null;
-};
+import { MenuItems } from "../components/store-side/store-page-components/store-container-items";
 
 export const CustomizeMenuPage = () => {
     useAppSettings();
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
-    const [storeData, setStoreData] = useState<StoreData | null>(null);
+    const [storeData, setStoreData] = useState<RestaurantData | null>(null);
     const [showStoreDataUpdateForm, setStoreDataUpdateForm] = useState(false)
     const [showStoreSchedulesUpdateForm, setShowStoreSchedulesUpdateForm] = useState(false)
     const [bannerUrl, setBannerUrl] = useState<string>('');
-    const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
+    const [storeStyle, setStoreStyle] = useState<StyleStorePage | null>(null);
     const [initialButtonColor, setInitialButtonColor] = useState('');
     const [initialBackgroundColor, setInitialBackgroundColor] = useState('');
     const [initialTextColorButtons, setInitialTextColorButtons] = useState('');
@@ -182,7 +156,7 @@ export const CustomizeMenuPage = () => {
                             textColor={textColorButtons}
                             buttonColor={buttonColor}
                         />
-                        <MenuItemsContainer
+                        <MenuItems
                             categories={categories}
                             backgroundColor={backgroundColor ?? ''}
                             buttonColor={buttonColor ?? ''}

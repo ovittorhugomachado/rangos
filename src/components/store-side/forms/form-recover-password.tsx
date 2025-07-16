@@ -1,9 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { AccountContainerProps, AccountData } from "../../../types/types-account.d";
-import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import { InputEmail } from "../inputs/input-store-email";
+import { AccountData } from "../../../types/types-account.d";
+import { AccountFormProps } from "../../../types/types-data-forms.d";
 import { Logo } from "../../component-logo";
+import { InputEmail } from "../inputs/input-store-email";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const RecoverPasswordFormContainer = ({
     onSubmit,
@@ -11,14 +13,14 @@ export const RecoverPasswordFormContainer = ({
     message,
     initialValues = {},
     isLoading = false,
-}: AccountContainerProps) => {
+}: AccountFormProps) => {
     const {
         register,
         handleSubmit,
         clearErrors,
         setError,
         formState: { errors },
-    } = useForm<AccountData>({
+    } = useForm<RestaurantData>({
         defaultValues: {
             email: '',
             ...initialValues,

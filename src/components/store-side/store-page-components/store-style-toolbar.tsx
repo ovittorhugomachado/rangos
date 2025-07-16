@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { updatePageStyle } from '../../../services/service-page-style';
 import { toggleHiddenFlex } from '../../../utils/function-toggleHiddenFlex';
+import { useDraggable } from '../../../hooks/use-draggable';
+import { BottomNavProps } from '../../../types/types-style-store-page.d';
 import { MdOutlineColorLens } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
-import { useDraggable } from '../../../hooks/use-draggable';
-
-interface BottomNavProps {
-    initialBackgroundColor: 'white' | 'black';
-    initialButtonColor: string;
-    initialTextColorButtons: 'white' | 'black';
-    backgroundColorStore: 'white' | 'black';
-    setBackgroundColor: (color: 'white' | 'black') => void;
-    buttonColor: string;
-    setButtonColor: (color: string) => void;
-    textColorButtons: 'white' | 'black';
-    setTextColorButtons: (color: 'white' | 'black') => void;
-}
 
 export const BottomNav = ({
     initialBackgroundColor,

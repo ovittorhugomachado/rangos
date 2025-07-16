@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { getStoreData, updateStoreData } from "../../../services/service-store-data";
+import { UpdateStoreDataFormProps } from "../../../types/types-data-forms.d";
+import { AccountData } from "../../../types/types-account.d";
 import { ErrorComponent } from "../../component-error";
 import { LoadingComponent } from "../../component-loading";
-import { AccountData } from "../../../types/types-account.d";
 import { CheckboxDeliveryTypesInput } from "../inputs/input-store-delivery-type";
 import { InputRestaurantName } from "../inputs/input-store-restaurant-name";
 import { InputPhoneNumber } from "../inputs/input-store-phone-number";
 import { InputAddress } from "../inputs/input-store-address";
 import { IoCloseOutline } from "react-icons/io5";
-
-interface UpdateStoreDataFormProps {
-    onClose: () => void;
-    isLoading?: boolean;
-    error?: string;
-    initialValues?: Partial<AccountData>;
-    message?: string;
-}
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     onClose,
@@ -29,7 +23,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
         control,
         clearErrors,
         formState: { errors },
-    } = useForm<AccountData>({
+    } = useForm<RestaurantData>({
         defaultValues: {
             restaurantName: "",
             address: "",
@@ -43,7 +37,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [messageSuccess, setMessageSuccess] = useState("");
-    const [lastData, setLastData] = useState<Partial<AccountData> | null>(null);
+    const [lastData, setLastData] = useState<Partial<RestaurantData> | null>(null);
 
     useEffect(() => {
         const fetchStoreData = async () => {

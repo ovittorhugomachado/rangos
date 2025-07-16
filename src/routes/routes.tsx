@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { LoginPage } from "../pages/page-login";
 import { RegisterPage } from "../pages/page-signup";
-//import { HomePage } from "../pages/home-page";
 import { RecoverPasswordPage } from "../pages/page-recover-password";
 import { CreateNewPasswordPage } from "../pages/page-create-new-password";
 import { AdminDashboard } from "../pages/page-dashboard";

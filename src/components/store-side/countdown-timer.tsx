@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-
-interface CountdownTimerProps {
-    createdAt: string;
-    durationSeconds: number;
-}
+import { CountdownTimerProps } from "../../types/types-orders.d";
 
 export const CountdownTimer = ({ createdAt, durationSeconds }: CountdownTimerProps) => {
     const [secondsLeft, setSecondsLeft] = useState(durationSeconds);

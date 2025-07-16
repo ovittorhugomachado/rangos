@@ -26,7 +26,7 @@ interface MenuItem {
     photoUrl?: string | null;
 }
 
-export const MenuItemsContainer = ({
+export const MenuItems = ({
     categories,
     backgroundColor,
     buttonColor,

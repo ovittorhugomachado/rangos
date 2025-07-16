@@ -1,11 +1,11 @@
-import { InputNameProps } from "../../../types/types-input.d";
+import { InputOwnersNameProps } from "../../../types/types-input.d";
 
 export const InputOwnersName = ({
     register,
     errors,
     clearErrors,
     initialValues = {},
-}: InputNameProps) => {
+}: InputOwnersNameProps) => {
     return (
         <>
             <label htmlFor="ownersName" className="label">

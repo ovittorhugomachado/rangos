@@ -1,7 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
-import { AccountData, AccountContainerProps } from "../../../types/types-account.d";
+import { AccountData } from "../../../types/types-account.d";
+import { AccountFormProps } from "../../../types/types-data-forms.d";
+import { Logo } from "../../component-logo";
 import { InputCNPJ } from "../inputs/input-store-cnpj";
 import { InputRestaurantName } from "../inputs/input-store-restaurant-name";
 import { InputOwnersName } from "../inputs/input-store-owners-name";
@@ -9,14 +10,15 @@ import { InputCPF } from "../inputs/input-store-cpf";
 import { InputPhoneNumber } from "../inputs/input-store-phone-number";
 import { InputEmail } from "../inputs/input-store-email";
 import { InputPasswordRegister } from "../inputs/input-store-password-register";
-import { Logo } from "../../component-logo";
+import { FaArrowLeft } from "react-icons/fa";
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const SignupFormContainer = ({
     onSubmit,
     error,
     initialValues = {},
     isLoading = false,
-}: AccountContainerProps) => {
+}: AccountFormProps) => {
 
     const {
         register,
@@ -25,7 +27,7 @@ export const SignupFormContainer = ({
         clearErrors,
         watch,
         formState: { errors },
-    } = useForm<AccountData>({
+    } = useForm<RestaurantData>({
         defaultValues: {
             restaurantName: '',
             cnpj: '',

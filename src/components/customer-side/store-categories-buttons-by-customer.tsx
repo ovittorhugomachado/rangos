@@ -1,10 +1,4 @@
-import { Category } from "../../types/types-menu.d";
-
-interface CategoryButtonsProps {
-    categories: Category[];
-    buttonColor?: string;
-    textColor?: string;
-}
+import { CategoryButtonsProps } from "../../types/types-menu.d";
 
 export const CategoryButtons = ({ categories, buttonColor, textColor }: CategoryButtonsProps) => {
 

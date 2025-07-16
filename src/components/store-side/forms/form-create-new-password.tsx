@@ -1,16 +1,18 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
-import { AccountData, AccountContainerProps } from "../../../types/types-account.d";
-import { InputPasswordRegister } from "../inputs/input-store-password-register";
+import { AccountFormProps } from "../../../types/types-data-forms.d";
+import { AccountData } from "../../../types/types-account.d";
 import { Logo } from "../../component-logo";
+import { InputPasswordRegister } from "../inputs/input-store-password-register";
+import { FaArrowLeft } from "react-icons/fa";
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const CreateNewPasswordFormContainer = ({
     onSubmit,
     message,
     initialValues = {},
     isLoading = false,
-}: AccountContainerProps) => {
+}: AccountFormProps) => {
 
     const {
         register,
@@ -18,7 +20,7 @@ export const CreateNewPasswordFormContainer = ({
         clearErrors,
         watch,
         formState: { errors },
-    } = useForm<AccountData>({
+    } = useForm<RestaurantData>({
         defaultValues: {
             password: '',
             ...initialValues,

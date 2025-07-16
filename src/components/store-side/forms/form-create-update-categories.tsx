@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { categoryFormProps } from "../../../types/types-data-forms.d";
 import { IoCloseOutline } from "react-icons/io5";
-
-interface categoryFormProps {
-    onClose: () => void;
-    onSubmit: (name: string) => void;
-}
 
 export const CreateCategoryForm = ({
     onClose,

@@ -1,17 +1,18 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { FaArrowRight } from "react-icons/fa";
+import { AccountFormProps } from "../../../types/types-data-forms.d";
+import { Logo } from "../../component-logo";
 import { InputEmail } from "../inputs/input-store-email";
 import { InputPassword } from "../inputs/input-store-password";
-import { AccountContainerProps, AccountData } from "../../../types/types-account.d";
-import { Logo } from "../../component-logo";
+import { FaArrowRight } from "react-icons/fa";
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const LoginFormContainer = ({
     onSubmit,
     error,
     initialValues = {},
     isLoading = false,
-}: AccountContainerProps) => {
+}: AccountFormProps) => {
     const {
         register,
         handleSubmit,
@@ -19,7 +20,7 @@ export const LoginFormContainer = ({
         setError,
         watch,
         formState: { errors },
-    } = useForm<AccountData>({
+    } = useForm<RestaurantData>({
         defaultValues: {
             email: '',
             password: '',
@@ -27,7 +28,7 @@ export const LoginFormContainer = ({
         },
     });
 
-    const handleAccountData: SubmitHandler<AccountData> = (data) => {
+    const handleAccountData: SubmitHandler<RestaurantData> = (data) => {
         try {
             onSubmit(data);
             clearErrors();

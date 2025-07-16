@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import { ErrorComponent } from "../components/component-error";
-import { LoadingComponent } from "../components/component-loading";
-import { Header } from "../components/customer-side/store-header-by-customer";
 import { getStoreData } from "../services/service-store-data";
 import { getPageStyle } from "../services/service-page-style";
 import { getCategoriesStore } from "../services/service-manage-menu-store";
-import { RestaurantData } from "../types/types-restaurante-data.d";
 import { Category } from "../types/types-menu.d";
+import { StyleStorePage } from "../types/types-style-store-page.d";
+import { RestaurantData } from "../types/types-restaurante-data.d";
+import { ErrorComponent } from "../components/component-error";
+import { LoadingComponent } from "../components/component-loading";
+import { Header } from "../components/customer-side/store-header-by-customer";
 import { StoreBanner } from "../components/customer-side/store-banner-customer";
 import { CategoryButtons } from "../components/customer-side/store-categories-buttons-by-customer";
-import { MenuItemsContainer } from "../components/customer-side/store-container-items-by-customer";
+import { MenuItems } from "../components/customer-side/store-container-items-by-customer";
 import { StoreFooterComponent } from "../components/customer-side/store-footer-by-customer";
-import { StyleStorePage } from "../types/types-style-store-page.d";
 
 export const Store = () => {
 
@@ -91,8 +91,9 @@ export const Store = () => {
                             categories={categories}
                             buttonColor={storeStyle?.primaryColor ?? ''}
                             textColor={storeStyle?.textColorButton ?? 'black'}
+    
                         />
-                        <MenuItemsContainer
+                        <MenuItems
                             categories={categories}
                             backgroundColor={storeStyle?.backgroundColor ?? ''}
                             buttonColor={storeStyle?.primaryColor ?? ''}
@@ -103,4 +104,4 @@ export const Store = () => {
             )}
         </>
     )
-}
+};

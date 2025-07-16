@@ -1,15 +1,3 @@
-export type OrderItem = {
-    id: number;
-    orderId: number;
-    menuItemId: number;
-    quantity: number;
-    note?: string;
-    menuItem: {
-        name: string;
-        price: string;
-    };
-};
-
 export type Order = {
     id: number;
     storeId: number;
@@ -26,19 +14,16 @@ export type Order = {
     orderItems: OrderItem[];
 };
 
-export type OrderFormData = {
-    customerName: string;
-    customerPhone: string;
-    deliveryType: "delivery" | "pickup";
-    customerAddress: string;
-    paymentMethod: string;
-    items: Array<{
-        id: number;
+export type OrderItem = {
+    id: number;
+    orderId: number;
+    menuItemId: number;
+    quantity: number;
+    note?: string;
+    menuItem: {
         name: string;
-        price: number;
-    }>;
-    message: string;
-    error: unknown;
+        price: string;
+    };
 };
 
 export type OrderRequest = {
@@ -52,4 +37,20 @@ export type OrderRequest = {
         note?: string;
         optionIds: number[];
     }>;
-}
+};
+
+export type DashboardCardOrdersProps = {
+    fontSize: string;
+    orders: Order[];
+    activePanel: number[];
+    setActivePanel: React.Dispatch<React.SetStateAction<number[]>>;
+    onAcceptOrder: (orderId: number) => void;
+    onCancelOrder: (orderId: number) => void;
+    onOrderReady: (orderId: number) => void;
+    onOrderDelivered: (orderId: number) => void;
+};
+
+export type CountdownTimerProps = {
+    createdAt: string;
+    durationSeconds: number;
+};

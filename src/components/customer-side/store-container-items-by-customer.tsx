@@ -3,28 +3,9 @@ import { getMenuItemService } from "../../services/service-manage-menu-store"
 import { ErrorComponent } from "../component-error"
 import { LoadingComponent } from "../component-loading"
 import { Item } from "./store-item-by-customer";
+import { MenuItem, MenuItemsContainerProps } from "../../types/types-menu.d";
 
-
-interface MenuItemsContainerProps {
-    categories: Category[];
-    backgroundColor: string;
-    buttonColor: string;
-}
-
-interface Category {
-    id: number;
-    name: string;
-}
-
-interface MenuItem {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    photoUrl?: string | null;
-}
-
-export const MenuItemsContainer = ({
+export const MenuItems = ({
     categories,
     backgroundColor,
     buttonColor,

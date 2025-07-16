@@ -2,20 +2,14 @@ import { useState, useEffect } from "react";
 import { getStoreData } from "../../../services/service-store-data";
 import { updateSchedules } from "../../../services/service-update-schedules";
 import { OpeningHour } from "../../../types/types-schedules.d";
-import { IoCloseOutline } from "react-icons/io5";
+import { UpdateSchedulesStoreFormProps } from "../../../types/types-data-forms.d";
+import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/function-validate-opening-hours";
 import { LoadingComponent } from "../../component-loading";
 import { ErrorComponent } from "../../component-error";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/function-validate-opening-hours";
+import { IoCloseOutline } from "react-icons/io5";
 
-interface UpdateSchedulesStore {
-    onClose: () => void;
-    isLoading?: boolean;
-    error?: string;
-    message?: string;
-}
-
-export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
+export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
     onClose,
 }) => {
     const [error, setError] = useState("");
@@ -70,7 +64,11 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStore> = ({
         const schedule = openingHours.map(({ day, timeRanges }) => ({
             day,
             timeRanges,
+            isOpen: timeRanges.length > 0,
+            status: "",
         }));
+
+        console.log(schedule);
 
         const fieldErrors: { [key: string]: string } = {};
         let hasError = false;

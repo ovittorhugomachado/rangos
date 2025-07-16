@@ -1,11 +1,11 @@
-import { InputNameProps } from "../../../types/types-input.d";
+import { InputRestaurantNameProps } from "../../../types/types-input.d";
 
 export const InputRestaurantName = ({
     register, 
     errors,
     clearErrors,
     initialValues = {}, 
-}: InputNameProps) => {
+}: InputRestaurantNameProps) => {
 
     return (
         <>

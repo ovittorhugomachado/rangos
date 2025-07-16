@@ -7,13 +7,13 @@ import { LoadingComponent } from "../components/component-loading";
 import { ToggleThemeAndFont } from "../components/store-side/display-settings";
 import { DashboardNav } from "../components/store-side/nav";
 import { DashboardCards } from "../components/store-side/dashboard-cards";
+import { CgMenuGridR } from "react-icons/cg";
 import {
     cancelOrderService,
     acceptOrderService, readyOrderService,
     deliveredOrderService,
     getOrdersService
 } from "../services/service-manage-orders";
-import { CgMenuGridR } from "react-icons/cg";
 
 export const AdminDashboard = () => {
     const {
