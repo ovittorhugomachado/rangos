@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Order } from "../types/orders-types.d";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
-import { LoadingComponent } from "../components/loading";
-import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
-import { DashboardNav } from "../components/nav";
-import { DashboardCards } from "../components/dashboard-cards";
+import { LoadingComponent } from "../components/loading-component";
+import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
+import { DashboardNav } from "../components/store-side/nav-component";
+import { DashboardCards } from "../components/store-side/dashboard-cards";
 import {
     cancelOrderService,
     acceptOrderService, readyOrderService,

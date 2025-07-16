@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { ErrorComponent } from "../components/error";
-import { LoadingComponent } from "../components/loading";
-import { Header } from "../components/store-page/by-customer/header"
+import { ErrorComponent } from "../components/error-component";
+import { LoadingComponent } from "../components/loading-component";
+import { Header } from "../components/customer-side/header-store";
 import { getStoreData } from "../services/store-data";
 import { getPageStyle } from "../services/page-style";
 import { getCategoriesStore } from "../services/menu-store";
 import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
-import { StoreBanner } from "../components/store-page/by-customer/banner";
-import { CategoryButtons } from "../components/store-page/by-customer/categories-butttons";
-import { MenuItemsContainer } from "../components/store-page/by-customer/menu-items";
-import { StoreFooterComponent } from "../components/store-page/by-customer/footer";
+import { StoreBanner } from "../components/customer-side/banner-store";
+import { CategoryButtons } from "../components/customer-side/categories-buttons-store";
+import { MenuItemsContainer } from "../components/customer-side/container-items-store";
+import { StoreFooterComponent } from "../components/customer-side/footer-store";
 
 type StoreData = {
     restaurantName: string,

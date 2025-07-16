@@ -1,13 +1,13 @@
-import { CreateNewPasswordFormContainer } from "../components/forms/create-new-password";
+import { CreateNewPasswordFormContainer } from "../components/store-side/forms/create-new-password-form";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useState, useEffect } from "react";
 import { AccountData } from "../types/account-types.d";
-import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
+import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
 import { createNewPassword, validateToken } from "../services/create-new-password"; // Adicionei a nova função
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { Logo } from "../components/logo";
+import { Logo } from "../components/logo-component";
 
 export const CreateNewPasswordPage = () => {
 

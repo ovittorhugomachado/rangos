@@ -1,5 +1,5 @@
 import { AppRoutes } from "./routes/routes";
-import { CartProvider } from "./context/cart-context/provider";
+import { CartProvider } from "./context/cart-context/cart-provider";
 
 function App() {
 

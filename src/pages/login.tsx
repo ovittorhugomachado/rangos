@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { login } from "../services/auth-service";
 import { AccountData } from "../types/account-types.d";
-import { LoginFormContainer } from "../components/forms/login";
-import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
+import { LoginFormContainer } from "../components/store-side/forms/login-form";
+import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
 
 export const LoginPage = () => {
 

@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/register";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { AccountData } from "../types/account-types.d";
-import { SignupFormContainer } from "../components/forms/signup";
-import { ToggleThemeAndFont } from "../components/toggle-theme-and-font";
+import { SignupFormContainer } from "../components/store-side/forms/signup-form";
+import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
 
 
 export const RegisterPage = () => {

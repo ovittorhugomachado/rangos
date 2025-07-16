@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { BottomNav } from "../components/store-page/by-store/style-toolbar";
+import { BottomNav } from "../components/store-side/store-page-components/style-toolbar-store";
 import { getPageStyle } from "../services/page-style";
-import { LoadingComponent } from "../components/loading";
-import { StoreBanner } from "../components/store-page/by-store/banner";
+import { LoadingComponent } from "../components/loading-component";
+import { StoreBanner } from "../components/store-side/store-page-components/banner-store";
 import { useAppSettings } from "../hooks/use-app-settings";
-import { StoreFooterComponent } from "../components/store-page/by-store/footer";
-import { ErrorComponent } from "../components/error";
+import { StoreFooterComponent } from "../components/store-side/store-page-components/footer-store";
+import { ErrorComponent } from "../components/error-component";
 import { getCategoriesStore } from "../services/menu-store";
 import { DayOfWeek, Category } from "../types/restaurante-data-types.d";
-import { CategoryButtons } from "../components/store-page/by-store/categories-butttons";
+import { CategoryButtons } from "../components/store-side/store-page-components/categories-buttons-store";
 import { getStoreData } from "../services/store-data";
-import { Header } from "../components/store-page/by-store/header";
-import { UpdateStoreDataForm } from "../components/forms/update-data-store";
-import { UpdateSchedulesForm } from "../components/forms/update-schedules";
-import { MenuItemsContainer } from "../components/store-page/by-store/menu-items";
+import { Header } from "../components/store-side/store-page-components/header-store";
+import { UpdateStoreDataForm } from "../components/store-side/forms/update-data-store-form";
+import { UpdateSchedulesForm } from "../components/store-side/forms/update-schedules-form";
+import { MenuItemsContainer } from "../components/store-side/store-page-components/container-items-store";
 
 type StoreData = {
     restaurantName: string,
