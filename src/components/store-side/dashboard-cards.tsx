@@ -99,7 +99,7 @@ export const DashboardCards = ({
                         <li
                             key={index}
                             className={
-                                `${activePanel.includes(card.id) ? '' : 'max-h-[50px]'} ${card.id === 0 && cardOrders.length > 0 ? 'order-alert' : ''} ${card.color} relative w-full ${card.titleColor} rounded-xl`
+                                `${activePanel.includes(card.id) ? '' : 'max-h-[70px]'} ${card.id === 0 && cardOrders.length > 0 ? 'order-alert' : ''} ${card.color} relative w-full ${card.titleColor} rounded-xl`
                             }
                         >
                             {card.id === 0 && cardOrders.length > 0 && (

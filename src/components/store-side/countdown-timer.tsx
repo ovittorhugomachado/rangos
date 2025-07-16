@@ -28,7 +28,7 @@ export const CountdownTimer = ({ createdAt, durationSeconds }: CountdownTimerPro
     const strokeDashoffset = circumference * (1 - percent);
 
     return (
-        <div className="absolute right-0 top-0 -translate-y-2 translate-x-5 flex flex-col items-center justify-center">
+        <div className="absolute right-0 top-0 text-sm -translate-y-2 translate-x-5 flex flex-col items-center justify-center">
             <svg width={80} height={80}>
                 <circle
                     cx={40}
