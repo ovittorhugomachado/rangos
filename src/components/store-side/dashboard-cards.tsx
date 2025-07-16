@@ -1,5 +1,5 @@
 import { IoIosArrowDown } from "react-icons/io"
-import { CountdownTimer } from "./countdown-timer-component"
+import { CountdownTimer } from "./countdown-timer"
 import { toMoney } from "../../utils/function-transform-to-money";
 import { Order } from "../../types/types-orders.d";
 import { useEffect, useRef, useMemo } from "react";

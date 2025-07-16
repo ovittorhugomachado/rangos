@@ -2,14 +2,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { AccountData, AccountContainerProps } from "../../../types/types-account.d";
-import { InputCNPJ } from "../inputs/store-cnpj-input";
-import { InputRestaurantName } from "../inputs/store-restaurant-name-input";
-import { InputOwnersName } from "../inputs/store-owners-name-input";
-import { InputCPF } from "../inputs/store-cpf-input";
-import { InputPhoneNumber } from "../inputs/store-phone-number-input";
-import { InputEmail } from "../inputs/store-email-input";
-import { InputPasswordRegister } from "../inputs/store-password-register-input";
-import { Logo } from "../../logo-component";
+import { InputCNPJ } from "../inputs/input-store-cnpj";
+import { InputRestaurantName } from "../inputs/input-store-restaurant-name";
+import { InputOwnersName } from "../inputs/input-store-owners-name";
+import { InputCPF } from "../inputs/input-store-cpf";
+import { InputPhoneNumber } from "../inputs/input-store-phone-number";
+import { InputEmail } from "../inputs/input-store-email";
+import { InputPasswordRegister } from "../inputs/input-store-password-register";
+import { Logo } from "../../component-logo";
 
 export const SignupFormContainer = ({
     onSubmit,

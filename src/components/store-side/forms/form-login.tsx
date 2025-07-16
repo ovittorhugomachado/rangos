@@ -1,10 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
-import { InputEmail } from "../inputs/store-email-input";
-import { InputPassword } from "../inputs/store-password-input";
+import { InputEmail } from "../inputs/input-store-email";
+import { InputPassword } from "../inputs/input-store-password";
 import { AccountContainerProps, AccountData } from "../../../types/types-account.d";
-import { Logo } from "../../logo-component";
+import { Logo } from "../../component-logo";
 
 export const LoginFormContainer = ({
     onSubmit,

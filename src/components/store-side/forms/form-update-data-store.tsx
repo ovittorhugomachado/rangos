@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { getStoreData, updateStoreData } from "../../../services/service-store-data";
-import { ErrorComponent } from "../../error-component";
-import { LoadingComponent } from "../../loading-component";
+import { ErrorComponent } from "../../component-error";
+import { LoadingComponent } from "../../component-loading";
 import { AccountData } from "../../../types/types-account.d";
-import { CheckboxDeliveryTypesInput } from "../inputs/store-delivery-type-input";
-import { InputRestaurantName } from "../inputs/store-restaurant-name-input";
-import { InputPhoneNumber } from "../inputs/store-phone-number-input";
-import { InputAddress } from "../inputs/store-address-input";
+import { CheckboxDeliveryTypesInput } from "../inputs/input-store-delivery-type";
+import { InputRestaurantName } from "../inputs/input-store-restaurant-name";
+import { InputPhoneNumber } from "../inputs/input-store-phone-number";
+import { InputAddress } from "../inputs/input-store-address";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface UpdateStoreDataFormProps {

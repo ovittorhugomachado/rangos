@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Order } from "../types/types-orders.d";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
-import { LoadingComponent } from "../components/loading-component";
-import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
-import { DashboardNav } from "../components/store-side/nav-component";
+import { LoadingComponent } from "../components/component-loading";
+import { ToggleThemeAndFont } from "../components/store-side/display-settings";
+import { DashboardNav } from "../components/store-side/nav";
 import { DashboardCards } from "../components/store-side/dashboard-cards";
 import {
     cancelOrderService,

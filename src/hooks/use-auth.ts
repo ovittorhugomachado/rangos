@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { userData } from "../services/service-user-data";
 import { AccountData } from "../types/types-account.d";
 
-export const useAuth = () => { //função que verifica se o usuário tem o token e retorna dados do usuário
+export const useAuth = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<AccountData | null>(null);

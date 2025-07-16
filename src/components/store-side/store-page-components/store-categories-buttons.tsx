@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createCategoryService, deleteCategoryService, RenameCategoryService } from "../../../services/service-manage-menu-store";
 import { Category } from "../../../types/types-menu.d";
-import { CreateCategoryForm, UpdateCategoryForm } from "../forms/create-update-categories-form";
+import { CreateCategoryForm, UpdateCategoryForm } from "../forms/form-create-update-categories";
 import { IoCloseOutline } from "react-icons/io5";
 import { MdOutlineEdit } from "react-icons/md";
 

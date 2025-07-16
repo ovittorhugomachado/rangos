@@ -1,4 +1,4 @@
-import { Logo } from "./logo-store";
+import { Logo } from "./store-logo";
 import { OpeningHour } from "../../../types/types-schedules.d";import { getRestaurantStatus } from "../../../utils/function-restaurant-status";
 import { FaGear } from "react-icons/fa6";
 import { RiListSettingsFill } from "react-icons/ri";

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { ErrorComponent } from "../components/error-component";
-import { LoadingComponent } from "../components/loading-component";
-import { Header } from "../components/customer-side/header-store";
+import { ErrorComponent } from "../components/component-error";
+import { LoadingComponent } from "../components/component-loading";
+import { Header } from "../components/customer-side/store-header-by-customer";
 import { getStoreData } from "../services/service-store-data";
 import { getPageStyle } from "../services/service-page-style";
 import { getCategoriesStore } from "../services/service-manage-menu-store";
 import { RestaurantData } from "../types/types-restaurante-data.d";
 import { Category } from "../types/types-menu.d";
-import { StoreBanner } from "../components/customer-side/banner-store";
-import { CategoryButtons } from "../components/customer-side/categories-buttons-store";
-import { MenuItemsContainer } from "../components/customer-side/container-items-store";
-import { StoreFooterComponent } from "../components/customer-side/footer-store";
+import { StoreBanner } from "../components/customer-side/store-banner-customer";
+import { CategoryButtons } from "../components/customer-side/store-categories-buttons-by-customer";
+import { MenuItemsContainer } from "../components/customer-side/store-container-items-by-customer";
+import { StoreFooterComponent } from "../components/customer-side/store-footer-by-customer";
 import { StyleStorePage } from "../types/types-style-store-page.d";
 
 export const Store = () => {

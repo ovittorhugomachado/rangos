@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { createMenuItemService, updateMenuItemByCategoryService } from "../../../services/service-manage-menu-store";
-import { ErrorComponent } from "../../error-component";
-import { LoadingComponent } from "../../loading-component";
+import { ErrorComponent } from "../../component-error";
+import { LoadingComponent } from "../../component-loading";
 import { IoCloseOutline } from "react-icons/io5";
-import { InputName } from "../inputs/store-menu-item-name-input";
+import { InputName } from "../inputs/input-store-menu-item-name";
 import { useForm } from "react-hook-form";
-import { InputPrice } from "../inputs/store-menu-item-price-input";
+import { InputPrice } from "../inputs/input-store-menu-item-price";
 
 interface CreateMenuItemProps {
     onClose: () => void;

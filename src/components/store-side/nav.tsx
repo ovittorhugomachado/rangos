@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Logo } from "../logo-component";
+import { Logo } from "../component-logo";
 import { CgMenuGridR } from "react-icons/cg";
 import { ImExit } from "react-icons/im";
 import { MdBorderColor } from "react-icons/md";

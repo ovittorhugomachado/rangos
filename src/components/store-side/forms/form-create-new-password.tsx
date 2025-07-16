@@ -2,8 +2,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { AccountData, AccountContainerProps } from "../../../types/types-account.d";
-import { InputPasswordRegister } from "../inputs/store-password-register-input";
-import { Logo } from "../../logo-component";
+import { InputPasswordRegister } from "../inputs/input-store-password-register";
+import { Logo } from "../../component-logo";
 
 export const CreateNewPasswordFormContainer = ({
     onSubmit,

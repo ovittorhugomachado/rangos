@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from "react"
-import { getMenuItemService } from "../../../services/service-manage-menu-store"
-import { ErrorComponent } from "../../error-component"
-import { LoadingComponent } from "../../loading-component"
-import { IoMdAddCircle } from "react-icons/io";
-import { MenuItemCreationForm } from "../forms/create-update-menu-item-form";
-import { Item } from "./item-store";
+import { getMenuItemService } from "../../services/service-manage-menu-store"
+import { ErrorComponent } from "../component-error"
+import { LoadingComponent } from "../component-loading"
+import { Item } from "./store-item-by-customer";
 
 
 interface MenuItemsContainerProps {
@@ -35,7 +33,6 @@ export const MenuItemsContainer = ({
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [menuItemsByCategory, setMenuItemsByCategory] = useState<{ [categoryId: number]: MenuItem[] }>({});
-    const [showFormCreateMenuItem, setShowFormCreateMenuItem] = useState<number | null>(null);
 
     const fetchMenuItems = useCallback(async () => {
         setLoading(true);
@@ -67,9 +64,13 @@ export const MenuItemsContainer = ({
             ) : loading ? (
                 <LoadingComponent />
             ) : (
-                <section className="w-full">
+                <section className="w-full xs:text-base">
                     {categories.map(category => (
-                        <div key={category.id} className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} mt-8`}>
+                        <div
+                            key={category.id}
+                            className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} mt-8`}
+                            id={`category-${category.id}`}
+                        >
                             <h1
                                 style={{ borderColor: buttonColor }}
                                 className={`inline-block pr-6 mb-2 text-2xl font-semibold border-b-4`}
@@ -81,7 +82,7 @@ export const MenuItemsContainer = ({
                                     menuItemsByCategory[category.id].map(item => (
                                         <li
                                             key={item.id}
-                                            className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px]`}
+                                            className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px] hover:scale-102 transition-all duration-300`}
                                         >
                                             <Item
                                                 image={item.photoUrl ?? '../prato-default.png'}
@@ -90,31 +91,13 @@ export const MenuItemsContainer = ({
                                                 price={item.price}
                                                 categoryId={category.id}
                                                 id={item.id}
-                                                onUpdated={fetchMenuItems}
                                             />
                                         </li>
                                     ))
                                 ) : (
                                     <li className="flex items-center">Nenhum item nesta categoria</li>
                                 )}
-
-                                <button
-                                    className={`h-[150px] flex flex-col-reverse items-center justify-center border-[4px] cursor-pointer border-primary hover:scale-103 transition-transform duration-200`}
-                                    onClick={() => setShowFormCreateMenuItem(category.id)}
-                                >
-                                    Criar novo item na categoria {category.name}
-                                    <span>
-                                        <IoMdAddCircle className="text-4xl text-primary" />
-                                    </span>
-                                </button>
                             </ul>
-                            {showFormCreateMenuItem === category.id && (
-                                <MenuItemCreationForm
-                                    onClose={() => setShowFormCreateMenuItem(null)}
-                                    categoryId={category.id}
-                                    onCreated={fetchMenuItems}
-                                />
-                            )}
                         </div>
                     ))}
                 </section>

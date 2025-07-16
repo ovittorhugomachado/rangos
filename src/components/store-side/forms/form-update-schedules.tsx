@@ -3,8 +3,8 @@ import { getStoreData } from "../../../services/service-store-data";
 import { updateSchedules } from "../../../services/service-update-schedules";
 import { OpeningHour } from "../../../types/types-schedules.d";
 import { IoCloseOutline } from "react-icons/io5";
-import { LoadingComponent } from "../../loading-component";
-import { ErrorComponent } from "../../error-component";
+import { LoadingComponent } from "../../component-loading";
+import { ErrorComponent } from "../../component-error";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/function-validate-opening-hours";
 

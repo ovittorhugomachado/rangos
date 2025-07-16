@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { FaCamera } from "react-icons/fa";
-import { UpdateMenuItemForm } from "../forms/create-update-menu-item-form";
+import { UpdateMenuItemForm } from "../forms/form-create-update-menu-item";
 import { deleteMenuItemService } from "../../../services/service-manage-menu-store";
 import { MdOutlineEdit } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";

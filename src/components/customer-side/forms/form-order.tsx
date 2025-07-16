@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 import { OrderFormData } from "../../../types/types-orders.d";
-import { InputCustomerName } from "../inputs/customer-name-input";
-import { InputCustomerPhoneNumber } from "../inputs/customer-phone-input";
-import { InputCustomerAddress } from "../inputs/customer-address-input";
-import { RadioOrderDeliveryTypesInput } from "../inputs/customer-delivery-type-input";
+import { InputCustomerName } from "../inputs/input-customer-name";
+import { InputCustomerPhoneNumber } from "../inputs/input-customer-phone";
+import { InputCustomerAddress } from "../inputs/input-customer-address";
+import { RadioOrderDeliveryTypesInput } from "../inputs/input-customer-delivery-type";
 import { IoCloseOutline } from "react-icons/io5";
 import { toMoney } from "../../../utils/function-transform-to-money";
 import { useCart } from "../../../context/cart-context/cart-context";
 import { createOrder } from "../../../services/service-manage-orders";
-import { RadioOrderPaymentMethodInput } from "../inputs/customer-payment-method-input";
+import { RadioOrderPaymentMethodInput } from "../inputs/input-customer-payment-method";
 
 interface OrderDataFormProps {
     onClose: () => void;

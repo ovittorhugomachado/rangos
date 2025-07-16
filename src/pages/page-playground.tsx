@@ -1,4 +1,4 @@
-import { OrderForm } from "../components/customer-side/forms/order-form";
+import { OrderForm } from "../components/customer-side/forms/form-order";
 
 export const PlaygroundPage = () => {
 

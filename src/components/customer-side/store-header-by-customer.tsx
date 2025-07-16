@@ -1,10 +1,10 @@
-import { LogoStore } from "./logo-store";
+import { LogoStore } from "./store-logo-by-customer";
 import { OpeningHour } from "../../types/types-schedules.d";
 import { getRestaurantStatus } from "../../utils/function-restaurant-status";
 import { CiShoppingCart } from "react-icons/ci";
 import { toMoney } from "../../utils/function-transform-to-money";
 import { useState } from "react";
-import { OrderForm } from "./forms/order-form";
+import { OrderForm } from "./forms/form-order";
 import { useCart } from "../../context/cart-context/cart-context";
 
 interface HeaderProps {
