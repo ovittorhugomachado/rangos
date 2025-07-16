@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Order } from "../types/orders-types.d";
+import { Order } from "../types/types-orders.d";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
 import { LoadingComponent } from "../components/loading-component";

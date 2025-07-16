@@ -1,4 +1,4 @@
-import { AccountData } from "../types/account-types.d";
+import { AccountData } from "../types/types-account.d";
 
 export const recoverPassword = async (credentials: AccountData) => {
     try {

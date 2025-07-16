@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSettings } from "../hooks/use-app-settings.ts";
-import { AccountData } from "../types/account-types.d.tsx";
+import { AccountData } from "../types/types-account.d.tsx";
 import { recoverPassword } from "../services/service-recover-password.ts";
 import { RecoverPasswordFormContainer } from "../components/store-side/forms/recover-password-form.tsx";
 import { ToggleThemeAndFont } from "../components/store-side/display-settings-component.tsx";

@@ -1,5 +1,5 @@
 import { UseFormRegister } from "react-hook-form";
-import { AccountData } from "../../../types/account-types.d";
+import { AccountData } from "../../../types/types-account.d";
 
 interface UpdateDeliveryTypesInputProps {
     register: UseFormRegister<AccountData>;

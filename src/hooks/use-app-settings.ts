@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Theme } from '../types/theme.d';
-import { FontSize } from '../types/font-size.d';
+import { Theme, FontSize } from '../types/types-preferences-user.d';
 
 export const useAppSettings = () => {
     const [fontSize, setFontSize] = useState<FontSize>('text-sm');

@@ -1,4 +1,4 @@
-import { InputEmailProps } from "../../../types/account-input-types.d";
+import { InputEmailProps } from "../../../types/types-input.d";
 
 export const InputEmail = ({
     register,

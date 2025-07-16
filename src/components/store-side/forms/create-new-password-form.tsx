@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { AccountData, AccountContainerProps } from "../../../types/account-types.d";
+import { AccountData, AccountContainerProps } from "../../../types/types-account.d";
 import { InputPasswordRegister } from "../inputs/store-password-register-input";
 import { Logo } from "../../logo-component";
 

@@ -1,6 +1,6 @@
 import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask"
-import { InputPhoneNumberProps } from "../../../types/account-input-types.d"
+import { InputPhoneNumberProps } from "../../../types/types-input.d"
 
 export const InputPhoneNumber = ({
     control,

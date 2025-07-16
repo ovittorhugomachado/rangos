@@ -1,4 +1,4 @@
-import { ThemeButtonProps } from "../../types/theme.d";
+import { ThemeButtonProps } from "../../types/types-preferences-user.d";
 import { IoMdMoon, IoIosSunny } from "react-icons/io";
 import { BsZoomIn, BsZoomOut } from "react-icons/bs";
 

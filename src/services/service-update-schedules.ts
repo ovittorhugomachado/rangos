@@ -1,4 +1,4 @@
-import { OpeningHour } from "../types/schedules-types.d";
+import { OpeningHour } from "../types/types-schedules.d";
 
 export const updateSchedules = async (body: { schedule: OpeningHour[] }) => {
     const response = await fetch('http://localhost:3000/schedules', {

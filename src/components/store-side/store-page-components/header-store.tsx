@@ -1,6 +1,5 @@
 import { Logo } from "./logo-store";
-import { DayOfWeek } from "../../../types/restaurante-data-types.d";
-import { getRestaurantStatus } from "../../../utils/restaurant-status";
+import { OpeningHour } from "../../../types/types-schedules.d";import { getRestaurantStatus } from "../../../utils/function-restaurant-status";
 import { FaGear } from "react-icons/fa6";
 import { RiListSettingsFill } from "react-icons/ri";
 import { GoHomeFill } from "react-icons/go";
@@ -10,18 +9,13 @@ interface HeaderProps {
     backgroundColor?: string;
     restaurantImage?: string;
     restaurantName?: string;
-    openingHours?: {
-        day: DayOfWeek
-        open: string;
-        close: string;
-        isClosed?: boolean;
-    }[];
+    openingHours?: OpeningHour[];
     openFormUpdateDataStore: () => void;
     openFormUpdateSchedules: () => void;
-};
+}
 
 export const Header: React.FC<HeaderProps> = ({
-    backgroundColor = '',
+    backgroundColor = 'white',
     restaurantImage,
     restaurantName,
     openingHours = [],

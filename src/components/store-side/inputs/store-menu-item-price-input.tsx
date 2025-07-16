@@ -1,4 +1,4 @@
-import { InputMenuItemPriceProps } from "../../../types/account-input-types.d";
+import { InputMenuItemPriceProps } from "../../../types/types-input.d";
 
 export const InputPrice = ({
     register,

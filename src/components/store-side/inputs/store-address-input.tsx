@@ -1,4 +1,4 @@
-import { InputAddressProps } from "../../../types/account-input-types.d";
+import { InputAddressProps } from "../../../types/types-input.d";
 
 export const InputAddress = ({
     register, 

@@ -1,7 +1,7 @@
 import { CreateNewPasswordFormContainer } from "../components/store-side/forms/create-new-password-form";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useState, useEffect } from "react";
-import { AccountData } from "../types/account-types.d";
+import { AccountData } from "../types/types-account.d";
 import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
 import { createNewPassword, validateToken } from "../services/service-create-new-password"; // Adicionei a nova função
 import { useParams, useNavigate } from "react-router-dom";

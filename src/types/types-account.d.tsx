@@ -1,16 +1,7 @@
-type TimeRange = {
-  open: string;
-  close: string;
-};
-
-interface OpeningHour {
-  day: string;
-  status: string;
-  timeRanges: TimeRange[];
-}
+import { OpeningHour } from "./types-schedules.d";
 
 
-export interface AccountData {
+export type AccountData = {
   pageStyle(pageStyle: unknown): unknown;
   id: number;
   email: string;
@@ -43,7 +34,7 @@ export interface AccountData {
   error: unknown;
 }
 
-export interface MenuItemData {
+export type MenuItemData = {
   name: string;
   description: string;
   price: string;
@@ -51,7 +42,7 @@ export interface MenuItemData {
   error: unknown;
 }
 
-export interface AccountContainerProps {
+export type AccountContainerProps = {
   onSubmit: (data: AccountData) => void;
   isLoading: boolean;
   message: string;
@@ -59,7 +50,7 @@ export interface AccountContainerProps {
   initialValues?: Partial<AccountData>;
 };
 
-export interface MenuItemContainerProps {
+export type MenuItemContainerProps = {
   onSubmit: (data: AccountData) => void;
   isLoading: boolean;
   message: string;

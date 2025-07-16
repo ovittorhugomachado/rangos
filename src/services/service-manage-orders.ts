@@ -1,4 +1,4 @@
-import { Order, OrderRequest } from "../types/orders-types.d";
+import { Order, OrderRequest } from "../types/types-orders.d";
 
 export const getOrdersService = async (limit: number = 1000, offset: number = 0): Promise<Order[]> => {
     try {

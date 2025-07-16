@@ -1,4 +1,4 @@
-import { InputCustomerNameProps } from "../../../types/account-input-types.d";
+import { InputCustomerNameProps } from "../../../types/types-input.d";
 
 export const InputCustomerName = ({
     register,

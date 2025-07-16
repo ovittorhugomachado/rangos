@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import { OrderFormData } from "../../../types/orders-types.d";
+import { OrderFormData } from "../../../types/types-orders.d";
 import { InputCustomerName } from "../inputs/customer-name-input";
 import { InputCustomerPhoneNumber } from "../inputs/customer-phone-input";
 import { InputCustomerAddress } from "../inputs/customer-address-input";
 import { RadioOrderDeliveryTypesInput } from "../inputs/customer-delivery-type-input";
 import { IoCloseOutline } from "react-icons/io5";
-import { toMoney } from "../../../utils/transform-to-money";
+import { toMoney } from "../../../utils/function-transform-to-money";
 import { useCart } from "../../../context/cart-context/cart-context";
 import { createOrder } from "../../../services/service-manage-orders";
 import { RadioOrderPaymentMethodInput } from "../inputs/customer-payment-method-input";
@@ -16,7 +16,7 @@ interface OrderDataFormProps {
     error?: string;
     initialValues?: Partial<OrderFormData>;
     order?: OrderFormData;
-    backgroundColor?: 'white' | 'black';
+    backgroundColor?: string;
     message?: string;
 }
 

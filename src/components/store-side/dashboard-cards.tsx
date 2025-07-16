@@ -1,7 +1,7 @@
 import { IoIosArrowDown } from "react-icons/io"
 import { CountdownTimer } from "./countdown-timer-component"
-import { toMoney } from "../../utils/transform-to-money";
-import { Order } from "../../types/orders-types.d";
+import { toMoney } from "../../utils/function-transform-to-money";
+import { Order } from "../../types/types-orders.d";
 import { useEffect, useRef, useMemo } from "react";
 
 type DashboardCardProps = {

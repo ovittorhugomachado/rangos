@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { InputEmail } from "../inputs/store-email-input";
 import { InputPassword } from "../inputs/store-password-input";
-import { AccountContainerProps, AccountData } from "../../../types/account-types.d";
+import { AccountContainerProps, AccountData } from "../../../types/types-account.d";
 import { Logo } from "../../logo-component";
 
 export const LoginFormContainer = ({

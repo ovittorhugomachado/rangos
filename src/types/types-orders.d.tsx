@@ -41,7 +41,7 @@ export type OrderFormData = {
     error: unknown;
 };
 
-export interface OrderRequest {
+export type OrderRequest = {
     customerName: string;
     customerPhone: string;
     typeOfDelivery: "delivery" | "pickup";

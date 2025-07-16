@@ -1,77 +1,77 @@
 import { UseFormRegister, UseFormWatch, UseFormClearErrors, FieldErrors, Control } from "react-hook-form";
-import { AccountData, MenuItemData } from "./account-types.d";
-import { OrderFormData } from "./orders-types.d";
+import { AccountData, MenuItemData } from "./types-account.d";
+import { OrderFormData } from "./types-orders.d";
 
-export interface InputNameProps {
+export type InputNameProps = {
     register: UseFormRegister<AccountData>;
     errors: FieldErrors<AccountData>;
     clearErrors: UseFormClearErrors<AccountData>;
     initialValues?: Partial<AccountData>;
 };
 
-export interface InputCustomerNameProps {
+export type InputCustomerNameProps = {
     register: UseFormRegister<OrderFormData>;
     errors: FieldErrors<OrderFormData>;
     clearErrors: UseFormClearErrors<OrderFormData>;
     initialValues?: Partial<OrderFormData>;
 };
 
-export interface InputMenuItemNameProps {
+export type InputMenuItemNameProps = {
     register: UseFormRegister<MenuItemData>;
     errors: FieldErrors<MenuItemData>;
     clearErrors: UseFormClearErrors<MenuItemData>;
     initialValues?: Partial<MenuItemData>;
 };
 
-export interface InputMenuItemPriceProps {
+export type InputMenuItemPriceProps = {
     register: UseFormRegister<MenuItemData>;
     errors: FieldErrors<MenuItemData>;
     clearErrors: UseFormClearErrors<MenuItemData>;
     initialValues: Partial<MenuItemData>;
 };
 
-export interface InputAddressProps {
+export type InputAddressProps = {
     register: UseFormRegister<AccountData>;
     errors: FieldErrors<AccountData>;
     clearErrors: UseFormClearErrors<AccountData>;
     initialValues?: Partial<AccountData>;
 }
 
-export interface InputCustomerAddressProps {
+export type InputCustomerAddressProps = {
     register: UseFormRegister<OrderFormData>;
     errors: FieldErrors<OrderFormData>;
     clearErrors: UseFormClearErrors<OrderFormData>;
     initialValues?: Partial<OrderFormData>;
 }
 
-export interface InputCNPJProps {
+export type InputCNPJProps = {
     control: Control<AccountData>;
     initialValues?: Partial<AccountData>;
 }
 
-export interface InputCPFProps {
+export type InputCPFProps = {
     control: Control<AccountData>;
     initialValues: Partial<AccountData>;
 }
 
-export interface InputPhoneNumberProps {
+export type InputPhoneNumberProps = {
     control: Control<AccountData>;
     initialValues: Partial<AccountData>;
 }
 
-export interface InputCustomerPhoneNumberProps {
+export type InputCustomerPhoneNumberProps = {
     control: Control<OrderFormData>;
     initialValues: Partial<OrderFormData>;
 }
 
-export interface InputEmailProps {
+export type InputEmailProps = {
     register: UseFormRegister<AccountData>;
     errors: FieldErrors<AccountData>;
     clearErrors: UseFormClearErrors<AccountData>;
     initialValues?: Partial<AccountData>;
 }
 
-export interface InputPasswordProps {
+export type InputPasswordProps = {
     register: UseFormRegister<AccountData>;
     errors: FieldErrors<AccountData>;
     clearErrors: UseFormClearErrors<AccountData>;
@@ -79,13 +79,14 @@ export interface InputPasswordProps {
     initialValues?: Partial<AccountData>;
 }
 
-export interface InputDeliveryTypeProps {
+export type InputDeliveryTypeProps = {
     register: UseFormRegister<OrderFormData>;
     errors: FieldErrors<OrderFormData>;
     clearErrors: UseFormClearErrors<OrderFormData>;
     initialValues?: Partial<OrderFormData>;
 }
-export interface InputPaymentMethodProps {
+
+export type InputPaymentMethodProps = {
     register: UseFormRegister<OrderFormData>;
     errors: FieldErrors<OrderFormData>;
     clearErrors: UseFormClearErrors<OrderFormData>;

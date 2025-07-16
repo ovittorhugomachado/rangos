@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { getStoreData, updateStoreData } from "../../../services/service-store-data";
 import { ErrorComponent } from "../../error-component";
 import { LoadingComponent } from "../../loading-component";
-import { AccountData } from "../../../types/account-types.d";
+import { AccountData } from "../../../types/types-account.d";
 import { CheckboxDeliveryTypesInput } from "../inputs/store-delivery-type-input";
 import { InputRestaurantName } from "../inputs/store-restaurant-name-input";
 import { InputPhoneNumber } from "../inputs/store-phone-number-input";

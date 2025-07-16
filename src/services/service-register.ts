@@ -1,4 +1,4 @@
-import { AccountData } from "../types/account-types.d";
+import { AccountData } from "../types/types-account.d";
 
 export const registerUser = async (data: AccountData) => {
     const response = await fetch('http://localhost:3000/signup', {

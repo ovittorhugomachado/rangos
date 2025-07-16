@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/service-register";
 import { useAppSettings } from "../hooks/use-app-settings";
-import { AccountData } from "../types/account-types.d";
+import { AccountData } from "../types/types-account.d";
 import { SignupFormContainer } from "../components/store-side/forms/signup-form";
 import { ToggleThemeAndFont } from "../components/store-side/display-settings-component";
 

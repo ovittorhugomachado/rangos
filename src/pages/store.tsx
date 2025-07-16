@@ -5,47 +5,20 @@ import { Header } from "../components/customer-side/header-store";
 import { getStoreData } from "../services/service-store-data";
 import { getPageStyle } from "../services/service-page-style";
 import { getCategoriesStore } from "../services/service-manage-menu-store";
-import { Category, DayOfWeek } from "../types/restaurante-data-types.d";
+import { RestaurantData } from "../types/types-restaurante-data.d";
+import { Category } from "../types/types-menu.d";
 import { StoreBanner } from "../components/customer-side/banner-store";
 import { CategoryButtons } from "../components/customer-side/categories-buttons-store";
 import { MenuItemsContainer } from "../components/customer-side/container-items-store";
 import { StoreFooterComponent } from "../components/customer-side/footer-store";
-
-type StoreData = {
-    restaurantName: string,
-    phoneNumber: string,
-    address: string | null,
-    logoUrl: string | null,
-    bannerUrl: string | null,
-    delivery: boolean,
-    pickup: boolean,
-    cartValue: string | number,
-    openingHours: [
-        {
-            storeId: number,
-            day: string,
-            isOpen: boolean,
-            status: string,
-            timeRanges: Array<{
-                start: string,
-                end: string
-            }>
-        }
-    ]
-};
-
-type StyleData = {
-    primaryColor?: string | null;
-    backgroundColor?: string | null;
-    textColorButtons?: string | null;
-};
+import { StyleStorePage } from "../types/types-style-store-page.d";
 
 export const Store = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [storeData, setStoreData] = useState<StoreData | null>(null);
-    const [storeStyle, setStoreStyle] = useState<StyleData | null>(null);
+    const [storeData, setStoreData] = useState<RestaurantData | null>(null);
+    const [storeStyle, setStoreStyle] = useState<StyleStorePage | null>(null);
     const [categories, setCategories] = useState<Category[]>([]);
 
     const fetchStoreData = async () => {
@@ -94,20 +67,18 @@ export const Store = () => {
                     className="w-screen h-full min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center"
                 >
                     <Header
-                        backgroundColor={
-                            storeStyle?.backgroundColor === "black"
-                                ? "black"
-                                : "white"
-                        }
-                        restaurantImage={storeData?.logoUrl || 'store-logo-default.png'}
-                        restaurantName={storeData?.restaurantName || 'Loja'}
+                        backgroundColor={storeData?.backgroundColor ?? 'white'}
+                        restaurantImage={storeData?.logoUrl}
+                        restaurantName={storeData?.restaurantName}
                         openingHours={
                             Array.isArray(storeData?.openingHours)
                                 ? storeData.openingHours.map((oh) => ({
-                                    day: oh.day as DayOfWeek,
-                                    open: oh.timeRanges?.[0]?.start ?? '',
-                                    close: oh.timeRanges?.[0]?.end ?? '',
-                                    isClosed: !oh.isOpen
+                                    day: oh.day,
+                                    isOpen: oh.isOpen ?? true,
+                                    status: oh.status ?? "",
+                                    timeRanges: Array.isArray(oh.timeRanges) && oh.timeRanges.length > 0
+                                        ? oh.timeRanges
+                                        : [{ start: "", end: "" }],
                                 }))
                                 : []
                         }
@@ -119,7 +90,7 @@ export const Store = () => {
                         <CategoryButtons
                             categories={categories}
                             buttonColor={storeStyle?.primaryColor ?? ''}
-                            textColor={storeStyle?.textColorButtons ?? 'black'}
+                            textColor={storeStyle?.textColorButton ?? 'black'}
                         />
                         <MenuItemsContainer
                             categories={categories}

@@ -7,7 +7,7 @@ import { useAppSettings } from "../hooks/use-app-settings";
 import { StoreFooterComponent } from "../components/store-side/store-page-components/footer-store";
 import { ErrorComponent } from "../components/error-component";
 import { getCategoriesStore } from "../services/service-manage-menu-store";
-import { DayOfWeek, Category } from "../types/restaurante-data-types.d";
+import { Category } from "../types/types-menu.d";
 import { CategoryButtons } from "../components/store-side/store-page-components/categories-buttons-store";
 import { getStoreData } from "../services/service-store-data";
 import { Header } from "../components/store-side/store-page-components/header-store";
@@ -81,11 +81,11 @@ export const CustomizeMenuPage = () => {
             setCategories(categoriesStore);
             setInitialButtonColor(styleData.primaryColor ?? '');
             setInitialBackgroundColor(styleData.backgroundColor ?? '');
-            setInitialTextColorButtons(styleData.textButtonColor ?? '');
+            setInitialTextColorButtons(styleData.textColorButton ?? '');
 
             if (styleData.backgroundColor) setBackgroundColor(styleData.backgroundColor);
             if (styleData.primaryColor) setButtonColor(styleData.primaryColor);
-            if (styleData.textButtonColor) setTextColorButtons(styleData.textButtonColor);
+            if (styleData.textColorButton) setTextColorButtons(styleData.textColorButton);
 
         } catch (error) {
 
@@ -144,10 +144,13 @@ export const CustomizeMenuPage = () => {
                         openingHours={
                             Array.isArray(storeData?.openingHours)
                                 ? storeData.openingHours.map((oh) => ({
-                                    day: oh.day as DayOfWeek,
-                                    open: oh.timeRanges?.[0]?.start ?? '',
-                                    close: oh.timeRanges?.[0]?.end ?? '',
-                                    isClosed: !oh.isOpen
+                                    day: oh.day as import("../types/types-schedules.d").DayOfWeek,
+                                    isOpen: !!oh.isOpen,
+                                    isClosed: !!oh.isOpen,
+                                    status: oh.status ?? "",
+                                    timeRanges: Array.isArray(oh.timeRanges) && oh.timeRanges.length > 0
+                                        ? oh.timeRanges
+                                        : [{ start: "", end: "" }],
                                 }))
                                 : []
                         }

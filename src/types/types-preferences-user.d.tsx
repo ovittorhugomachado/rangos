@@ -1,8 +1,10 @@
 export type Theme = 'dark' | 'light';
 
-export interface ThemeButtonProps {
+export type FontSize = 'text-sm' | 'text-lg';
+
+export type ThemeButtonProps = {
     toggleTheme: () => void;
     increaseFontSize: () => void;
     decreaseFontSize: () => void;
-    fontSize: 'text-sm' | 'text-lg';
+    fontSize: FontSize;
 }

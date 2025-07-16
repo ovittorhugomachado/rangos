@@ -1,4 +1,4 @@
-import { InputPaymentMethodProps } from "../../../types/account-input-types.d";
+import { InputPaymentMethodProps } from "../../../types/types-input.d";
 
 export const RadioOrderPaymentMethodInput = ({
     register,

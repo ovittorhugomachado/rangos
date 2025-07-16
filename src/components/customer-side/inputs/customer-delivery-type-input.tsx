@@ -1,4 +1,4 @@
-import { InputDeliveryTypeProps } from "../../../types/account-input-types.d";
+import { InputDeliveryTypeProps } from "../../../types/types-input.d";
 
 
 export const RadioOrderDeliveryTypesInput = ({

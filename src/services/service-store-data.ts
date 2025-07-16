@@ -1,4 +1,4 @@
-import { AccountData } from "../types/account-types.d";
+import { AccountData } from "../types/types-account.d";
 
 export const getStoreData = async () => {
     const response = await fetch('http://localhost:3000/store', {

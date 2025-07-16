@@ -1,4 +1,4 @@
-import { InputMenuItemNameProps } from "../../../types/account-input-types.d";
+import { InputMenuItemNameProps } from "../../../types/types-input.d";
 
 export const InputName = ({
     register,

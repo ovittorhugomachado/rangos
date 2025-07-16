@@ -1,6 +1,6 @@
-import { AccountData } from "../types/account-types.d"
+import { StyleStorePage } from "../types/types-style-store-page.d";
 
-export const getPageStyle = async (): Promise<AccountData> => {
+export const getPageStyle = async (): Promise<StyleStorePage> => {
     try {
         const response = await fetch(`http://localhost:3000/store/style`,
             {
@@ -32,7 +32,7 @@ export const updatePageStyle = async (style: {
     primaryColor: string;
     backgroundColor: string;
     textButtonColor: string;
-}): Promise<AccountData> => {
+}): Promise<StyleStorePage> => {
     try {
         const response = await fetch(`http://localhost:3000/store/style`,
             {

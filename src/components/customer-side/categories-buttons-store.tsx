@@ -1,4 +1,4 @@
-import { Category } from "../../types/restaurante-data-types.d";
+import { Category } from "../../types/types-menu.d";
 
 interface CategoryButtonsProps {
     categories: Category[];

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { getStoreData } from "../../../services/service-store-data";
 import { updateSchedules } from "../../../services/service-update-schedules";
-import { OpeningHour } from "../../../types/schedules-types.d";
+import { OpeningHour } from "../../../types/types-schedules.d";
 import { IoCloseOutline } from "react-icons/io5";
 import { LoadingComponent } from "../../loading-component";
 import { ErrorComponent } from "../../error-component";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/validateOpeningHours";
+import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/function-validate-opening-hours";
 
 interface UpdateSchedulesStore {
     onClose: () => void;
