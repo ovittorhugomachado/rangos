@@ -26,7 +26,7 @@ export const RegisterPage = () => {
         try {
             const response = await registerUser(data); 
             localStorage.setItem('token', response.token);
-            console.log(data)
+            
             navigate('/entrar')
             setError('');
         } catch (error) {

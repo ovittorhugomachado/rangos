@@ -108,8 +108,6 @@ export const CategoryButtons = ({ categories, setCategories, buttonColor, textCo
                     }}
                     onSubmit={async (newName) => {
                         await RenameCategory(editCategoryId, newName);
-                        console.log(newName)
-                        console.log(editCategoryId)
                         setCategories(prev =>
                             prev.map(cat =>
                                 cat.id === editCategoryId ? { ...cat, name: newName } : cat

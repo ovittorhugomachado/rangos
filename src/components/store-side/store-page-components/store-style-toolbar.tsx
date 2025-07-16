@@ -78,7 +78,7 @@ export const BottomNav = ({
 
         } catch (error) {
             alert("Erro ao salvar as mudanças!");
-            console.log(error)
+            console.error(error)
         }
     };
 

@@ -82,7 +82,6 @@ export const uploadMenuItemImage = async (
 
         if (!response.ok) {
             const error = await response.json();
-            console.log(error)
             throw new Error(error.error);
         }
 

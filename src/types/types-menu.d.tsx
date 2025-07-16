@@ -10,5 +10,4 @@ export type MenuItem = {
   price: number;
   photoUrl: string;
   categoryId: number;
-  isAvailable: boolean;
 };

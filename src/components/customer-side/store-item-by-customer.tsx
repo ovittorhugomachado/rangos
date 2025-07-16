@@ -1,29 +1,19 @@
 import { useCart } from "../../context/cart-context/cart-context";
-
-interface ItemProps {
-    image?: string;
-    name: string;
-    description: string;
-    price: number;
-    categoryId: number;
-    id: number;
-}
+import { MenuItem } from "../../types/types-menu.d";
 
 export const Item = ({
     id,
-    image,
+    photoUrl,
     name,
     description,
     price,
-}: ItemProps) => {
+}: MenuItem) => {
 
-    const { addItem, cart } = useCart();
+    const { addItem } = useCart();
 
     const handleAddToCart = () => {
         addItem({ id, name, price });
     };
-
-    console.log(cart)
 
     return (
         <button
@@ -31,7 +21,7 @@ export const Item = ({
             onClick={handleAddToCart}
         >
             <div className="w-[150px] h-[150px] relative">
-                <img src={image}
+                <img src={photoUrl}
                     alt={name}
                     className="w-[150px] h-[150px] object-cover"
                 />

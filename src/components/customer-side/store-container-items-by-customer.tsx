@@ -85,7 +85,7 @@ export const MenuItemsContainer = ({
                                             className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px] hover:scale-102 transition-all duration-300`}
                                         >
                                             <Item
-                                                image={item.photoUrl ?? '../prato-default.png'}
+                                                photoUrl={item.photoUrl ?? '../prato-default.png'}
                                                 name={item.name}
                                                 description={item.description}
                                                 price={item.price}

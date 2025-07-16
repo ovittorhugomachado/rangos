@@ -64,7 +64,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                     pickup: response.pickup,
                 });
             } catch (error: unknown) {
-                console.log(error);
+                console.error(error);
                 setError(error instanceof Error ? error.message : "Erro ao carregar os dados da loja");
             } finally {
                 setLoading(false);
