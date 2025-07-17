@@ -68,7 +68,7 @@ export const Store = () => {
                 >
                     <Header
                         backgroundColor={storeData?.backgroundColor ?? 'white'}
-                        restaurantImage={storeData?.logoUrl}
+                        restaurantImage={storeData?.logoUrl ?? 'store-logo-default.png'}
                         restaurantName={storeData?.restaurantName}
                         openingHours={
                             Array.isArray(storeData?.openingHours)
