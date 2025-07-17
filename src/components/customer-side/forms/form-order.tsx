@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { OrderFormData } from "../../../types/types-orders.d";
+import { OrderFormData } from "../../../types/types-data-forms.d";
 import { InputCustomerName } from "../inputs/input-customer-name";
 import { InputCustomerPhoneNumber } from "../inputs/input-customer-phone";
 import { InputCustomerAddress } from "../inputs/input-customer-address";

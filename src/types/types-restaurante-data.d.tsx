@@ -37,3 +37,7 @@ export type RestaurantContainerProps = {
   error?: string;
   initialValues?: Partial<RestaurantData>;
 }
+
+export type RestaurantsGrid = {
+  restaurants: RestaurantData[];
+}

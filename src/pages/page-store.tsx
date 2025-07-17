@@ -7,11 +7,11 @@ import { StyleStorePage } from "../types/types-style-store-page.d";
 import { RestaurantData } from "../types/types-restaurante-data.d";
 import { ErrorComponent } from "../components/component-error";
 import { LoadingComponent } from "../components/component-loading";
-import { Header } from "../components/customer-side/store-header-by-customer";
-import { StoreBanner } from "../components/customer-side/store-banner-customer";
-import { CategoryButtons } from "../components/customer-side/store-categories-buttons-by-customer";
-import { MenuItems } from "../components/customer-side/store-container-items-by-customer";
-import { StoreFooterComponent } from "../components/customer-side/store-footer-by-customer";
+import { Header } from "../components/customer-side/store/store-header-by-customer";
+import { StoreBanner } from "../components/customer-side/store/store-banner-customer";
+import { CategoryButtons } from "../components/customer-side/store/store-categories-buttons-by-customer";
+import { MenuItems } from "../components/customer-side/store/store-container-items-by-customer";
+import { StoreFooterComponent } from "../components/customer-side/store/store-footer-by-customer";
 
 export const Store = () => {
 

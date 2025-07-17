@@ -1,11 +1,11 @@
 import { LogoStore } from "./store-logo-by-customer";
-import { OpeningHour } from "../../types/types-schedules.d";
-import { getRestaurantStatus } from "../../utils/function-restaurant-status";
+import { OpeningHour } from "../../../types/types-schedules.d";
+import { getRestaurantStatus } from "../../../utils/function-restaurant-status";
 import { CiShoppingCart } from "react-icons/ci";
-import { toMoney } from "../../utils/function-transform-to-money";
+import { toMoney } from "../../../utils/function-transform-to-money";
 import { useState } from "react";
-import { OrderForm } from "./forms/form-order";
-import { useCart } from "../../context/cart-context/cart-context";
+import { OrderForm } from "../forms/form-order";
+import { useCart } from "../../../context/cart-context/cart-context";
 
 interface HeaderProps {
     backgroundColor: string;
@@ -35,7 +35,7 @@ export const Header: React.FC<HeaderProps> = ({
             className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white'} max-h-[387px] z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between top-0 border-b-[1px] `}>
             <div className="w-full flex flex-col xs:flex-row justify-between items-center">
                 <div className="w-full flex items-center justify-center xs:justify-start gap-3.5">
-                    <LogoStore image={restaurantImage} />
+                    <LogoStore image={restaurantImage ?? ''} />
                     <div className="text-center mx-1.5">
                         <div className="flex items-center gap-1 m-1">
                             <h2 className="text-md xl:text-base font-bold mb-1">{restaurantName}</h2>

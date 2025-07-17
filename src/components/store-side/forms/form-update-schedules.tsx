@@ -68,8 +68,6 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
             status: "",
         }));
 
-        console.log(schedule);
-
         const fieldErrors: { [key: string]: string } = {};
         let hasError = false;
         schedule.forEach((range, idx) => {

@@ -1,5 +1,21 @@
 import { AccountData } from "../types/types-account.d";
 
+export const getStoresList = async () => {
+    const response = await fetch('http://localhost:3000/stores/list', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Erro ao buscar lista de lojas');
+    };
+
+    return await response.json();   
+};
+
 export const getStoreData = async () => {
     const response = await fetch('http://localhost:3000/store', {
         method: 'GET',

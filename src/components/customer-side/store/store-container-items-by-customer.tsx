@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react"
-import { getMenuItemService } from "../../services/service-manage-menu-store"
-import { ErrorComponent } from "../component-error"
-import { LoadingComponent } from "../component-loading"
-import { Item } from "./store-item-by-customer";
-import { MenuItem, MenuItemsContainerProps } from "../../types/types-menu.d";
+import { getMenuItemService } from "../../../services/service-manage-menu-store"
+import { ErrorComponent } from "../../component-error"
+import { LoadingComponent } from "../../component-loading"
+import { Item } from "./store-item-by-customer"
+import { MenuItem, MenuItemsContainerProps } from "../../../types/types-menu.d";
 
 export const MenuItems = ({
     categories,

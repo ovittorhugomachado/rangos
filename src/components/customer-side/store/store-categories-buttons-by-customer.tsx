@@ -1,4 +1,4 @@
-import { CategoryButtonsProps } from "../../types/types-menu.d";
+import { CategoryButtonsProps } from "../../../types/types-menu.d";
 
 export const CategoryButtons = ({ categories, buttonColor, textColor }: CategoryButtonsProps) => {
 

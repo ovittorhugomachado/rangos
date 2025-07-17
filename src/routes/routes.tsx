@@ -7,6 +7,7 @@ import { AdminDashboard } from "../pages/page-dashboard";
 import { CustomizeMenuPage } from "../pages/page-customize-menu";
 import { PlaygroundPage } from "../pages/page-playground";
 import { Store } from "../pages/page-store";
+import { PageListOfStores } from "../pages/page-list-of-stores";
 
 export const AppRoutes = () => {
     return (
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
                 <Route path="/recuperar-senha" element={<RecoverPasswordPage />} />
                 <Route path="/create-new-password/:token" element={<CreateNewPasswordPage />} />
                 <Route path="/painel" element={<AdminDashboard />} />
+                <Route path="/restaurantes" element={<PageListOfStores />} />
                 <Route path="/store" element={<Store />} />
                 <Route path="/playground" element={<PlaygroundPage />} />
             </Routes>

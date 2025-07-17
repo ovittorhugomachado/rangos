@@ -1,5 +1,5 @@
-import { useCart } from "../../context/cart-context/cart-context";
-import { MenuItem } from "../../types/types-menu.d";
+import { useCart } from "../../../context/cart-context/cart-context";
+import { MenuItem } from "../../../types/types-menu.d";
 
 export const Item = ({
     id,
