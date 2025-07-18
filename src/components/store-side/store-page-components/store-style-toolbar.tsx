@@ -54,7 +54,7 @@ export const BottomNav = ({
         );
     }, [buttonColor, initialButtonColor, backgroundColorStore, initialBackgroundColor, textColorButtons, initialTextColorButtons]);
 
-
+    console.log(textColorButtons)
     const saveChanges = async () => {
         try {
             await updatePageStyle({

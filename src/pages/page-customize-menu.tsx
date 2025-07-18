@@ -42,6 +42,7 @@ export const CustomizeMenuPage = () => {
             const storeData = await getStoreData();
 
             const styleData = await getPageStyle();
+            console.log("styleData", styleData.textButtonColor);
 
             const categoriesStore = await getCategoriesStore()
 
@@ -55,11 +56,11 @@ export const CustomizeMenuPage = () => {
             setCategories(categoriesStore);
             setInitialButtonColor(styleData.primaryColor ?? '');
             setInitialBackgroundColor(styleData.backgroundColor ?? '');
-            setInitialTextColorButtons(styleData.textColorButton ?? '');
+            setInitialTextColorButtons(styleData.textButtonColor ?? '');
 
             if (styleData.backgroundColor) setBackgroundColor(styleData.backgroundColor);
             if (styleData.primaryColor) setButtonColor(styleData.primaryColor);
-            if (styleData.textColorButton) setTextColorButtons(styleData.textColorButton);
+            if (styleData.textButtonColor) setTextColorButtons(styleData.textButtonColor);
 
         } catch (error) {
 
@@ -108,7 +109,7 @@ export const CustomizeMenuPage = () => {
                         initialTextColorButtons={initialTextColorButtons === "black" || initialTextColorButtons === "white" ? initialTextColorButtons : "black"}
                         buttonColor={buttonColor ?? ''}
                         setButtonColor={setButtonColor}
-                        textColorButtons={textColorButtons === "black" || textColorButtons === "white" ? textColorButtons : "black"}
+                        textColorButtons={textColorButtons === "black" || textColorButtons === "white" ? textColorButtons : "white"}
                         setTextColorButtons={setTextColorButtons}
                     />
                     <Header

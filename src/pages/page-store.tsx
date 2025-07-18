@@ -53,6 +53,7 @@ export const Store = () => {
         fetchStoreData();
     }, []);
 
+    console.log(storeStyle)
     return (
         <>
             {error ? (
@@ -67,7 +68,7 @@ export const Store = () => {
                     className="w-screen h-full min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center"
                 >
                     <Header
-                        backgroundColor={storeData?.backgroundColor ?? 'white'}
+                        backgroundColor={storeStyle?.backgroundColor ?? ''}
                         restaurantImage={storeData?.logoUrl ?? 'store-logo-default.png'}
                         restaurantName={storeData?.restaurantName}
                         openingHours={
@@ -90,8 +91,8 @@ export const Store = () => {
                         <CategoryButtons
                             categories={categories}
                             buttonColor={storeStyle?.primaryColor ?? ''}
-                            textColor={storeStyle?.textColorButton ?? 'black'}
-    
+                            textColor={storeStyle?.textButtonColor}
+
                         />
                         <MenuItems
                             categories={categories}

@@ -15,7 +15,7 @@ interface HeaderProps {
 };
 
 export const Header: React.FC<HeaderProps> = ({
-    backgroundColor = 'white',
+    backgroundColor = '',
     restaurantImage,
     restaurantName,
     openingHours = [],
