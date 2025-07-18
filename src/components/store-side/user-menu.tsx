@@ -9,8 +9,8 @@ export const UserMenu = ({ open }: { open: boolean }) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <div className={`${open ? "block" : "hidden"} flex flex-col items-center w-16 h-16 rounded-full bg-red-600 z-50`}>
-            <img src={style?.logoUrl} alt="logo" />
+        <div className={`${open ? "block" : "hidden"} flex flex-col items-center w-16 h-16 rounded-full`}>
+            <img src={style?.logoUrl ?? 'default-logo.png'} alt="logo" className="rounded-full" />
             <IoIosArrowDown
                 onClick={() => setMenuOpen((prev) => !prev)}
                 className={`${menuOpen ? "rotate-180" : ""} text-xl text-black dark:text-white cursor-pointer absolute right-[-21px] top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300`} />
