@@ -17,7 +17,7 @@ export const UserMenu = ({ open }: { open: boolean }) => {
 
             <div
                 style={{ zIndex: 1000 }}
-                className={`${menuOpen ? "block" : "hidden"} w-18 rounded-xl flex flex-col absolute bottom-3 sm:bottom-1 lg:-bottom-6 -right-18 lg:-right-1 bg-zinc-600 dark:bg-zinc-900`}
+                className={`${menuOpen ? "block" : "hidden"} w-18 rounded-xl flex flex-col absolute bottom-0 translate-y-2 sm:translate-y-3 bg-zinc-600 dark:bg-zinc-900`}
             >
                 <Link
                     to="/entrar"
