@@ -42,7 +42,6 @@ export const CustomizeMenuPage = () => {
             const storeData = await getStoreData();
 
             const styleData = await getPageStyle();
-            console.log("styleData", styleData.textButtonColor);
 
             const categoriesStore = await getCategoriesStore()
 

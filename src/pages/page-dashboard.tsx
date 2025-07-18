@@ -111,7 +111,9 @@ export const AdminDashboard = () => {
                         increaseFontSize={increaseFontSize}
                         decreaseFontSize={decreaseFontSize}
                     />
-                    <DashboardNav />
+                    <DashboardNav
+                        fontSize={fontSize}
+                    />
                     <main className={`${fontSize} text-black dark:text-white w-screen h-screen pt-6 flex flex-col items-center gap-6`}>
                         <div className="flex items-center justify-center">
                             <CgMenuGridR className="text-4xl hidden sm:block" />

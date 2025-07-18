@@ -6,9 +6,9 @@ import { MdBorderColor } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import { useState } from "react";
 
-export const DashboardNav = () => {
+export const DashboardNav = ({fontSize}: {fontSize: string}) => {
     const [menuOpen, setMenuOpen] = useState(false);
-
+console.log(fontSize)
     return (
         <nav className="dark:border-b-[1px] dark:border-zinc-600 top-0 w-screen lg:h-26 flex flex-col sm:flex-row items-center justify-center px-4 pt-13 sm:pt-8 pb-4 lg:py-0 sm:gap-36 shadow-md">
             <div className="container-logo mt-0 sm:absolute sm:mt-[-35px] lg:mt-0 lg:left-8 lg:translate-y-1">
@@ -32,14 +32,15 @@ export const DashboardNav = () => {
             <div className="sm:hidden relative py-2">
                 <UserMenu
                     open={menuOpen}
+                    fontSize={fontSize}
                 />
             </div>
-            <ul className={` md-flex ${menuOpen ? "" : "hidden sm:flex"} w-full max-w-[550px] md:w-[690px] flex flex-col sm:flex-row items-center justify-center mb-8 lg:mb-0 md:justify-around gap-2 sm:gap-8 sm:mt-12 lg:mt-0 translate-y-3.5 lg:translate-y-0 xl:translate-x-12 text-black dark:text-white`}>
+            <ul className={`${menuOpen ? "" : "hidden sm:flex"} ${fontSize === 'text-sm' ? 'text-lg' : 'text-2xl'} w-full max-w-[580px] md:w-[690px] flex flex-col sm:flex-row items-center justify-center mb-8 lg:mb-0 md:justify-around gap-2 sm:gap-4 sm:mt-12 lg:mt-0 translate-y-3.5 lg:translate-y-0 xl:translate-x-12 text-black dark:text-white`}>
                 <li className="flex justify-center rounded-full bg-primary px-4">
                     <Link
                         to="/"
                         title="Editar cardápio"
-                        className="flex items-center justify-center gap-2 text-lg text-center text-black transition-all duration-200 hover:scale-103"
+                        className="flex items-center justify-center gap-2 text-center text-black transition-all duration-200 hover:scale-103"
                     >
                         <CgMenuGridR />
                         Painel
@@ -50,7 +51,7 @@ export const DashboardNav = () => {
                         to="/store"
                         target="_blank"
                         title="Criar pedido"
-                        className="flex items-center justify-center gap-2 text-lg text-center text-black transition-all duration-200 hover:scale-103"
+                        className="flex items-center justify-center gap-2 text-center text-black transition-all duration-200 hover:scale-103"
                     >
                         <MdBorderColor />
                         Criar pedido
@@ -60,7 +61,7 @@ export const DashboardNav = () => {
                     <Link
                         to="/personalizar-cardapio"
                         title="Editar loja"
-                        className="flex items-center justify-center gap-2 text-lg text-center text-black transition-all duration-200 hover:scale-103"
+                        className="flex items-center justify-center gap-2 text-center text-black transition-all duration-200 hover:scale-103"
                     >
                         <IoMdSettings />
                         Editar loja
@@ -70,6 +71,7 @@ export const DashboardNav = () => {
             <div className="hidden sm:block absolute left-6 lg:left-auto lg:right-20">
                 <UserMenu
                     open={true}
+                    fontSize={fontSize}
                 />
             </div>
         </nav>

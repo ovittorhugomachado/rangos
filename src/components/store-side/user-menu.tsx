@@ -2,14 +2,15 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useAuth } from "../../hooks/use-auth"
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { logout } from "../../services/service-auth";
 
-export const UserMenu = ({ open }: { open: boolean }) => {
+export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }) => {
     const { style } = useAuth();
 
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <div className={`${open ? "block" : "hidden"} flex flex-col items-center w-16 h-16 rounded-full`}>
+        <div className={`${open ? "block" : "hidden"} flex flex-col items-center w-16 h-16 rounded-full sm:-translate-y-10 sm:-translate-x-2 lg:translate-0 `}>
             <img src={style?.logoUrl ?? 'default-logo.png'} alt="logo" className="rounded-full" />
             <IoIosArrowDown
                 onClick={() => setMenuOpen((prev) => !prev)}
@@ -21,8 +22,8 @@ export const UserMenu = ({ open }: { open: boolean }) => {
             >
                 <Link
                     to="/entrar"
-                    onClick={() => localStorage.removeItem('token')}
-                    className="text-center hover:scale-110 transition-all duration-200 text-white"
+                    onClick={() => logout()}
+                    className={`${fontSize} text-center hover:scale-110 transition-all duration-200 text-white`}
                 >
                     Sair
                 </Link>
