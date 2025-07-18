@@ -7,7 +7,7 @@ import { IoMdSettings } from "react-icons/io";
 
 export const DashboardNav = () => {
     return (
-        <nav className="absolute top-0 w-screen h-70 sm:h-38 lg:h-26 flex flex-col sm:flex-row items-center justify-center px-4 pt-16 sm:pt-12 py-12 lg:py-0 sm:gap-36 border-b border-zinc-800 dark:border-zinc-700">
+        <nav className="absolute top-0 w-screen h-70 sm:h-38 lg:h-26 flex flex-col sm:flex-row items-center justify-center px-4 pt-16 sm:pt-12 py-12 lg:py-0 sm:gap-36 shadow-md">
             <div className="container-logo mt-0 sm:absolute sm:mt-[-35px] lg:mt-0 lg:left-8 lg:translate-y-1">
                 <Logo />
             </div>
