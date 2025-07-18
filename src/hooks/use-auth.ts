@@ -2,18 +2,22 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../services/service-user-data";
 import { AccountData } from "../types/types-account.d";
+import { getStoreData } from "../services/service-store-data";
+import { RestaurantData } from "../types/types-restaurante-data.d";
 
 export const useAuth = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<AccountData | null>(null);
+    const [style, setStyle] = useState<RestaurantData | null>(null);
     const navigate = useNavigate();
 
     const fetchData = useCallback(async () => {
         setLoading(true);
         try {
             const userDataResponse = await userData();
-            if (!userDataResponse) {
+            const styleData = await getStoreData();
+            if (!userDataResponse || !styleData) {
                 throw new Error('Dados do usuário não encontrados');
             }
             setUser(prevUser => {
@@ -22,6 +26,7 @@ export const useAuth = () => {
                     ? prevUser
                     : userDataResponse;
             });
+            setStyle(styleData);
             setError('');
         } catch (error) {
             const err = error as Error;
@@ -45,6 +50,8 @@ export const useAuth = () => {
         }
     }, [error, loading, navigate]);
 
-    return { user, loading, error, refreshData: fetchData };  
+    const isLogged = !!user;
+
+    return { user, style, loading, error, refreshData: fetchData, isLogged };
 };
 
