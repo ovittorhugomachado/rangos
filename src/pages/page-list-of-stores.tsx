@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { StoreGrid } from "../components/customer-side/restaurants-grid";
 import { LoadingComponent } from "../components/component-loading";
 import { getStoresList } from "../services/service-store-data";
+import { Header } from "../components/customer-side/header";
 
 export const PageListOfStores = () => {
 
@@ -29,18 +30,21 @@ export const PageListOfStores = () => {
 
     return (
         <>
-        {loading ? (
-            <LoadingComponent />
-        ) : error ? (
-            <div className="flex flex-col items-center">
-                <p className="text-red-500">{error}</p>
-            </div>
-        ) : (
-            <StoreGrid
-                restaurants={restaurants}
-            />
-        )}
-    </>
+            {loading ? (
+                <LoadingComponent />
+            ) : error ? (
+                <div className="flex flex-col items-center">
+                    <p className="text-red-500">{error}</p>
+                </div>
+            ) : (
+                <div className="w-full min-h-screen flex flex-col items-center justify-start mx-4 md:mx-10 lg:mx-20">
+                    <Header />
+                    <StoreGrid
+                        restaurants={restaurants}
+                    />
+                </div>
+            )}
+        </>
     )
 };
 

@@ -4,9 +4,9 @@ import { RestaurantsGrid } from "../../types/types-restaurante-data.d";
 export const StoreGrid = ({ restaurants }: RestaurantsGrid) => {
 
     return (
-        <main className="w-full mx-4 md:mx-10 lg:mx-20 flex flex-col bg-white text-black">
-            <h1>Restaurantes</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 w-full mt-8">
+        <main className="w-full flex flex-col bg-white text-black">
+            <h1 className="w-60 mx-auto text-3xl text-center my-4 border-b-2 border-primary">Restaurantes</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 w-full max-w-[1450px] mt-8 mx-auto">
                 {restaurants.map(restaurant => (
                     <Link
                         key={restaurant.id}
