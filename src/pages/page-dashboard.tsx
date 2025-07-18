@@ -112,7 +112,7 @@ export const AdminDashboard = () => {
                         decreaseFontSize={decreaseFontSize}
                     />
                     <DashboardNav />
-                    <main className={`${fontSize} w-screen h-screen pt-77 sm:pt-46 flex flex-col text-black dark:text-white items-center gap-6`}>
+                    <main className={`${fontSize} text-black dark:text-white w-screen h-screen pt-6 flex flex-col items-center gap-6`}>
                         <div className="flex items-center justify-center">
                             <CgMenuGridR className="text-4xl hidden sm:block" />
                             <h1 className="text-4xl text-center border-b-2 border-primary mx-3">Painel de pedidos</h1>
