@@ -3,7 +3,7 @@ import { useAppSettings } from "../hooks/use-app-settings.ts";
 import { AccountData } from "../types/types-account.d.tsx";
 import { recoverPassword } from "../services/service-recover-password.ts";
 import { RecoverPasswordFormContainer } from "../components/store-side/forms/form-recover-password.tsx";
-import { ToggleThemeAndFont } from "../components/store-side/display-settings.tsx";
+import { ToggleThemeAndFont } from "../components/component-display-settings.tsx";
 
 export const RecoverPasswordPage = () => {
 

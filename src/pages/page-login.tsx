@@ -4,7 +4,7 @@ import { useAppSettings } from "../hooks/use-app-settings";
 import { login } from "../services/service-auth";
 import { AccountData } from "../types/types-account.d";
 import { LoginFormContainer } from "../components/store-side/forms/form-login";
-import { ToggleThemeAndFont } from "../components/store-side/display-settings";
+import { ToggleThemeAndFont } from "../components/component-display-settings";
 
 export const LoginPage = () => {
 

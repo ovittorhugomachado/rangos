@@ -7,4 +7,5 @@ export type ThemeButtonProps = {
     increaseFontSize: () => void;
     decreaseFontSize: () => void;
     fontSize: FontSize;
+    byStore?: boolean; 
 }
