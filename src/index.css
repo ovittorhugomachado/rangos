@@ -68,7 +68,7 @@ img, button, span {
 }
 
 .primary-button {
-    @apply px-[60px] py-2 text-sm md:text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-primary text-black hover:scale-105;
+    @apply px-[60px] py-2 text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-primary text-black hover:scale-105;
 }
 
 .cancel-button {

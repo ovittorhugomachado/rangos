@@ -45,7 +45,7 @@ export const SignupFormContainer = ({
     };
 
     return (
-        <div className="primary-component w-120 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
+        <div className="primary-component w-[90%] max-w-[450px] gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
             <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col justify-center items-center mt-5 mb-5 w-full max-w-105 gap-4">
                 <Link
                     to="/entrar"
@@ -106,7 +106,7 @@ export const SignupFormContainer = ({
                 )}
                 <button
                     type="submit"
-                    className="primary-button w-[250px]"
+                    className="primary-button"
                     disabled={isLoading}
                 >
                     {isLoading ? "Carregando..." : "Criar conta"}

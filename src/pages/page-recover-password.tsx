@@ -34,7 +34,7 @@ export const RecoverPasswordPage = () => {
     };
 
     return (
-        <main className={`${fontSize} min-h-[550px] min-w-[300px] flex justify-center items-center`}>
+        <main className={`${fontSize} w-full min-h-[550px] min-w-[300px] flex justify-center items-center`}>
             <RecoverPasswordFormContainer
                 onSubmit={HandleRecoverPassword}
                 isLoading={loading}

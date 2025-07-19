@@ -47,17 +47,14 @@ export const RecoverPasswordFormContainer = ({
     };
 
     return (
-        <div className="primary-component w-120 gap-3 mx-3 pt-20 pb-10 p-5 flex flex-col justify-center items-center">
-
+        <div className="primary-component w-[90%] max-w-[450px] gap-3 mx-3 pt-20 pb-10 p-5 flex flex-col justify-center items-center">
             <Link
                 to="/entrar"
                 className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
             >
                 <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
             </Link>
-
             <Logo />
-
             {message === "" && (
                 <>
                     <form onSubmit={handleSubmit(handleRecoverPasswordSubmit)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
@@ -66,15 +63,12 @@ export const RecoverPasswordFormContainer = ({
                             errors={errors}
                             clearErrors={clearErrors}
                         />
-
                         {error && (
                             <p className="text-error">
                                 {error}
                             </p>
                         )}
-
                         <p className="text-center">{message}</p>
-
                         <button
                             type="submit"
                             className="primary-button self-center mt-4"
@@ -102,7 +96,6 @@ export const RecoverPasswordFormContainer = ({
                     <h1 className="text-center mt-4 mb-12">{message}</h1>
                 </>
             )}
-
         </div>
     );
 };
