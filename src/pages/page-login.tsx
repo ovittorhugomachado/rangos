@@ -23,8 +23,8 @@ export const LoginPage = () => {
     const handleLogin = async (data: AccountData) => {
         setLoading(true);
         try {
-            const { token } = await login(data);
-            localStorage.setItem('token', token);
+            const { isLogged } = await login(data);
+            localStorage.setItem('isLogged', JSON.stringify(isLogged));
             navigate('/painel')
 
         } catch (error) {

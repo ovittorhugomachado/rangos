@@ -17,8 +17,7 @@ export const login = async (credentials: AccountData) => {
             throw new Error(data.message || 'Erro ao fazer login')
         }
 
-        return data;
-
+        return { ...data, isLogged: true };
     } catch (error) {
 
         if (error instanceof TypeError && error.message === 'Failed to fetch') {
@@ -36,7 +35,7 @@ export const logout = async () => {
     try {
         const response = await fetch('http://localhost:3000/logout', {
             method: 'POST',
-            credentials: 'include',  
+            credentials: 'include',
         });
 
         const data = await response.json();
@@ -45,8 +44,7 @@ export const logout = async () => {
             throw new Error(data.message || 'Erro ao fazer logout');
         }
 
-        return data;
-
+        return { ...data, isLogged: false };
     } catch (error) {
         if (error instanceof TypeError && error.message === 'Failed to fetch') {
             throw new Error('Estamos com problemas técnicos. Por favor tente novamente mais tarde.');

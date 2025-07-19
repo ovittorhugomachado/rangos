@@ -24,6 +24,7 @@ export type RestaurantData = {
   plan: string;
   cratedAt: Date;
   cpf: string;
+  isLogged: boolean;
   passwordResetToken: object;
   storeCustomization: object;
   primaryColor: string;

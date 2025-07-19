@@ -22,7 +22,11 @@ export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }
             >
                 <Link
                     to="/entrar"
-                    onClick={() => logout()}
+                    onClick={() => {
+                        logout()
+                        localStorage.setItem('isLogged', JSON.stringify(false));
+                        localStorage.removeItem('token');
+                    }}
                     className={`${fontSize} text-center hover:scale-110 transition-all duration-200 text-white`}
                 >
                     Sair
