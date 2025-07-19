@@ -48,7 +48,7 @@ export const LoginFormContainer = ({
     };
 
     return (
-        <div className="primary-component w-120 h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
+        <div className="primary-component w-[90%] max-w-[400px] h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
             <Logo/>
             <form onSubmit={handleSubmit(handleAccountData)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
                 <InputEmail
@@ -70,7 +70,7 @@ export const LoginFormContainer = ({
 
                 <button
                     type="submit"
-                    className="primary-button w-[250px] self-center mt-4"
+                    className="primary-button self-center mt-4"
                     disabled={isLoading}
                 >
                     {isLoading ? "Carregando..." : "Entrar"}

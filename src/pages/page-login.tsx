@@ -36,7 +36,7 @@ export const LoginPage = () => {
     };
 
     return (
-        <main className={`${fontSize} min-h-[590px] min-w-[300px] flex justify-center items-center`}>
+        <main className={`${fontSize} w-full min-h-[590px] min-w-[280px] flex justify-center items-center`}>
             <LoginFormContainer
                 onSubmit={handleLogin}
                 isLoading={loading}
