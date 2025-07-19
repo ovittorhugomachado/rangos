@@ -110,7 +110,7 @@ export const DashboardCards = ({
                                     className={`${activePanel.includes(card.id) ? 'rotate-180' : ''} text-2xl cursor-pointer transition-all duration-300`}
                                     onClick={() => togglePanel(card.id)}
                                 />
-                                <span className="text-lg flex-2">{card.name}</span>
+                                <h1 className={`${fontSize === 'text-sm' ? 'text-lg' : 'text-xl'} flex-2`}>{card.name}</h1>
                                 <span className="w-7 h-7 rounded-full flex items-center justify-center bg-white dark:bg-black text-black dark:text-white text-sm">{cardOrders.length}</span>
                             </div>
                             {cardOrders.length === 0 ? (
