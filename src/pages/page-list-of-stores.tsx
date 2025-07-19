@@ -29,8 +29,6 @@ export const PageListOfStores = () => {
         fetchRestaurants();
     }, []);
 
-    console.log(restaurants)
-
     return (
         <>
             {loading ? (

@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export const DashboardNav = ({fontSize}: {fontSize: string}) => {
     const [menuOpen, setMenuOpen] = useState(false);
-console.log(fontSize)
+
     return (
         <nav className="dark:border-b-[1px] dark:border-zinc-600 top-0 w-screen lg:h-26 flex flex-col sm:flex-row items-center justify-center px-4 pt-13 sm:pt-8 pb-4 lg:py-0 sm:gap-36 shadow-md">
             <div className="container-logo mt-0 sm:absolute sm:mt-[-35px] lg:mt-0 lg:left-8 lg:translate-y-1">
@@ -35,7 +35,7 @@ console.log(fontSize)
                     fontSize={fontSize}
                 />
             </div>
-            <ul className={`${menuOpen ? "" : "hidden sm:flex"} ${fontSize === 'text-sm' ? 'text-lg' : 'text-2xl'} w-full max-w-[580px] md:w-[690px] flex flex-col sm:flex-row items-center justify-center mb-8 lg:mb-0 md:justify-around gap-2 sm:gap-4 sm:mt-12 lg:mt-0 translate-y-3.5 lg:translate-y-0 xl:translate-x-12 text-black dark:text-white`}>
+            <ul className={`${menuOpen ? "" : "hidden sm:flex"} ${fontSize === 'text-sm' ? 'text-lg' : 'text-xl'} w-full max-w-[580px] md:w-[690px] flex flex-col sm:flex-row items-center justify-center mb-8 lg:mb-0 md:justify-around gap-2 sm:gap-4 sm:mt-12 lg:mt-0 translate-y-3.5 lg:translate-y-0 xl:translate-x-12 text-black dark:text-white`}>
                 <li className="flex justify-center rounded-full bg-primary px-4">
                     <Link
                         to="/"
@@ -68,7 +68,7 @@ console.log(fontSize)
                     </Link>
                 </li>
             </ul>
-            <div className="hidden sm:block absolute left-6 lg:left-auto lg:right-20">
+            <div className="hidden sm:block absolute right-16 lg:left-auto lg:right-18">
                 <UserMenu
                     open={true}
                     fontSize={fontSize}

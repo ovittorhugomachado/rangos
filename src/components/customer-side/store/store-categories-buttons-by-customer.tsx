@@ -11,8 +11,6 @@ export const CategoryButtons = ({ categories, buttonColor, textColor }: Category
         }
     };
 
-    console.log(textColor)
-
     return (
         <div className="w-full flex flex-wrap justify-center gap-4 p-2.5 my-3.5 lg:text-base">
             {categories.map((category) => (

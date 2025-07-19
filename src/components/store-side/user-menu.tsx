@@ -29,6 +29,5 @@ export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }
                 </Link>
             </div>
         </div>
-
     )
-}
+};

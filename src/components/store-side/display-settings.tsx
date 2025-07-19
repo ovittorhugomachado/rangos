@@ -9,7 +9,7 @@ export const ToggleThemeAndFont = ({
   decreaseFontSize,
 }: ThemeButtonProps) => {
   return (
-    <div className="absolute top-[10px] right-0 z-60 flex flex-row md:flex-col items-center justify-center gap-2.5 px-2 py-1 sm:py-2 rounded-l-xl backdrop-blur-sm border border-zinc-400 border-r-0 bg-white dark:bg-zinc-950 text-lg sm:text-xl text-black dark:text-white">
+    <div className="absolute top-[10px] right-0 z-60 flex flex-row sm:flex-col items-center justify-center gap-2.5 px-2 py-1 sm:py-2 rounded-l-xl backdrop-blur-sm border border-zinc-400 border-r-0 bg-white dark:bg-zinc-950 text-lg sm:text-xl text-black dark:text-white">
       <button onClick={toggleTheme} className="hidden dark:inline cursor-pointer">
         <IoIosSunny className="w-6 h-6 m-0.5 text-primary z-[3]" />
       </button>

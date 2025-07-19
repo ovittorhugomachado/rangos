@@ -53,7 +53,6 @@ export const Store = () => {
         fetchStoreData();
     }, []);
 
-    console.log(storeStyle)
     return (
         <>
             {error ? (
