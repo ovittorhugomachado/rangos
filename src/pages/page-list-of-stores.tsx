@@ -10,6 +10,7 @@ import { Header } from "../components/header";
 import { MdRestaurantMenu } from "react-icons/md";
 import { BsTools } from "react-icons/bs";
 import { CgMenuGridR } from "react-icons/cg";
+import { IoMdSettings } from "react-icons/io";
 
 export const PageListOfStores = () => {
 
@@ -35,7 +36,13 @@ export const PageListOfStores = () => {
             to: "/criar-conta",
             title: "Criar Restaurante",
             icon: <BsTools />,
-            target: "_blank",
+        },
+        isLogged ? {
+            to: "/personalizar-cardapio",
+            title: "Editar cardápio",
+            icon: <IoMdSettings />,
+        } : {
+            to: "/",
         },
         {
             to: "/restaurantes",

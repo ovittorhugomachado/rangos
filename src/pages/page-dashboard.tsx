@@ -41,13 +41,11 @@ export const AdminDashboard = () => {
             to: "/personalizar-cardapio",
             title: "Editar cardápio",
             icon: <IoMdSettings />,
-            target: "_blank",
         },
         {
             to: "/restaurantes",
             title: "Restaurantes",
             icon: <MdRestaurantMenu />,
-            target: "_blank",
         },
     ]
 

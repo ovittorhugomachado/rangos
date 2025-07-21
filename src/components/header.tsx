@@ -6,8 +6,8 @@ import { UserMenu } from "./store-side/user-menu";
 
 type HeaderButton = {
     to: string;
-    title: string;
-    icon: React.ReactNode;
+    title?: string;
+    icon?: React.ReactNode;
     className?: string;
     target?: string;
 };
