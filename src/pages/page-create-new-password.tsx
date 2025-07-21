@@ -1,13 +1,13 @@
-import { CreateNewPasswordFormContainer } from "../components/store-side/forms/form-create-new-password";
-import { useAppSettings } from "../hooks/use-app-settings";
 import { useState, useEffect } from "react";
-import { AccountData } from "../types/types-account.d";
-import { ToggleThemeAndFont } from "../components/component-display-settings";
-import { createNewPassword, validateToken } from "../services/service-create-new-password"; // Adicionei a nova função
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { useAppSettings } from "../hooks/use-app-settings";
+import { createNewPassword, validateToken } from "../services/service-create-new-password";
+import { AccountData } from "../types/types-account.d";
+import { CreateNewPasswordFormContainer } from "../components/store-side/forms/form-create-new-password";
+import { ToggleThemeAndFont } from "../components/component-display-settings";
 import { Logo } from "../components/component-logo";
+import { FaArrowLeft } from "react-icons/fa";
 
 export const CreateNewPasswordPage = () => {
 
@@ -15,6 +15,7 @@ export const CreateNewPasswordPage = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [isValidToken, setIsValidToken] = useState(false);
+
     const { token } = useParams<{ token: string }>();
     const navigate = useNavigate();
 
@@ -24,7 +25,6 @@ export const CreateNewPasswordPage = () => {
                 setError('Token inválido ou ausente.');
                 return;
             }
-
             setLoading(true);
             try {
                 const isValid = await validateToken(token);
@@ -49,10 +49,8 @@ export const CreateNewPasswordPage = () => {
             setError('Token inválido ou expirado.');
             return;
         }
-
         setLoading(true);
         setError('');
-
         try {
             await createNewPassword(formData.password, token);
             setMessage("nova senha cadastrada com sucesso")
@@ -67,20 +65,16 @@ export const CreateNewPasswordPage = () => {
     return (
         <>
             {loading && !isValidToken ? (
-                <div className="loading-screen">Validando link...</div>
+                <div className={`w-full h-80 flex items-center justify-center text-lg`}>
+                    Validando link...
+                </div>
             ) : message ? (
-                <div className="primary-component w-120 h-80 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
-
+                <div className={`w-120 h-80 mx-3 pt-10 pb-10 p-5 flex flex-col gap-3 justify-center items-center text-base rounded bg-white`}>
                     <Logo />
-
                     <p>{message}</p>
-                    <Link
-                        to="/entrar"
-                        className="primary-button mt-2.5"
-                    >
+                    <Link to="/entrar" className={`mt-2.5 text-base rounded bg-primary text-white px-4 py-2 text-center`}>
                         Entrar na conta
                     </Link>
-
                 </div>
             ) : isValidToken ? (
                 <CreateNewPasswordFormContainer
@@ -90,26 +84,18 @@ export const CreateNewPasswordPage = () => {
                     error={error}
                 />
             ) : (
-                <div className="primary-component w-120 h-80 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
-                    <Link
-                        to="/entrar"
-                        className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
-                    >
+                <div className={`w-120 h-80 mx-3 pt-10 pb-10 p-5 flex flex-col gap-3 justify-center items-center text-base rounded bg-white`}>
+                    <Link to="/entrar" className={`absolute top-2.5 left-4 flex gap-2 items-center justify-center text-base`}>
                         <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
                     </Link>
-
                     <Logo />
-
                     {error || 'Link inválido ou expirado'}
-                    <Link
-                        to="/recuperar-senha"
-                        className="primary-button mt-3.5"
-                    >
+                    <Link to="/recuperar-senha" className={`mt-3.5 text-base rounded bg-primary text-white px-4 py-2 text-center`}>
                         Solicitar novo link
                     </Link>
                 </div>
             )}
             <ToggleThemeAndFont {...useAppSettings()} />
         </>
-    );
+    )
 };

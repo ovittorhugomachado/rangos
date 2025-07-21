@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Order } from "../types/types-orders.d";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { useAuth } from "../hooks/use-auth";
-import { LoadingComponent } from "../components/component-loading";
-import { ToggleThemeAndFont } from "../components/store-side/display-settings";
-import { DashboardNav } from "../components/store-side/nav";
-import { DashboardCards } from "../components/store-side/dashboard-cards";
-import { CgMenuGridR } from "react-icons/cg";
 import {
     cancelOrderService,
-    acceptOrderService, readyOrderService,
+    acceptOrderService,
+    readyOrderService,
     deliveredOrderService,
     getOrdersService
 } from "../services/service-manage-orders";
+import { Order } from "../types/types-orders.d";
+import { Header } from "../components/header";
+import { LoadingComponent } from "../components/component-loading";
+import { ToggleThemeAndFont } from "../components/component-display-settings";
+import { DashboardCards } from "../components/store-side/dashboard-cards";
+import { CgMenuGridR } from "react-icons/cg";
+import { MdBorderColor, MdRestaurantMenu } from "react-icons/md";
+import { IoMdSettings } from "react-icons/io";
 
 export const AdminDashboard = () => {
     const {
@@ -27,6 +30,26 @@ export const AdminDashboard = () => {
     const [activePanel, setActivePanel] = useState<number[]>([]);
     const [ordersLoading, setOrdersLoading] = useState(true);
     const [orders, setOrders] = useState<Order[]>([]);
+
+    const buttons = [
+        {
+            to: "/",
+            title: "Painel de pedidos",
+            icon: <CgMenuGridR />,
+        },
+        {
+            to: "/personalizar-cardapio",
+            title: "Editar cardápio",
+            icon: <IoMdSettings />,
+            target: "_blank",
+        },
+        {
+            to: "/restaurantes",
+            title: "Restaurantes",
+            icon: <MdRestaurantMenu />,
+            target: "_blank",
+        },
+    ]
 
     const fetchOrders = async () => {
         setOrdersLoading(true);
@@ -110,15 +133,26 @@ export const AdminDashboard = () => {
                         fontSize={fontSize}
                         increaseFontSize={increaseFontSize}
                         decreaseFontSize={decreaseFontSize}
+                        byStore={true}
                     />
-                    <DashboardNav
+                    <Header
                         fontSize={fontSize}
+                        buttons={buttons}
                     />
-                    <main className={`${fontSize} text-black dark:text-white w-screen h-screen pt-6 flex flex-col items-center gap-6`}>
+                    <main className={`${fontSize} w-screen h-screen pt-6 text-black dark:text-white flex flex-col items-center gap-6`}>
                         <div className="flex items-center justify-center">
                             <CgMenuGridR className="text-4xl hidden sm:block" />
-                            <h1 className="text-4xl text-center border-b-2 border-primary mx-3">Painel de pedidos</h1>
+                            <h1 className="text-4xl border-b-2 border-primary text-center mx-3">Painel de pedidos</h1>
                         </div>
+                        <Link
+                            to="/loja"
+                            title="Fazer pedido"
+                            style={{ fontSize: fontSize === 'text-sm' ? '18px' : '19px' }}
+                            className="w-46 mx-auto px-4 py-1 text-black bg-primary rounded-full flex justify-center items-center gap-1 transition-all duration-200 hover:scale-103"
+                        >
+                            <MdBorderColor />
+                            Fazer pedido
+                        </Link>
                         {ordersLoading ? (
                             <LoadingComponent />
                         ) : (

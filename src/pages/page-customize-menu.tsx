@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import { useAppSettings } from "../hooks/use-app-settings";
 import { getPageStyle } from "../services/service-page-style";
 import { getCategoriesStore } from "../services/service-manage-menu-store";
 import { getStoreData } from "../services/service-store-data";
-import { useAppSettings } from "../hooks/use-app-settings";
 import { RestaurantData } from "../types/types-restaurante-data.d";
 import { StyleStorePage } from "../types/types-style-store-page.d";
 import { Category } from "../types/types-menu.d";
@@ -18,31 +18,29 @@ import { UpdateSchedulesForm } from "../components/store-side/forms/form-update-
 import { MenuItems } from "../components/store-side/store-page-components/store-container-items";
 
 export const CustomizeMenuPage = () => {
+
     useAppSettings();
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
     const [storeData, setStoreData] = useState<RestaurantData | null>(null);
+    const [storeStyle, setStoreStyle] = useState<StyleStorePage | null>(null);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [initialBackgroundColor, setInitialBackgroundColor] = useState('');
+    const [initialButtonColor, setInitialButtonColor] = useState('');
+    const [initialTextColorButtons, setInitialTextColorButtons] = useState('');
+    const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined);
+    const [buttonColor, setButtonColor] = useState<string>('');
+    const [textColorButtons, setTextColorButtons] = useState<string>('');
     const [showStoreDataUpdateForm, setStoreDataUpdateForm] = useState(false)
     const [showStoreSchedulesUpdateForm, setShowStoreSchedulesUpdateForm] = useState(false)
     const [bannerUrl, setBannerUrl] = useState<string>('');
-    const [storeStyle, setStoreStyle] = useState<StyleStorePage | null>(null);
-    const [initialButtonColor, setInitialButtonColor] = useState('');
-    const [initialBackgroundColor, setInitialBackgroundColor] = useState('');
-    const [initialTextColorButtons, setInitialTextColorButtons] = useState('');
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [backgroundColor, setBackgroundColor] = useState<string | undefined>(undefined);
-    const [textColorButtons, setTextColorButtons] = useState<string>('');
-    const [buttonColor, setButtonColor] = useState<string>('');
 
     const fetchStoreData = async () => {
         setLoading(true);
         try {
-
             const storeData = await getStoreData();
-
             const styleData = await getPageStyle();
-
             const categoriesStore = await getCategoriesStore()
 
             if (!styleData) {
@@ -60,11 +58,8 @@ export const CustomizeMenuPage = () => {
             if (styleData.backgroundColor) setBackgroundColor(styleData.backgroundColor);
             if (styleData.primaryColor) setButtonColor(styleData.primaryColor);
             if (styleData.textButtonColor) setTextColorButtons(styleData.textButtonColor);
-
         } catch (error) {
-
             setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
-
             setStoreStyle(null);
         } finally {
             setLoading(false);
@@ -141,7 +136,7 @@ export const CustomizeMenuPage = () => {
                             onClose={handleSchedulesUpdated}
                         />
                     )}
-                    <main className="w-full max-w-[1140px] flex flex-col items-center justify-center pb-24 mt-[110px] xs:mt-[125px] sm:mt-[115px] xl:mt-[132px]">
+                    <main className="w-full max-w-[1140px] pb-24 mt-[110px] xs:mt-[125px] sm:mt-[115px] xl:mt-[132px] flex flex-col items-center justify-center">
                         <StoreBanner
                             banner={bannerUrl}
                             onBannerChange={async () => {

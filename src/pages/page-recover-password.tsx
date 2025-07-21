@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAppSettings } from "../hooks/use-app-settings.ts";
-import { AccountData } from "../types/types-account.d.tsx";
 import { recoverPassword } from "../services/service-recover-password.ts";
+import { AccountData } from "../types/types-account.d.tsx";
 import { RecoverPasswordFormContainer } from "../components/store-side/forms/form-recover-password.tsx";
 import { ToggleThemeAndFont } from "../components/component-display-settings.tsx";
 
@@ -18,11 +18,10 @@ export const RecoverPasswordPage = () => {
         toggleTheme,
     } = useAppSettings();
 
-
     const HandleRecoverPassword = async (data: AccountData) => {
         setLoading(true);
         try {
-            const response= await recoverPassword(data);
+            const response = await recoverPassword(data);
             setError('')
             setMessage(response.message)
         } catch (error) {
@@ -34,7 +33,7 @@ export const RecoverPasswordPage = () => {
     };
 
     return (
-        <main className={`${fontSize} w-full min-h-[550px] min-w-[300px] flex justify-center items-center`}>
+        <main className={`${fontSize} w-full min-w-[300px] min-h-[550px] flex justify-center items-center`}>
             <RecoverPasswordFormContainer
                 onSubmit={HandleRecoverPassword}
                 isLoading={loading}
@@ -46,6 +45,7 @@ export const RecoverPasswordPage = () => {
                 fontSize={fontSize}
                 increaseFontSize={increaseFontSize}
                 decreaseFontSize={decreaseFontSize}
+                byStore={true}
             />
         </main>
     )

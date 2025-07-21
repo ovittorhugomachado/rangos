@@ -15,7 +15,7 @@ export const StoreGrid = ({ restaurants }: RestaurantsGrid) => {
                     <Link
                         key={restaurant.id}
                         to={`/restaurant/${restaurant.id}`}
-                        className="min-w-50 rounded-lg shadow p-4 border-[1px] border-zinc-300 flex flex-col items-center cursor-pointer hover:scale-103 transition-all duration-300">
+                        className="min-w-50 rounded-lg shadow p-4 border-[1px] border-zinc-500 flex flex-col items-center cursor-pointer hover:scale-103 transition-all duration-300">
                         <img
                             src={restaurant.logoUrl || "/store-logo-default.png"}
                             alt={restaurant.name}

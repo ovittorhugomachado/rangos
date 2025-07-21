@@ -24,11 +24,8 @@ export const Store = () => {
     const fetchStoreData = async () => {
         setLoading(true);
         try {
-
             const storeData = await getStoreData();
-
             const styleData = await getPageStyle();
-
             const categoriesStore = await getCategoriesStore()
 
             if (!styleData) {
@@ -40,9 +37,7 @@ export const Store = () => {
             setCategories(categoriesStore);
 
         } catch (error) {
-
             setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
-
             setStoreStyle(null);
         } finally {
             setLoading(false);
@@ -56,16 +51,13 @@ export const Store = () => {
     return (
         <>
             {error ? (
-                <div className="flex flex-col items-center">
+                <div className="w-full flex flex-col items-center justify-center">
                     <ErrorComponent message={error} />
                 </div>
-            ) : (loading) ? (
+            ) : loading ? (
                 <LoadingComponent />
             ) : (
-                <div
-                    style={{ backgroundColor: storeStyle?.backgroundColor ?? undefined }}
-                    className="w-screen h-full min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center"
-                >
+                <div style={{ backgroundColor: storeStyle?.backgroundColor ?? undefined }} className="w-screen min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center">
                     <Header
                         backgroundColor={storeStyle?.backgroundColor ?? ''}
                         restaurantImage={storeData?.logoUrl ?? 'store-logo-default.png'}
@@ -83,7 +75,7 @@ export const Store = () => {
                                 : []
                         }
                     />
-                    <main className="w-full max-w-[1140px] flex flex-col items-center justify-center pb-24 mt-[110px] xs:mt-[87px] sm:mt-[115px] xl:mt-[132px]">
+                    <main className="w-full max-w-[1140px] pb-24 mt-[110px] xs:mt-[87px] sm:mt-[115px] xl:mt-[132px] flex flex-col items-center justify-center">
                         {storeData?.bannerUrl && (
                             <StoreBanner banner={storeData?.bannerUrl || 'store-banner-default.png'} />
                         )}
@@ -91,7 +83,6 @@ export const Store = () => {
                             categories={categories}
                             buttonColor={storeStyle?.primaryColor ?? ''}
                             textColor={storeStyle?.textButtonColor}
-
                         />
                         <MenuItems
                             categories={categories}

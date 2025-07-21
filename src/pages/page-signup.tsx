@@ -1,32 +1,31 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../services/service-register";
 import { useAppSettings } from "../hooks/use-app-settings";
+import { registerUser } from "../services/service-register";
 import { AccountData } from "../types/types-account.d";
 import { SignupFormContainer } from "../components/store-side/forms/form-signup";
 import { ToggleThemeAndFont } from "../components/component-display-settings";
-
 
 export const RegisterPage = () => {
 
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-
+    
     const navigate = useNavigate()
 
-        const {
-            fontSize,
-            increaseFontSize,
-            decreaseFontSize,
-            toggleTheme,
-        } = useAppSettings();
+    const {
+        fontSize,
+        increaseFontSize,
+        decreaseFontSize,
+        toggleTheme,
+    } = useAppSettings();
 
     const handleRegister = async (data: AccountData) => {
         setLoading(true);
         try {
-            const response = await registerUser(data); 
+            const response = await registerUser(data);
             localStorage.setItem('token', response.token);
-            
+
             navigate('/entrar')
             setError('');
         } catch (error) {
@@ -38,7 +37,7 @@ export const RegisterPage = () => {
     };
 
     return (
-        <main className={`${fontSize} w-full min-h-[700px] min-w-[300px] py-14 flex justify-center items-center`}>
+        <main className={`${fontSize} w-full min-w-[300px] min-h-[700px] py-14 flex justify-center items-center`}>
             <SignupFormContainer
                 onSubmit={handleRegister}
                 isLoading={loading}
@@ -50,6 +49,7 @@ export const RegisterPage = () => {
                 fontSize={fontSize}
                 increaseFontSize={increaseFontSize}
                 decreaseFontSize={decreaseFontSize}
+                byStore={true}
             />
         </main>
     );

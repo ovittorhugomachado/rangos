@@ -25,7 +25,7 @@ export const LoginPage = () => {
         try {
             const { isLogged } = await login(data);
             localStorage.setItem('isLogged', JSON.stringify(isLogged));
-            navigate('/painel')
+            navigate('/')
 
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Erro inesperado');
@@ -36,7 +36,7 @@ export const LoginPage = () => {
     };
 
     return (
-        <main className={`${fontSize} w-full min-h-[590px] min-w-[280px] flex justify-center items-center`}>
+        <main className={`${fontSize} w-full min-w-[280px] min-h-[590px] flex justify-center items-center`}>
             <LoginFormContainer
                 onSubmit={handleLogin}
                 isLoading={loading}
@@ -48,7 +48,8 @@ export const LoginPage = () => {
                 fontSize={fontSize}
                 increaseFontSize={increaseFontSize}
                 decreaseFontSize={decreaseFontSize}
+                byStore={true}
             />
         </main>
-    );
+    )
 };

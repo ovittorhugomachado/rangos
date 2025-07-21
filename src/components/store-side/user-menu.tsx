@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import { logout } from "../../services/service-auth";
 
 export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }) => {
+    
     const { style } = useAuth();
 
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <div className={`${open ? "block" : "hidden"} flex flex-col items-center w-16 h-16 rounded-full sm:-translate-y-10 sm:-translate-x-2 lg:translate-0 `}>
+        <div className={`${open ? "block" : "hidden"} flex flex-col items-center w-16 h-16 rounded-full md:-translate-y-10 md:-translate-x-2 lg:translate-0 `}>
             <img src={style?.logoUrl ?? 'default-logo.png'} alt="logo" className="rounded-full" />
             <IoIosArrowDown
                 onClick={() => setMenuOpen((prev) => !prev)}
