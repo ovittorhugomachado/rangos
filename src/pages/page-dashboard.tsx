@@ -118,7 +118,7 @@ export const AdminDashboard = () => {
         <>
             {error ? (
                 <div className="flex flex-col items-center justify-center min-h-screen">
-                    <h2 className="text-red-600 text-xl font-bold mb-4">Erro ao carregar dados</h2>
+                    <h2 className="text-black dark:text-white text-xl font-bold mb-4">Erro ao carregar dados</h2>
                     <p className="text-zinc-700">{error}</p>
                     <Link to="/entrar" className="primary-button mt-4">
                         Ir para login

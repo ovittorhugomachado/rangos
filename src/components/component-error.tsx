@@ -1,9 +1,8 @@
 export const ErrorComponent = ({ message }: { message: string }) => {
     return (
-        <div className="w-full flex flex-col items-center justify-center py-24 m-2">
-            <img src="../error.png" alt="Erro" className="w-24 h-24" />
-            <h2 className="text-red-600 text-xl font-bold mb-4">Oops</h2>
-            <p className="text-lg text-center font-extralight text-black dark:text-zinc-200">{message}</p>
+        <div className="w-full py-24 m-2 flex flex-col items-center justify-center">
+            <img src="../error.png" alt="Erro" className="w-54 h-54" />
+            <p className="text-primary text-lg text-center font-extralight">{message}</p>
         </div>
     );
 };

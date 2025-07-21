@@ -47,7 +47,8 @@ export const MenuItems = ({
             }
             setMenuItemsByCategory(itemsObj);
         } catch (error) {
-            setError(error instanceof Error ? error.message : 'Erro ao buscar itens do menu');
+            console.error(error)
+            setError('Erro ao buscar itens do menu');
         } finally {
             setLoading(false);
         }
