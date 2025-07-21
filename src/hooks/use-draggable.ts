@@ -1,10 +1,12 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 
 export const useDraggable = () => {
-    const ref = useRef<HTMLDivElement>(null);
+
     const [dragging, setDragging] = useState(false);
     const [position, setPosition] = useState({ x: 0.5, y: 0 });
     const [offset, setOffset] = useState({ x: 0.5, y: 0 });
+
+    const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (ref.current) {

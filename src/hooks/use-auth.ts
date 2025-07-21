@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../services/service-user-data";
-import { AccountData } from "../types/types-account.d";
 import { getStoreData } from "../services/service-store-data";
+import { AccountData } from "../types/types-account.d";
 import { RestaurantData } from "../types/types-restaurante-data.d";
 
 export const useAuth = () => {
@@ -10,6 +10,7 @@ export const useAuth = () => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<AccountData | null>(null);
     const [style, setStyle] = useState<RestaurantData | null>(null);
+
     const navigate = useNavigate();
 
     const fetchData = useCallback(async () => {

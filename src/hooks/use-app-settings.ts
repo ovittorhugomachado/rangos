@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Theme, FontSize } from '../types/types-preferences-user.d';
 
 export const useAppSettings = () => {
+
     const [fontSize, setFontSize] = useState<FontSize>('text-sm');
     const [theme, setTheme] = useState<Theme>('light');
 
