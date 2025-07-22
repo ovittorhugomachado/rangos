@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { FaCamera } from "react-icons/fa";
-import { UpdateMenuItemForm } from "../forms/form-create-update-menu-item";
+import { uploadMenuItemImage } from "../../../services/service-upload-image";
 import { deleteMenuItemService } from "../../../services/service-manage-menu-store";
+import { UpdateMenuItemForm } from "../forms/form-create-update-menu-item";
 import { MdOutlineEdit } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
-import { uploadMenuItemImage } from "../../../services/service-upload-image";
+import { FaCamera } from "react-icons/fa";
 
 interface ItemProps {
     image?: string;
@@ -61,17 +61,21 @@ export const Item = ({
     return (
         <>
             <div className="w-[150px] h-[150px] relative">
-                <img src={image ? `${image}?v=${imageVersion}` : "../prato-default.png"} alt="" className="w-[150px] h-[150px] object-cover" />
+                <img
+                    src={image ? `${image}?v=${imageVersion}` : "../prato-default.png"}
+                    alt=""
+                    className="w-[150px] h-[150px] object-cover"
+                />
                 <button
                     type="button"
                     title="Configurar Banner da loja"
-                    className="w-6 h-6 sm:w-8 sm:h-8 absolute bottom-0 text-black bg-white bg-opacity-70 m-2 border-2 border-black rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
+                    className="w-6 h-6 sm:w-8 sm:h-8 border-2 rounded-full bg-white bg-opacity-70 text-black absolute bottom-0 m-2 flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                     onClick={handleButtonClick}
                 >
                     <FaCamera className="text-black" />
                 </button>
             </div>
-            <div className="flex flex-col justify-between py-4 px-4">
+            <div className="py-4 px-4 flex flex-col justify-between">
                 <h1 className="font-bold">{name}</h1>
                 <p className="font-light">{description}</p>
                 <h3>R$ {Number(price.toString().replace(',', '.')).toFixed(2).replace('.', ',')}</h3>
@@ -85,17 +89,17 @@ export const Item = ({
                     initialData={{ name, description, price }}
                 />
             )}
-            <div className="flex top-[-11px] right-[10px] absolute">
+            <div className="absolute top-[-11px] right-[10px] flex">
                 <button
                     title="Renomear categoria"
-                    className="rounded-full w-5 h-5 z-2 flex items-center justify-center bg-blue-800 text-white border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
+                    className="w-5 h-5 border-[1px] rounded-full bg-blue-800 text-white border-amber-50 z-2 flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                     onClick={() => setShowFormUpdateMenuItem(id)}
                 >
                     <MdOutlineEdit className="text-sm" />
                 </button>
                 <button
                     title="Excluir categoria"
-                    className="w-5 h-5 ml-2 z-2 flex items-center justify-center bg-red-600 text-white rounded-full border-[1px] border-amber-50 cursor-pointer hover:scale-105 transition-all duration-200"
+                    className="w-5 h-5 ml-2 border-[1px] rounded-full bg-red-600 text-white border-amber-50 z-2 flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                     onClick={async () => {
                         await deleteMenuItemService(id);
                         if (onUpdated) onUpdated();
@@ -112,10 +116,10 @@ export const Item = ({
                 onChange={handleImageUpload}
             />
             {error && (
-                <div className="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded shadow text-xs z-10">
+                <div className="absolute top-2 right-2 text-xs bg-red-600 text-white px-3 py-1 rounded shadow z-10">
                     {error}
                 </div>
             )}
         </>
-    )
-}
+    );
+};

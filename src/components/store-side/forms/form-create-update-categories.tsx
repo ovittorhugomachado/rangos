@@ -17,29 +17,29 @@ export const CreateCategoryForm = ({
     };
 
     return (
-        <div className="dark:text-white fixed inset-0 z-30 flex items-center justify-center">
+        <div className="fixed inset-0 z-30 flex items-center justify-center dark:text-white">
             <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-sm">
                 <form
-                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative border-1 border-zinc-300"
+                    className="w-120 max-w-[600px] h-[300px] min-h-[270px] mx-1.5 p-6 py-10 rounded-xl border border-zinc-300 bg-white dark:bg-black shadow-lg flex flex-col items-center justify-between gap-4 relative"
                     onSubmit={handleSubmit}
                 >
                     <button
                         type="button"
-                        className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-full cursor-pointer transition-all duration-200"
+                        className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
                         onClick={onClose}
                     >
                         <IoCloseOutline className="text-lg" />
                     </button>
                     <h3 className="text-lg md:text-2xl">Criar nova categoria</h3>
-                    <div className="w-full max-w-[300px] flex flex-col items-start justify-center">
-                        <label htmlFor="category-name" className="text-md">
+                    <div className="w-full flex flex-col items-start justify-center">
+                        <label htmlFor="category-name" className="text-md ml-2">
                             Nome
                         </label>
                         <input
                             type="text"
                             id="category-name"
                             placeholder="Nome da categoria"
-                            className="input w-full px-3 py-2 border rounded"
+                            className="input"
                             value={name}
                             onChange={e => setName(e.target.value)}
                             autoFocus
@@ -79,29 +79,29 @@ export const UpdateCategoryForm = ({
     };
 
     return (
-        <div className="dark:text-white fixed inset-0 z-30 flex items-center justify-center">
+        <div className="fixed inset-0 z-30 flex items-center justify-center dark:text-white">
             <div className="absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-sm">
                 <form
-                    className="w-full max-w-[600px] h-[300px] bg-white dark:bg-black mx-1.5 p-6 py-10 rounded-xl shadow-lg flex flex-col items-center justify-between gap-4 relative border-1 border-zinc-300"
+                    className="w-120 max-w-[600px] h-[300px] min-h-[270px] mx-1.5 p-6 py-10 rounded-xl border border-zinc-300 bg-white dark:bg-black shadow-lg flex flex-col items-center justify-between gap-4 relative"
                     onSubmit={handleSubmit}
                 >
                     <button
                         type="button"
-                        className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-full cursor-pointer transition-all duration-200"
+                        className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
                         onClick={onClose}
                     >
                         <IoCloseOutline className="text-lg" />
                     </button>
                     <h3 className="text-lg md:text-2xl">Renomear categoria</h3>
-                    <div className="w-full max-w-[300px] flex flex-col items-start justify-center">
-                        <label htmlFor="category-name" className="text-md">
+                    <div className="w-full flex flex-col items-start justify-center">
+                        <label htmlFor="category-name" className="text-md ml-2">
                             Nome
                         </label>
                         <input
                             type="text"
                             id="category-name"
                             placeholder="Nome da categoria"
-                            className="input w-full px-3 py-2 border rounded"
+                            className="input"
                             value={name}
                             onChange={e => setName(e.target.value)}
                             autoFocus

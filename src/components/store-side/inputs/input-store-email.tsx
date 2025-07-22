@@ -8,9 +8,11 @@ export const InputEmail = ({
 }: InputEmailProps) => {
 
     return (
-        <div className="flex flex-col gap-1">
-            
-            <label htmlFor="email" className="label">
+        <div className="w-full flex flex-col gap-1">
+            <label
+                htmlFor="email"
+                className="w-full font-medium ml-2 mt-2 flex flex-col relative"
+            >
                 Email
                 {errors.email && (
                     <span className="span-error">
@@ -21,7 +23,7 @@ export const InputEmail = ({
             <input
                 id="email"
                 type="email"
-                className={errors.email ? "input-error" : "input"}
+                className={`input ${errors.email ? " input-error" : ""}`}
                 placeholder="Digite seu email"
                 defaultValue={initialValues.email || ""}
                 {...register("email", {
@@ -37,7 +39,6 @@ export const InputEmail = ({
                     }
                 })}
             />
-
         </div>
-    )
+    );
 };

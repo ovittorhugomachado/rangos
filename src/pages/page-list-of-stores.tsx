@@ -6,7 +6,7 @@ import { StoreGrid } from "../components/customer-side/restaurants-grid";
 import { LoadingComponent } from "../components/component-loading";
 import { ErrorComponent } from "../components/component-error";
 import { ToggleThemeAndFont } from "../components/component-display-settings";
-import { Header } from "../components/header";
+import { Header } from "../components/component-header";
 import { MdRestaurantMenu } from "react-icons/md";
 import { BsTools } from "react-icons/bs";
 import { CgMenuGridR } from "react-icons/cg";

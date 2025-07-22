@@ -1,8 +1,8 @@
-import { IoIosArrowDown } from "react-icons/io";
-import { useAuth } from "../../hooks/use-auth"
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/use-auth"
 import { logout } from "../../services/service-auth";
+import { IoIosArrowDown } from "react-icons/io";
 
 export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }) => {
     
@@ -11,11 +11,16 @@ export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <div className={`${open ? "block" : "hidden"} flex flex-col items-center w-16 h-16 rounded-full md:-translate-y-10 md:-translate-x-2 lg:translate-0 `}>
-            <img src={style?.logoUrl ?? 'default-logo.png'} alt="logo" className="rounded-full" />
+        <div className={`${open ? "block" : "hidden"} w-16 h-16 rounded-full flex flex-col items-center md:-translate-y-10 xl:translate-y-0 md:-translate-x-2 lg:translate-x-0`}>
+            <img
+                src={style?.logoUrl ?? 'default-logo.png'}
+                alt="logo"
+                className="w-full h-full rounded-full"
+            />
             <IoIosArrowDown
                 onClick={() => setMenuOpen((prev) => !prev)}
-                className={`${menuOpen ? "rotate-180" : ""} text-xl text-black dark:text-white cursor-pointer absolute right-[-21px] top-1/2 transform -translate-y-1/2 hover:scale-110 transition-all duration-300`} />
+                className={`text-xl ${menuOpen ? "rotate-180" : ""} text-black dark:text-white absolute right-[-21px] top-1/2 -translate-y-1/2 cursor-pointer hover:scale-110 transition-all duration-300`}
+            />
 
             <div
                 style={{ zIndex: 1000 }}
@@ -28,11 +33,11 @@ export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }
                         localStorage.setItem('isLogged', JSON.stringify(false));
                         localStorage.removeItem('token');
                     }}
-                    className={`${fontSize} text-center hover:scale-110 transition-all duration-200 text-white`}
+                    className={`${fontSize} text-center text-white hover:scale-110 transition-all duration-200`}
                 >
                     Sair
                 </Link>
             </div>
         </div>
-    )
+    );
 };

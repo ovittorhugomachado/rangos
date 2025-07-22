@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { IoEye, IoEyeOff } from "react-icons/io5";
 import { InputPasswordProps } from "../../../types/types-input.d"
+import { IoEye, IoEyeOff } from "react-icons/io5";
 
 export const InputPassword = ({
     register,
@@ -13,9 +13,11 @@ export const InputPassword = ({
 
     return (
         <>
-            <div className="flex flex-col gap-1">
-
-                <label htmlFor="password" className="label">
+            <div className="w-full flex flex-col gap-1">
+                <label
+                    htmlFor="password"
+                    className="w-full font-medium ml-2 mt-2 flex flex-col relative"
+                >
                     Senha
                     {errors?.password && (
                         <span className="span-error">
@@ -23,12 +25,11 @@ export const InputPassword = ({
                         </span>
                     )}
                 </label>
-
-                <div className="relative">
+                <div className="w-full flex flex-col gap-1 relative">
                     <input
                         id="password"
                         type={showPassword ? "text" : "password"}
-                        className={errors.password ? "input-error" : "input"}
+                        className={`input ${errors.password ? " input-error" : ""}`}
                         placeholder="Digite sua senha"
                         defaultValue={initialValues.password || ""}
                         {...register("password", {
@@ -40,18 +41,16 @@ export const InputPassword = ({
                             }
                         })}
                     />
-
                     <button
                         type="button"
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
                         onClick={() => setShowPassword(!showPassword)}
                         aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                     >
                         {showPassword ? <IoEyeOff size={18} /> : <IoEye size={18} />}
                     </button>
                 </div>
-
             </div>
         </>
-    )
+    );
 };

@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react"
 import { getMenuItemService } from "../../../services/service-manage-menu-store"
+import { Item } from "./store-item";
 import { ErrorComponent } from "../../component-error"
 import { LoadingComponent } from "../../component-loading"
-import { IoMdAddCircle } from "react-icons/io";
 import { MenuItemCreationForm } from "../forms/form-create-update-menu-item";
-import { Item } from "./store-item";
+import { IoMdAddCircle } from "react-icons/io";
 
 
 interface MenuItemsContainerProps {
@@ -62,7 +62,7 @@ export const MenuItems = ({
     return (
         <>
             {error ? (
-                <div className="flex flex-col items-center">
+                <div className="w-full flex flex-col items-center">
                     <ErrorComponent message={error} />
                 </div>
             ) : loading ? (
@@ -70,19 +70,22 @@ export const MenuItems = ({
             ) : (
                 <section className="w-full">
                     {categories.map(category => (
-                        <div key={category.id} className={`${backgroundColor === 'white' ? 'text-black' : 'text-white'} mt-8`}>
+                        <div
+                            key={category.id}
+                            className={`w-full mt-8 ${backgroundColor === 'white' ? 'text-black' : 'text-white'}`}
+                        >
                             <h1
                                 style={{ borderColor: buttonColor }}
-                                className={`inline-block pr-6 mb-2 text-2xl font-semibold border-b-4`}
+                                className="text-2xl font-semibold border-b-4 pr-6 mb-2 inline-block"
                             >
                                 {category.name}
                             </h1>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto w-full max-w-6xl">
+                            <ul className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 gap-4 py-1 mx-auto">
                                 {Array.isArray(menuItemsByCategory[category.id]) && menuItemsByCategory[category.id].length > 0 ? (
                                     menuItemsByCategory[category.id].map(item => (
                                         <li
                                             key={item.id}
-                                            className={`${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} relative flex border-[1px]`}
+                                            className={`relative flex border-[1px] ${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'}`}
                                         >
                                             <Item
                                                 image={item.photoUrl ?? '../prato-default.png'}
@@ -100,7 +103,7 @@ export const MenuItems = ({
                                 )}
 
                                 <button
-                                    className={`h-[150px] flex flex-col-reverse items-center justify-center border-[4px] cursor-pointer border-primary hover:scale-103 transition-transform duration-200`}
+                                    className="h-[150px] flex flex-col-reverse items-center justify-center border-[4px] border-primary cursor-pointer hover:scale-103 transition-transform duration-200"
                                     onClick={() => setShowFormCreateMenuItem(category.id)}
                                 >
                                     Criar novo item na categoria {category.name}
@@ -121,7 +124,7 @@ export const MenuItems = ({
                 </section>
             )}
         </>
-    )
+    );
 };
 
 

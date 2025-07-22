@@ -1,11 +1,11 @@
-import { LogoStore } from "./store-logo-by-customer";
-import { OpeningHour } from "../../../types/types-schedules.d";
-import { getRestaurantStatus } from "../../../utils/function-restaurant-status";
-import { CiShoppingCart } from "react-icons/ci";
-import { toMoney } from "../../../utils/function-transform-to-money";
 import { useState } from "react";
-import { OrderForm } from "../forms/form-order";
+import { LogoStore } from "./store-logo-by-customer";
 import { useCart } from "../../../context/cart-context/cart-context";
+import { getRestaurantStatus } from "../../../utils/function-restaurant-status";
+import { toMoney } from "../../../utils/function-transform-to-money";
+import { OpeningHour } from "../../../types/types-schedules.d";
+import { OrderForm } from "../forms/form-order";
+import { CiShoppingCart } from "react-icons/ci";
 
 interface HeaderProps {
     backgroundColor: string;
@@ -31,42 +31,33 @@ export const Header: React.FC<HeaderProps> = ({
     };
 
     return (
-        <header
-            className={`w-screen bg-${backgroundColor} ${backgroundColor === 'white' ? 'text-black' : 'text-white'} max-h-[387px] z-10 px-[5%] lg:px-[15%] fixed py-2 xl:py-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between top-0 border-b-[1px] `}>
-            <div className="w-full flex flex-col xs:flex-row justify-between items-center">
+        <header className={`w-screen max-h-[387px] px-[5%] sm:px-6 lg:px-[15%] py-2 xl:py-4 flex flex-col sm:flex-row items-center justify-between border-b-[1px] fixed top-0 z-10 ${backgroundColor === 'white' ? 'text-black bg-white' : 'text-white bg-black'}`}>
+            <div className="w-full flex flex-col xs:flex-row items-center justify-between">
                 <div className="w-full flex items-center justify-center xs:justify-start gap-3.5">
                     <LogoStore image={restaurantImage ?? ''} />
-                    <div className="text-center mx-1.5">
+                    <div className="mx-1.5 text-center">
                         <div className="flex items-center gap-1 m-1">
                             <h2 className="text-md xl:text-base font-bold mb-1">{restaurantName}</h2>
                         </div>
-                        {isOpen ?
+                        {isOpen ? (
                             <div className="flex items-center flex-shrink-0">
-                                <p
-                                    aria-live="polite"
-                                    className="min-w-28 flex flex-col font-extralight mb-1 text-xs sm:text-base">
+                                <p aria-live="polite" className="min-w-28 mb-1 flex flex-col text-xs sm:text-base font-extralight">
                                     <span className="bg-green-600 p-0.5 rounded-md text-white">aberto</span>
                                     {message}
                                 </p>
                             </div>
-                            :
+                        ) : (
                             <div className="flex items-center">
-                                <p
-                                    aria-live="polite"
-                                    className="min-w-28 flex flex-col font-extralight mb-1 text-xs sm:text-base">
+                                <p aria-live="polite" className="min-w-28 mb-1 flex flex-col text-xs sm:text-base font-extralight">
                                     <span className="bg-red-600 p-0.5 rounded-md text-white">fechado</span>
                                     {message}
                                 </p>
                             </div>
-                        }
+                        )}
                     </div>
                 </div>
                 {cart.total !== undefined && cart.total > 0 && (
-                    <button
-                        aria-label="Carrinho de compras"
-                        className="flex xs:flex-col items-center text-center cursor-pointer hover:scale-105 transition-all duration-200"
-                        onClick={handleCartClick}
-                    >
+                    <button aria-label="Carrinho de compras" className="flex xs:flex-col items-center text-center cursor-pointer transition-all duration-200 hover:scale-105" onClick={handleCartClick}>
                         <CiShoppingCart className="text-2xl sm:text-3xl" />
                         <h3 className="text-xs sm:text-base">{toMoney(Number(cart.total), 'BRL')}</h3>
                     </button>
@@ -78,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
                         backgroundColor={backgroundColor}
                     />
                 )}
-            </div >
-        </header >
-    )
+            </div>
+        </header>
+    );
 };

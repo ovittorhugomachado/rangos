@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { getStoreData, updateStoreData } from "../../../services/service-store-data";
 import { UpdateStoreDataFormProps } from "../../../types/types-data-forms.d";
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 import { AccountData } from "../../../types/types-account.d";
 import { ErrorComponent } from "../../component-error";
 import { LoadingComponent } from "../../component-loading";
@@ -10,7 +11,6 @@ import { InputRestaurantName } from "../inputs/input-store-restaurant-name";
 import { InputPhoneNumber } from "../inputs/input-store-phone-number";
 import { InputAddress } from "../inputs/input-store-address";
 import { IoCloseOutline } from "react-icons/io5";
-import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     onClose,
@@ -111,8 +111,8 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
     return (
         <>
             {error ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
+                <div className="fixed w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-sm z-30">
+                    <div className="absolute w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center z-50">
                         <button
                             type="button"
                             className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
@@ -124,8 +124,8 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                     </div>
                 </div>
             ) : loading ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
+                <div className="fixed w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-sm z-30">
+                    <div className="absolute w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center z-50">
                         <button
                             type="button"
                             className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
@@ -137,12 +137,12 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                     </div>
                 </div>
             ) : (
-                <div className="fixed inset-0 z-30 flex items-center justify-center">
+                <div className="fixed inset-0 flex items-center justify-center z-30">
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
                     <form
                         onSubmit={handleSubmit(handleFormSubmit)}
                         noValidate
-                        className="relative z-50 flex flex-col items-center justify-center w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 gap-4 bg-white dark:bg-black primary-component"
+                        className="relative w-120 max-w-115 primary-component mx-3 mt-0 mb-5 p-5 py-4 flex flex-col items-center justify-center gap-4 bg-white dark:bg-black dark:text-white z-50"
                     >
                         <button
                             type="button"
@@ -151,7 +151,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                         >
                             <IoCloseOutline className="text-lg" />
                         </button>
-                        <div className="flex flex-col w-full max-w-105 mt-5 mb-5 gap-1">
+                        <div className="w-full max-w-105 mt-5 mb-5 flex flex-col gap-1">
                             <InputRestaurantName
                                 register={register}
                                 errors={errors}
@@ -178,7 +178,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
                         )}
                         <button
                             type="submit"
-                            className="w-[250px] primary-button"
+                            className=" primary-button"
                         >
                             Atualizar Dados
                         </button>

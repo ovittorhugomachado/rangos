@@ -1,11 +1,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AccountFormProps } from "../../../types/types-data-forms.d";
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 import { Logo } from "../../component-logo";
 import { InputEmail } from "../inputs/input-store-email";
 import { InputPassword } from "../inputs/input-store-password";
 import { FaArrowRight } from "react-icons/fa";
-import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const LoginFormContainer = ({
     onSubmit,
@@ -48,9 +48,13 @@ export const LoginFormContainer = ({
     };
 
     return (
-        <div className="primary-component w-[90%] max-w-[450px] h-120 mx-3 pt-25 pb-20 p-5 flex flex-col justify-center items-center">
-            <Logo/>
-            <form onSubmit={handleSubmit(handleAccountData)} noValidate className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-4">
+        <div className="w-[90%] max-w-[450px] pt-10 pb-10 flex flex-col justify-center items-center gap-3">
+            <form
+                onSubmit={handleSubmit(handleAccountData)}
+                noValidate
+                className="w-full max-w-105 primary-component py-8 px-4 flex flex-col justify-center items-center gap-4"
+            >
+                <Logo />
                 <InputEmail
                     register={register}
                     errors={errors}
@@ -67,34 +71,32 @@ export const LoginFormContainer = ({
                         {error}
                     </p>
                 )}
-
                 <button
                     type="submit"
-                    className="primary-button self-center mt-4"
+                    className="w-[250px] primary-button mt-4 self-center"
                     disabled={isLoading}
                 >
                     {isLoading ? "Carregando..." : "Entrar"}
                 </button>
+                <div className="mb-5 flex flex-col gap-4">
+                    <Link
+                        to="/criar-conta"
+                        className="text-center"
+                    >
+                        Ainda não tem conta?{" "}
+                        <strong className="whitespace-nowrap">
+                            Criar conta <FaArrowRight className="inline" />
+                        </strong>
+                    </Link>
+                    <Link
+                        to="/recuperar-senha"
+                        className="text-center"
+                    >
+                        Esqueci minha senha
+                    </Link>
+                </div>
             </form>
 
-            <div className="flex flex-col mb-5 gap-4">
-                <Link
-                    to="/criar-conta"
-                    className="link text-center"
-                >
-                    Ainda não tem conta?{" "}
-                    <strong className="whitespace-nowrap">
-                        Criar conta <FaArrowRight className="inline" />
-                    </strong>
-                </Link>
-
-                <Link
-                    to="/recuperar-senha"
-                    className="link text-center"
-                >
-                    Esqueci minha senha
-                </Link>
-            </div>
         </div>
     );
 };

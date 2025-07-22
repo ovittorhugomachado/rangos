@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import { FaCamera } from "react-icons/fa";
 import { UploadLogo } from "../../../services/service-upload-image";
+import { FaCamera } from "react-icons/fa";
 
 export const Logo = ({ logo, onImageChange }: { logo: string; onImageChange: () => void; }) => {
     const [logoVersion, setLogoVersion] = useState(Date.now());
@@ -31,7 +31,7 @@ export const Logo = ({ logo, onImageChange }: { logo: string; onImageChange: () 
     };
 
     return (
-        <div className={"w-16 h-16 sm:w-23 sm:h-23 rounded-full relative mb-1.5"}>
+        <div className="w-16 h-16 sm:w-23 sm:h-23 rounded-full relative">
             <img
                 src={logo ? `${logo}?v=${logoVersion}` : "/logo-default.png"}
                 alt="logo"
@@ -40,7 +40,7 @@ export const Logo = ({ logo, onImageChange }: { logo: string; onImageChange: () 
             <button
                 type="button"
                 title="Alterar logo da loja"
-                className="w-6 h-6 sm:w-8 sm:h-8 bg-white bg-opacity-70 border-2 border-black absolute bottom-0 left-0 rounded-full flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
+                className="w-6 h-6 sm:w-8 sm:h-8 border-2 rounded-full bg-white bg-opacity-70 text-black absolute bottom-0 left-0 flex items-center justify-center cursor-pointer hover:scale-105 transition-all duration-200"
                 onClick={handleButtonClick}
             >
                 <FaCamera className="text-black" />
@@ -53,7 +53,7 @@ export const Logo = ({ logo, onImageChange }: { logo: string; onImageChange: () 
                 onChange={handleImageUpload}
             />
             {error && (
-                <div className="bg-red-600 text-white absolute top-2 right-2 px-3 py-1 rounded shadow text-xs z-10">
+                <div className="text-xs bg-red-600 text-white px-3 py-1 rounded shadow absolute top-2 right-2 z-10">
                     {error}
                 </div>
             )}

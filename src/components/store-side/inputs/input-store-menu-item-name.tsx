@@ -6,9 +6,13 @@ export const InputName = ({
     clearErrors,
     initialValues = {},
 }: InputMenuItemNameProps) => {
+    
     return (
         <>
-            <label htmlFor="name" className="label">
+            <label
+                htmlFor="name"
+                className="w-full font-medium ml-2 mt-2 flex flex-col relative"
+            >
                 Nome *
                 {errors.name && (
                     <span className="span-error">
@@ -19,22 +23,22 @@ export const InputName = ({
             <input
                 id="name"
                 type="text"
-                className={`input mb-2 ${errors.name ? "input-error" : ""} autofill:text-black`}
+                className={`input ${errors.name ? " input-error" : ""}`}
                 placeholder="Nome"
                 defaultValue={initialValues.name || ""}
                 {...register("name", {
                     required: "Nome obrigatório",
                     minLength: {
                         value: 2,
-                        message: "Nome obrigatório"
+                        message: "Nome obrigatório",
                     },
                     onChange: (e) => {
                         if (e.target.value.length > 4) {
                             clearErrors("name");
                         }
-                    }
+                    },
                 })}
             />
         </>
-    )
+    );
 };

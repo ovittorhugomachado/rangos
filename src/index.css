@@ -52,11 +52,11 @@ img, button, span {
 }
 
 .span-error {
-    @apply text-red-500 font-medium text-right
+    @apply text-red-500 text-sm font-normal text-right mr-3 absolute right-0
 }
 
 .span-success {
-    @apply text-green-500 font-medium text-right
+    @apply text-green-500 text-sm font-normal text-right  right-3
 }
 
 .text-error {
@@ -68,7 +68,7 @@ img, button, span {
 }
 
 .primary-button {
-    @apply px-[60px] py-2 text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-primary text-black hover:scale-105;
+    @apply px-[30px] py-2 text-lg rounded-3xl cursor-pointer font-semibold transition-all bg-primary text-black hover:scale-105;
 }
 
 .cancel-button {

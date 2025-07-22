@@ -16,22 +16,16 @@ export const Item = ({
     };
 
     return (
-        <button
-            className="w-full flex hover:scale-102 transition-all duration-300 cursor-pointer"
-            onClick={handleAddToCart}
-        >
+        <button className="w-full h-[150px] flex cursor-pointer transition-all duration-300 hover:scale-102" onClick={handleAddToCart}>
             <div className="w-[150px] h-[150px] relative">
-                <img src={photoUrl}
-                    alt={name}
-                    className="w-[150px] h-[150px] object-cover"
-                />
+                <img src={photoUrl} alt={name} className="w-[150px] h-[150px] object-cover" />
             </div>
-            <div className="flex flex-col justify-between items-start py-4 px-4">
-                <h1 className="font-bold text-start">{name}</h1>
-                <p className="font-light text-start">{description}</p>
-                <h3>R$ {Number(price.toString().replace(',', '.')).toFixed(2).replace('.', ',')}</h3>
+            <div className="py-4 px-4 flex flex-col items-start justify-between">
+                <h1 className="text-base font-bold text-start">{name}</h1>
+                <p className="text-base font-light text-start">{description}</p>
+                <h3 className="text-base">R$ {Number(price.toString().replace(',', '.')).toFixed(2).replace('.', ',')}</h3>
             </div>
         </button>
-    )
-}
+    );
+};
 

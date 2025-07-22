@@ -25,6 +25,7 @@ export type InputRestaurantNameProps = {
 };
 
 export type InputCustomerNameProps = {
+    backgroundColor?: string;
     register: UseFormRegister<OrderFormData>;
     errors: FieldErrors<OrderFormData>;
     clearErrors: UseFormClearErrors<OrderFormData>;
@@ -53,6 +54,7 @@ export type InputAddressProps = {
 }
 
 export type InputCustomerAddressProps = {
+    backgroundColor?: string;
     register: UseFormRegister<OrderFormData>;
     errors: FieldErrors<OrderFormData>;
     clearErrors: UseFormClearErrors<OrderFormData>;
@@ -75,6 +77,8 @@ export type InputPhoneNumberProps = {
 }
 
 export type InputCustomerPhoneNumberProps = {
+    backgroundColor?: string;
+    errors: FieldErrors<OrderFormData>;
     control: Control<OrderFormData>;
     initialValues: Partial<OrderFormData>;
 }

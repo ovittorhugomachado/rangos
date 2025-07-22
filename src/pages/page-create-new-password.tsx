@@ -8,16 +8,24 @@ import { CreateNewPasswordFormContainer } from "../components/store-side/forms/f
 import { ToggleThemeAndFont } from "../components/component-display-settings";
 import { Logo } from "../components/component-logo";
 import { FaArrowLeft } from "react-icons/fa";
+import { LoadingComponent } from "../components/component-loading";
 
 export const CreateNewPasswordPage = () => {
 
     const [message, setMessage] = useState('')
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true); // Força o loading para true
     const [isValidToken, setIsValidToken] = useState(false);
 
     const { token } = useParams<{ token: string }>();
     const navigate = useNavigate();
+
+    const {
+        fontSize,
+        increaseFontSize,
+        decreaseFontSize,
+        toggleTheme,
+    } = useAppSettings();
 
     useEffect(() => {
         const validateTokenOnLoad = async () => {
@@ -64,38 +72,44 @@ export const CreateNewPasswordPage = () => {
 
     return (
         <>
-            {loading && !isValidToken ? (
-                <div className={`w-full h-80 flex items-center justify-center text-lg`}>
-                    Validando link...
-                </div>
+            {loading ? (
+                <LoadingComponent />
             ) : message ? (
-                <div className={`w-120 h-80 mx-3 pt-10 pb-10 p-5 flex flex-col gap-3 justify-center items-center text-base rounded bg-white`}>
+                <div className={`${fontSize} w-full h-80 text-black dark:text-white mx-3 pt-10 pb-10 p-5 flex flex-col gap-3 justify-center items-center rounded`}>
                     <Logo />
                     <p>{message}</p>
-                    <Link to="/entrar" className={`mt-2.5 text-base rounded bg-primary text-white px-4 py-2 text-center`}>
+                    <Link to="/entrar" className="primary-button">
                         Entrar na conta
                     </Link>
                 </div>
-            ) : isValidToken ? (
-                <CreateNewPasswordFormContainer
-                    onSubmit={handleNewPassword}
-                    message={message}
-                    isLoading={loading}
-                    error={error}
-                />
+            ) : isValidToken && !loading ? (
+                <div className={`${fontSize} w-full min-w-[300px] py-8 flex justify-center items-center`}>
+                    <CreateNewPasswordFormContainer
+                        onSubmit={handleNewPassword}
+                        message={message}
+                        isLoading={loading}
+                        error={error}
+                    />
+                </div>
             ) : (
-                <div className={`w-120 h-80 mx-3 pt-10 pb-10 p-5 flex flex-col gap-3 justify-center items-center text-base rounded bg-white`}>
+                <div className={`${fontSize} w-full min-w-[270px] flex flex-col justify-center items-center text-black dar:text-white`}>
                     <Link to="/entrar" className={`absolute top-2.5 left-4 flex gap-2 items-center justify-center text-base`}>
                         <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
                     </Link>
                     <Logo />
-                    {error || 'Link inválido ou expirado'}
-                    <Link to="/recuperar-senha" className={`mt-3.5 text-base rounded bg-primary text-white px-4 py-2 text-center`}>
+                    {error ? (<p className="py-6 px-4">{error}</p>) : null}
+                    <Link to="/recuperar-senha" className="primary-button">
                         Solicitar novo link
                     </Link>
                 </div>
             )}
-            <ToggleThemeAndFont {...useAppSettings()} />
+            <ToggleThemeAndFont
+                toggleTheme={toggleTheme}
+                fontSize={fontSize}
+                increaseFontSize={increaseFontSize}
+                decreaseFontSize={decreaseFontSize}
+                byStore={true}
+            />
         </>
     )
 };

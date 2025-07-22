@@ -37,7 +37,7 @@ export const RegisterPage = () => {
     };
 
     return (
-        <main className={`${fontSize} w-full min-w-[300px] min-h-[700px] py-14 flex justify-center items-center`}>
+        <main className={`${fontSize} w-full min-w-[300px] min-h-[700px] py-8 flex justify-center items-center`}>
             <SignupFormContainer
                 onSubmit={handleRegister}
                 isLoading={loading}

@@ -2,10 +2,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AccountFormProps } from "../../../types/types-data-forms.d";
 import { AccountData } from "../../../types/types-account.d";
+import { RestaurantData } from "../../../types/types-restaurante-data.d";
 import { Logo } from "../../component-logo";
 import { InputPasswordRegister } from "../inputs/input-store-password-register";
 import { FaArrowLeft } from "react-icons/fa";
-import { RestaurantData } from "../../../types/types-restaurante-data.d";
 
 export const CreateNewPasswordFormContainer = ({
     onSubmit,
@@ -32,36 +32,43 @@ export const CreateNewPasswordFormContainer = ({
     };
 
     return (
-        <div className="primary-component w-120 gap-3 mx-3 pt-10 pb-10 p-5 flex flex-col justify-center items-center">
-            <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col justify-center items-center mt-5 mb-5 w-full max-w-105 gap-4">
-                <Link
-                    to="/entrar"
-                    className="flex gap-2 items-center justify-center absolute top-2.5 left-4"
+        <div className="w-[90%] max-w-[450px] pt-10 pb-10 flex flex-col justify-center items-center gap-3">
+            {message === "" && (
+                <form
+                    onSubmit={handleSubmit(handleFormSubmit)}
+                    noValidate
+                    className="w-full max-w-105 primary-component py-8 px-4 flex flex-col justify-center items-center gap-4 relative"
                 >
-                    <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
-                </Link>
-                <Logo />
-                <div className="flex flex-col mt-5 mb-5 w-full max-w-105 gap-1">
-
-                    <InputPasswordRegister
-                        register={register}
-                        watch={watch}
-                        errors={errors}
-                        clearErrors={clearErrors}
-                    />
-                </div>
-                {<p className="text-error">
-                    {message}
-                </p>}
-                <button
-                    type="submit"
-                    className="primary-button w-[250px]"
-                    disabled={isLoading}
-                >
-                    {isLoading ? "Carregando..." : "Redefinir senha"}
-                </button>
-            </form>
+                    <Link to="/entrar" className="absolute top-2.5 left-4 flex items-center justify-center gap-2">
+                        <span className="translate-y-[1px]"><FaArrowLeft /></span>Voltar
+                    </Link>
+                    <Logo />
+                    <div className="w-full max-w-105 mt-5 mb-5 flex flex-col gap-1">
+                        <InputPasswordRegister
+                            register={register}
+                            watch={watch}
+                            errors={errors}
+                            clearErrors={clearErrors}
+                        />
+                    </div>
+                    <button type="submit" className="primary-button" disabled={isLoading}>
+                        {isLoading ? "Carregando..." : "Redefinir senha"}
+                    </button>
+                </form>
+            )}
+            {message !== "" && (
+                <>
+                    <Logo />
+                    <h1 className="text-black  my-4 text-center">{message}</h1>
+                    <Link
+                        to="/entrar"
+                        className="flex items-center gap-3 primary-button"
+                    >
+                        <span className="translate-y-[1px]"><FaArrowLeft /></span>
+                        Fazer login
+                    </Link>
+                </>
+            )}
         </div>
-
     );
 };

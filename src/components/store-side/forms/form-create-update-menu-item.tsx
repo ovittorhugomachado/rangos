@@ -78,26 +78,18 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemFormProps> = ({
     return (
         <>
             {error ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
-                        <button
-                            type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
-                            onClick={onClose}
-                        >
+                <div className="fixed z-30 w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-sm">
+                    <div className="absolute z-50 w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center">
+                        <button type="button" className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200" onClick={onClose}>
                             <IoCloseOutline className="text-lg" />
                         </button>
                         <ErrorComponent message={error} />
                     </div>
                 </div>
             ) : loading ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
-                        <button
-                            type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
-                            onClick={onClose}
-                        >
+                <div className="fixed z-30 w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-sm">
+                    <div className="absolute z-50 w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center">
+                        <button type="button" className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200" onClick={onClose}>
                             <IoCloseOutline className="text-lg" />
                         </button>
                         <LoadingComponent />
@@ -106,41 +98,23 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemFormProps> = ({
             ) : (
                 <div className="fixed inset-0 z-30 flex items-center justify-center">
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-                    <form
-                        onSubmit={handleSubmit(handleFormSubmit)}
-                        noValidate
-                        className="relative z-50 flex flex-col items-center justify-center w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 gap-4 bg-white dark:bg-black primary-component"
-                    >
-                        <button
-                            type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
-                            onClick={onClose}
-                        >
+                    <form onSubmit={handleSubmit(handleFormSubmit)} noValidate  className="relative z-50 w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 border border-zinc-400 rounded-xl flex flex-col items-center justify-center gap-4 bg-white dark:bg-black text-black dark:text-white">
+                        <button type="button" className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200" onClick={onClose}>
                             <IoCloseOutline className="text-lg" />
                         </button>
-                        <div className="flex flex-col w-full max-w-105 mt-5 mb-5 gap-1">
-                            <h3 className="text-lg md:text-2xl text-center mb-3">Cria novo</h3>
+                        <div className="w-full max-w-105 mt-5 mb-5 flex flex-col gap-1">
+                            <h3 className="text-lg md:text-2xl mb-3 text-center">Cria novo</h3>
                             <InputName
                                 register={register}
                                 errors={errors}
                                 clearErrors={clearErrors}
                             />
-                            <label
-                                htmlFor="description"
-                                className="flex justify-between"
-                            >
-                                Descrição
+                            <label htmlFor="description" className="ml-2 mt-2 flex justify-between  relative">Descrição
                                 {errors.description && (
-                                    <span className="span-error">
-                                        {errors.description.message?.toString()}
-                                    </span>
+                                    <span className="span-error">{errors.description.message?.toString()}</span>
                                 )}
                             </label>
-                            <textarea
-                                {...register("description", { required: "Descrição obrigatória" })}
-                                className={`input h-32 mb-2.5 ${errors.description ? "input-error" : ""}`}
-                                placeholder="Descrição"
-                            />
+                            <textarea {...register("description", { required: "Descrição obrigatória" })} className={`input h-32 mb-2.5 border rounded px-3 py-2${errors.description ? " border-red-500" : ""}`} placeholder="Descrição" />
                             <InputPrice
                                 register={register}
                                 errors={errors}
@@ -148,18 +122,9 @@ export const MenuItemCreationForm: React.FC<CreateMenuItemFormProps> = ({
                                 initialValues={{}}
                             />
                         </div>
-                        {error && (
-                            <p className="font-bold text-error">{error}</p>
-                        )}
-                        {messageSuccess && (
-                            <p className="font-bold text-green-600">{messageSuccess}</p>
-                        )}
-                        <button
-                            type="submit"
-                            className="w-[250px] primary-button"
-                        >
-                            Criar item
-                        </button>
+                        {error && (<p className="font-bold text-error">{error}</p>)}
+                        {messageSuccess && (<p className="font-bold text-green-600">{messageSuccess}</p>)}
+                        <button type="submit" className="w-[250px] primary-button">Criar item</button>
                     </form>
                 </div>
             )}
@@ -240,26 +205,18 @@ export const UpdateMenuItemForm: React.FC<UpdateMenuItemFormProps> = ({
     return (
         <>
             {error ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
-                        <button
-                            type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
-                            onClick={onClose}
-                        >
+                <div className="fixed z-30 w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-sm">
+                    <div className="absolute z-50 w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center">
+                        <button type="button" className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200" onClick={onClose}>
                             <IoCloseOutline className="text-lg" />
                         </button>
                         <ErrorComponent message={error} />
                     </div>
                 </div>
             ) : loading ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
-                        <button
-                            type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
-                            onClick={onClose}
-                        >
+                <div className="fixed z-30 w-screen h-screen flex items-center justify-center bg-white/10 backdrop-blur-sm">
+                    <div className="absolute z-50 w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center">
+                        <button type="button" className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200" onClick={onClose}>
                             <IoCloseOutline className="text-lg" />
                         </button>
                         <LoadingComponent />
@@ -268,41 +225,25 @@ export const UpdateMenuItemForm: React.FC<UpdateMenuItemFormProps> = ({
             ) : (
                 <div className="fixed inset-0 z-30 flex items-center justify-center">
                     <div className="absolute inset-0 bg-white/10 backdrop-blur-sm"></div>
-                    <form
-                        onSubmit={handleSubmit(handleFormSubmit)}
-                        noValidate
-                        className="relative z-50 flex flex-col items-center justify-center w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 gap-4 bg-white dark:bg-black primary-component"
-                    >
-                        <button
-                            type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
-                            onClick={onClose}
-                        >
-                            <IoCloseOutline className="text-lg" />
+                    <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="relative z-50 w-120 max-w-115 mx-3 mt-0 mb-5 p-5 py-4 border border-zinc-400 rounded-xl flex flex-col items-center justify-center gap-4 bg-white dark:bg-black text-black dark:text-white">
+                        <button type="button" className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200" onClick={onClose}>
+                            <IoCloseOutline
+                                className="text-lg"
+                            />
                         </button>
-                        <div className="flex flex-col w-full max-w-105 mt-5 mb-5 gap-1">
-                            <h3 className="text-lg md:text-2xl text-center mb-3">Editar item</h3>
+                        <div className="w-full max-w-105 mt-5 mb-5 flex flex-col gap-1">
+                            <h3 className="text-lg md:text-2xl mb-3 text-center">Editar item</h3>
                             <InputName
                                 register={register}
                                 errors={errors}
                                 clearErrors={clearErrors}
                             />
-                            <label
-                                htmlFor="description"
-                                className="flex justify-between"
-                            >
-                                Descrição
+                            <label htmlFor="description" className="ml-2 mt-2 flex justify-between relative">Descrição
                                 {errors.description && (
-                                    <span className="span-error">
-                                        {errors.description.message?.toString()}
-                                    </span>
+                                    <span className="span-error">{errors.description.message?.toString()}</span>
                                 )}
                             </label>
-                            <textarea
-                                {...register("description", { required: "Descrição obrigatória" })}
-                                className={`input h-32 mb-2.5 ${errors.description ? "input-error" : ""}`}
-                                placeholder="Descrição"
-                            />
+                            <textarea {...register("description", { required: "Descrição obrigatória" })} className={`input h-32 mb-2.5 border rounded px-3 py-2${errors.description ? " border-red-500" : ""}`} placeholder="Descrição" />
                             <InputPrice
                                 register={register}
                                 errors={errors}
@@ -310,18 +251,9 @@ export const UpdateMenuItemForm: React.FC<UpdateMenuItemFormProps> = ({
                                 initialValues={{}}
                             />
                         </div>
-                        {error && (
-                            <p className="font-bold text-error">{error}</p>
-                        )}
-                        {messageSuccess && (
-                            <p className="font-bold text-green-600">{messageSuccess}</p>
-                        )}
-                        <button
-                            type="submit"
-                            className="w-[250px] primary-button"
-                        >
-                            Salvar alterações
-                        </button>
+                        {error && (<p className="font-bold text-error">{error}</p>)}
+                        {messageSuccess && (<p className="font-bold text-green-600">{messageSuccess}</p>)}
+                        <button type="submit" className="w-[250px] primary-button">Salvar alterações</button>
                     </form>
                 </div>
             )}

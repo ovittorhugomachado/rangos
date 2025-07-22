@@ -8,5 +8,5 @@ export const Logo = () => {
             src={theme === 'dark' ? "../logo-dark.png" : "../logo.png"}
             alt="domus-logo"
         />
-    )
+    );
 };

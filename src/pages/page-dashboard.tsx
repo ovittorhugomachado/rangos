@@ -10,7 +10,7 @@ import {
     getOrdersService
 } from "../services/service-manage-orders";
 import { Order } from "../types/types-orders.d";
-import { Header } from "../components/header";
+import { Header } from "../components/component-header";
 import { LoadingComponent } from "../components/component-loading";
 import { ToggleThemeAndFont } from "../components/component-display-settings";
 import { DashboardCards } from "../components/store-side/dashboard-cards";
@@ -61,6 +61,7 @@ export const AdminDashboard = () => {
             setOrders(filtered);
         } catch (error) {
             console.error("Erro ao buscar pedidos:", error);
+            
         } finally {
             setOrdersLoading(false);
         }

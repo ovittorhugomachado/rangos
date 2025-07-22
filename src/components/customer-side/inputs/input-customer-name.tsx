@@ -1,17 +1,19 @@
 import { InputCustomerNameProps } from "../../../types/types-input.d";
 
 export const InputCustomerName = ({
+    backgroundColor,
     register,
     errors,
     clearErrors,
     initialValues = {},
 }: InputCustomerNameProps) => {
+    
     return (
         <>
-            <label htmlFor="name" className="label">
+            <label htmlFor="name" className="w-full text-base font-medium mb-1 flex flex-col">
                 Nome *
                 {errors.customerName && (
-                    <span className="span-error">
+                    <span className="text-xs font-normal text-red-600 mt-1">
                         {errors.customerName.message?.toString()}
                     </span>
                 )}
@@ -19,7 +21,7 @@ export const InputCustomerName = ({
             <input
                 id="name"
                 type="text"
-                className={`input-store mb-2 ${errors.customerName ? "input-error-store" : ""} autofill:text-black`}
+                className={`w-full text-base border border-zinc-300 rounded-md mb-2 px-3 py-2 input-store ${errors.customerAddress ? " border-red-500 input-error-store" : ""} ${backgroundColor === 'white' ? 'bg-white text-black autofill:caret-lime-700' : 'bg-black text-white'}`}
                 placeholder="Nome"
                 defaultValue={initialValues.customerName || ""}
                 {...register("customerName", {

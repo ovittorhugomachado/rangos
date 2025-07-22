@@ -24,7 +24,10 @@ export const InputCPF = ({
             }}
             render={({ field, fieldState }) => (
                 <>
-                    <label htmlFor="cpf" className="label">
+                    <label
+                        htmlFor="cpf"
+                        className="w-full font-medium ml-2 mt-2 flex flex-col relative"
+                    >
                         CPF *
                         {fieldState.error && (
                             <span className="span-error">
@@ -32,16 +35,15 @@ export const InputCPF = ({
                             </span>
                         )}
                     </label>
-
                     <IMaskInput
                         {...field}
                         mask="000.000.000-00"
                         placeholder="000.000.000-00"
-                        className={`input mb-2 ${fieldState.error ? "input-error" : ""}`}
+                        className={`input ${fieldState.error ? " input-error" : ""}`}
                         onAccept={(value) => field.onChange(value)}
                     />
                 </>
             )}
         />
-    )
+    );
 };

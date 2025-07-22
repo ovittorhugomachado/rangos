@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useDraggable } from '../../../hooks/use-draggable';
 import { updatePageStyle } from '../../../services/service-page-style';
 import { toggleHiddenFlex } from '../../../utils/function-toggleHiddenFlex';
-import { useDraggable } from '../../../hooks/use-draggable';
 import { BottomNavProps } from '../../../types/types-style-store-page.d';
 import { MdOutlineColorLens } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
@@ -83,10 +83,10 @@ export const BottomNav = ({
                 cursor: dragging ? 'grabbing' : 'grab',
                 zIndex: 30,
             }}
-            className={`w-[187px] py-2 mx-2.5 my-1.5 ${backgroundColorStore === 'white' ? 'bg-black border-white text-white' : 'bg-white'} fixed z-30 flex flex-col items-center content-between rounded-2xl border-[0.1px] select-none`}
+            className={`w-[187px] py-2 mx-2.5 my-1.5 rounded-2xl border-[0.1px] select-none flex flex-col items-center content-between fixed z-30 ${backgroundColorStore === 'white' ? 'bg-black border-white text-white' : 'bg-white'}`}
         >
-            <span className="text-3xl text-zinc-600 left-[-20px] top-1 my-auto absolute">⋮⋮</span>
-            <button className="gap-1 flex items-center cursor-pointer transition-all duration-300 ease-in-out" onClick={handleToggleToolbar}>
+            <span className="text-3xl left-[-20px] top-1 my-auto text-zinc-600 absolute">⋮⋮</span>
+            <button className="gap-1 flex items-center transition-all duration-300 ease-in-out cursor-pointer" onClick={handleToggleToolbar}>
                 <MdOutlineColorLens className="text-3xl" />
                 <span>Editar cores</span>
                 <IoIosArrowDown className={toolbarOpen ? 'rotate-180 transition-transform duration-300' : 'transition-transform duration-300'} />
@@ -101,9 +101,9 @@ export const BottomNav = ({
                         <span>Branco</span>
                         <button
                             onClick={BackgroundStoreChange}
-                            className={`w-[50px] h-[25px] ml-1 px-1 py-1 ${backgroundColorStore === 'white' ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]' : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'} flex items-center gap-3 rounded-full cursor-pointer transition-all duration-300`}
+                            className={`w-[50px] h-[25px] ml-1 px-1 py-1 flex items-center gap-3 rounded-full cursor-pointer transition-all duration-300 ${backgroundColorStore === 'white' ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]' : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'}`}
                         >
-                            <span className={`w-4.5 h-4.5 ${backgroundColorStore === 'white' ? 'bg-white' : 'translate-x-6 bg-black'} rounded-full transition-transform duration-300`}></span>
+                            <span className={`w-4.5 h-4.5 rounded-full transition-transform duration-300 ${backgroundColorStore === 'white' ? 'bg-white' : 'translate-x-6 bg-black'}`}></span>
                         </button>
                         <span>Preto</span>
                     </div>
@@ -124,16 +124,16 @@ export const BottomNav = ({
                     <span>Branco</span>
                     <button
                         onClick={toggleTextColorButtons}
-                        className={`w-[50px] h-[25px] ml-1 px-1 py-1 ${backgroundColorStore === 'white' ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]' : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'} flex items-center gap-3 rounded-full cursor-pointer transition-all duration-300`}
+                        className={`w-[50px] h-[25px] ml-1 px-1 py-1 flex items-center gap-3 rounded-full cursor-pointer transition-all duration-300 ${backgroundColorStore === 'white' ? 'bg-zinc-800 hover:shadow-[0_0_16px_2px_rgba(155,155,155,0.7)]' : 'bg-zinc-400 hover:shadow-[0_0_16px_2px_rgba(0,0,0,0.4)]'}`}
                     >
-                        <span className={`w-4.5 h-4.5 ${backgroundColorStore === 'white' ? 'bg-white' : 'bg-black'} ${textColorButtons === 'black' ? 'translate-x-6' : ''} rounded-full transition-transform duration-300`} />
+                        <span className={`w-4.5 h-4.5 rounded-full transition-transform duration-300 ${backgroundColorStore === 'white' ? 'bg-white' : 'bg-black'} ${textColorButtons === 'black' ? 'translate-x-6' : ''}`} />
                     </button>
                     <span>Preto</span>
                 </div>
             </div>
             {hasChanges && (
                 <button
-                    className="w-full absolute bottom-[-30px] opacity-100 bg-primary text-black rounded-3xl mt-3 cursor-pointer hover:scale-[104%] transition"
+                    className="w-full mt-3 absolute bottom-[-30px] rounded-3xl bg-primary text-black opacity-100 cursor-pointer hover:scale-[104%] transition"
                     onClick={saveChanges}
                 >
                     Salvar mudanças

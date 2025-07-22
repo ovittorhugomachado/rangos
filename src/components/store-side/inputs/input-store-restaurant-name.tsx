@@ -9,7 +9,10 @@ export const InputRestaurantName = ({
 
     return (
         <>
-            <label htmlFor="restaurantName" className="label">
+            <label
+                htmlFor="restaurantName"
+                className="w-full font-medium ml-2 mt-2 flex flex-col relative"
+            >
                 Nome do Restaurante *
                 {errors.restaurantName && (
                     <span className="span-error">
@@ -20,7 +23,7 @@ export const InputRestaurantName = ({
             <input
                 id="restaurantName"
                 type="text"
-                className={`input mb-2 ${errors.restaurantName ? "input-error" : ""}`}
+                className={`input ${errors.restaurantName ? " input-error" : ""}`}
                 placeholder="Restaurante"
                 defaultValue={initialValues.restaurantName || ""}
                 {...register("restaurantName", {
@@ -37,5 +40,5 @@ export const InputRestaurantName = ({
                 })}
             />
         </>
-    )
+    );
 };

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { getStoreData } from "../../../services/service-store-data";
 import { updateSchedules } from "../../../services/service-update-schedules";
+import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/function-validate-opening-hours";
 import { OpeningHour } from "../../../types/types-schedules.d";
 import { UpdateSchedulesStoreFormProps } from "../../../types/types-data-forms.d";
-import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/function-validate-opening-hours";
 import { LoadingComponent } from "../../component-loading";
 import { ErrorComponent } from "../../component-error";
 import { AiFillCloseSquare } from "react-icons/ai";
@@ -40,7 +40,6 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
         }
     }, [successMessage]);
 
-
     const orderedOpeningHours = openingHours.sort((a, b) => {
         const dayOrder: { [key: string]: number } = {
             'segunda': 0,
@@ -51,7 +50,6 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
             'sabado': 5,
             'domingo': 6
         };
-
         return dayOrder[a.day] - dayOrder[b.day];
     });
 
@@ -116,11 +114,11 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
     return (
         <>
             {error && !fieldErrors ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
+                <div className="w-screen h-screen flex items-center justify-center fixed z-30 bg-white/10 backdrop-blur-sm">
+                    <div className="w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center absolute z-50">
                         <button
                             type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
+                            className="top-2 right-2 p-2 rounded-full bg-red-600 text-white absolute cursor-pointer transition-all duration-200"
                             onClick={onClose}
                         >
                             <IoCloseOutline className="text-lg" />
@@ -129,11 +127,11 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
                     </div>
                 </div>
             ) : loading ? (
-                <div className="fixed z-30 flex items-center justify-center w-screen h-screen bg-white/10 backdrop-blur-sm">
-                    <div className="absolute z-50 flex flex-col items-center justify-center w-120 h-90 mx-3 p-5 pt-25 pb-20 bg-white dark:bg-black border border-zinc-400 rounded-xl">
+                <div className="w-screen h-screen flex items-center justify-center fixed z-30 bg-white/10 backdrop-blur-sm">
+                    <div className="w-120 h-90 mx-3 p-5 pt-25 pb-20 border border-zinc-400 bg-white dark:bg-black rounded-xl flex flex-col items-center justify-center absolute z-50">
                         <button
                             type="button"
-                            className="absolute top-2 right-2 p-2 rounded-full bg-red-600 text-white cursor-pointer transition-all duration-200"
+                            className="top-2 right-2 p-2 rounded-full bg-red-600 text-white absolute cursor-pointer transition-all duration-200"
                             onClick={onClose}
                         >
                             <IoCloseOutline className="text-lg" />
@@ -142,32 +140,31 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
                     </div>
                 </div>
             ) : (
-                <div className="dark:text-white fixed inset-0 z-50 flex items-center justify-center overflow-y-auto max-h-screen">
+                <div className="fixed inset-0 max-h-screen flex items-center justify-center z-50 overflow-y-auto dark:text-white">
                     <div className="fixed inset-0 bg-white/10 backdrop-blur-sm z-40"></div>
                     <form
                         id="update-schedules-form"
                         onSubmit={handleFormSubmit}
                         noValidate
-                        className="dark:bg-black relative z-50 flex flex-col items-center w-120 max-w-115 mx-3 mt-10 mb-10 px-5 pb-4 bg-white border border-zinc-400 rounded-xl max-h-[80vh] translate-y-[-3vh] overflow-y-auto"
+                        className="w-120 max-w-115 mx-3 mt-10 mb-10 px-5 pb-4 text-base border border-zinc-400 rounded-xl bg-white dark:bg-black relative z-50 max-h-[80vh] translate-y-[-3vh] flex flex-col items-center overflow-y-auto"
                     >
-                        <div className="dark:bg-black bg-white sticky top-0 left-0 w-full py-4 z-50 flex items-center justify-center">
-                            <h2 className="text-xl text-center font-bold mx-10">Horários de Funcionamento</h2>
+                        <div className="w-full py-4 sticky top-0 left-0 z-50 flex items-center justify-center bg-white dark:bg-black">
+                            <h2 className="mx-10 text-xl font-bold text-center">Horários de Funcionamento</h2>
                             <button
                                 type="button"
-                                className="absolute right-0 m-2 p-2 rounded-full bg-red-600 text-white translate-x-[50%] cursor-pointer transition-all duration-200"
+                                className="top-0 right-0 m-2 p-2 rounded-full bg-red-600 text-white absolute translate-x-[50%] cursor-pointer transition-all duration-200"
                                 onClick={onClose}
                             >
                                 <IoCloseOutline className="text-lg" />
                             </button>
                         </div>
-
                         {successMessage && (
-                            <p className="fon t-bold text-green-600">{successMessage}</p>
+                            <p className="text-green-600 font-bold">{successMessage}</p>
                         )}
                         {orderedOpeningHours.map((oh, idx) => (
-                            <div key={oh.day} className="flex flex-col justify-center items-center border-t-1 border-zinc-300 dark:border-zinc-800 p-3 mb-2 w-full">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <div className="w-full flex flex-col justify-center items-center">
+                            <div key={oh.day} className="w-full p-3 mb-2 flex flex-col items-center justify-center border-t-1 border-zinc-300 dark:border-zinc-800">
+                                <div className="mb-2 flex items-center gap-2">
+                                    <div className="w-full flex flex-col items-center justify-center">
                                         <span className="font-bold capitalize">{dayDisplay[oh.day] || oh.day}</span>
                                         <div className="flex gap-4">
                                             <label className="flex items-center gap-1 cursor-pointer">
@@ -184,7 +181,6 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
                                                 />
                                                 <span className="font-extralight">Aberto</span>
                                             </label>
-
                                             <label className="flex items-center gap-1 cursor-pointer">
                                                 <input
                                                     type="radio"
@@ -201,7 +197,6 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
                                             </label>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="flex flex-col gap-6">
                                     {oh.timeRanges.map((tr, trIdx) => (
@@ -216,10 +211,10 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
                                                         updated[idx].timeRanges[trIdx].start = e.target.value;
                                                         setOpeningHours(updated);
                                                     }}
-                                                    className={`input w-[92px] border px-2 py-1 rounded ${fieldErrors[`${idx}-${trIdx}-start`] ? "border-red-500" : ""}`}
+                                                    className={`w-[92px] border px-2 py-1 rounded${fieldErrors[`${idx}-${trIdx}-start`] ? " border-red-500" : ""}`}
                                                 />
                                                 {fieldErrors[`${idx}-${trIdx}-start`] && (
-                                                    <span className="min-w-[92px] max-w-[200px] absolute top-[-20px] left-1/2 -translate-x-1/2 text-center text-xs text-red-600 whitespace-nowrap">{fieldErrors[`${idx}-${trIdx}-start`]}</span>
+                                                    <span className="min-w-[92px] max-w-[200px] absolute top-[-20px] left-1/2 -translate-x-1/2 text-xs text-red-600 text-center whitespace-nowrap">{fieldErrors[`${idx}-${trIdx}-start`]}</span>
                                                 )}
                                             </div>
                                             <div className="w-[138px] flex items-center justify-end gap-2">
@@ -232,7 +227,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
                                                         updated[idx].timeRanges[trIdx].end = e.target.value;
                                                         setOpeningHours(updated);
                                                     }}
-                                                    className="input w-[92px] border px-2 py-1 rounded"
+                                                    className="w-[92px] border px-2 py-1 rounded"
                                                 />
                                             </div>
                                             <button
@@ -265,8 +260,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
                             </div>
                         ))}
                     </form>
-
-                    <div className="absolute left-1/2 -translate-x-1/2 w-full flex justify-center z-50" style={{ bottom: "4vh" }}>
+                    <div className="w-full absolute left-1/2 flex justify-center z-50" style={{ bottom: "4vh", transform: "translateX(-50%)" }}>
                         <button
                             type="submit"
                             form="update-schedules-form"

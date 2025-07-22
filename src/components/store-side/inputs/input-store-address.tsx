@@ -9,7 +9,10 @@ export const InputAddress = ({
 
     return (
         <>
-            <label htmlFor="address" className="label">
+            <label
+                htmlFor="address"
+                className="w-full font-medium ml-2 mt-2 flex flex-col relative"
+            >
                 Endereço
                 {errors.address && (
                     <span className="span-error">
@@ -20,7 +23,7 @@ export const InputAddress = ({
             <input
                 id="address"
                 type="text"
-                className={`input mb-2 ${errors.address ? "input-error" : ""}`}
+                className={`input ${errors.address ? " input-error" : ""}`}
                 placeholder="Endereço"
                 defaultValue={initialValues.address || ""}
                 {...register("address", {
@@ -36,5 +39,5 @@ export const InputAddress = ({
                 })}
             />
         </>
-    )
+    );
 };
