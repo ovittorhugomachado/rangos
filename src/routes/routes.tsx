@@ -6,8 +6,9 @@ import { CreateNewPasswordPage } from "../pages/page-create-new-password";
 import { AdminDashboard } from "../pages/page-dashboard";
 import { CustomizeMenuPage } from "../pages/page-customize-menu";
 import { PlaygroundPage } from "../pages/page-playground";
-import { Store } from "../pages/page-store";
+import { MyStorePage } from "../pages/page-my-store";
 import { PageListOfStores } from "../pages/page-list-of-stores";
+import { StorePage } from "../pages/page-store";
 
 export const AppRoutes = () => {
     return (
@@ -20,7 +21,8 @@ export const AppRoutes = () => {
                 <Route path="/recuperar-senha" element={<RecoverPasswordPage />} />
                 <Route path="/create-new-password/:token" element={<CreateNewPasswordPage />} />
                 <Route path="/restaurantes" element={<PageListOfStores />} />
-                <Route path="/loja" element={<Store />} />
+                <Route path="/meu-restaurante" element={<MyStorePage />} />
+                <Route path="/restaurante/:id" element={<StorePage />} />
                 <Route path="/playground" element={<PlaygroundPage />} />
             </Routes>
         </BrowserRouter>

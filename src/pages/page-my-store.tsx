@@ -1,38 +1,32 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
+import { getMyStoreData } from "../services/service-store-data";
+import { getMyPageStyle } from "../services/service-page-style";
+import { getCategoriesStore } from "../services/service-manage-menu-store";
+import { Category } from "../types/types-menu.d";
+import { StyleStorePage } from "../types/types-style-store-page.d";
 import { RestaurantData } from "../types/types-restaurante-data.d";
-import { getStoreData } from "../services/service-store-data";
-import { useParams } from "react-router-dom";
 import { ErrorComponent } from "../components/component-error";
 import { LoadingComponent } from "../components/component-loading";
 import { Header } from "../components/customer-side/store/store-header-by-customer";
 import { StoreBanner } from "../components/customer-side/store/store-banner-customer";
-import { StoreFooterComponent } from "../components/store-side/store-page-components/store-footer";
-import { getPageStyle } from "../services/service-page-style";
-import { StyleStorePage } from "../types/types-style-store-page.d";
+import { CategoryButtons } from "../components/customer-side/store/store-categories-buttons-by-customer";
+import { MenuItems } from "../components/customer-side/store/store-container-items-by-customer";
+import { StoreFooterComponent } from "../components/customer-side/store/store-footer-by-customer";
 
-
-export const StorePage = () => {
-
-    const { id } = useParams();
+export const MyStorePage = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [storeData, setStoreData] = useState<RestaurantData | null>(null);
     const [storeStyle, setStoreStyle] = useState<StyleStorePage | null>(null);
-    // const [categories, setCategories] = useState<Category[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
 
-    const fetchStoreData = useCallback(async () => {
+    const fetchStoreData = async () => {
         setLoading(true);
         try {
-            if (typeof id === "undefined") {
-                throw new Error("Store ID is missing");
-            }
-            const numericId = Number(id);
-            if (isNaN(numericId)) {
-                throw new Error("Store ID is not a valid number");
-            }
-            const storeData = await getStoreData(numericId);
-            const styleData = await getPageStyle(numericId);
+            const storeData = await getMyStoreData();
+            const styleData = await getMyPageStyle();
+            const categoriesStore = await getCategoriesStore()
 
             if (!styleData) {
                 throw new Error('Dados da loja não encontrados');
@@ -40,17 +34,19 @@ export const StorePage = () => {
 
             setStoreData(storeData);
             setStoreStyle(styleData);
+            setCategories(categoriesStore);
 
         } catch (error) {
-            setError(error instanceof Error ? error.message : 'Error loading store data');
+            setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
+            setStoreStyle(null);
         } finally {
             setLoading(false);
         }
-    }, [id]);
+    };
 
     useEffect(() => {
         fetchStoreData();
-    }, [fetchStoreData]);
+    }, []);
 
     console.log(storeData?.logoUrl)
 
@@ -85,7 +81,7 @@ export const StorePage = () => {
                         {storeData?.bannerUrl && (
                             <StoreBanner banner={storeData?.bannerUrl || 'store-banner-default.png'} />
                         )}
-                        {/* <CategoryButtons
+                        <CategoryButtons
                             categories={categories}
                             buttonColor={storeStyle?.primaryColor ?? ''}
                             textColor={storeStyle?.textButtonColor}
@@ -94,11 +90,11 @@ export const StorePage = () => {
                             categories={categories}
                             backgroundColor={storeStyle?.backgroundColor ?? ''}
                             buttonColor={storeStyle?.primaryColor ?? ''}
-                        /> */}
+                        />
                     </main>
                     <StoreFooterComponent backgroundColor={storeStyle?.backgroundColor ?? ''} />
                 </div>
             )}
         </>
-    );
+    )
 };
