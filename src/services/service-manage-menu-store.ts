@@ -1,6 +1,23 @@
-export const getCategoriesStore = async () => {
+export const getCategories = async (storeId: number) => {
 
-    const response = await fetch('http://localhost:3000/categories', {
+    const response = await fetch(`http://localhost:3000/categories/${storeId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+
+    if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Erro ao buscar categorias do menu');
+    };
+
+    return await response.json();
+};
+
+export const getCategoriesMyStore = async () => {
+
+    const response = await fetch('http://localhost:3000/my-categories', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

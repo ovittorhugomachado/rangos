@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMyStoreData } from "../services/service-store-data";
 import { getMyPageStyle } from "../services/service-page-style";
-import { getCategoriesStore } from "../services/service-manage-menu-store";
+import { getCategoriesMyStore } from "../services/service-manage-menu-store";
 import { Category } from "../types/types-menu.d";
 import { StyleStorePage } from "../types/types-style-store-page.d";
 import { RestaurantData } from "../types/types-restaurante-data.d";
@@ -26,9 +26,9 @@ export const MyStorePage = () => {
         try {
             const storeData = await getMyStoreData();
             const styleData = await getMyPageStyle();
-            const categoriesStore = await getCategoriesStore()
+            const categoriesStore = await getCategoriesMyStore()
 
-            if (!styleData) {
+            if (!storeData || !styleData || !categoriesStore) {
                 throw new Error('Dados da loja não encontrados');
             };
 
