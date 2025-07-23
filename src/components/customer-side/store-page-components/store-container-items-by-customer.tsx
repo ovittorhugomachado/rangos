@@ -6,6 +6,7 @@ import { LoadingComponent } from "../../component-loading"
 import { Item } from "./store-item-by-customer"
 
 export const MenuItems = ({
+    storeId,
     categories,
     backgroundColor,
     buttonColor,
@@ -20,7 +21,7 @@ export const MenuItems = ({
         try {
             const itemsObj: { [categoryId: number]: MenuItem[] } = {};
             for (const category of categories) {
-                const response = await getMenuItemService(category.id);
+                const response = await getMenuItemService(storeId, category.id);
                 itemsObj[category.id] = response.data;
             }
             setMenuItemsByCategory(itemsObj);
@@ -29,7 +30,8 @@ export const MenuItems = ({
         } finally {
             setLoading(false);
         }
-    }, [categories]);
+    }, [categories, storeId]);
+
     useEffect(() => {
         if (categories.length > 0) {
             fetchMenuItems();
