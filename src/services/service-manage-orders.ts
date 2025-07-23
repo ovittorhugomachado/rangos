@@ -17,12 +17,11 @@ export const getOrdersService = async (limit: number = 1000, offset: number = 0)
 };
 
 export const createOrder = async (order: OrderRequest) => {
-    const response = await fetch("http://localhost:3000/order", {
+    const response = await fetch(`http://localhost:3000/order/${order.storeId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        credentials: 'include',
         body: JSON.stringify(order),
     });
 
