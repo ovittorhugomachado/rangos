@@ -1,13 +1,13 @@
 export type Category = {
-  id: number; 
+  id: number;
   name: string;
 };
 
 export type CategoryButtonsProps = {
-    categories: Category[];
-    setCategories?: React.Dispatch<React.SetStateAction<Category[]>>;
-    buttonColor?: string;
-    textColor?: string;
+  categories: Category[];
+  setCategories?: React.Dispatch<React.SetStateAction<Category[]>>;
+  buttonColor?: string;
+  textColor?: string;
 }
 
 export type MenuItem = {
@@ -20,8 +20,9 @@ export type MenuItem = {
 };
 
 export type MenuItemsContainerProps = {
-    categories: Category[];
-    backgroundColor: string;
-    buttonColor: string;
+  storeId: number;
+  categories: Category[];
+  backgroundColor: string;
+  buttonColor: string;
 }
 

@@ -27,6 +27,7 @@ export type OrderItem = {
 };
 
 export type OrderRequest = {
+    storeId: number;
     customerName: string;
     customerPhone: string;
     typeOfDelivery: "delivery" | "pickup";
