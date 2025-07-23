@@ -28,22 +28,27 @@ export const PageListOfStores = () => {
     const isLogged = localStorage.getItem('isLogged') === 'true';
 
     const buttons = [
-        isLogged ? {
-            to: "/",
-            title: "Painel de pedidos",
-            icon: <CgMenuGridR />,
-        } : {
-            to: "/criar-conta",
-            title: "Criar Restaurante",
-            icon: <BsTools />,
-        },
-        isLogged ? {
-            to: "/personalizar-cardapio",
-            title: "Editar cardápio",
-            icon: <IoMdSettings />,
-        } : {
-            to: "/",
-        },
+        ...(isLogged
+            ? [
+                {
+                    to: "/",
+                    title: "Painel de pedidos",
+                    icon: <CgMenuGridR />,
+                },
+                {
+                    to: "/personalizar-cardapio",
+                    title: "Editar cardápio",
+                    icon: <IoMdSettings />,
+                }
+            ]
+            : [
+                {
+                    to: "/criar-conta",
+                    title: "Criar Restaurante",
+                    icon: <BsTools />,
+                }
+            ]
+        ),
         {
             to: "/restaurantes",
             title: "Restaurantes",
