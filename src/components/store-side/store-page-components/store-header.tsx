@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
         >
             <div className="flex items-center gap-3.5">
                 <Logo
-                    logo={restaurantImage || ""}
+                    logo={restaurantImage || 'store-logo-default.png'}
                     onImageChange={() => { }}
                 />
                 <div className="mx-1.5 text-center">

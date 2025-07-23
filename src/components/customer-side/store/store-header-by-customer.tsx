@@ -34,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({
         <header className={`w-screen max-h-[387px] px-[5%] sm:px-6 lg:px-[15%] py-2 xl:py-4 flex flex-col sm:flex-row items-center justify-between border-b-[1px] fixed top-0 z-10 ${backgroundColor === 'white' ? 'text-black bg-white' : 'text-white bg-black'}`}>
             <div className="w-full flex flex-col xs:flex-row items-center justify-between">
                 <div className="w-full flex items-center justify-center xs:justify-start gap-3.5">
-                    <LogoStore image={restaurantImage ?? ''} />
+                    <LogoStore image={restaurantImage ?? 'store-logo-default.png'} />
                     <div className="mx-1.5 text-center">
                         <div className="flex items-center gap-1 m-1">
                             <h2 className="text-md xl:text-base font-bold mb-1">{restaurantName}</h2>

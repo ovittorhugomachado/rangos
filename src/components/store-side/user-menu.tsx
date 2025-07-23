@@ -13,7 +13,7 @@ export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }
     return (
         <div className={`${open ? "block" : "hidden"} w-16 h-16 rounded-full flex flex-col items-center md:-translate-y-10 xl:translate-y-0 md:-translate-x-2 lg:translate-x-0`}>
             <img
-                src={style?.logoUrl ?? 'default-logo.png'}
+                src={style?.logoUrl ?? 'store-logo-default.png'}
                 alt="logo"
                 className="w-full h-full rounded-full"
             />
