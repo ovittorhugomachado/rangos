@@ -5,28 +5,10 @@ import { ErrorComponent } from "../../component-error"
 import { LoadingComponent } from "../../component-loading"
 import { MenuItemCreationForm } from "../forms/form-create-update-menu-item";
 import { IoMdAddCircle } from "react-icons/io";
-
-
-interface MenuItemsContainerProps {
-    categories: Category[];
-    backgroundColor: string;
-    buttonColor: string;
-}
-
-interface Category {
-    id: number;
-    name: string;
-}
-
-interface MenuItem {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    photoUrl?: string | null;
-}
+import { MenuItem, MenuItemsContainerProps } from "../../../types/types-menu.d";
 
 export const MenuItems = ({
+    storeId,
     categories,
     backgroundColor,
     buttonColor,
@@ -42,7 +24,7 @@ export const MenuItems = ({
         try {
             const itemsObj: { [categoryId: number]: MenuItem[] } = {};
             for (const category of categories) {
-                const response = await getMenuItemService(category.id);
+                const response = await getMenuItemService(storeId, category.id);
                 itemsObj[category.id] = response.data;
             }
             setMenuItemsByCategory(itemsObj);
@@ -52,7 +34,8 @@ export const MenuItems = ({
         } finally {
             setLoading(false);
         }
-    }, [categories]);
+    }, [categories, storeId]);
+    
     useEffect(() => {
         if (categories.length > 0) {
             fetchMenuItems();

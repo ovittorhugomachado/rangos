@@ -14,7 +14,7 @@ export const StoreGrid = ({ restaurants }: RestaurantsGrid) => {
                 {restaurants.map(restaurant => (
                     <Link
                         key={restaurant.id}
-                        to={`/restaurant/${restaurant.id}`}
+                        to={`/restaurante/${restaurant.id}`}
                         className="min-w-50 p-4 rounded-lg border-[1px] border-zinc-500 shadow flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-103"
                     >
                         <img

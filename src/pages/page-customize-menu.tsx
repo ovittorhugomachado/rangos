@@ -152,6 +152,7 @@ export const CustomizeMenuPage = () => {
                             buttonColor={buttonColor}
                         />
                         <MenuItems
+                            storeId={storeData?.id ?? 0}
                             categories={categories}
                             backgroundColor={backgroundColor ?? ''}
                             buttonColor={buttonColor ?? ''}

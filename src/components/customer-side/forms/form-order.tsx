@@ -10,6 +10,7 @@ import { InputCustomerAddress } from "../inputs/input-customer-address";
 import { RadioOrderDeliveryTypesInput } from "../inputs/input-customer-delivery-type";
 import { RadioOrderPaymentMethodInput } from "../inputs/input-customer-payment-method";
 import { IoCloseOutline } from "react-icons/io5";
+import { useParams } from "react-router-dom";
 
 export const OrderForm: React.FC<OrderDataFormProps> = ({
     backgroundColor,
@@ -17,6 +18,10 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
     onClose,
     initialValues = {},
 }) => {
+
+    const { id } = useParams<{ id: string }>();
+
+    const numericId = Number(id);
 
     const {
         register,
@@ -40,6 +45,7 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
     const onSubmit = async (data: OrderFormData) => {
         try {
             await createOrder({
+                storeId: numericId,
                 customerName: data.customerName,
                 customerPhone: data.customerPhone,
                 typeOfDelivery: data.deliveryType,

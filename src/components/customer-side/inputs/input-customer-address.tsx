@@ -7,7 +7,7 @@ export const InputCustomerAddress = ({
     clearErrors,
     initialValues = {}, 
 }: InputCustomerAddressProps) => {
-console.log(backgroundColor)
+
     return (
         <>
             <label htmlFor="customerAddress" className="w-full text-base font-medium mb-1 flex flex-col">

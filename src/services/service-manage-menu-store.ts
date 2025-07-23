@@ -107,13 +107,12 @@ export const deleteCategoryService = async (categoryId: number) => {
     return await response.json();
 };
 
-export const getMenuItemService = async (categoryId: number) => {
-    const response = await fetch(`http://localhost:3000/menu-items/${categoryId}`, {
+export const getMenuItemService = async (storeId: number, categoryId: number) => {
+    const response = await fetch(`http://localhost:3000/menu-items/${storeId}/${categoryId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
-        credentials: 'include'
     });
 
     if (!response.ok) {

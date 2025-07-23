@@ -80,7 +80,7 @@ export const AdminDashboard = () => {
             console.error("Erro ao buscar pedidos:", error);
         }
     }
-
+    
     useEffect(() => {
         fetchOrders();
     }, []);
@@ -144,7 +144,7 @@ export const AdminDashboard = () => {
                             <h1 className="text-4xl border-b-2 border-primary text-center mx-3">Painel de pedidos</h1>
                         </div>
                         <Link
-                            to="/meu-restaurante"
+                            to={`restaurante/${user.id}`}
                             title="Fazer pedido"
                             style={{ fontSize: fontSize === 'text-sm' ? '18px' : '19px' }}
                             className="w-46 mx-auto px-4 py-1 text-black bg-primary rounded-full flex justify-center items-center gap-1 transition-all duration-200 hover:scale-103"
