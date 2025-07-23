@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { userData } from "../services/service-user-data";
-import { getStoreData } from "../services/service-store-data";
+import { getMyStoreData } from "../services/service-store-data";
 import { AccountData } from "../types/types-account.d";
 import { RestaurantData } from "../types/types-restaurante-data.d";
 
@@ -17,7 +17,7 @@ export const useAuth = () => {
         setLoading(true);
         try {
             const userDataResponse = await userData();
-            const styleData = await getStoreData();
+            const styleData = await getMyStoreData();
             if (!userDataResponse || !styleData) {
                 throw new Error('Dados do usuário não encontrados');
             }

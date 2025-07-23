@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDraggable } from '../../../hooks/use-draggable';
-import { updatePageStyle } from '../../../services/service-page-style';
+import { updateMyPageStyle } from '../../../services/service-page-style';
 import { toggleHiddenFlex } from '../../../utils/function-toggleHiddenFlex';
 import { BottomNavProps } from '../../../types/types-style-store-page.d';
 import { MdOutlineColorLens } from "react-icons/md";
@@ -56,7 +56,7 @@ export const BottomNav = ({
 
     const saveChanges = async () => {
         try {
-            await updatePageStyle({
+            await updateMyPageStyle({
                 primaryColor: buttonColor,
                 backgroundColor: backgroundColorStore,
                 textButtonColor: textColorButtons,

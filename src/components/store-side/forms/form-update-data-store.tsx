@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { getStoreData, updateStoreData } from "../../../services/service-store-data";
+import { getMyStoreData, updateMyStoreData } from "../../../services/service-store-data";
 import { UpdateStoreDataFormProps } from "../../../types/types-data-forms.d";
 import { RestaurantData } from "../../../types/types-restaurante-data.d";
 import { AccountData } from "../../../types/types-account.d";
@@ -43,7 +43,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
         const fetchStoreData = async () => {
             setLoading(true);
             try {
-                const response = await getStoreData();
+                const response = await getMyStoreData();
 
                 setValue("restaurantName", response.restaurantName);
                 setValue("address", response.address);
@@ -92,7 +92,7 @@ export const UpdateStoreDataForm: React.FC<UpdateStoreDataFormProps> = ({
         }
 
         try {
-            await updateStoreData(data);
+            await updateMyStoreData(data);
             setMessageSuccess("Dados atualizados com sucesso!");
             setError("");
             setLastData({

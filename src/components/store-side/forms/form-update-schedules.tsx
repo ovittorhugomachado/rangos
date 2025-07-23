@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getStoreData } from "../../../services/service-store-data";
+import { getMyStoreData } from "../../../services/service-store-data";
 import { updateSchedules } from "../../../services/service-update-schedules";
 import { checkOverlappingRanges, validateOpeningHours } from "../../../utils/function-validate-opening-hours";
 import { OpeningHour } from "../../../types/types-schedules.d";
@@ -22,7 +22,7 @@ export const UpdateSchedulesForm: React.FC<UpdateSchedulesStoreFormProps> = ({
         const fetchStoreSchedules = async () => {
             setLoading(true);
             try {
-                const response = await getStoreData();
+                const response = await getMyStoreData();
                 setOpeningHours(response.openingHours);
             } catch (error: unknown) {
                 setError(error instanceof Error ? error.message : "Erro ao carregar os dados da loja");

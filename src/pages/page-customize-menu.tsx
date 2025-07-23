@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useAppSettings } from "../hooks/use-app-settings";
-import { getPageStyle } from "../services/service-page-style";
+import { getMyPageStyle } from "../services/service-page-style";
 import { getCategoriesStore } from "../services/service-manage-menu-store";
-import { getStoreData } from "../services/service-store-data";
+import { getMyStoreData } from "../services/service-store-data";
 import { RestaurantData } from "../types/types-restaurante-data.d";
 import { StyleStorePage } from "../types/types-style-store-page.d";
 import { Category } from "../types/types-menu.d";
@@ -39,8 +39,8 @@ export const CustomizeMenuPage = () => {
     const fetchStoreData = async () => {
         setLoading(true);
         try {
-            const storeData = await getStoreData();
-            const styleData = await getPageStyle();
+            const storeData = await getMyStoreData();
+            const styleData = await getMyPageStyle();
             const categoriesStore = await getCategoriesStore()
 
             if (!styleData) {
@@ -71,13 +71,13 @@ export const CustomizeMenuPage = () => {
     }, []);
 
     const handleStoreDataUpdated = async () => {
-        const updatedStoreData = await getStoreData();
+        const updatedStoreData = await getMyStoreData();
         setStoreData(updatedStoreData);
         setStoreDataUpdateForm(false)
     };
 
     const handleSchedulesUpdated = async () => {
-        const updatedStoreData = await getStoreData();
+        const updatedStoreData = await getMyStoreData();
         setStoreData(updatedStoreData);
         setShowStoreSchedulesUpdateForm(false);
     };
@@ -140,7 +140,7 @@ export const CustomizeMenuPage = () => {
                         <StoreBanner
                             banner={bannerUrl}
                             onBannerChange={async () => {
-                                const updatedStoreData = await getStoreData();
+                                const updatedStoreData = await getMyStoreData();
                                 setBannerUrl(updatedStoreData.bannerUrl ?? '');
                             }}
                         />
