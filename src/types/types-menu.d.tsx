@@ -11,6 +11,7 @@ export type CategoryButtonsProps = {
 }
 
 export type MenuItem = {
+  storeId: number;
   id: number;
   name: string;
   description: string;
