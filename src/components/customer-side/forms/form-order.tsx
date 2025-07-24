@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
 import { useCart } from "../../../context/cart-context/cart-context";
 import { createOrder } from "../../../services/service-manage-orders";
 import { toMoney } from "../../../utils/function-transform-to-money";
@@ -10,7 +11,6 @@ import { InputCustomerAddress } from "../inputs/input-customer-address";
 import { RadioOrderDeliveryTypesInput } from "../inputs/input-customer-delivery-type";
 import { RadioOrderPaymentMethodInput } from "../inputs/input-customer-payment-method";
 import { IoCloseOutline } from "react-icons/io5";
-import { useParams } from "react-router-dom";
 
 export const OrderForm: React.FC<OrderDataFormProps> = ({
     backgroundColor,
@@ -41,6 +41,8 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
     });
 
     const { cart, clearCart } = useCart();
+
+    console.log(cart)
 
     const onSubmit = async (data: OrderFormData) => {
         try {

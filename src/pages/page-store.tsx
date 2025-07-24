@@ -1,18 +1,19 @@
 import { useEffect, useState, useCallback } from "react";
-import { RestaurantData } from "../types/types-restaurante-data.d";
-import { getStoreData } from "../services/service-store-data";
 import { useParams } from "react-router-dom";
-import { ErrorComponent } from "../components/component-error";
-import { LoadingComponent } from "../components/component-loading";
-import { Header } from "../components/customer-side/store-page-components/store-header-by-customer";
-import { StoreBanner } from "../components/customer-side/store-page-components/store-banner-customer";
-import { StoreFooterComponent } from "../components/store-side/store-page-components/store-footer";
+import { getStoreData } from "../services/service-store-data";
 import { getPageStyle } from "../services/service-page-style";
-import { StyleStorePage } from "../types/types-style-store-page.d";
 import { getCategories } from "../services/service-manage-menu-store";
-import { CategoryButtons } from "../components/customer-side/store-page-components/store-categories-buttons-by-customer";
+import { RestaurantData } from "../types/types-restaurante-data.d";
+import { StyleStorePage } from "../types/types-style-store-page.d";
 import { Category } from "../types/types-menu.d";
+import { LoadingComponent } from "../components/component-loading";
+import { ErrorComponent } from "../components/component-error";
+import { StoreFooterComponent } from "../components/store-side/store-page-components/store-footer";
+import { StoreBanner } from "../components/customer-side/store-page-components/store-banner-customer";
+import { Header } from "../components/customer-side/store-page-components/store-header-by-customer";
+import { CategoryButtons } from "../components/customer-side/store-page-components/store-categories-buttons-by-customer";
 import { MenuItems } from "../components/customer-side/store-page-components/store-container-items-by-customer";
+import { CartProvider } from "../context/cart-context/cart-provider";
 
 
 export const StorePage = () => {
@@ -67,42 +68,44 @@ export const StorePage = () => {
             ) : loading ? (
                 <LoadingComponent />
             ) : (
-                <div style={{ backgroundColor: storeStyle?.backgroundColor ?? undefined }} className="w-screen min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center">
-                    <Header
-                        backgroundColor={storeStyle?.backgroundColor ?? ''}
-                        restaurantImage={storeData?.logoUrl ?? '/store-logo-default.png'}
-                        restaurantName={storeData?.restaurantName}
-                        openingHours={
-                            Array.isArray(storeData?.openingHours)
-                                ? storeData.openingHours.map((oh) => ({
-                                    day: oh.day,
-                                    isOpen: oh.isOpen ?? true,
-                                    status: oh.status ?? "",
-                                    timeRanges: Array.isArray(oh.timeRanges) && oh.timeRanges.length > 0
-                                        ? oh.timeRanges
-                                        : [{ start: "", end: "" }],
-                                }))
-                                : []
-                        }
-                    />
-                    <main className="w-full max-w-[1140px] pb-24 mt-[110px] xs:mt-[87px] sm:mt-[115px] xl:mt-[132px] flex flex-col items-center justify-center">
-                        {storeData?.bannerUrl && (
-                            <StoreBanner banner={storeData?.bannerUrl || 'store-banner-default.png'} />
-                        )}
-                        <CategoryButtons
-                            categories={categories}
-                            buttonColor={storeStyle?.primaryColor ?? ''}
-                            textColor={storeStyle?.textButtonColor}
-                        />
-                        <MenuItems
-                            storeId={storeData?.id ?? 0}
-                            categories={categories}
+                <CartProvider>
+                    <div style={{ backgroundColor: storeStyle?.backgroundColor ?? undefined }} className="w-screen min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center">
+                        <Header
                             backgroundColor={storeStyle?.backgroundColor ?? ''}
-                            buttonColor={storeStyle?.primaryColor ?? ''}
+                            restaurantImage={storeData?.logoUrl ?? '/store-logo-default.png'}
+                            restaurantName={storeData?.restaurantName}
+                            openingHours={
+                                Array.isArray(storeData?.openingHours)
+                                    ? storeData.openingHours.map((oh) => ({
+                                        day: oh.day,
+                                        isOpen: oh.isOpen ?? true,
+                                        status: oh.status ?? "",
+                                        timeRanges: Array.isArray(oh.timeRanges) && oh.timeRanges.length > 0
+                                            ? oh.timeRanges
+                                            : [{ start: "", end: "" }],
+                                    }))
+                                    : []
+                            }
                         />
-                    </main>
-                    <StoreFooterComponent backgroundColor={storeStyle?.backgroundColor ?? ''} />
-                </div>
+                        <main className="w-full max-w-[1140px] pb-24 mt-[110px] xs:mt-[87px] sm:mt-[115px] xl:mt-[132px] flex flex-col items-center justify-center">
+                            {storeData?.bannerUrl && (
+                                <StoreBanner banner={storeData?.bannerUrl || 'store-banner-default.png'} />
+                            )}
+                            <CategoryButtons
+                                categories={categories}
+                                buttonColor={storeStyle?.primaryColor ?? ''}
+                                textColor={storeStyle?.textButtonColor}
+                            />
+                            <MenuItems
+                                storeId={storeData?.id ?? 0}
+                                categories={categories}
+                                backgroundColor={storeStyle?.backgroundColor ?? ''}
+                                buttonColor={storeStyle?.primaryColor ?? ''}
+                            />
+                        </main>
+                        <StoreFooterComponent backgroundColor={storeStyle?.backgroundColor ?? ''} />
+                    </div>
+                </CartProvider>
             )}
         </>
     );

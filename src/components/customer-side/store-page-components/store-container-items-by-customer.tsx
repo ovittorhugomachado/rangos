@@ -64,6 +64,7 @@ export const MenuItems = ({
                                                 price={item.price}
                                                 categoryId={category.id}
                                                 id={item.id}
+                                                storeId={storeId}
                                             />
                                         </li>
                                     ))

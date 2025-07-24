@@ -10,10 +10,10 @@ export const InputCustomerAddress = ({
 
     return (
         <>
-            <label htmlFor="customerAddress" className="w-full text-base font-medium mb-1 flex flex-col">
+            <label htmlFor="customerAddress" className="w-full text-sm font-medium pl-2 flex flex-col">
                 Endereço
                 {errors.customerAddress && (
-                    <span className="text-xs font-normal text-red-600 mt-1">
+                    <span className="span-error pr-4">
                         {errors.customerAddress.message?.toString()}
                     </span>
                 )}
@@ -21,14 +21,14 @@ export const InputCustomerAddress = ({
             <input
                 id="address"
                 type="text"
-                className={`w-full text-base border border-zinc-300 rounded-md mb-2 px-3 py-2 input-store ${errors.customerAddress ? " border-red-500 input-error-store" : ""} ${backgroundColor === 'white' ? 'bg-white text-black autofill:caret-lime-700' : 'bg-black text-white'}`}
+                className={`w-full text-sm border border-zinc-300 rounded-md mb-2 px-3 py-2 input-store ${errors.customerAddress ? " border-red-500 input-error-store" : ""} ${backgroundColor === 'white' ? 'bg-white text-black autofill:caret-lime-700' : 'bg-black text-white'}`}
                 placeholder="Endereço"
                 defaultValue={initialValues.customerAddress || ""}
                 {...register("customerAddress", {
-                    required: "Endereço obrigatório",
+                    required: "Obrigatório",
                     minLength: {
                         value: 10,
-                        message: "Campo obrigatório"
+                        message: "Obrigatório"
                     },
                     onChange: (e) => {
                         if (e.target.value.length > 4) {

@@ -7,9 +7,9 @@ export const RadioOrderPaymentMethodInput = ({
 }: InputPaymentMethodProps) => {
 
     return (
-        <div className="w-full gap-4 mt-2 flex items-start mx-auto translate-y-1.5">
+        <div className="relative w-full gap-4 mt-2 flex items-start mx-auto translate-y-1.5">
             {errors.paymentMethod && (
-                <span className="absolute -translate-y-4.5 span-error">
+                <span className="text-red-500 text-sm font-normal text-right mr-3 absolute -translate-y-4">
                     {errors.paymentMethod.message?.toString()}
                 </span>
             )}

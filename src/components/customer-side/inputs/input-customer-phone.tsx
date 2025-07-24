@@ -15,18 +15,18 @@ export const InputCustomerPhoneNumber = ({
             control={control}
             defaultValue={initialValues.customerPhone || ""}
             rules={{
-                required: "Campo obrigatório",
+                required: "Obrigatório",
                 pattern: {
                     value: /^\(\d{2}\) \d{5}-\d{4}$/,
-                    message: "Digite no formato (99) 99999-9999",
+                    message: "(99) 99999-9999",
                 },
             }}
             render={({ field, fieldState }) => (
                 <>
-                    <label htmlFor="phoneNumber" className="w-full text-base font-medium mb-1 flex flex-col">
+                    <label htmlFor="phoneNumber" className="w-full text-sm font-medium pl-2 flex flex-col">
                         Celular *
                         {fieldState.error && (
-                            <span className="text-xs font-normal text-red-600 mt-1">
+                            <span className="span-error pr-4">
                                 {fieldState.error.message}
                             </span>
                         )}
@@ -35,7 +35,7 @@ export const InputCustomerPhoneNumber = ({
                         {...field}
                         mask="(00) 00000-0000"
                         placeholder="(99) 99999-9999"
-                        className={`w-full text-base border border-zinc-300 rounded-md mb-2 px-3 py-2 input-store ${errors.customerPhone ? " border-red-500 input-error-store" : ""} ${backgroundColor === 'white' ? 'bg-white text-black autofill:caret-lime-700' : 'bg-black text-white'}`}
+                        className={`w-full text-sm border border-zinc-300 rounded-md mb-2 px-3 py-2 input-store ${errors.customerPhone ? " border-red-500 input-error-store" : ""} ${backgroundColor === 'white' ? 'bg-white text-black autofill:caret-lime-700' : 'bg-black text-white'}`}
                         onAccept={(value) => field.onChange(value)}
                     />
                 </>

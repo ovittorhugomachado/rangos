@@ -2,6 +2,7 @@ import { useCart } from "../../../context/cart-context/cart-context";
 import { MenuItem } from "../../../types/types-menu.d";
 
 export const Item = ({
+    storeId,
     id,
     photoUrl,
     name,
@@ -12,7 +13,7 @@ export const Item = ({
     const { addItem } = useCart();
 
     const handleAddToCart = () => {
-        addItem({ id, name, price });
+        addItem({ storeId, id, name, price });
     };
 
     return (
