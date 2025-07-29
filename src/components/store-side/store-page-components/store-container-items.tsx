@@ -7,6 +7,8 @@ import { MenuItemCreationForm } from "../forms/form-create-update-menu-item";
 import { IoMdAddCircle } from "react-icons/io";
 import { MenuItem, MenuItemsContainerProps } from "../../../types/types-menu.d";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 export const MenuItems = ({
     storeId,
     categories,
@@ -35,7 +37,7 @@ export const MenuItems = ({
             setLoading(false);
         }
     }, [categories, storeId]);
-    
+
     useEffect(() => {
         if (categories.length > 0) {
             fetchMenuItems();
@@ -71,7 +73,13 @@ export const MenuItems = ({
                                             className={`relative flex border-[1px] ${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'}`}
                                         >
                                             <Item
-                                                image={item.photoUrl ?? '../prato-default.png'}
+                                                image={
+                                                    item.photoUrl && item.photoUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
+                                                        ? item.photoUrl
+                                                        : item.photoUrl
+                                                            ? `${VITE_API_URL}/uploads/store${storeId}-category${category.id}-product${item.id}.png`
+                                                            : '/prato-default.png'
+                                                }
                                                 name={item.name}
                                                 description={item.description}
                                                 price={item.price}

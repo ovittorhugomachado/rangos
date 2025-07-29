@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { RestaurantsGrid } from "../../types/types-restaurante-data.d";
 import { MdRestaurantMenu } from "react-icons/md";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 export const StoreGrid = ({ restaurants }: RestaurantsGrid) => {
 
     return (
@@ -18,7 +20,13 @@ export const StoreGrid = ({ restaurants }: RestaurantsGrid) => {
                         className="min-w-50 p-4 rounded-lg border-[1px] border-zinc-500 shadow flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-103"
                     >
                         <img
-                            src={restaurant.logoUrl || "/store-logo-default.png"}
+                            src={
+                                restaurant.logoUrl && restaurant.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
+                                    ? restaurant.logoUrl
+                                    : restaurant.logoUrl
+                                        ? `${VITE_API_URL}/uploads/store${restaurant.id}-logo.png`
+                                        : "/store-logo-default.png"
+                            }
                             alt={restaurant.name}
                             className="w-24 h-24 rounded-full object-cover"
                         />

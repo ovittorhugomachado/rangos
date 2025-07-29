@@ -4,8 +4,10 @@ import { useAuth } from "../../hooks/use-auth"
 import { logout } from "../../services/service-auth";
 import { IoIosArrowDown } from "react-icons/io";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }) => {
-    
+
     const { style } = useAuth();
 
     const [menuOpen, setMenuOpen] = useState(false);
@@ -13,7 +15,13 @@ export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }
     return (
         <div className={`${open ? "block" : "hidden"} w-16 h-16 rounded-full flex flex-col items-center md:-translate-y-10 xl:translate-y-0 md:-translate-x-2 lg:translate-x-0`}>
             <img
-                src={style?.logoUrl ?? 'store-logo-default.png'}
+                src={
+                    style?.logoUrl && style.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
+                        ? style.logoUrl
+                        : style?.logoUrl
+                            ? `${VITE_API_URL}/uploads/store${style.id}-logo.png`
+                            : 'store-logo-default.png'
+                }
                 alt="logo"
                 className="w-full h-full rounded-full"
             />

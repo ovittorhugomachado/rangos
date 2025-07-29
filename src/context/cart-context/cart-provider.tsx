@@ -7,8 +7,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const { id } = useParams<{ id: string }>();
     const storeId = Number(id);
 
-    console.log(storeId)
-
     const [cart, setCart] = useState<Cart>(() => {
         const saved = localStorage.getItem("cart");
         return saved ? JSON.parse(saved) : { items: [], total: 0 };

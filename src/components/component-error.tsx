@@ -1,7 +1,7 @@
 export const ErrorComponent = ({ message }: { message: string }) => {
     
     return (
-        <div className="w-full py-24 m-2 flex flex-col items-center justify-center">
+        <div className="w-full h-24 py-24 m-2 flex flex-col items-center justify-center">
             <img
                 src="../error.png"
                 alt="Erro"

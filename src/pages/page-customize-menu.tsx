@@ -17,6 +17,8 @@ import { UpdateStoreDataForm } from "../components/store-side/forms/form-update-
 import { UpdateSchedulesForm } from "../components/store-side/forms/form-update-schedules";
 import { MenuItems } from "../components/store-side/store-page-components/store-container-items";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 export const CustomizeMenuPage = () => {
 
     useAppSettings();
@@ -108,7 +110,11 @@ export const CustomizeMenuPage = () => {
                     />
                     <Header
                         backgroundColor={backgroundColor ?? ''}
-                        restaurantImage={storeData?.logoUrl ?? ''}
+                        restaurantImage={
+                            storeData?.logoUrl && storeData.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
+                                ? storeData.logoUrl
+                                : `${VITE_API_URL}/uploads/store${storeData?.id}-logo.png`
+                        }
                         restaurantName={storeData?.restaurantName ?? ''}
                         openingHours={
                             Array.isArray(storeData?.openingHours)
@@ -138,7 +144,11 @@ export const CustomizeMenuPage = () => {
                     )}
                     <main className="w-full max-w-[1140px] pb-24 mt-[110px] xs:mt-[125px] sm:mt-[115px] xl:mt-[132px] flex flex-col items-center justify-center">
                         <StoreBanner
-                            banner={bannerUrl}
+                            banner={
+                                bannerUrl && bannerUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
+                                    ? bannerUrl
+                                    : `${VITE_API_URL}/uploads/store${storeData?.id}-banner.png`
+                            }
                             onBannerChange={async () => {
                                 const updatedStoreData = await getMyStoreData();
                                 setBannerUrl(updatedStoreData.bannerUrl ?? '');

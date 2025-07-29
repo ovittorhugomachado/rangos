@@ -42,8 +42,6 @@ export const OrderForm: React.FC<OrderDataFormProps> = ({
 
     const { cart, clearCart } = useCart();
 
-    console.log(cart)
-
     const onSubmit = async (data: OrderFormData) => {
         try {
             await createOrder({

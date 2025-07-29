@@ -5,6 +5,8 @@ import { ErrorComponent } from "../../component-error"
 import { LoadingComponent } from "../../component-loading"
 import { Item } from "./store-item-by-customer"
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
 export const MenuItems = ({
     storeId,
     categories,
@@ -58,7 +60,13 @@ export const MenuItems = ({
                                     menuItemsByCategory[category.id].map(item => (
                                         <li key={item.id} className={`relative flex border-[1px] ${backgroundColor === 'white' ? 'border-zinc-400' : 'border-zinc-900'} transition-all duration-300 hover:scale-102`}>
                                             <Item
-                                                photoUrl={item.photoUrl ?? '../prato-default.png'}
+                                                photoUrl={
+                                                    item.photoUrl && item.photoUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
+                                                        ? item.photoUrl
+                                                        : item.photoUrl
+                                                            ? `${VITE_API_URL}/uploads/store${storeId}-category${category.id}-product${item.id}.png`
+                                                            : '/prato-default.png'
+                                                }
                                                 name={item.name}
                                                 description={item.description}
                                                 price={item.price}

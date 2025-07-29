@@ -15,6 +15,7 @@ import { CategoryButtons } from "../components/customer-side/store-page-componen
 import { MenuItems } from "../components/customer-side/store-page-components/store-container-items-by-customer";
 import { CartProvider } from "../context/cart-context/cart-provider";
 
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 export const StorePage = () => {
 
@@ -72,7 +73,13 @@ export const StorePage = () => {
                     <div style={{ backgroundColor: storeStyle?.backgroundColor ?? undefined }} className="w-screen min-h-[100vh] px-[5%] lg:px-[15%] flex flex-col items-center">
                         <Header
                             backgroundColor={storeStyle?.backgroundColor ?? ''}
-                            restaurantImage={storeData?.logoUrl ?? '/store-logo-default.png'}
+                            restaurantImage={
+                                storeData?.logoUrl && storeData.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
+                                    ? storeData.logoUrl
+                                    : storeData?.logoUrl
+                                        ? `${VITE_API_URL}/uploads/store${storeData.id}-logo.png`
+                                        : "/store-logo-default.png"
+                            }
                             restaurantName={storeData?.restaurantName}
                             openingHours={
                                 Array.isArray(storeData?.openingHours)
@@ -89,7 +96,9 @@ export const StorePage = () => {
                         />
                         <main className="w-full max-w-[1140px] pb-24 mt-[110px] xs:mt-[87px] sm:mt-[115px] xl:mt-[132px] flex flex-col items-center justify-center">
                             {storeData?.bannerUrl && (
-                                <StoreBanner banner={storeData?.bannerUrl || 'store-banner-default.png'} />
+                                <StoreBanner banner={storeData.bannerUrl && storeData.bannerUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
+                                    ? storeData.bannerUrl
+                                    : `${VITE_API_URL}/uploads/store${storeData?.id}-banner.png`} />
                             )}
                             <CategoryButtons
                                 categories={categories}
