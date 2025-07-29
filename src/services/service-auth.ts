@@ -1,8 +1,10 @@
 import { AccountData } from "../types/types-account.d";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const login = async (credentials: AccountData) => {
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch(`${API_URL}/login`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -33,7 +35,7 @@ export const login = async (credentials: AccountData) => {
 
 export const logout = async () => {
     try {
-        const response = await fetch('http://localhost:3000/logout', {
+        const response = await fetch(`${API_URL}/logout`, {
             method: 'POST',
             credentials: 'include',
         });

@@ -1,6 +1,8 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const getCategories = async (storeId: number) => {
 
-    const response = await fetch(`http://localhost:3000/categories/${storeId}`, {
+    const response = await fetch(`${API_URL}/categories/${storeId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -17,7 +19,7 @@ export const getCategories = async (storeId: number) => {
 
 export const getCategoriesMyStore = async () => {
 
-    const response = await fetch('http://localhost:3000/my-categories', {
+    const response = await fetch(`${API_URL}/my-categories`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -37,7 +39,7 @@ export const createCategoryService = async (category: {
     name: string;
 }): Promise<void> => {
     try {
-        const response = await fetch(`http://localhost:3000/categories`,
+        const response = await fetch(`${API_URL}/categories`,
             {
                 method: 'POST',
                 headers: {
@@ -67,7 +69,7 @@ export const createCategoryService = async (category: {
 
 export const RenameCategoryService = async (categoryId: number, newName: string) => {
     try {
-        const response = await fetch(`http://localhost:3000/categories/${categoryId}`, {
+        const response = await fetch(`${API_URL}/categories/${categoryId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -91,7 +93,7 @@ export const RenameCategoryService = async (categoryId: number, newName: string)
 };
 
 export const deleteCategoryService = async (categoryId: number) => {
-    const response = await fetch(`http://localhost:3000/categories/${categoryId}`, {
+    const response = await fetch(`${API_URL}/categories/${categoryId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -108,7 +110,7 @@ export const deleteCategoryService = async (categoryId: number) => {
 };
 
 export const getMenuItemService = async (storeId: number, categoryId: number) => {
-    const response = await fetch(`http://localhost:3000/menu-items/${storeId}/${categoryId}`, {
+    const response = await fetch(`${API_URL}/menu-items/${storeId}/${categoryId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -129,7 +131,7 @@ export const createMenuItemService = async (categoryId: number, item: {
     price: number;
 }) => {
     try {
-        const response = await fetch(`http://localhost:3000/menu-items/${categoryId}`, {
+        const response = await fetch(`${API_URL}/menu-items/${categoryId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -163,7 +165,7 @@ export const updateMenuItemByCategoryService = async (
     }
 ) => {
     try {
-        const response = await fetch(`http://localhost:3000/menu-items/${categoryId}/${itemId}`, {
+        const response = await fetch(`${API_URL}/menu-items/${categoryId}/${itemId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -187,7 +189,7 @@ export const updateMenuItemByCategoryService = async (
 };
 
 export const deleteMenuItemService = async (itemId: number) => {
-    const response = await fetch(`http://localhost:3000/menu-items/${itemId}`, {
+    const response = await fetch(`${API_URL}/menu-items/${itemId}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',

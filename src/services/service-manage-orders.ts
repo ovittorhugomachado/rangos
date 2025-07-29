@@ -1,8 +1,10 @@
 import { Order, OrderRequest } from "../types/types-orders.d";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const getOrdersService = async (limit: number = 1000, offset: number = 0): Promise<Order[]> => {
     try {
-        const response = await fetch(`http://localhost:3000/order/list?limit=${limit}&offset=${offset}`, {
+        const response = await fetch(`${API_URL}/order/list?limit=${limit}&offset=${offset}`, {
             credentials: 'include',
         });
         if (!response.ok) {
@@ -17,7 +19,7 @@ export const getOrdersService = async (limit: number = 1000, offset: number = 0)
 };
 
 export const createOrder = async (order: OrderRequest) => {
-    const response = await fetch(`http://localhost:3000/order/${order.storeId}`, {
+    const response = await fetch(`${API_URL}/order/${order.storeId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -34,7 +36,7 @@ export const createOrder = async (order: OrderRequest) => {
 
 export const cancelOrderService = async (orderId: number) => {
     try {
-        const response = await fetch(`http://localhost:3000/order/${orderId}/cancel`, {
+        const response = await fetch(`${API_URL}/order/${orderId}/cancel`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +57,7 @@ export const cancelOrderService = async (orderId: number) => {
 };
 export const acceptOrderService = async (orderId: number) => {
     try {
-        const response = await fetch(`http://localhost:3000/order/${orderId}/accept`, {
+        const response = await fetch(`${API_URL}/order/${orderId}/accept`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +79,7 @@ export const acceptOrderService = async (orderId: number) => {
 
 export const readyOrderService = async (orderId: number) => {
     try {
-        const response = await fetch(`http://localhost:3000/order/${orderId}/ready`, {
+        const response = await fetch(`${API_URL}/order/${orderId}/ready`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +101,7 @@ export const readyOrderService = async (orderId: number) => {
 
 export const deliveredOrderService = async (orderId: number) => {
     try {
-        const response = await fetch(`http://localhost:3000/order/${orderId}/delivered`, {
+        const response = await fetch(`${API_URL}/order/${orderId}/delivered`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

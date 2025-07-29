@@ -108,7 +108,7 @@ export const CustomizeMenuPage = () => {
                     />
                     <Header
                         backgroundColor={backgroundColor ?? ''}
-                        restaurantImage={storeData?.logoUrl ?? 'store-logo-default.png'}
+                        restaurantImage={storeData?.logoUrl ?? ''}
                         restaurantName={storeData?.restaurantName ?? ''}
                         openingHours={
                             Array.isArray(storeData?.openingHours)

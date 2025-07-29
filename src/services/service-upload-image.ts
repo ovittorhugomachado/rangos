@@ -1,3 +1,5 @@
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const UploadLogo = async (imageFile: File) => {
     
     try {
@@ -6,7 +8,7 @@ export const UploadLogo = async (imageFile: File) => {
         const formData = new FormData();
         formData.append('logo', imageFile);
 
-        const response = await fetch(`http://localhost:3000/logo`, {
+        const response = await fetch(`${API_URL}/logo`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -37,7 +39,7 @@ export const UploadBannerImage = async (imageFile: File) => {
         const formData = new FormData();
         formData.append('banner', imageFile);
 
-        const response = await fetch(`http://localhost:3000/banner`, {
+        const response = await fetch(`${API_URL}/banner`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -71,7 +73,7 @@ export const uploadMenuItemImage = async (
         const formData = new FormData();
         formData.append('menu-item', imageFile);
 
-        const response = await fetch(`http://localhost:3000/${categoryId}/${menuItemId}`, {
+        const response = await fetch(`${API_URL}/${categoryId}/${menuItemId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`

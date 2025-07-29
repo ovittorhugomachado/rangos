@@ -1,8 +1,10 @@
 import { StyleStorePage } from "../types/types-style-store-page.d";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export const getPageStyle = async (storeId: number): Promise<StyleStorePage> => {
     try {
-        const response = await fetch(`http://localhost:3000/store/style/${storeId}`,
+        const response = await fetch(`${API_URL}/store/style/${storeId}`,
             {
                 method: 'GET',
                 headers: {
@@ -29,7 +31,7 @@ export const getPageStyle = async (storeId: number): Promise<StyleStorePage> => 
 
 export const getMyPageStyle = async (): Promise<StyleStorePage> => {
     try {
-        const response = await fetch(`http://localhost:3000/my-store/style`,
+        const response = await fetch(`${API_URL}/my-store/style`,
             {
                 method: 'GET',
                 headers: {
@@ -61,7 +63,7 @@ export const updateMyPageStyle = async (style: {
     textButtonColor: string;
 }): Promise<StyleStorePage> => {
     try {
-        const response = await fetch(`http://localhost:3000/my-store/style`,
+        const response = await fetch(`${API_URL}/my-store/style`,
             {
                 method: 'PATCH',
                 headers: {
