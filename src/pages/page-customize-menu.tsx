@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppSettings } from "../hooks/use-app-settings";
 import { getMyPageStyle } from "../services/service-page-style";
 import { getCategoriesMyStore } from "../services/service-manage-menu-store";
@@ -22,6 +23,7 @@ const VITE_API_URL = import.meta.env.VITE_API_URL;
 export const CustomizeMenuPage = () => {
 
     useAppSettings();
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -38,16 +40,16 @@ export const CustomizeMenuPage = () => {
     const [showStoreSchedulesUpdateForm, setShowStoreSchedulesUpdateForm] = useState(false)
     const [bannerUrl, setBannerUrl] = useState<string>('');
 
-    const fetchStoreData = async () => {
+    const fetchStoreData = useCallback(async () => {
         setLoading(true);
         try {
             const storeData = await getMyStoreData();
             const styleData = await getMyPageStyle();
-            const categoriesStore = await getCategoriesMyStore()
+            const categoriesStore = await getCategoriesMyStore();
 
             if (!styleData) {
                 throw new Error('Dados da loja não encontrados');
-            };
+            }
 
             setStoreData(storeData);
             setBannerUrl(storeData.bannerUrl ?? '');
@@ -63,14 +65,15 @@ export const CustomizeMenuPage = () => {
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Erro ao carregar os dados da loja');
             setStoreStyle(null);
+            navigate('/entrar');
         } finally {
             setLoading(false);
         }
-    };
+    }, [navigate]);
 
     useEffect(() => {
         fetchStoreData();
-    }, []);
+    }, [fetchStoreData]);
 
     const handleStoreDataUpdated = async () => {
         const updatedStoreData = await getMyStoreData();
