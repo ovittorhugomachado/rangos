@@ -114,9 +114,11 @@ export const CustomizeMenuPage = () => {
                     <Header
                         backgroundColor={backgroundColor ?? ''}
                         restaurantImage={
-                            storeData?.logoUrl && storeData.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
+                            storeData?.logoUrl && storeData.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
                                 ? storeData.logoUrl
-                                : `${VITE_API_URL}/uploads/store${storeData?.id}-logo.png`
+                                : storeData?.logoUrl
+                                    ? `${VITE_API_URL}/uploads/store${storeData.id}-logo.png`
+                                    : "/store-logo-default.png"
                         }
                         restaurantName={storeData?.restaurantName ?? ''}
                         openingHours={
@@ -150,7 +152,9 @@ export const CustomizeMenuPage = () => {
                             banner={
                                 bannerUrl && bannerUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
                                     ? bannerUrl
-                                    : `${VITE_API_URL}/uploads/store${storeData?.id}-banner.png`
+                                    : bannerUrl
+                                        ? `${VITE_API_URL}/uploads/store${storeData?.id}-banner.png`
+                                        : "/store-banner-default.png"
                             }
                             onBannerChange={async () => {
                                 const updatedStoreData = await getMyStoreData();
