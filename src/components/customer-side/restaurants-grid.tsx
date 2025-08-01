@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { RestaurantsGrid } from "../../types/types-restaurante-data.d";
 import { MdRestaurantMenu } from "react-icons/md";
-import { getExtension } from "../../utils/function-get-extension";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -25,7 +24,7 @@ export const StoreGrid = ({ restaurants }: RestaurantsGrid) => {
                                 restaurant.logoUrl && restaurant.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
                                     ? restaurant.logoUrl
                                     : restaurant.logoUrl
-                                        ? `${VITE_API_URL}/uploads/store${restaurant.id}-logo${getExtension(restaurant.logoUrl)}`
+                                        ? `${VITE_API_URL}/uploads/store${restaurant.id}-logo.png`
                                         : "/store-logo-default.png"
                             }
                             alt={restaurant.name}

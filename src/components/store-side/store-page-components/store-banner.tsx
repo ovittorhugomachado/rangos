@@ -12,8 +12,6 @@ export const StoreBanner = ({ banner, onBannerChange }: { banner: string, onBann
         inputRef.current?.click();
     };
 
-    console.log(banner)
-
     const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
