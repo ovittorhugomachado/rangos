@@ -14,6 +14,7 @@ import { Header } from "../components/customer-side/store-page-components/store-
 import { CategoryButtons } from "../components/customer-side/store-page-components/store-categories-buttons-by-customer";
 import { MenuItems } from "../components/customer-side/store-page-components/store-container-items-by-customer";
 import { CartProvider } from "../context/cart-context/cart-provider";
+import { getExtension } from "../utils/function-get-extension";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -77,7 +78,7 @@ export const StorePage = () => {
                                 storeData?.logoUrl && storeData.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
                                     ? storeData.logoUrl
                                     : storeData?.logoUrl
-                                        ? `${VITE_API_URL}/uploads/store${storeData.id}-logo.png`
+                                        ? `${VITE_API_URL}/uploads/store${storeData.id}-logo${getExtension(storeData?.logoUrl)}`
                                         : "/store-logo-default.png"
                             }
                             restaurantName={storeData?.restaurantName}
@@ -98,7 +99,7 @@ export const StorePage = () => {
                             {storeData?.bannerUrl && (
                                 <StoreBanner banner={storeData.bannerUrl && storeData.bannerUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
                                     ? storeData.bannerUrl
-                                    : `${VITE_API_URL}/uploads/store${storeData?.id}-banner.png`} />
+                                    : `${VITE_API_URL}/uploads/store${storeData?.id}-banner${getExtension(storeData?.bannerUrl)}`} />
                             )}
                             <CategoryButtons
                                 categories={categories}

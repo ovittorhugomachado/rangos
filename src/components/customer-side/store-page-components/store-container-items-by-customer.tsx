@@ -4,6 +4,7 @@ import { MenuItem, MenuItemsContainerProps } from "../../../types/types-menu.d";
 import { ErrorComponent } from "../../component-error"
 import { LoadingComponent } from "../../component-loading"
 import { Item } from "./store-item-by-customer"
+import { getExtension } from "../../../utils/function-get-extension";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
@@ -64,7 +65,7 @@ export const MenuItems = ({
                                                     item.photoUrl && item.photoUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
                                                         ? item.photoUrl
                                                         : item.photoUrl
-                                                            ? `${VITE_API_URL}/uploads/store${storeId}-category${category.id}-product${item.id}.png`
+                                                            ? `${VITE_API_URL}/uploads/store${storeId}-category${category.id}-product${item.id}${getExtension(item.photoUrl)}`
                                                             : '/prato-default.png'
                                                 }
                                                 name={item.name}
