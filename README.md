@@ -26,8 +26,8 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
    > npm install
 
 
-3. **Iniciar os containers do banco de dados e backend**
-   O terminal precisa ser executado como administrador!
+3. **Iniciar os containers do banco de dados e backend:**
+   (O terminal precisa ser executado como administrador!)
 
    > docker-compose up -d
 
@@ -49,7 +49,7 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 5. **Acessar a aplicação:**
    - Depois do comando acima é esperado que o terminal apresente um link, através dele que estará rodando o front end 
-   Exemplo [http://localhost:5173]
+   > Exemplo [http://localhost:5173]
 
 ---
 
