@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth"
 import { logout } from "../../services/service-auth";
 import { IoIosArrowDown } from "react-icons/io";
+import { getExtension } from "../../utils/function-get-extension";
 
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }) => {
 
-    const { style } = useAuth();
+    const { user, style } = useAuth();
 
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -19,7 +20,7 @@ export const UserMenu = ({ open, fontSize }: { open: boolean, fontSize: string }
                     style?.logoUrl && style.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
                         ? style.logoUrl
                         : style?.logoUrl
-                            ? `${VITE_API_URL}/uploads/store${style.id}-logo.png`
+                            ? `${VITE_API_URL}/uploads/store${user?.id}-logo${getExtension(style?.logoUrl)}`
                             : 'store-logo-default.png'
                 }
                 alt="logo"

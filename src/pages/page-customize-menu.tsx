@@ -7,6 +7,7 @@ import { getMyStoreData } from "../services/service-store-data";
 import { RestaurantData } from "../types/types-restaurante-data.d";
 import { StyleStorePage } from "../types/types-style-store-page.d";
 import { Category } from "../types/types-menu.d";
+import { getExtension } from "../utils/function-get-extension";
 import { BottomNav } from "../components/store-side/store-page-components/store-style-toolbar";
 import { LoadingComponent } from "../components/component-loading";
 import { StoreBanner } from "../components/store-side/store-page-components/store-banner";
@@ -117,7 +118,7 @@ export const CustomizeMenuPage = () => {
                             storeData?.logoUrl && storeData.logoUrl.startsWith('https://s3.us-east-2.amazonaws.com/bucket.rangos/')
                                 ? storeData.logoUrl
                                 : storeData?.logoUrl
-                                    ? `${VITE_API_URL}/uploads/store${storeData.id}-logo.png`
+                                    ? `${VITE_API_URL}/uploads/store${storeData.id}-logo${getExtension(storeData?.logoUrl)}`
                                     : "/store-logo-default.png"
                         }
                         restaurantName={storeData?.restaurantName ?? ''}
@@ -153,7 +154,7 @@ export const CustomizeMenuPage = () => {
                                 bannerUrl && bannerUrl.startsWith('https://s3.us-east-2.amazonaws.com/')
                                     ? bannerUrl
                                     : bannerUrl
-                                        ? `${VITE_API_URL}/uploads/store${storeData?.id}-banner.png`
+                                        ? `${VITE_API_URL}/uploads/store${storeData?.id}-banner${getExtension(storeData?.bannerUrl)}`
                                         : "/store-banner-default.png"
                             }
                             onBannerChange={async () => {
