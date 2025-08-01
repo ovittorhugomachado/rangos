@@ -1,54 +1,107 @@
-# React + TypeScript + Vite
+# Rangos
+Esse é o repositório front end do projeto Rangos, que serve para criar cardápios online, podendo exibir os pratos, bebidas, alterando cores e estilo da página, também criando e recebendo pedidos, que são gerenciados através de um painel. Esse é um projeto full stack, então para testar as funcionalidade é necessário rodar o back end, pra isso disponibilizei um arquivo *Docker compose* na raiz do projeto, através dele é possível rodar uma instância do back end e do banco de dados, usando apenas o Docker, sem precisar instalar mais nada.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ao final desse arquivo está o link do repositório do back end, case queira ver o código e alterar algo.
 
-Currently, two official plugins are available:
+## Como usar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Pré-requisitos
 
-## Expanding the ESLint configuration
+- **Docker** instalado na máquina
+- **Node.js** e **npm** instalados para rodar o frontend
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Passo a passo para rodar o projeto
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. **Clonar o repositório**
+   git clone https://github.com/ovittorhugomachado/rangos.git
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   cd rangos
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+2. **Instalar as dependências do frontend**
+   npm install
+
+3. **Iniciar os containers do banco de dados e backend**
+   > O terminal precisa ser executado como administrador!
+   docker-compose up -d
+
+   **Portas padrão utilizadas:**
+   - `3000`: Serviço backend (definido em `.env` e `docker-compose.yaml`)
+   - `5432`: Banco de dados (definido em `docker-compose.yaml`)
+   - `5173`: Frontend (definido em `vite.config.ts`)
+
+   > **IMPORTANTE:** Verifique se essas portas estão livres na sua máquina.  
+   > Não é recomendado alterar as portas no `docker-compose.yaml` ou `.env`.  
+   > Se precisar alterar, modifique apenas o primeiro valor do mapeamento, exemplo:  
+   > `3000:3000` → `5000:3000` (acessará pelo `localhost:5000`).
+
+4. **Executar o frontend em modo desenvolvimento**
+   npm run dev
+
+5. **Acessar a aplicação**
+   - Depois do comando acima é esperado que o terminal apresente um link, através dele que estará rodando o front end 
+   > Exemplo [http://localhost:5173]
+
+---
+
+## Comandos úteis
+
+### Docker
+
+- **Listar containers ativos**
+  docker ps
+
+- **Listar todos os containers (inclusive parados)**
+  docker ps -a
+
+- **Listar imagens**
+  docker images
+
+- **Parar um container**
+  docker stop <nome-ou-id-do-container>
+
+- **Executar (iniciar) um container parado**
+  docker start <nome-ou-id-do-container>
+
+- **Verificar versão do Docker**
+  docker --version
+
+- **Remover um container**
+  docker rm <nome-ou-id-do-container>
+
+- **Parar todos os containers do Docker Compose**
+  docker-compose down
+
+- **Remover uma imagem**
+  docker rmi <nome-ou-id-da-imagem>
+
+
+- **Ver logs de um container**
+  docker logs <nome-ou-id-do-container>
+
+---
+
+### Outros serviços
+
+- **Verificar versão do Node.js**
+  node --version
+
+- **Verificar versão do npm**
+  npm --version
+
+- **Instalar dependências**
+  npm install ou npm i
+
+- **Rodar o frontend em modo desenvolvimento**
+  npm run dev
+
+
+## Observações
+
+- Se tiver problemas, verifique se o Docker está rodando e se as portas estão livres.
+- Para parar os containers, use:
+  docker-compose
+
+### Link do back end
+- https://github.com/ovittorhugomachado/rangos-server.git
