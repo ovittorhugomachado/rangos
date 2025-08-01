@@ -16,20 +16,20 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 1. **Clonar o repositório:**
 
-   git clone https://github.com/ovittorhugomachado/rangos.git
+   > git clone https://github.com/ovittorhugomachado/rangos.git
 
-   cd rangos
+   > cd rangos
 
 
 2. **Instalar as dependências do frontend:**
 
-   npm install
+   > npm install
 
 
 3. **Iniciar os containers do banco de dados e backend**
-   > O terminal precisa ser executado como administrador!
+   O terminal precisa ser executado como administrador!
 
-   docker-compose up -d
+   > docker-compose up -d
 
 
    **Portas padrão utilizadas:**
@@ -37,19 +37,19 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
    - `5432`: Banco de dados (definido em `docker-compose.yaml`)
    - `5173`: Frontend (definido em `vite.config.ts`)
 
-   > **IMPORTANTE:** Verifique se essas portas estão livres na sua máquina.  
-   > Não é recomendado alterar as portas no `docker-compose.yaml` ou `.env`.  
-   > Se precisar alterar, modifique apenas o primeiro valor do mapeamento, exemplo:  
-   > `3000:3000` → `5000:3000` (acessará pelo `localhost:5000`).
+   **IMPORTANTE:** Verifique se essas portas estão livres na sua máquina.  
+   Não é recomendado alterar as portas no `docker-compose.yaml` ou `.env`.  
+   Se precisar alterar, modifique apenas o primeiro valor do mapeamento, exemplo:  
+   `3000:3000` → `5000:3000` (acessará pelo `localhost:5000`).
 
 4. **Executar o frontend em modo desenvolvimento:**
 
-   npm run dev
+   > npm run dev
 
 
 5. **Acessar a aplicação:**
    - Depois do comando acima é esperado que o terminal apresente um link, através dele que estará rodando o front end 
-   > Exemplo [http://localhost:5173]
+   Exemplo [http://localhost:5173]
 
 ---
 
@@ -59,52 +59,52 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 - **Listar containers ativos:**
 
-  docker ps
+  > docker ps
 
 
 - **Listar todos os containers (inclusive parados):**
 
-  docker ps -a
+  > docker ps -a
 
 
 - **Listar imagens:**
 
-  docker images
+  > docker images
 
 
 - **Parar um container:**
 
-  docker stop <nome-ou-id-do-container>
+  > docker stop <nome-ou-id-do-container>
 
 
 - **Executar (iniciar) um container parado:**
 
-  docker start <nome-ou-id-do-container>
+  > docker start <nome-ou-id-do-container>
 
 
 - **Verificar versão do Docker:**
 
-  docker --version
+  > docker --version
 
 
 - **Remover um container:**
 
-  docker rm <nome-ou-id-do-container>
+  > docker rm <nome-ou-id-do-container>
 
 
 - **Parar todos os containers do Docker Compose:**
   
-  docker-compose down
+  > docker-compose down
 
 
 - **Remover uma imagem:**
 
-  docker rmi <nome-ou-id-da-imagem>
+  > docker rmi <nome-ou-id-da-imagem>
 
 
 - **Ver logs de um container:**
 
-  docker logs <nome-ou-id-do-container>
+  > docker logs <nome-ou-id-do-container>
 
 
 ---
@@ -113,22 +113,22 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 - **Verificar versão do Node.js:**
 
-  node --version
+  > node --version
 
 
 - **Verificar versão do npm:**
 
-  npm --version
+  > npm --version
 
 
 - **Instalar dependências:**
 
-  npm install ou npm i
+  > npm install ou npm i
 
 
 - **Rodar o frontend em modo desenvolvimento:**
 
-  npm run dev
+  > npm run dev
 
 
 
