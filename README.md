@@ -7,8 +7,8 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 ### Pré-requisitos
 
-- **Docker** instalado na máquina
-- **Node.js** e **npm** instalados para rodar o frontend
+- **Docker** instalado na máquina - [Baixar Docker](https://www.docker.com/)
+- **Node.js** instalado para rodar o frontend - [Baixar Node](https://nodejs.org/)
 
 ---
 
@@ -23,7 +23,7 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 2. **Instalar as dependências do frontend:**
 
-   > npm install
+   > npm install ou npm i
 
 
 3. **Iniciar os containers do banco de dados e backend:**
@@ -74,12 +74,12 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 - **Parar um container:**
 
-  > docker stop <nome-ou-id-do-container>
+  > docker stop [nome-ou-id-do-container]
 
 
 - **Executar (iniciar) um container parado:**
 
-  > docker start <nome-ou-id-do-container>
+  > docker start [nome-ou-id-do-container]
 
 
 - **Verificar versão do Docker:**
@@ -89,7 +89,7 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 - **Remover um container:**
 
-  > docker rm <nome-ou-id-do-container>
+  > docker rm [nome-ou-id-do-container]
 
 
 - **Parar todos os containers do Docker Compose:**
@@ -99,12 +99,12 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 
 - **Remover uma imagem:**
 
-  > docker rmi <nome-ou-id-da-imagem>
+  > docker rmi [nome-ou-id-da-imagem]
 
 
 - **Ver logs de um container:**
 
-  > docker logs <nome-ou-id-do-container>
+  > docker logs [nome-ou-id-do-container]
 
 
 ---
@@ -138,5 +138,11 @@ Ao final desse arquivo está o link do repositório do back end, case queira ver
 - Para parar os containers, use:
   docker-compose
 
-### Link do back end
+### Aplicação em produção
+- https://rangos.onrender.com
+
+### Imagem docker
+- https://hub.docker.com/r/ovittormachado/rangos-server-app
+
+### Repositório back end
 - https://github.com/ovittorhugomachado/rangos-server.git
