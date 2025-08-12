@@ -8,7 +8,7 @@ export const UploadLogo = async (imageFile: File) => {
         const formData = new FormData();
         formData.append('logo', imageFile);
 
-        const response = await fetch(`${API_URL}/logo`, {
+        const response = await fetch(`${API_URL}/api/logo`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -39,7 +39,7 @@ export const UploadBannerImage = async (imageFile: File) => {
         const formData = new FormData();
         formData.append('banner', imageFile);
 
-        const response = await fetch(`${API_URL}/banner`, {
+        const response = await fetch(`${API_URL}/api/banner`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -73,7 +73,7 @@ export const uploadMenuItemImage = async (
         const formData = new FormData();
         formData.append('menu-item', imageFile);
 
-        const response = await fetch(`${API_URL}/${categoryId}/${menuItemId}`, {
+        const response = await fetch(`${API_URL}/api/${categoryId}/${menuItemId}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Bearer ${token}`

@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export const login = async (credentials: AccountData) => {
     try {
-        const response = await fetch(`${API_URL}/login`, {
+        const response = await fetch(`${API_URL}/api/login`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -35,7 +35,7 @@ export const login = async (credentials: AccountData) => {
 
 export const logout = async () => {
     try {
-        const response = await fetch(`${API_URL}/logout`, {
+        const response = await fetch(`${API_URL}/api/logout`, {
             method: 'POST',
             credentials: 'include',
         });

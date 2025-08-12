@@ -7,7 +7,7 @@ export const UploadProfileImage = async (userId: number, file: File) => {
   const token = localStorage.getItem('token');
   if (!token) throw new Error('Token não encontrado');
 
-  const response = await fetch(`${API_URL}/users/${userId}/profile-picture`, {
+  const response = await fetch(`${API_URL}/api/users/${userId}/profile-picture`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`

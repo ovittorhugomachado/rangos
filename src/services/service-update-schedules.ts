@@ -3,7 +3,7 @@ import { OpeningHour } from "../types/types-schedules.d";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const updateSchedules = async (body: { schedule: OpeningHour[] }) => {
-    const response = await fetch(`${API_URL}/schedules`, {
+    const response = await fetch(`${API_URL}/api/schedules`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
