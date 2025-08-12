@@ -7,7 +7,7 @@ export const recoverPassword = async (credentials: AccountData) => {
 
         const token = localStorage.getItem('token')
 
-        const response = await fetch(`${API_URL}/api/recover-password`, {
+        const response = await fetch(`${API_URL}api/recover-password`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

@@ -5,7 +5,7 @@ import { AccountData } from "../types/types-account.d";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const getMyStoreData = async () => {
-    const response = await fetch(`${API_URL}/api/my-store`, {
+    const response = await fetch(`${API_URL}api/my-store`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export const getMyStoreData = async () => {
 };
 
 export const updateMyStoreData = async (data: AccountData) => {
-    const response = await fetch(`${API_URL}/api/my-store`, {
+    const response = await fetch(`${API_URL}api/my-store`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export const updateMyStoreData = async (data: AccountData) => {
 
 //Services para buscar dados de qualquer restaurante
 export const getStoresList = async () => {
-    const response = await fetch(`${API_URL}/api/stores/list`, {
+    const response = await fetch(`${API_URL}api/stores/list`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export const getStoresList = async () => {
 };
 
 export const getStoreData = async (storeId: number) => {
-    const response = await fetch(`${API_URL}/api/store/${storeId}`, {
+    const response = await fetch(`${API_URL}api/store/${storeId}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
