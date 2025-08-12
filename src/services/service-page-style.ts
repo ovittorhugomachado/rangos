@@ -4,7 +4,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 export const getPageStyle = async (storeId: number): Promise<StyleStorePage> => {
     try {
-        const response = await fetch(`$apistore/style/${storeId}`,
+        const response = await fetch(`${API_URL}/api/store/style/${storeId}`,
             {
                 method: 'GET',
                 headers: {
